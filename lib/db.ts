@@ -4,8 +4,38 @@ import { randomUUID } from "node:crypto";
 const globalForSql = globalThis as unknown as { genctekSql?: ReturnType<typeof postgres> };
 const baglantiYolu = process.env.DATABASE_URL ?? "postgresql://gecersiz:gecersiz@127.0.0.1:5432/gecersiz";
 
+/*
+ * SAAT DİLİMİ ÇEVİRİSİ ELLE YAPILIYOR (21 Ağustos 2026).
+ *
+ * Şemadaki zaman sütunları "timestamp without time zone" ve içlerine hep
+ * CURRENT_TIMESTAMP yazılıyor; sunucunun TimeZone ayarı Etc/GMT0 olduğu için
+ * saklanan değer UTC. Ama postgres.js saat dilimi taşımayan bir metni
+ * `new Date("2026-08-20 22:33:14")` ile çözüyor — bu, JS'te YEREL saat demek.
+ * Türkiye'de (UTC+3) her okunan zaman 3 saat geçmişe kayıyordu.
+ *
+ * Görünen arıza giriş döngüsüydü: yeni açılan oturumun idleExpiresAt'i
+ * "şimdi + 30 dakika" yazılıyor, geri okunurken 3 saat geriye kayıp "şimdi -
+ * 150 dakika" oluyor ve lib/auth/oturum.ts oturumu daha doğduğu anda süresi
+ * dolmuş sayıyordu. Giriş çerezi koyup /yonetim'e yolluyor, /yonetim oturumu
+ * geçersiz bulup /giris'e geri atıyordu.
+ *
+ * Çözüm okuma tarafında: 1114 (timestamp) oid'i için çözümleyici değiştirilip
+ * metin UTC kabul ediliyor. 1184 (timestamptz) dokunulmadan kalıyor, o zaten
+ * doğru. Yazma tarafı da etkilenmiyor: `to` yalnızca sql.typed ile çağrılınca
+ * devreye girer, kodda naive sütuna JS Date parametresi geçen yer yok.
+ */
+const zamanTipleri = {
+  naiveTimestamp: {
+    to: 1114,
+    from: [1114],
+    serialize: (deger: Date | string) =>
+      deger instanceof Date ? deger.toISOString().replace("T", " ").replace("Z", "") : deger,
+    parse: (metin: string) => new Date(`${metin}Z`),
+  },
+};
+
 // Sürücü bağlantıyı ilk sorguya kadar açmaz; böylece Next build aşaması veritabanına bağımlı olmaz.
-const sql = globalForSql.genctekSql ?? postgres(baglantiYolu, { max: 10, idle_timeout: 20 });
+const sql = globalForSql.genctekSql ?? postgres(baglantiYolu, { max: 10, idle_timeout: 20, types: zamanTipleri });
 if (process.env.NODE_ENV !== "production") globalForSql.genctekSql = sql;
 
 // Aşağıdaki prisma kabuğu yalnızca belge akışının ihtiyaç duyduğu birkaç sorguyu
