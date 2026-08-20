@@ -25,12 +25,10 @@ import { HAKKINDA_KARTLARI } from "@/lib/hakkinda";
  * seçiliyor (bkz. lib/hakkinda.ts · ikon). Rastgele dağıtılan renkler, ikinci
  * ziyarette kartın yerini hatırlamayı zorlaştırırdı.
  */
-export function HakkindaKartlari({ haric }: { haric?: string }) {
-  const kartlar = HAKKINDA_KARTLARI.filter((kart) => kart.slug !== haric);
-
+export function HakkindaKartlari() {
   return (
     <div className="hakkinda-izgara">
-      {kartlar.map((kart, sira) => (
+      {HAKKINDA_KARTLARI.map((kart, sira) => (
         <Link className="hakkinda-karti" href={kart.adres} key={kart.slug}>
           <span className={`hakkinda-bant hakkinda-bant-${kart.ikon}`}>
             <span className="hakkinda-filigran" aria-hidden="true">

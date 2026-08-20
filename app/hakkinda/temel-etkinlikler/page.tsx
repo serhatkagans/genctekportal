@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { HakkindaKartlari } from "@/components/hakkinda-kartlari";
 
 export const metadata = {
   title: "Temel GençTek etkinlikleri · GençTek",
@@ -121,17 +120,6 @@ export default function TemelEtkinliklerSayfasi() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">Devamı</span>
-              <h2>Diğer başlıklar</h2>
-            </div>
-          </div>
-          <HakkindaKartlari haric="temel-etkinlikler" />
-        </div>
-      </section>
     </main>
     <Footer />
   </>;

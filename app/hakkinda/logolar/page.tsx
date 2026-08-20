@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { HakkindaKartlari } from "@/components/hakkinda-kartlari";
 import { gorselYolu } from "@/lib/ortam";
 
 export const metadata = {
@@ -107,17 +106,6 @@ export default function LogolarSayfasi() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">Devamı</span>
-              <h2>Diğer başlıklar</h2>
-            </div>
-          </div>
-          <HakkindaKartlari haric="logolar" />
-        </div>
-      </section>
     </main>
     <Footer />
   </>;
