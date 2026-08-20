@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import type { Koordinator } from "@/lib/koordinator";
+import { gorselYolu } from "@/lib/ortam";
 import { Icon } from "./icons";
 
 /**
@@ -21,9 +22,17 @@ import { Icon } from "./icons";
  * isteneceği de söyleniyor. Kaynak dosyalara DOKUNULMADI — küçültme istek
  * anında yapılıyor, arşivdeki asıl görsel olduğu gibi duruyor.
  *
- * YOL HAM VERİLİYOR, `gorselYolu`ndan geçirilmiyor: `next/image` alt dizin
- * önekini (basePath) kendisi ekler; ikisi birden uygulanırsa yol iki kez
- * öneklenir ve görsel bulunamaz.
+ * YOL `gorselYolu`NDAN GEÇER — ve bu, "next/image basePath'i kendisi ekler"
+ * sanısına rağmen ZORUNLUDUR. İlk denemede ham yol verildi; yerelde
+ * (basePath boş) sorunsuz çalıştı ama canlıda (aiotechs.cloud/genctekportal)
+ * optimizasyon ucu 400 döndü: "The requested resource isn't a valid image".
+ *
+ * Sebebi şu: `next/image` yalnızca ETİKETİN src'sine önek ekler, `url=`
+ * parametresine dokunmaz. Optimizasyon ucu o parametreyi kendi sunucusundan
+ * çekmeye çalışır ve önek yoksa uygulamanın dışına, 404 veren bir adrese
+ * gider — geri gelen HTML'i de "geçerli görsel değil" diye reddeder.
+ *
+ * Yani önek burada elle konmalı. Aynı desen theme-card.tsx'te de var.
  */
 export function KoordinatorRehberi({ kayitlar }: { kayitlar: Koordinator[] }) {
   const [arama, setArama] = useState("");
@@ -57,7 +66,7 @@ export function KoordinatorRehberi({ kayitlar }: { kayitlar: Koordinator[] }) {
             <article className="rehber-kart" key={k.id}>
               <Image
                 className="rehber-avatar"
-                src={k.gorsel}
+                src={gorselYolu(k.gorsel)}
                 alt={k.ad ? `${k.ad} portresi` : ""}
                 width={96}
                 height={96}

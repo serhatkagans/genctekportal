@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { HakkindaKartlari } from "@/components/hakkinda-kartlari";
+import { gorselYolu } from "@/lib/ortam";
 
 export const metadata = {
   title: "Logolar ve roll-up'lar · GençTek",
@@ -64,9 +65,9 @@ export default function LogolarSayfasi() {
           </div>
           <div className="card-grid">
             {ogeler.map((oge) => (
-              <a className="content-card marka-karti" href={oge.dosya} download key={oge.dosya}>
+              <a className="content-card marka-karti" href={gorselYolu(oge.dosya)} download key={oge.dosya}>
                 <span className="marka-onizleme">
-                  <Image src={oge.dosya} alt={`${oge.ad} önizlemesi`} width={220} height={140} sizes="220px" />
+                  <Image src={gorselYolu(oge.dosya)} alt={`${oge.ad} önizlemesi`} width={220} height={140} sizes="220px" />
                 </span>
                 <span className="card-body">
                   <span className="chip">Dosyayı indir</span>
