@@ -1,0 +1,23 @@
+node_modules
+.next
+.env
+.env.local
+coverage
+*.log
+veri
+
+# MEDYA DEPOYA GİRMEZ (20 Ağustos 2026 kararı).
+#
+# public/wordpress ve public/temalar birlikte ~990 MB ve 4000'den fazla dosya:
+# WordPress'ten aktarılmış haber görselleri, bilgi notu PDF'leri ve tema
+# afişleri. Depoya konsaydı her klonlama gigabaytlık bir indirme olurdu ve
+# GitHub 1 GB üzerindeki depolar için uyarı veriyor.
+#
+# DOSYALAR KAYBOLMUŞ DEĞİL: sunucuda /opt/genctekportal/public altında
+# duruyorlar ve dağıtım onlara dokunmuyor. Depoyu başka bir makineye
+# klonlayan kişi bu iki klasörü sunucudan ayrıca kopyalamalıdır.
+public/wordpress
+public/temalar
+
+# TypeScript derleme önbelleği; makineye özel ve her derlemede değişir.
+tsconfig.tsbuildinfo

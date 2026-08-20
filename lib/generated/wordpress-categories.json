@@ -1,0 +1,65 @@
+[
+  {
+    "id": 41,
+    "slug": "duyurular",
+    "name": "Duyurular",
+    "description": "",
+    "count": 49
+  },
+  {
+    "id": 40,
+    "slug": "etkinlikler",
+    "name": "Etkinlikler",
+    "description": "",
+    "count": 54
+  },
+  {
+    "id": 25,
+    "slug": "free",
+    "name": "Free",
+    "description": "",
+    "count": 0
+  },
+  {
+    "id": 1,
+    "slug": "genel",
+    "name": "Genel",
+    "description": "",
+    "count": 0
+  },
+  {
+    "id": 26,
+    "slug": "general",
+    "name": "General",
+    "description": "",
+    "count": 0
+  },
+  {
+    "id": 27,
+    "slug": "paid",
+    "name": "Paid",
+    "description": "",
+    "count": 0
+  },
+  {
+    "id": 28,
+    "slug": "uncategorized",
+    "name": "Uncategorized",
+    "description": "",
+    "count": 1
+  },
+  {
+    "id": 42,
+    "slug": "zirve2025",
+    "name": "Zirve 2025",
+    "description": "",
+    "count": 0
+  },
+  {
+    "id": 43,
+    "slug": "zirve2026",
+    "name": "Zirve 2026",
+    "description": "",
+    "count": 0
+  }
+]

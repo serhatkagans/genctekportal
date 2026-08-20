@@ -1,0 +1,1 @@
+export default function Loading(){return <main className="state-page" aria-busy="true" aria-live="polite"><div><div className="skeleton skeleton-title"/><div className="skeleton skeleton-copy"/><div className="skeleton skeleton-copy short"/><span className="sr-only">Sayfa yükleniyor</span></div></main>}

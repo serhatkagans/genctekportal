@@ -1,0 +1,274 @@
+[
+  {
+    "slug": "oyun-tasarimi-egitijam",
+    "name": "Oyun Tasarımı - EğitiJAM",
+    "shortDescription": "Fikirleri oynanabilir ve anlamlı deneyimlere dönüştür.",
+    "description": "Oyun fikrinin mekanik, hikâye, görsel dünya ve ses tasarımıyla çalışan bir prototipe dönüştüğü üretim alanıdır. EğitiJAM ruhuyla ekipler kısa sürede tasarlar, dener ve geliştirir.",
+    "image": "/temalar/oyun-tasarimi-egitijam.jpg",
+    "focus": [
+      "Oyun mekaniği ve seviye tasarımı",
+      "Hikâye, görsel ve işitsel anlatım",
+      "Oyun motorlarıyla prototipleme"
+    ],
+    "outcomes": [
+      "Oynanabilir oyun prototipi",
+      "Oyun tasarım dokümanı",
+      "Tanıtım videosu ve sunum"
+    ]
+  },
+  {
+    "slug": "g2s-genc-sektor-bulusmalari",
+    "name": "G2S Genç Sektör Buluşmaları",
+    "shortDescription": "Sektör profesyonelleriyle buluş, meslekleri yakından tanı.",
+    "description": "Gençleri bilişim sektöründeki uzmanlar ve rol modellerle bir araya getirir. Kariyer yollarını, gerçek çalışma süreçlerini ve güncel uzmanlık alanlarını doğrudan sektör temsilcilerinden öğrenmeye odaklanır.",
+    "image": "/temalar/g2s-genc-sektor-bulusmalari.jpg",
+    "focus": [
+      "Kariyer ve uzmanlık alanları",
+      "Sektör deneyimleri ve mentörlük",
+      "Teknik gezi ve çevrim içi buluşmalar"
+    ],
+    "outcomes": [
+      "Kariyer yol haritası",
+      "Uzman söyleşisi notları",
+      "Sektör problemine çözüm fikri"
+    ]
+  },
+  {
+    "slug": "ritim-ai-yapay-zeka-araclari",
+    "name": "Ritim a.i. Yapay Zeka Araçları",
+    "shortDescription": "Yapay zekâ araçlarıyla müzik, söz ve yaratıcı içerik üret.",
+    "description": "Üretken yapay zekâ araçlarını müzik ve yaratıcı anlatım odağında deneyimleme alanıdır. Öğrenciler komut tasarımını, özgün içerik geliştirmeyi ve sorumlu araç kullanımını birlikte öğrenir.",
+    "image": "/temalar/ritim-ai-yapay-zeka-araclari.jpg",
+    "focus": [
+      "Üretken yapay zekâ araçları",
+      "Müzik, söz ve ritim üretimi",
+      "Etik kullanım ve telif farkındalığı"
+    ],
+    "outcomes": [
+      "Özgün şarkı veya ses çalışması",
+      "Üretim süreci günlüğü",
+      "Yapay zekâ araçları değerlendirmesi"
+    ]
+  },
+  {
+    "slug": "dijital-sanatlar",
+    "name": "Dijital Sanatlar",
+    "shortDescription": "Teknolojiyi görsel, işitsel ve etkileşimli anlatıya dönüştür.",
+    "description": "Sanatsal ifade ile dijital teknolojileri buluşturur. Görsel tasarım, animasyon, ses, video ve etkileşimli medya üzerinden özgün anlatılar geliştirilir.",
+    "image": "/temalar/dijital-sanatlar.jpg",
+    "focus": [
+      "Dijital çizim ve grafik tasarım",
+      "Animasyon, video ve ses",
+      "Etkileşimli medya ve sergileme"
+    ],
+    "outcomes": [
+      "Dijital eser seçkisi",
+      "Kısa animasyon veya video",
+      "Çevrim içi sergi tasarımı"
+    ]
+  },
+  {
+    "slug": "bilisim-hukuku-guvenli-internet",
+    "name": "Bilişim Hukuku ve Güvenli İnternet",
+    "shortDescription": "Dijital dünyada haklarını, sorumluluklarını ve güvenliği öğren.",
+    "description": "Teknoloji kullanımının hukuki, etik ve güvenlik boyutlarını ele alır. Kişisel veri, dijital haklar, güvenli iletişim ve çevrim içi riskler üzerine farkındalık ve çözüm üretir.",
+    "image": "/temalar/bilisim-hukuku-guvenli-internet.jpg",
+    "focus": [
+      "Kişisel veriler ve dijital haklar",
+      "Güvenli internet alışkanlıkları",
+      "Siber zorbalık ve dijital etik"
+    ],
+    "outcomes": [
+      "Güvenli internet rehberi",
+      "Farkındalık kampanyası",
+      "Örnek olay çözüm dosyası"
+    ]
+  },
+  {
+    "slug": "tek-maraton",
+    "name": "Tek Maraton",
+    "shortDescription": "Bir problemi ekipçe analiz et, çözümünü hızla prototiple.",
+    "description": "Belirli bir problem çevresinde fikir geliştirme, ekip kurma ve hızlı prototipleme deneyimidir. Tasarım odaklı düşünme ile teknoloji üretimini maraton formatında bir araya getirir.",
+    "image": "/temalar/tek-maraton.jpg",
+    "focus": [
+      "Problem keşfi ve kullanıcı ihtiyacı",
+      "Fikir geliştirme ve ekip çalışması",
+      "Hızlı prototipleme ve sunum"
+    ],
+    "outcomes": [
+      "Çözüm prototipi",
+      "Proje kanvası",
+      "Jüri veya akran sunumu"
+    ]
+  },
+  {
+    "slug": "robot-isletim-sistemi",
+    "name": "Robot İşletim Sistemi",
+    "shortDescription": "Robotların algı, karar ve hareket katmanlarını birlikte geliştir.",
+    "description": "Robot İşletim Sistemi yaklaşımıyla sensör, yazılım ve hareket bileşenlerini ortak bir mimaride buluşturur. Simülasyondan gerçek robot uygulamasına uzanan takım çalışmasını destekler.",
+    "image": "/temalar/robot-isletim-sistemi.jpg",
+    "focus": [
+      "Robot yazılım mimarisi",
+      "Sensör ve hareket verileri",
+      "Simülasyon ve otonom görevler"
+    ],
+    "outcomes": [
+      "Çalışan robot düğümleri",
+      "Simülasyon senaryosu",
+      "Teknik görev dokümantasyonu"
+    ]
+  },
+  {
+    "slug": "espor",
+    "name": "Espor",
+    "shortDescription": "Rekabetçi oyunu strateji, takım ve etkinlik yönetimiyle ele al.",
+    "description": "Esporu yalnızca oyunculuk değil; takım iletişimi, strateji, yayıncılık ve organizasyon boyutlarıyla inceler. Sağlıklı ve sürdürülebilir dijital oyun alışkanlıklarını önemser.",
+    "image": "/temalar/espor.jpg",
+    "focus": [
+      "Takım stratejisi ve iletişim",
+      "Turnuva ve etkinlik yönetimi",
+      "Yayıncılık ve dijital esenlik"
+    ],
+    "outcomes": [
+      "Turnuva planı",
+      "Takım rol ve strateji dosyası",
+      "Yayın akışı tasarımı"
+    ]
+  },
+  {
+    "slug": "robot-futbol-ligi",
+    "name": "Robot Futbol Ligi",
+    "shortDescription": "Robotik, kodlama ve takım stratejisini sahaya taşı.",
+    "description": "Robotların futbol görevleri üzerinden tasarım, elektronik, programlama ve stratejiyi birleştirir. Öğrenciler aynı hedef için farklı disiplinlerde görev paylaşımı yapar.",
+    "image": "/temalar/robot-futbol-ligi.jpg",
+    "focus": [
+      "Robot mekanik ve elektronik tasarımı",
+      "Kontrol algoritmaları",
+      "Maç stratejisi ve takım koordinasyonu"
+    ],
+    "outcomes": [
+      "Müsabakaya hazır robot",
+      "Test ve iyileştirme raporu",
+      "Takım oyun planı"
+    ]
+  },
+  {
+    "slug": "iha",
+    "name": "İHA",
+    "shortDescription": "Uçuş sistemlerini güvenlik, tasarım ve yazılımla keşfet.",
+    "description": "İnsansız hava araçlarının temel bileşenlerini, uçuş prensiplerini ve güvenli kullanım yaklaşımını proje tabanlı çalışmalarla ele alır.",
+    "image": "/temalar/iha.jpg",
+    "focus": [
+      "Uçuş prensipleri ve güvenlik",
+      "Gövde, elektronik ve kontrol",
+      "Görev planlama ve veri toplama"
+    ],
+    "outcomes": [
+      "İHA görev senaryosu",
+      "Tasarım veya simülasyon modeli",
+      "Uçuş güvenliği kontrol listesi"
+    ]
+  },
+  {
+    "slug": "acik-kaynak",
+    "name": "Açık Kaynak",
+    "shortDescription": "Birlikte geliştir, belgele ve ürettiğini toplulukla paylaş.",
+    "description": "Açık kaynak yazılım kültürünü; şeffaf geliştirme, sürüm kontrolü, dokümantasyon ve topluluk katkısı üzerinden deneyimletir.",
+    "image": "/temalar/acik-kaynak.jpg",
+    "focus": [
+      "Sürüm kontrolü ve ortak geliştirme",
+      "Lisanslar ve dijital özgürlük",
+      "Dokümantasyon ve topluluk iletişimi"
+    ],
+    "outcomes": [
+      "Açık kaynak proje deposu",
+      "Katkı ve kurulum rehberi",
+      "Topluluk odaklı çözüm"
+    ]
+  },
+  {
+    "slug": "e-ticaret-e-ihracat",
+    "name": "E-Ticaret ve E-İhracat",
+    "shortDescription": "Dijital bir ürünü pazara ve dünyaya açmanın yollarını öğren.",
+    "description": "Ürün fikrinden dijital mağazaya, marka anlatısından müşteri deneyimine uzanan e-ticaret süreçlerini inceler. Küresel pazar ve e-ihracat farkındalığı kazandırır.",
+    "image": "/temalar/e-ticaret-e-ihracat.jpg",
+    "focus": [
+      "Ürün, hedef kitle ve değer önerisi",
+      "Dijital mağaza ve müşteri deneyimi",
+      "Pazarlama, ödeme ve e-ihracat"
+    ],
+    "outcomes": [
+      "Dijital mağaza prototipi",
+      "Ürün ve pazar dosyası",
+      "Tanıtım kampanyası"
+    ]
+  },
+  {
+    "slug": "yapay-zeka",
+    "name": "Yapay Zeka",
+    "shortDescription": "Veriden öğrenen, açıklanabilir ve sorumlu çözümler geliştir.",
+    "description": "Yapay zekânın temel çalışma mantığını veri, model ve uygulama ekseninde ele alır. Öğrencileri gerçek ihtiyaçlara yönelik, etik ve insan odaklı çözümler üretmeye yönlendirir.",
+    "image": "/temalar/yapay-zeka.webp",
+    "focus": [
+      "Veri okuryazarlığı ve model mantığı",
+      "Makine öğrenmesi uygulamaları",
+      "Etik, tarafsızlık ve açıklanabilirlik"
+    ],
+    "outcomes": [
+      "Yapay zekâ uygulama prototipi",
+      "Veri ve model değerlendirmesi",
+      "Etik etki kartı"
+    ]
+  },
+  {
+    "slug": "master-tek",
+    "name": "Master Tek",
+    "shortDescription": "Teknoloji bilgisini akranlarına aktar, birlikte ustalaş.",
+    "description": "Öğrencilerin uzmanlaştıkları teknoloji alanlarında akranlarına rehberlik ettiği paylaşım ve mentörlük modelidir. Öğrenirken öğretmeyi ve güçlü sunum becerilerini destekler.",
+    "image": "/temalar/master-tek.jpg",
+    "focus": [
+      "Akran eğitimi ve mentörlük",
+      "Atölye ve içerik tasarımı",
+      "Sunum, geri bildirim ve kolaylaştırıcılık"
+    ],
+    "outcomes": [
+      "Akran atölyesi",
+      "Öğrenme materyali",
+      "Mentörlük ve geri bildirim planı"
+    ]
+  },
+  {
+    "slug": "dijital-yuruyus-stem",
+    "name": "Dijital Yürüyüş STEM",
+    "shortDescription": "Şehrini keşfet, gözlemlerini STEM çözümlerine dönüştür.",
+    "description": "Saha gözlemini bilim, teknoloji, mühendislik ve matematikle buluşturur. Çevredeki kültürel ve doğal değerler dijital araçlarla belgelenir ve yeni çözüm fikirlerine dönüştürülür.",
+    "image": "/temalar/dijital-yuruyus-stem.jpg",
+    "focus": [
+      "Saha araştırması ve gözlem",
+      "Konum, veri ve dijital hikâyeleştirme",
+      "STEM temelli problem çözme"
+    ],
+    "outcomes": [
+      "Dijital yürüyüş rotası",
+      "Saha veri günlüğü",
+      "Yerel probleme STEM çözümü"
+    ]
+  },
+  {
+    "slug": "dijital-bagimliliklara-sosyal-fiziksel-alternatif",
+    "name": "Dijital Bağımlılıklara Sosyal Fiziksel Alternatif",
+    "shortDescription": "Teknoloji kullanımında denge kur, çevrim dışı alternatifler üret.",
+    "description": "Dijital alışkanlıkları fark etmeyi; sosyal, fiziksel ve yaratıcı alternatiflerle dengeli teknoloji kullanımını desteklemeyi amaçlar.",
+    "image": "/temalar/dijital-bagimliliklara-alternatif.jpg",
+    "focus": [
+      "Dijital esenlik ve öz denetim",
+      "Sosyal ve fiziksel etkinlik tasarımı",
+      "Farkındalık ve davranış değişikliği"
+    ],
+    "outcomes": [
+      "Dijital denge planı",
+      "Çevrim dışı etkinlik tasarımı",
+      "Okul farkındalık kampanyası"
+    ]
+  }
+]

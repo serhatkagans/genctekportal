@@ -1,0 +1,3 @@
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+export default function PrivacyPage(){return <><Header/><main><section className="page-hero compact"><div className="container"><span className="eyebrow">Yasal bilgiler</span><h1>KVKK ve gizlilik</h1><p>Üretime geçmeden önce kurumun onayladığı aydınlatma ve açık rıza metinleri burada yayımlanacaktır.</p></div></section><section className="section"><div className="article-body"><h2>Prototip bildirimi</h2><p>Bu geliştirme sürümü kişisel veri toplamaz. Katılım formu yalnızca arayüz ve erişilebilirlik doğrulaması amacıyla gösterilmektedir.</p></div></section></main><Footer/></>}

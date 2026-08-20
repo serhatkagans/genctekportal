@@ -1,0 +1,33 @@
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  basePath: (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(/\/$/, ""),
+  poweredByHeader: false,
+  compress: true,
+  /*
+   * İl koordinatörleri sayfası Hakkında'nın altına taşındı (20 Ağustos 2026).
+   * Eski adres KALICI OLARAK yönlendiriliyor: sayfa dışarıda paylaşılmış ve
+   * arama motorlarına kaydedilmiş olabilir, yönlendirme olmasaydı o bağlantılar
+   * 404 verirdi.
+   */
+  async redirects() {
+    return [{
+      source: "/il-koordinatorleri",
+      destination: "/hakkinda/il-koordinatorleri",
+      permanent: true,
+    }];
+  },
+  async headers() {
+    return [{
+      source: "/(.*)",
+      headers: [
+        { key: "X-Frame-Options", value: "DENY" },
+        { key: "X-Content-Type-Options", value: "nosniff" },
+        { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+        { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+      ],
+    }];
+  },
+};
+
+export default nextConfig;

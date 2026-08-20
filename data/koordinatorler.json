@@ -1,0 +1,810 @@
+[
+  {
+    "id": "k001",
+    "ad": "Muhammed YILDIRIM",
+    "il": "Adana",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/Adana-Komisyon-33f9ff59c55c5b0b.png",
+    "sira": 0
+  },
+  {
+    "id": "k002",
+    "ad": "",
+    "il": "Adıyaman",
+    "rol": "",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 1
+  },
+  {
+    "id": "k003",
+    "ad": "Yalçın YURDAKUL",
+    "il": "Afyonkarahisar",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Yalcin-YURDAKUL-AFYONKARAHISAR-23388c233fbed08d.png",
+    "sira": 2
+  },
+  {
+    "id": "k004",
+    "ad": "Mehmet Nuri ÇOLAK",
+    "il": "Ağrı",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 3
+  },
+  {
+    "id": "k005",
+    "ad": "Ömer ALKAN",
+    "il": "Aksaray",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Omer-ALKAN-AKSARAY-07e5a6b3d2539126.png",
+    "sira": 4
+  },
+  {
+    "id": "k006",
+    "ad": "Zeynep ÜNLÜ",
+    "il": "Amasya",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 5
+  },
+  {
+    "id": "k007",
+    "ad": "Nilay TEKİNER DEMİRER",
+    "il": "Ankara",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 6
+  },
+  {
+    "id": "k008",
+    "ad": "Ömer ÖZÇELİK",
+    "il": "Ankara",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/Omer-Ozcelik-8ebf75579f1310d6.png",
+    "sira": 7
+  },
+  {
+    "id": "k009",
+    "ad": "Gürkan DÖNMEZ",
+    "il": "Antalya",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/gurkan-donmez-5c1a01e1c458c6e6.png",
+    "sira": 8
+  },
+  {
+    "id": "k010",
+    "ad": "Elif ŞAHİN MAMAK",
+    "il": "Ardahan",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 9
+  },
+  {
+    "id": "k011",
+    "ad": "Neşe YÖRDAN",
+    "il": "Artin",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 10
+  },
+  {
+    "id": "k012",
+    "ad": "Nuran KAMBER",
+    "il": "Aydın",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Nuran-KAMBER-AYDIN-ff9c6e6d4e75ee22.png",
+    "sira": 11
+  },
+  {
+    "id": "k013",
+    "ad": "Ümit YEL",
+    "il": "Balıkesir",
+    "rol": "Yeğitek İl Yöneticisi",
+    "gorsel": "/wordpress/media/Umit-Yel-a2b4d3cb4bc12164.png",
+    "sira": 12
+  },
+  {
+    "id": "k014",
+    "ad": "Buse TEKMECİ",
+    "il": "Balıkesir",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 13
+  },
+  {
+    "id": "k015",
+    "ad": "Dr. Özlem KALAYCI",
+    "il": "Bartın",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Dr--Ozlem-KALAYCI-BARTIN-956e1aac4e1dbecf.png",
+    "sira": 14
+  },
+  {
+    "id": "k016",
+    "ad": "Muhammed Furkan AKTAŞ",
+    "il": "Batman",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/muhammed-furkan-1-253821d07c431683.png",
+    "sira": 15
+  },
+  {
+    "id": "k017",
+    "ad": "Buşra AKYOL",
+    "il": "Batman",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/IMG_1899-db544efeef6b3899.png",
+    "sira": 16
+  },
+  {
+    "id": "k018",
+    "ad": "Hatice Gülşah AKÇA",
+    "il": "Batman",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/BATMAN-Gulsah-AKCA-1d08e923ca56371f.png",
+    "sira": 17
+  },
+  {
+    "id": "k019",
+    "ad": "Asuman KURT FIRAT",
+    "il": "Bayburt",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Asuman-Hoca-e3b353a73cbd6cc2.png",
+    "sira": 18
+  },
+  {
+    "id": "k020",
+    "ad": "Ramazan DOĞU",
+    "il": "Bilecik",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/BILECIK-Ramazan-DOGU-52e775d1ba16abbc.png",
+    "sira": 19
+  },
+  {
+    "id": "k021",
+    "ad": "Ali Can KİŞİN",
+    "il": "Bingöl",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 20
+  },
+  {
+    "id": "k022",
+    "ad": "İdris KARAKOYUN",
+    "il": "Bitlis",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 21
+  },
+  {
+    "id": "k023",
+    "ad": "Mustafa EGE",
+    "il": "Bolu",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Mustafa-EGE-Bolu-2f6703a4122fc3d5.png",
+    "sira": 22
+  },
+  {
+    "id": "k024",
+    "ad": "Elif KANDEMİR",
+    "il": "Burdur",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Elif-KANDEMIR-BURDUR-1-e834f4556add27e2.png",
+    "sira": 23
+  },
+  {
+    "id": "k025",
+    "ad": "Bengül TOKER",
+    "il": "Bursa",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Bengul-TOKER-Bursa-1-123857388edc4f26.png",
+    "sira": 24
+  },
+  {
+    "id": "k026",
+    "ad": "Melike ERSEVEN",
+    "il": "Çanakkale",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Melike-Hoca-ed4cf668bd682d14.png",
+    "sira": 25
+  },
+  {
+    "id": "k027",
+    "ad": "",
+    "il": "Çankırı",
+    "rol": "",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 26
+  },
+  {
+    "id": "k028",
+    "ad": "Emine Esra KAZANCI",
+    "il": "Çorum",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Emine-Esra-KAZANCI-CORUM-6221e7166b13435c.png",
+    "sira": 27
+  },
+  {
+    "id": "k029",
+    "ad": "Fatma ŞENER",
+    "il": "Denizli",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/denizli-193e59f9f74959c7.png",
+    "sira": 28
+  },
+  {
+    "id": "k030",
+    "ad": "İbrahim Felat SERT",
+    "il": "Diyarbakır",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/ibrahim-felat-1ec1d1b90570b55f.png",
+    "sira": 29
+  },
+  {
+    "id": "k031",
+    "ad": "Özge ÇELTEK",
+    "il": "Düzce",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Ozge-CELTEK-DUZCE-19e89a8ed66d7cc6.png",
+    "sira": 30
+  },
+  {
+    "id": "k032",
+    "ad": "Seçkin YILDIRIM",
+    "il": "Edirne",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/EDIRNE-Seckin-YILDIRIM-cf774b1daa32f983.png",
+    "sira": 31
+  },
+  {
+    "id": "k033",
+    "ad": "Mehmet POLAT",
+    "il": "Elazığ",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Elazig-Mehmet-Polat-1-da8ed0a801905505.png",
+    "sira": 32
+  },
+  {
+    "id": "k034",
+    "ad": "Onur ÇOKER",
+    "il": "Elazığ",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/ELAZIG-Onur-COKER-538174410fe18ac3.png",
+    "sira": 33
+  },
+  {
+    "id": "k035",
+    "ad": "Aykut GÖKALP",
+    "il": "Erzincan",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 34
+  },
+  {
+    "id": "k036",
+    "ad": "Abdurrahim ERDEM",
+    "il": "Erzurum",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 35
+  },
+  {
+    "id": "k037",
+    "ad": "Songül ESEN ÖZBEY",
+    "il": "Eskişehir",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/ESKISEHIR-Songul-Esen-OZBEY-22cf86662c963b88.png",
+    "sira": 36
+  },
+  {
+    "id": "k038",
+    "ad": "Kadir Şaban BAYRAM",
+    "il": "Gaziantep",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Kadir-Saban-BAYRAM-GAZIANTEP-23771bcb8b55ec75.png",
+    "sira": 37
+  },
+  {
+    "id": "k039",
+    "ad": "Kübra IŞIKYILDIZ",
+    "il": "Gaziantep",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/Kubra-Gantep-dadb0ebd1ba68be7.png",
+    "sira": 38
+  },
+  {
+    "id": "k040",
+    "ad": "İbrahim AYDIN",
+    "il": "Giresun",
+    "rol": "Yeğitek İl Yöneticisi",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 39
+  },
+  {
+    "id": "k041",
+    "ad": "Adem MEYDAN",
+    "il": "Gümüşhane",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/Adem-Meydan-GUMUSHANE-0e2d3dcba7b0f09d.png",
+    "sira": 40
+  },
+  {
+    "id": "k042",
+    "ad": "Ebru ALACA",
+    "il": "Gümüşhane",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 41
+  },
+  {
+    "id": "k043",
+    "ad": "Hasan KIYMACI",
+    "il": "Hatay",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 42
+  },
+  {
+    "id": "k044",
+    "ad": "",
+    "il": "Hakkari",
+    "rol": "",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 43
+  },
+  {
+    "id": "k045",
+    "ad": "Zeynep KARACA",
+    "il": "Iğdır",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Zeynep-KARACA-IGDIR-1-5e30879ccf8a12c8.png",
+    "sira": 44
+  },
+  {
+    "id": "k046",
+    "ad": "Tevekkül BÖREKCİ",
+    "il": "Isparta",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/TEvekkul-e6d63354ff0f7893.png",
+    "sira": 45
+  },
+  {
+    "id": "k047",
+    "ad": "Ahmet CAN",
+    "il": "İSTANBUL",
+    "rol": "İl Yöneticisi",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 46
+  },
+  {
+    "id": "k048",
+    "ad": "Saniye KULELİ",
+    "il": "İzmir",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/IZMIR-Saniye-KULELI-1793bc6539841daf.png",
+    "sira": 47
+  },
+  {
+    "id": "k049",
+    "ad": "Mustafa Murat Coşkun",
+    "il": "İzmir",
+    "rol": "İl Yöneticisi",
+    "gorsel": "/wordpress/media/Mustafa-Murat-Coskun-0533289d12eb1918.png",
+    "sira": 48
+  },
+  {
+    "id": "k050",
+    "ad": "Çağlar Atay",
+    "il": "İzmir",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/Caglar-HI-88b2b04314a94271.png",
+    "sira": 49
+  },
+  {
+    "id": "k051",
+    "ad": "Hilal GÖKDEMİR",
+    "il": "Kahramanmaraş",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Kahramanmaras-Hilal-GOKDEMIR-4ffa1d29cfaceac0.png",
+    "sira": 50
+  },
+  {
+    "id": "k052",
+    "ad": "Ahmet AKYOL",
+    "il": "Karabük",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Ahmet-AKYOL-KARABUK-65ff5c53a8173515.png",
+    "sira": 51
+  },
+  {
+    "id": "k053",
+    "ad": "İsmail Hakkı KUNT",
+    "il": "Karaman",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Ismail-Hakki-KUNT-KARAMAN-15c5318c86604f41.png",
+    "sira": 52
+  },
+  {
+    "id": "k054",
+    "ad": "Tuğba DOĞU",
+    "il": "Kars",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Tugba-DOGU-KARS-c96d2363987c381b.png",
+    "sira": 53
+  },
+  {
+    "id": "k055",
+    "ad": "Vildan Çağlar",
+    "il": "Kastamonu",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/vildan-caglar-c6bab31c9a846519.png",
+    "sira": 54
+  },
+  {
+    "id": "k056",
+    "ad": "Tolga AKGÜL",
+    "il": "Kayseri",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/KAYSERI-Tolga-AKGUL-fdda5b04fc0c38b6.png",
+    "sira": 55
+  },
+  {
+    "id": "k057",
+    "ad": "",
+    "il": "Kırıkkale",
+    "rol": "",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 56
+  },
+  {
+    "id": "k058",
+    "ad": "İsa ÇETİNKAYA",
+    "il": "Kırklareli",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/KIRKLARELI-Isa-CETINKAYA-1a11fd4c00263205.png",
+    "sira": 57
+  },
+  {
+    "id": "k059",
+    "ad": "Şakir ATA",
+    "il": "Kırşehir",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 58
+  },
+  {
+    "id": "k060",
+    "ad": "Eda GÖL",
+    "il": "Kilis",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/eda-gol-670a2290b6b15e5c.png",
+    "sira": 59
+  },
+  {
+    "id": "k061",
+    "ad": "İsmet KILIÇ",
+    "il": "Kocaeli",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 60
+  },
+  {
+    "id": "k062",
+    "ad": "Nagihan KAYNAR",
+    "il": "Konya",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Nagihan-Kaynar-3d3cfb6490c2918b.png",
+    "sira": 61
+  },
+  {
+    "id": "k063",
+    "ad": "Adem YÜCE",
+    "il": "Konya",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/IMG_1894-18540e28e0c28346.png",
+    "sira": 62
+  },
+  {
+    "id": "k064",
+    "ad": "İsmail AKPINAR",
+    "il": "Kütahya",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Ismail-Akpinar-Kutahya-dfb5e4798b4c0952.png",
+    "sira": 63
+  },
+  {
+    "id": "k065",
+    "ad": "Feryal ÇİTİL",
+    "il": "Malatya",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Feryal-CITIL-MALATYA-2-72bc863de366b123.png",
+    "sira": 64
+  },
+  {
+    "id": "k066",
+    "ad": "Aslı YILDIRIMGİL",
+    "il": "Manisa",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Asli-Yildirim-273084c7fa2001ac.png",
+    "sira": 65
+  },
+  {
+    "id": "k067",
+    "ad": "Şeref KAPLAN",
+    "il": "Manisa",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/seref-kaplan-b2390ef01b4a357f.png",
+    "sira": 66
+  },
+  {
+    "id": "k068",
+    "ad": "Medine UZUN",
+    "il": "Mardin",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Mardin-Medine-UZUN-2-50f8c279c0c38039.png",
+    "sira": 67
+  },
+  {
+    "id": "k069",
+    "ad": "Nursel DURMAZ",
+    "il": "Mersin",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Nursel-0027c2ec078fdc3c.png",
+    "sira": 68
+  },
+  {
+    "id": "k070",
+    "ad": "",
+    "il": "Muğla",
+    "rol": "",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 69
+  },
+  {
+    "id": "k071",
+    "ad": "Salih KAN",
+    "il": "Muş",
+    "rol": "İl Yöneticisi",
+    "gorsel": "/wordpress/media/Salih-Kan-667ecd0ecc333d5d.png",
+    "sira": 70
+  },
+  {
+    "id": "k072",
+    "ad": "",
+    "il": "Nevşehir",
+    "rol": "",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 71
+  },
+  {
+    "id": "k073",
+    "ad": "Aynur DEMİRTAŞ",
+    "il": "Niğde",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Nigde-Aynur-Demirtas-68d46cc073498c3a.png",
+    "sira": 72
+  },
+  {
+    "id": "k074",
+    "ad": "Büşra KAYA",
+    "il": "Niğde",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/nigde-Busra-Kaya-905db56bd88d99da.png",
+    "sira": 73
+  },
+  {
+    "id": "k075",
+    "ad": "Arif Murat YAĞCI",
+    "il": "Ordu",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Arif-Murat-YAGCI-ORDU-b3450e9f2a29807a.png",
+    "sira": 74
+  },
+  {
+    "id": "k076",
+    "ad": "Ömer Çağdaş Atasu",
+    "il": "Ordu",
+    "rol": "İl Yöneticisi",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 75
+  },
+  {
+    "id": "k077",
+    "ad": "İsmail TÜRKMENOĞLU",
+    "il": "Osmaniye",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Osmaniye-abc8d4be36170fd2.png",
+    "sira": 76
+  },
+  {
+    "id": "k078",
+    "ad": "Hüseyin EKŞİ",
+    "il": "Sinop",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/Huseyin-EKSI-SINOP-cdabbb1461738258.png",
+    "sira": 77
+  },
+  {
+    "id": "k079",
+    "ad": "Melek Bahar YAMAN",
+    "il": "Sinop",
+    "rol": "İl Yöneticisi",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 78
+  },
+  {
+    "id": "k080",
+    "ad": "Özlem ÇAĞLAYAN SEYYAR",
+    "il": "Rize",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Rize-Ozge-CAGLAYAN-SEYYAR-03375146f9ec7e55.png",
+    "sira": 79
+  },
+  {
+    "id": "k081",
+    "ad": "Demet YILDIRIM",
+    "il": "Sakarya",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Demet-Hoca-Sakarya-3790ca92163de065.png",
+    "sira": 80
+  },
+  {
+    "id": "k082",
+    "ad": "Yasemin KARACAN",
+    "il": "Samsun",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/IMG_1897-6b0ebb8ddf942ae6.png",
+    "sira": 81
+  },
+  {
+    "id": "k083",
+    "ad": "Adem ÜNLÜ",
+    "il": "Samsun",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/IMG_1911-04b7dae8ea063d7c.png",
+    "sira": 82
+  },
+  {
+    "id": "k084",
+    "ad": "Gamze ÖZKUL",
+    "il": "Siirt",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/IMG_1901-c098d1a969dad51a.png",
+    "sira": 83
+  },
+  {
+    "id": "k085",
+    "ad": "Erkan EKİCİ",
+    "il": "Sivas",
+    "rol": "İl Yöneticisi",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 84
+  },
+  {
+    "id": "k086",
+    "ad": "Betül ŞİMŞEK",
+    "il": "Sivas",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 85
+  },
+  {
+    "id": "k087",
+    "ad": "Müslüm ÇEPİK",
+    "il": "Şanlıurfa",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Muslum-5dfb1aa0e62f898d.png",
+    "sira": 86
+  },
+  {
+    "id": "k088",
+    "ad": "Ali KOÇYİĞİT",
+    "il": "Şırnak",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Sirnak-Il-K-64e3b649e931e8d5.png",
+    "sira": 87
+  },
+  {
+    "id": "k089",
+    "ad": "Emre ŞAHİN",
+    "il": "Tekirdağ",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Emre-SAHIN-TEKIRDAG-df74f6acaf33e158.png",
+    "sira": 88
+  },
+  {
+    "id": "k090",
+    "ad": "Sezgin TETİK",
+    "il": "TOKAT",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/sezgin-127861fe8671a138.png",
+    "sira": 89
+  },
+  {
+    "id": "k091",
+    "ad": "Mustafa AKYÜZ",
+    "il": "TOKAT",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/Mustafa-akyuz-775d11b96f51799e.png",
+    "sira": 90
+  },
+  {
+    "id": "k092",
+    "ad": "Yelda KARA",
+    "il": "Trabzon",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/TRABZON-Yelda-KARA-b7e01d7469503034.png",
+    "sira": 91
+  },
+  {
+    "id": "k093",
+    "ad": "Musa TOPLU",
+    "il": "Tunceli",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Mustafa-TOPLU-TUNCELI-1be6fbee0caf4095.png",
+    "sira": 92
+  },
+  {
+    "id": "k094",
+    "ad": "Mustafa Hami AY",
+    "il": "Uşak",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/USAK-Mustafa-HAMI-f1ea228be116d636.png",
+    "sira": 93
+  },
+  {
+    "id": "k095",
+    "ad": "Çağıl SÖYLER",
+    "il": "Uşak",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/genctek-1-9f875b56c3d924e4.png",
+    "sira": 94
+  },
+  {
+    "id": "k096",
+    "ad": "Faruk ABUT",
+    "il": "Van",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/Faruk-ABUT-VAN-c023b9283112c74f.png",
+    "sira": 95
+  },
+  {
+    "id": "k097",
+    "ad": "Ayhan ÇIRPAN",
+    "il": "Van",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/IMG_1896-4d1137640fe0c30d.png",
+    "sira": 96
+  },
+  {
+    "id": "k098",
+    "ad": "Mehmet Seyit GÜVENOĞLU",
+    "il": "Yalova",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/1-1-367f8426a933c791.png",
+    "sira": 97
+  },
+  {
+    "id": "k099",
+    "ad": "Şamil GÖKKAYA",
+    "il": "Yozgat",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Samil-GOKKAYA-YOZGAT-1dfed1a5cf6a35f9.png",
+    "sira": 98
+  },
+  {
+    "id": "k100",
+    "ad": "Nihal YILMAZ TOSUN",
+    "il": "Zonguldak",
+    "rol": "İl Koordinatörü",
+    "gorsel": "/wordpress/media/Zonguldak-c93f2eff3e0d233c.png",
+    "sira": 99
+  },
+  {
+    "id": "k101",
+    "ad": "Müzeyyen Merve BAKANGÖZ",
+    "il": "Zonguldak",
+    "rol": "Komisyon Üyesi",
+    "gorsel": "/wordpress/media/Muzeyyen-f02d6f90c2acd20c.png",
+    "sira": 100
+  }
+]

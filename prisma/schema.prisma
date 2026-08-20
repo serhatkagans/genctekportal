@@ -1,0 +1,528 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum PublishStatus {
+  DRAFT
+  IN_REVIEW
+  APPROVED
+  SCHEDULED
+  PUBLISHED
+  ARCHIVED
+}
+
+enum UserStatus {
+  INVITED
+  ACTIVE
+  LOCKED
+  DISABLED
+}
+
+enum RoleCode {
+  SYSTEM_ADMIN
+  CONTENT_MANAGER
+  EDITOR
+  PUBLISHER
+  FORM_REVIEWER
+  AUDITOR
+}
+
+enum SubmissionStatus {
+  NEW
+  IN_REVIEW
+  WAITING_INFORMATION
+  APPROVED
+  REJECTED
+  ARCHIVED
+}
+
+enum CoordinatorRole {
+  PROVINCE_COORDINATOR
+  COMMISSION_MEMBER
+  YEGITEK_PROVINCE_MANAGER
+}
+
+enum MediaStatus {
+  PROCESSING
+  READY
+  QUARANTINED
+  REJECTED
+}
+
+enum FormStatus {
+  DRAFT
+  PUBLISHED
+  CLOSED
+  ARCHIVED
+}
+
+enum AuthEventType {
+  LOGIN_SUCCESS
+  LOGIN_FAILURE
+  ACCOUNT_LOCKED
+  LOGOUT
+  INVITE_ACCEPTED
+  PASSWORD_RESET
+  MFA_ENABLED
+  MFA_DISABLED
+  MFA_FAILURE
+  SESSION_REVOKED
+}
+
+enum ActivityParticipationStatus {
+  BASVURDU
+  SECILDI
+  REDDEDILDI
+}
+
+model Province {
+  code         String        @id @db.VarChar(2)
+  name         String        @unique
+  region       String?
+  districts    District[]
+  users        User[]
+  articles     Article[]
+  events       Event[]
+  coordinators Coordinator[]
+  submissions  Submission[]
+}
+
+model District {
+  id           String        @id @default(cuid())
+  name         String
+  provinceCode String        @db.VarChar(2)
+  province     Province      @relation(fields: [provinceCode], references: [code], onDelete: Restrict)
+  coordinators Coordinator[]
+  submissions  Submission[]
+
+  @@unique([provinceCode, name])
+  @@index([provinceCode])
+}
+
+model User {
+  id                  String           @id @default(cuid())
+  email               String           @unique
+  name                String
+  passwordHash        String?
+  status              UserStatus       @default(INVITED)
+  provinceCode        String?          @db.VarChar(2)
+  province            Province?        @relation(fields: [provinceCode], references: [code], onDelete: SetNull)
+  totpSecretEncrypted String?
+  mfaEnabled          Boolean          @default(false)
+  recoveryCodeHashes  Json?
+  failedLoginCount    Int              @default(0)
+  lockedUntil         DateTime?
+  lastLoginAt         DateTime?
+  passwordChangedAt   DateTime?
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+  roles               UserRole[]
+  articles            Article[]
+  sessions            Session[]
+  invitationsSent     Invitation[]     @relation("InvitationInviter")
+  passwordResets      PasswordReset[]
+  authEvents          AuthEvent[]
+  auditLogs           AuditLog[]       @relation("AuditActor")
+  assignedSubmissions Submission[]     @relation("SubmissionAssignee")
+  submissionNotes     SubmissionNote[]
+}
+
+model UserRole {
+  id        String   @id @default(cuid())
+  userId    String
+  role      RoleCode
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, role])
+  @@index([role])
+}
+
+model Invitation {
+  id           String    @id @default(cuid())
+  email        String
+  tokenHash    String    @unique
+  roles        Json
+  provinceCode String?   @db.VarChar(2)
+  inviterId    String
+  inviter      User      @relation("InvitationInviter", fields: [inviterId], references: [id])
+  expiresAt    DateTime
+  acceptedAt   DateTime?
+  createdAt    DateTime  @default(now())
+
+  @@index([email, expiresAt])
+}
+
+model PasswordReset {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId, expiresAt])
+}
+
+model Session {
+  id            String    @id
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  csrfHash      String
+  userAgent     String?
+  ipHash        String?
+  issuedAt      DateTime  @default(now())
+  lastSeenAt    DateTime  @default(now())
+  idleExpiresAt DateTime
+  expiresAt     DateTime
+  revokedAt     DateTime?
+
+  @@index([userId, expiresAt])
+  @@index([idleExpiresAt])
+}
+
+model AuthEvent {
+  id        String        @id @default(cuid())
+  userId    String?
+  user      User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  email     String?
+  type      AuthEventType
+  outcome   String
+  ipHash    String?
+  userAgent String?
+  metadata  Json?
+  createdAt DateTime      @default(now())
+
+  @@index([userId, createdAt])
+  @@index([email, createdAt])
+}
+
+model Page {
+  id             String        @id @default(cuid())
+  title          String
+  slug           String        @unique
+  blocks         Json
+  seoTitle       String?
+  seoDescription String?
+  status         PublishStatus @default(DRAFT)
+  locale         String        @default("tr")
+  publishedAt    DateTime?
+  scheduledAt    DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model Article {
+  id           String            @id @default(cuid())
+  title        String
+  slug         String            @unique
+  summary      String
+  body         Json
+  category     String
+  status       PublishStatus     @default(DRAFT)
+  provinceCode String?           @db.VarChar(2)
+  province     Province?         @relation(fields: [provinceCode], references: [code], onDelete: SetNull)
+  coverMediaId String?
+  coverMedia   Media?            @relation("ArticleCover", fields: [coverMediaId], references: [id], onDelete: SetNull)
+  featured     Boolean           @default(false)
+  authorId     String
+  author       User              @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  publishedAt  DateTime?
+  scheduledAt  DateTime?
+  archivedAt   DateTime?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  revisions    ArticleRevision[]
+
+  @@index([status, publishedAt])
+  @@index([provinceCode, status])
+}
+
+model ArticleRevision {
+  id        String   @id @default(cuid())
+  articleId String
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  snapshot  Json
+  actorId   String?
+  note      String?
+  createdAt DateTime @default(now())
+
+  @@index([articleId, createdAt])
+}
+
+model Theme {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  summary      String
+  description  Json
+  academicYear String
+  iconName     String?
+  order        Int      @default(0)
+  active       Boolean  @default(true)
+  events       Event[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([active, order])
+}
+
+model Event {
+  id              String        @id @default(cuid())
+  title           String
+  slug            String        @unique
+  summary         String
+  description     Json
+  eventType       String
+  status          PublishStatus @default(DRAFT)
+  startsAt        DateTime
+  endsAt          DateTime?
+  timezone        String        @default("Europe/Istanbul")
+  venue           String?
+  onlineUrl       String?
+  registrationUrl String?
+  capacity        Int?
+  provinceCode    String?       @db.VarChar(2)
+  province        Province?     @relation(fields: [provinceCode], references: [code], onDelete: SetNull)
+  themeId         String?
+  theme           Theme?        @relation(fields: [themeId], references: [id], onDelete: SetNull)
+  publishedAt     DateTime?
+  scheduledAt     DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  organizerName   String?
+  organizerUnit   String?
+  participations  ActivityParticipation[]
+
+  @@index([status, startsAt])
+  @@index([provinceCode, startsAt])
+}
+
+model Participant {
+  id             Int                     @id @default(autoincrement())
+  name           String
+  surname        String
+  className      String?
+  branch         String?
+  institution    String?
+  participations ActivityParticipation[]
+  createdAt      DateTime                 @default(now())
+  updatedAt      DateTime                 @updatedAt
+
+  @@index([surname, name])
+}
+
+model ActivityParticipation {
+  id            String                      @id @default(cuid())
+  eventId       String
+  participantId Int
+  status        ActivityParticipationStatus @default(BASVURDU)
+  appliedAt     DateTime                    @default(now())
+  event         Event                       @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  participant   Participant                 @relation(fields: [participantId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, participantId])
+  @@index([eventId, status])
+  @@index([participantId])
+}
+
+model Coordinator {
+  id            String          @id @default(cuid())
+  name          String
+  title         String?
+  role          CoordinatorRole
+  email         String?
+  phone         String?
+  contactPublic Boolean         @default(false)
+  provinceCode  String          @db.VarChar(2)
+  province      Province        @relation(fields: [provinceCode], references: [code], onDelete: Restrict)
+  districtId    String?
+  district      District?       @relation(fields: [districtId], references: [id], onDelete: SetNull)
+  institution   String?
+  photoMediaId  String?
+  order         Int             @default(0)
+  activeFrom    DateTime?
+  activeUntil   DateTime?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  @@index([provinceCode, role])
+}
+
+model Media {
+  id                    String                 @id @default(cuid())
+  storageKey            String                 @unique
+  originalName          String
+  mimeType              String
+  size                  Int
+  width                 Int?
+  height                Int?
+  checksum              String
+  altText               String?
+  decorative            Boolean                @default(false)
+  caption               String?
+  credit                String?
+  license               String?
+  focalX                Float                  @default(0.5)
+  focalY                Float                  @default(0.5)
+  variants              Json?
+  status                MediaStatus            @default(PROCESSING)
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  articleCovers         Article[]              @relation("ArticleCover")
+  documents             Document[]
+  submissionAttachments SubmissionAttachment[]
+
+  @@index([status, createdAt])
+}
+
+model Document {
+  id           String        @id @default(cuid())
+  title        String
+  slug         String        @unique
+  documentType String
+  version      String?
+  language     String        @default("tr")
+  accessible   Boolean       @default(false)
+  mediaId      String
+  media        Media         @relation(fields: [mediaId], references: [id], onDelete: Restrict)
+  status       PublishStatus @default(DRAFT)
+  publishedAt  DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model FormDefinition {
+  id            String        @id @default(cuid())
+  name          String
+  slug          String        @unique
+  status        FormStatus    @default(DRAFT)
+  retentionDays Int
+  opensAt       DateTime?
+  closesAt      DateTime?
+  versions      FormVersion[]
+  submissions   Submission[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model FormVersion {
+  id             String         @id @default(cuid())
+  formId         String
+  form           FormDefinition @relation(fields: [formId], references: [id], onDelete: Cascade)
+  version        Int
+  schema         Json
+  consentVersion String
+  consentText    String
+  publishedAt    DateTime?
+  submissions    Submission[]
+  createdAt      DateTime       @default(now())
+
+  @@unique([formId, version])
+}
+
+model Submission {
+  id             String                 @id @default(cuid())
+  reference      String                 @unique
+  formId         String
+  form           FormDefinition         @relation(fields: [formId], references: [id], onDelete: Restrict)
+  formVersionId  String
+  formVersion    FormVersion            @relation(fields: [formVersionId], references: [id], onDelete: Restrict)
+  consentVersion String
+  answers        Json
+  status         SubmissionStatus       @default(NEW)
+  provinceCode   String?                @db.VarChar(2)
+  province       Province?              @relation(fields: [provinceCode], references: [code], onDelete: SetNull)
+  districtId     String?
+  district       District?              @relation(fields: [districtId], references: [id], onDelete: SetNull)
+  assigneeId     String?
+  assignee       User?                  @relation("SubmissionAssignee", fields: [assigneeId], references: [id], onDelete: SetNull)
+  sourcePage     String?
+  ipHash         String?
+  retentionUntil DateTime
+  submittedAt    DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+  notes          SubmissionNote[]
+  attachments    SubmissionAttachment[]
+
+  @@index([formId, status, submittedAt])
+  @@index([provinceCode, status])
+  @@index([retentionUntil])
+}
+
+model SubmissionNote {
+  id           String     @id @default(cuid())
+  submissionId String
+  submission   Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  authorId     String
+  author       User       @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  body         String
+  createdAt    DateTime   @default(now())
+
+  @@index([submissionId, createdAt])
+}
+
+model SubmissionAttachment {
+  id           String     @id @default(cuid())
+  submissionId String
+  submission   Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  mediaId      String
+  media        Media      @relation(fields: [mediaId], references: [id], onDelete: Restrict)
+  scanResult   String?
+  createdAt    DateTime   @default(now())
+
+  @@unique([submissionId, mediaId])
+}
+
+model Redirect {
+  id        String   @id @default(cuid())
+  source    String   @unique
+  target    String
+  permanent Boolean  @default(true)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model GlobalSetting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  actor      User?    @relation("AuditActor", fields: [actorId], references: [id], onDelete: SetNull)
+  action     String
+  targetType String
+  targetId   String?
+  metadata   Json?
+  ipHash     String?
+  createdAt  DateTime @default(now())
+
+  @@index([targetType, targetId])
+  @@index([actorId, createdAt])
+  @@index([createdAt])
+}
+
+model MigrationMapping {
+  id         String   @id @default(cuid())
+  sourceType String
+  sourceId   String
+  sourceUrl  String?
+  targetType String
+  targetId   String
+  targetUrl  String?
+  importHash String
+  importedAt DateTime @default(now())
+
+  @@unique([sourceType, sourceId])
+  @@index([targetType, targetId])
+}
