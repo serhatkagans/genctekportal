@@ -47,6 +47,35 @@ systemctl restart genctekportal
 kurduğu için üretilmiş istemci siliniyor ve derleme
 `import type { RoleCode } from "@prisma/client"` satırında düşüyor.
 
+## İçerik dosyaları depoda değil
+
+`data/*.json` (haberler, koordinatörler, temalar, yönlendirmeler) **yönetim
+panelinden yazılıyor**, yani canlı içeriğin tek sahibi sunucudur. Bu yüzden
+21 Ağustos 2026'da `.gitignore`'a alındılar.
+
+Öncesinde depoda izleniyorlardı ve bu sessiz bir veri kaybı kapısıydı:
+dağıtımdaki `git checkout -f`, panelden yapılmış her düzenlemeyi depodaki
+eski anlık görüntüye geri alırdı. Kayıp yaşanmadan fark edildi.
+
+Depoda yalnızca **başlangıç kopyaları** duruyor:
+
+```
+data-ornek/haberler.json
+data-ornek/koordinatorler.json
+data-ornek/temalar.json
+```
+
+Yeni bir makinede kurulum betiği (`baslat.bat`) `node scripts/veri-hazirla.mjs`
+çağırır; bu betik yalnızca **eksik** dosyaları örnekten oluşturur, var olana
+dokunmaz.
+
+Sunucuda `data/` klasörü artık `git checkout -f`'ten etkilenmez — tıpkı
+aşağıdaki medya klasörleri gibi. Yedeklemek isteyen:
+
+```bash
+rsync -az genctek:/opt/genctekportal/data ./data-yedek/
+```
+
 ## Medya depoda değil
 
 `public/wordpress` (~805 MB) ve `public/temalar` (~175 MB) `.gitignore`'da.

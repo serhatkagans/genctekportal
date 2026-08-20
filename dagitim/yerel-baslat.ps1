@@ -29,7 +29,16 @@ Write-Host "  GencTek Portal baslatiliyor" -ForegroundColor Cyan
 Write-Host "  Klasor: $proje"
 Write-Host ""
 
-# --- 1. Veritabani ---------------------------------------------------------
+# --- 1. Icerik dosyalari ---------------------------------------------------
+#
+# data/*.json depoda izlenmiyor (bkz. .gitignore): canli icerigin tek sahibi
+# sunucu. Yeni klonlanmis bir makinede klasor bos olur ve site icerigi
+# gorunmez; asagidaki betik eksik dosyalari data-ornek/ altindaki baslangic
+# kopyalarindan doldurur. VAR OLAN DOSYAYA DOKUNMAZ.
+Write-Host "  [1/3] Icerik dosyalari kontrol ediliyor..."
+node scripts/veri-hazirla.mjs
+
+# --- 2. Veritabani ---------------------------------------------------------
 #
 # PORT DINLENIYOR OLMASI YETMEZ (21 Agustos 2026).
 #
@@ -45,7 +54,7 @@ function Veritabani-Hazir-Mi {
     return ($LASTEXITCODE -eq 0)
 }
 
-Write-Host "  [1/2] Veritabani kontrol ediliyor..."
+Write-Host "  [2/3] Veritabani kontrol ediliyor..."
 if (Veritabani-Hazir-Mi) {
     Write-Host "        hazir." -ForegroundColor Green
 } else {
@@ -87,7 +96,7 @@ if (Veritabani-Hazir-Mi) {
 
 Write-Host ""
 
-# --- 2. Uygulama -----------------------------------------------------------
+# --- 3. Uygulama -----------------------------------------------------------
 #
 # WEBPACK BAYRAĞI ŞART, keyfi değil (20 Ağustos 2026).
 #
@@ -102,9 +111,9 @@ Write-Host ""
 #
 # Pencere AÇIK KALMALI; kapatılırsa uygulama durur.
 if (Dinliyor-Mu $PORT) {
-    Write-Host "  [2/2] Portal zaten calisiyor (port $PORT)."
+    Write-Host "  [3/3] Portal zaten calisiyor (port $PORT)."
 } else {
-    Write-Host "  [2/2] Portal baslatiliyor (webpack)..."
+    Write-Host "  [3/3] Portal baslatiliyor (webpack)..."
     Start-Process -FilePath "cmd.exe" `
         -ArgumentList "/k", "npm run dev -- --webpack" `
         -WorkingDirectory $proje
@@ -120,7 +129,7 @@ if (Dinliyor-Mu $PORT) {
     }
 }
 
-# --- 3. Gerçekten yanıt veriyor mu -----------------------------------------
+# --- 4. Gerçekten yanıt veriyor mu -----------------------------------------
 # Port dinleniyor olması yetmez: derleme hatası varsa sayfa 500 döner.
 $saglikli = $false
 try {
@@ -130,7 +139,7 @@ try {
     $saglikli = $false
 }
 
-# --- 4. Platform bağlantısı -------------------------------------------------
+# --- 5. Platform bağlantısı -------------------------------------------------
 if (-not (Dinliyor-Mu $PLATFORM_PORT)) {
     Write-Host ""
     Write-Host "  Not: platform (port $PLATFORM_PORT) kapali." -ForegroundColor Yellow

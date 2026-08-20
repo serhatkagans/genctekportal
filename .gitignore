@@ -19,5 +19,17 @@ veri
 public/wordpress
 public/temalar
 
+# İÇERİK DOSYALARI DEPODA DEĞİL (21 Ağustos 2026 kararı).
+#
+# data/*.json (haberler, koordinatörler, temalar, yönlendirmeler) yönetim
+# panelinden YAZILIYOR. Depoda izlenirlerse iki sahipleri olur ve dağıtımdaki
+# `git checkout -f`, sunucuda panelden yapılmış düzenlemeleri sessizce geri
+# alır. Canlı içeriğin tek sahibi sunucudur.
+#
+# Başlangıç kopyaları data-ornek/ altında duruyor ve İZLENİYOR: yeni bir
+# makinede `node scripts/veri-hazirla.mjs` eksik dosyaları oradan doldurur,
+# var olanlara dokunmaz. Aynı desen yukarıdaki medya klasörlerinde de var.
+/data
+
 # TypeScript derleme önbelleği; makineye özel ve her derlemede değişir.
 tsconfig.tsbuildinfo
