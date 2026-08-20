@@ -35,7 +35,30 @@ export async function girisAction(_oncekiDurum: string | undefined, formData: Fo
     return `Çok fazla deneme yapıldı. ${dakika} dakika sonra tekrar deneyin.`;
   }
 
-  const sonuc = await girisYap({ eposta, parola, userAgent, ipOzeti });
+  /*
+   * VERİTABANI KAPALIYSA 500 DEĞİL, AÇIK BİR MESAJ (20 Ağustos 2026).
+   *
+   * `girisYap` doğrudan SQL çalıştırıyor. Postgres kapalıyken (geliştirme
+   * makinesinde çoğu zaman öyle) sorgu ECONNREFUSED ile düşüyor, sunucu eylemi
+   * hatayı yukarı fırlatıyor ve kullanıcı "Bir şeyler yolunda gitmedi" diyen
+   * genel hata sayfasını görüyordu. Ne olduğunu söylemeyen bu ekran, kişiyi
+   * parolasını yanlış girdiğini sanarak tekrar tekrar denemeye itiyor.
+   *
+   * Mesaj AYRIŞTIRILIYOR: yanlış parola "E-posta veya parola hatalı" der ve
+   * öyle kalmalı (hesap sayımını engeller). Bağlantı hatası ise kişinin
+   * bilgileriyle ilgili değil, sistemle ilgili — onu gizlemenin bir güvenlik
+   * karşılığı yok, gizlemenin bedeli ise boşuna denemek.
+   *
+   * Hata sunucu günlüğüne yazılıyor: kullanıcıya kısa cümle yeter, arızayı
+   * çözecek kişiye yığın izi gerek.
+   */
+  let sonuc;
+  try {
+    sonuc = await girisYap({ eposta, parola, userAgent, ipOzeti });
+  } catch (hata) {
+    console.error("[giris] veritabanina ulasilamadi", hata);
+    return "Veritabanına ulaşılamıyor; giriş şu an yapılamıyor. Sistem yöneticisiyle görüşün.";
+  }
   if (!sonuc.tamam) return sonuc.hata;
 
   resetRateLimit(anahtar);
