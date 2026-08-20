@@ -29,7 +29,65 @@ Write-Host "  GencTek Portal baslatiliyor" -ForegroundColor Cyan
 Write-Host "  Klasor: $proje"
 Write-Host ""
 
-# --- 1. Uygulama -----------------------------------------------------------
+# --- 1. Veritabani ---------------------------------------------------------
+#
+# PORT DINLENIYOR OLMASI YETMEZ (21 Agustos 2026).
+#
+# Veritabani, "prisma dev" ile acilan yerel bir Postgres sunucusu (.env icindeki
+# DATABASE_URL oraya bakar). Bu sunucu yari olu kalabiliyor: portu dinlemeye
+# devam ediyor ama gelen her baglantiyi sifirliyor. O halde /yonetim, oturum
+# sorgusunda "read ECONNRESET" ile 500 donuyor ve giris ekrani doner durur.
+# Bu yuzden kontrol gercek bir sorguyla yapiliyor: scripts/veritabani-hazir.mjs.
+$DB_ADI = "portal"
+
+function Veritabani-Hazir-Mi {
+    node scripts/veritabani-hazir.mjs *>$null
+    return ($LASTEXITCODE -eq 0)
+}
+
+Write-Host "  [1/2] Veritabani kontrol ediliyor..."
+if (Veritabani-Hazir-Mi) {
+    Write-Host "        hazir." -ForegroundColor Green
+} else {
+    Write-Host "        yanit vermiyor; yeniden baslatiliyor..." -ForegroundColor Yellow
+    npx prisma dev stop $DB_ADI *>$null
+
+    # Durdurma yarim kalirsa kilit klasoru geride kaliyor ve yeni sunucu
+    # "Lock file is already being held" diyerek hic acilmiyor. Sunucu durdurulmus
+    # oldugu icin kilidi silmek guvenli.
+    $kilit = Join-Path $env:LOCALAPPDATA "prisma-dev-nodejs\Data\$DB_ADI\.lock"
+    if (Test-Path $kilit) { Remove-Item -Recurse -Force $kilit -ErrorAction SilentlyContinue }
+
+    $cikti = npx prisma dev --name $DB_ADI --detach 2>$null
+    $adres = ($cikti | Select-String -Pattern "^postgres://" | Select-Object -First 1)
+
+    # Port her acilista ayni kalmayabilir; degistiyse .env guncellenmezse
+    # uygulama eski porta baglanmaya calisir.
+    if ($adres) {
+        $yeni = $adres.ToString().Trim()
+        $envYolu = Join-Path $proje ".env"
+        $satirlar = Get-Content $envYolu
+        $mevcut = ($satirlar | Where-Object { $_ -match "^DATABASE_URL=" }) -replace "^DATABASE_URL=", "" -replace '"', ""
+        if ($mevcut -ne $yeni) {
+            Write-Host "        port degisti, .env guncelleniyor." -ForegroundColor Yellow
+            ($satirlar | ForEach-Object {
+                if ($_ -match "^DATABASE_URL=") { "DATABASE_URL=`"$yeni`"" } else { $_ }
+            }) | Set-Content $envYolu -Encoding utf8
+        }
+    }
+
+    if (Veritabani-Hazir-Mi) {
+        Write-Host "        hazir." -ForegroundColor Green
+    } else {
+        Write-Host "        VERITABANI ACILAMADI." -ForegroundColor Red
+        Write-Host "        Portal acilir ama /giris ve /yonetim calismaz."
+        Write-Host "        Elle deneyin: npx prisma dev --name $DB_ADI --detach"
+    }
+}
+
+Write-Host ""
+
+# --- 2. Uygulama -----------------------------------------------------------
 #
 # WEBPACK BAYRAĞI ŞART, keyfi değil (20 Ağustos 2026).
 #
@@ -44,9 +102,9 @@ Write-Host ""
 #
 # Pencere AÇIK KALMALI; kapatılırsa uygulama durur.
 if (Dinliyor-Mu $PORT) {
-    Write-Host "  [1/1] Portal zaten calisiyor (port $PORT)."
+    Write-Host "  [2/2] Portal zaten calisiyor (port $PORT)."
 } else {
-    Write-Host "  [1/1] Portal baslatiliyor (webpack)..."
+    Write-Host "  [2/2] Portal baslatiliyor (webpack)..."
     Start-Process -FilePath "cmd.exe" `
         -ArgumentList "/k", "npm run dev -- --webpack" `
         -WorkingDirectory $proje
@@ -62,7 +120,7 @@ if (Dinliyor-Mu $PORT) {
     }
 }
 
-# --- 2. Gerçekten yanıt veriyor mu -----------------------------------------
+# --- 3. Gerçekten yanıt veriyor mu -----------------------------------------
 # Port dinleniyor olması yetmez: derleme hatası varsa sayfa 500 döner.
 $saglikli = $false
 try {
@@ -72,7 +130,7 @@ try {
     $saglikli = $false
 }
 
-# --- 3. Platform bağlantısı -------------------------------------------------
+# --- 4. Platform bağlantısı -------------------------------------------------
 if (-not (Dinliyor-Mu $PLATFORM_PORT)) {
     Write-Host ""
     Write-Host "  Not: platform (port $PLATFORM_PORT) kapali." -ForegroundColor Yellow

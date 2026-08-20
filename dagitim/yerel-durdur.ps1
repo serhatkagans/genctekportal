@@ -30,10 +30,11 @@ if ($idler) {
 Start-Sleep -Seconds 2
 
 <#
-VERİTABANINA DOKUNULMAZ. Portalın veritabanı (PostgreSQL) bu makinede ayrı
-kurulu bir hizmettir; platformdaki gibi betiğin açtığı geçici bir sunucu
-değildir. Onu durdurmak, aynı PostgreSQL'i kullanan başka her şeyi de
-durdururdu.
+VERİTABANINA DOKUNULMAZ. Portalın veritabanı "prisma dev" ile açılan, portal
+kapandıktan sonra da ayakta kalan ayrı bir sunucu ("portal" adlı). Onu burada
+durdurmak, aynı sunucuya bağlanan seed/migration betiklerini ve bir sonraki
+başlatmayı gereksiz yere yavaşlatırdı; başlatma betiği zaten sunucunun sağlığını
+kontrol edip gerekirse kendisi yeniden başlatıyor.
 #>
 
 $kalan = Get-NetTCPConnection -LocalPort $PORT -State Listen -ErrorAction SilentlyContinue
