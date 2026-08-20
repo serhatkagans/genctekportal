@@ -5,6 +5,7 @@ import { HaberGalerisi } from "@/components/HaberGalerisi";
 import { EtkinlikKarti } from "@/components/etkinlik-karti";
 import { Icon } from "@/components/icons";
 import { haberleriOku } from "@/lib/haber";
+import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
 import { genctekEtkinlikleriOku } from "@/lib/genctek-etkinlik";
 
 // Ana sayfa da haber listesi/detayıyla aynı kaynağı kullanmalı; ayrı tohum verisi
@@ -42,7 +43,13 @@ export default async function Home() {
             <span className="eyebrow">YEĞİTEK Genel Müdürlüğü</span>
             <h1>Sektörün yeni <em>liderleri</em>.</h1>
             <p>Fikirlerin ekiplere, ekiplerin gerçek projelere dönüştüğü; öğrencileri, öğretmenleri ve sektörü buluşturan öğrenme ağı.</p>
-            <div className="button-row"><Link className="button button-primary" href="/katilim">Ekosisteme katıl <Icon name="arrow" /></Link><Link className="text-link" href="/hakkinda">GençTek’i keşfet <Icon name="arrow" /></Link></div>
+            {/*
+              HERO DÜĞMESİ DE PLATFORMA (20 Ağustos 2026 · istek: "herodaki
+              ekosisteme katıl da giriş olsun ve platforma girişe
+              yönlendirsin"). Sayfadaki üç çağrı — üst menü, hero ve alttaki
+              şerit — artık aynı adı taşıyıp aynı kapıya gidiyor.
+            */}
+            <div className="button-row"><a className="button button-primary" href={genctekGirisAdresi()}>Giriş <Icon name="arrow" /></a><Link className="text-link" href="/hakkinda">GençTek’i keşfet <Icon name="arrow" /></Link></div>
           </div>
           <div className="hero-panel" aria-label="GençTek etki özeti">
             <div className="hero-panel-head"><span>2025–2026</span><span className="live-dot">Aktif dönem</span></div>
@@ -75,7 +82,16 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="section join-section"><div className="container join-card"><div><span className="eyebrow eyebrow-light">Sıra sende</span><h2>Fikrini ekibe, ekibini harekete dönüştür.</h2><p>Öğrenci veya danışman öğretmen olarak GençTek ekosistemine katıl.</p></div><Link className="button button-light" href="/katilim">Başvuruyu başlat <Icon name="arrow" /></Link></div></section>
+      {/*
+        ALT ÇAĞRI DA PLATFORMA GİDİYOR (20 Ağustos 2026 · istek: "Başvuruyu
+        başlat burayı da girişe bağla ve ismi platforma giriş olsun").
+
+        Üstteki düğmeyle aynı yere gider ve aynı şeyi söyler: katılmak, portalda
+        ikinci bir form doldurmak değil platforma girmektir. İki düğmenin farklı
+        adlar taşıması ("Başvuruyu başlat" / "Giriş") aynı kapıyı iki ayrı kapı
+        gibi gösteriyordu.
+      */}
+      <section className="section join-section"><div className="container join-card"><div><span className="eyebrow eyebrow-light">Sıra sende</span><h2>Fikrini ekibe, ekibini harekete dönüştür.</h2><p>Öğrenci veya danışman öğretmen olarak GençTek ekosistemine katıl.</p></div><a className="button button-light" href={genctekGirisAdresi()}>Platforma giriş <Icon name="arrow" /></a></div></section>
     </main>
     <Footer />
   </>;

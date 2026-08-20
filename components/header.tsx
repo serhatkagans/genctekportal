@@ -47,9 +47,13 @@ const zirveler = [
 
 export function Header() {
   /*
-   * KATILIM FORMU ARTIK PLATFORMA GİDİYOR (20 Ağustos 2026 · istek: "portal
-   * olandaki katılım formu platforma gidecek (giriş) şeklinde, yani portaldaki
-   * diğer platforma link gibi olacak").
+   * DÜĞMENİN ADI "GİRİŞ" VE HEDEFİ PLATFORM (20 Ağustos 2026 · istekler:
+   * "portal olandaki katılım formu platforma gidecek (giriş) şeklinde, yani
+   * portaldaki diğer platforma link gibi olacak" ve "sayfanın üstündeki
+   * katılım formu da adı giriş olsun").
+   *
+   * Düğme portal içine değil BAŞKA BİR UYGULAMAYA gittiği için `<a>`;
+   * `next/link` istemci tarafı gezinme için, dış adreste karşılığı yok.
    *
    * Katılım kimliği doğrulanmış bir işlem: kayıt da başvuru da GençTek
    * panelinde yürüyor. Portalda ikinci bir form doldurtmak, aynı bilgiyi iki
@@ -73,7 +77,7 @@ export function Header() {
           </details>
         </nav>
         <TemaSecici />
-        <Link className="button button-primary header-cta" href={katilimAdresi}>Katılım Formu</Link>
+        <a className="button button-primary header-cta" href={katilimAdresi}>Giriş</a>
         <details className="mobile-menu">
           <summary aria-label="Menüyü aç">Menü</summary>
           <nav aria-label="Mobil menü">
@@ -81,7 +85,7 @@ export function Header() {
             {/* Mobilde açılır menü İÇİNDE açılır menü olmaz: iki zirve doğrudan
                 listeleniyor, başlıkları zaten hangi yıl olduğunu söylüyor. */}
             {zirveler.map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
-            <Link href={katilimAdresi}>Katılım Formu</Link>
+            <a href={katilimAdresi}>Giriş</a>
           </nav>
         </details>
       </div>
