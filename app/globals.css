@@ -759,3 +759,45 @@ html[data-theme="kirmizi"] .site-header .nav-acilir-govde a{color:var(--color-te
 
 @media(max-width:1024px){.hakkinda-izgara{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:720px){.hakkinda-izgara{grid-template-columns:1fr}}
+
+/* Yönetim: kullanıcılar, denetim kaydı ve genel ayarlar ekranları.
+   Mevcut yönetim dilini (admin-panel, resource-row, status) kullanıyorlar;
+   burada yalnızca bu üç ekrana özgü yerleşim var. */
+.sayim-kutu{display:grid;gap:4px;padding:18px 20px}
+.sayim-kutu strong{font:800 1.7rem var(--font-display);color:var(--color-text-strong)}
+.sayim-kutu span{color:var(--color-text-muted);font-size:.85rem}
+
+.kullanici-satiri{display:grid;grid-template-columns:minmax(220px,1.3fr) minmax(260px,1.4fr) auto;gap:20px;align-items:center}
+.kullanici-kimlik{display:grid;gap:2px;min-width:0}
+.kullanici-kimlik strong{color:var(--color-text-strong)}
+.kullanici-kimlik span{color:var(--color-text-muted);font-size:.85rem;overflow:hidden;text-overflow:ellipsis}
+.kullanici-son{font-size:.78rem!important}
+/* Rol etiketleri: açık olan dolu, kapalı olan sönük. Tıklanabilir olduğu için
+   düğme; imleç ve odak halkası tarayıcıdan geliyor. */
+.rol-kutusu{display:flex;flex-wrap:wrap;gap:6px}
+.rol-etiket{border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text-muted);border-radius:999px;padding:4px 11px;font-size:.75rem;font-weight:700;cursor:pointer;transition:border-color 120ms,color 120ms}
+.rol-etiket:hover{border-color:var(--color-brand);color:var(--color-brand)}
+.rol-etiket-acik{background:var(--color-bg-brand-tint);border-color:var(--color-brand);color:var(--color-brand-active)}
+.kullanici-eylem{display:grid;gap:6px;justify-items:end}
+.kullanici-eylem form{display:flex;align-items:center;gap:8px}
+.durum-secim{min-height:36px;border:1px solid var(--color-border);border-radius:8px;background:var(--color-surface);padding:0 10px}
+
+.denetim-satiri{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center}
+.denetim-satiri strong{color:var(--color-text-strong)}
+.denetim-satiri span{color:var(--color-text-muted);font-size:.85rem}
+.denetim-satiri time{color:var(--color-text-muted);font-size:.8rem;white-space:nowrap}
+.denetim-sayfalama{display:flex;align-items:center;justify-content:space-between;margin-top:16px;color:var(--color-text-muted);font-size:.85rem}
+.denetim-sayfa-baglari{display:flex;gap:16px}
+
+.ayar-formu{display:grid;gap:22px;padding:24px}
+.ayar-alani{display:grid;gap:6px}
+.ayar-etiket{font-weight:700;color:var(--color-text-strong)}
+.ayar-alani input,.ayar-alani textarea{border:1px solid var(--color-border);border-radius:8px;background:var(--color-surface);padding:10px 12px;font:inherit;min-height:44px}
+.ayar-aciklama{color:var(--color-text-muted);font-size:.82rem}
+.ayar-not{margin:0;color:var(--color-text-muted);font-size:.82rem}
+.ayar-formu button{width:max-content}
+
+@media(max-width:1024px){
+  .kullanici-satiri,.denetim-satiri{grid-template-columns:1fr;gap:12px}
+  .kullanici-eylem{justify-items:start}
+}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ayarlariOkuSessiz } from "@/lib/yonetim/ayar";
 import { Archivo, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 
@@ -17,11 +18,30 @@ const body = Source_Sans_3({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: { default: "GençTek | Sektörün Yeni Liderleri", template: "%s | GençTek" },
-  description: "Gençlerin teknolojiyle ürettiği, paylaştığı ve birlikte büyüdüğü bilişim ekosistemi.",
-  metadataBase: new URL("https://genctek.eba.gov.tr"),
-};
+/**
+ * METADATA ARTIK AYARLARDAN ÜRETİLİYOR (20 Ağustos 2026 · istek: "ayarlar
+ * sayfasını yapmamışsın").
+ *
+ * Önce burada sabitti; yönetim panelindeki ayar formu doluydu ama Kaydet
+ * hiçbir şeyi değiştirmiyordu. Şimdi başlık ve açıklama `GlobalSetting`
+ * tablosundan geliyor (bkz. lib/yonetim/ayar.ts) ve panelden değiştirilebiliyor.
+ *
+ * Sabit kalan tek şey `metadataBase`: yayın adresi bir içerik ayarı değil,
+ * dağıtım kararıdır — panelden değiştirilebilseydi yanlış bir değer bütün
+ * paylaşım bağlantılarını kırardı.
+ *
+ * VERİTABANI KAPALIYKEN sayfa başlıksız kalmaz: `ayarlariOkuSessiz`
+ * varsayılanlara düşer.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const ayarlar = await ayarlariOkuSessiz();
+  const baslik = ayarlar["site.baslik"];
+  return {
+    title: { default: `${baslik} | Sektörün Yeni Liderleri`, template: `%s | ${baslik}` },
+    description: ayarlar["site.aciklama"],
+    metadataBase: new URL("https://genctek.eba.gov.tr"),
+  };
+}
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
