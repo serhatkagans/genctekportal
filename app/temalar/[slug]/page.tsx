@@ -8,6 +8,7 @@ import { Icon } from "@/components/icons";
 import { EgitijamProgram } from "@/components/egitijam-program";
 import { ThemeOfficialProgram } from "@/components/theme-official-program";
 import { ThemeSourceArticle } from "@/components/theme-source-article";
+import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
 import { temaBul, temaGorseli, temalariOku } from "@/lib/tema";
 import { getThemeProgram } from "@/lib/theme-programs";
 
@@ -42,7 +43,7 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
       {theme.slug === "oyun-tasarimi-egitijam" ? <EgitijamProgram /> : null}
       {program ? <ThemeOfficialProgram program={program} /> : null}
       <ThemeSourceArticle slug={theme.slug} />
-      <section className="section theme-detail-cta"><div className="container join-card"><div><span className="eyebrow eyebrow-light">Bu tema seni heyecanlandırdı mı?</span><h2>{theme.name} ekibinde yerini al.</h2><p>Öğrenci veya danışman öğretmen olarak GençTek ekosistemine katıl.</p></div><Link className="button button-light" href="/katilim">Katılım formuna git <Icon name="arrow"/></Link></div></section>
+      <section className="section theme-detail-cta"><div className="container join-card"><div><span className="eyebrow eyebrow-light">Bu tema seni heyecanlandırdı mı?</span><h2>{theme.name} ekibinde yerini al.</h2><p>Öğrenci veya danışman öğretmen olarak GençTek ekosistemine katıl.</p></div><a className="button button-light" href={genctekGirisAdresi()}>Platforma giriş <Icon name="arrow"/></a></div></section>
     </article>
   </main><Footer/></>;
 }
