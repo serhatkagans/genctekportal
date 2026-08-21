@@ -1,7 +1,7 @@
-import type { WordPressContent } from "@/lib/wordpress-content";
+import type { HaberKarti } from "@/lib/haber";
 import { WordPressCard } from "./wordpress-card";
 
-export function HaberGalerisi({ haberler }: { haberler: WordPressContent[] }) {
+export function HaberGalerisi({ haberler }: { haberler: HaberKarti[] }) {
   if (haberler.length === 0) return null;
 
   return (

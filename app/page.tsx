@@ -4,7 +4,7 @@ import { Footer } from "@/components/footer";
 import { HaberGalerisi } from "@/components/HaberGalerisi";
 import { EtkinlikKarti } from "@/components/etkinlik-karti";
 import { Icon } from "@/components/icons";
-import { haberleriOku } from "@/lib/haber";
+import { haberKartlariOku } from "@/lib/haber";
 import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
 import { genctekEtkinlikleriOku } from "@/lib/genctek-etkinlik";
 
@@ -13,7 +13,7 @@ import { genctekEtkinlikleriOku } from "@/lib/genctek-etkinlik";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const sonHaberler = (await haberleriOku()).slice(0, 12);
+  const sonHaberler = await haberKartlariOku(12);
   /*
    * ETKİNLİKLER GENÇTEK UYGULAMASINDAN GELİR (20 Ağustos 2026 · istek: "ana
    * sayfada Üretim temaları yerine az önce oluşturulan etkinlikler gelecek,

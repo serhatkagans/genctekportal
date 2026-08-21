@@ -28,6 +28,37 @@ async function yaz(kayitlar: Haber[]) {
   await writeFile(DOSYA, JSON.stringify(kayitlar, null, 2) + "\n", "utf8");
 }
 
+// Kart listeleri yalnızca bu alanları gösterir. Gövde html'i (72 haberde ~500 KB)
+// sunucu bileşeni akışına girmesin diye kartlara ayıklanmış kayıt verilir.
+export type HaberKarti = Pick<Haber, "id" | "slug" | "title" | "excerpt" | "date" | "featuredImage" | "categories">;
+
+export const HABER_SAYFA_BOYUTU = 12;
+
+function karta({ id, slug, title, excerpt, date, featuredImage, categories }: Haber): HaberKarti {
+  return { id, slug, title, excerpt, date, featuredImage, categories };
+}
+
+export async function haberKartlariOku(limit?: number): Promise<HaberKarti[]> {
+  const kayitlar = await haberleriOku();
+  return (limit ? kayitlar.slice(0, limit) : kayitlar).map(karta);
+}
+
+// Sayfa numarası aralık dışındaysa en yakın geçerli sayfaya çekilir; boş liste
+// dönmektense ilk/son sayfayı göstermek kullanıcıyı çıkmaza sokmaz.
+export async function haberSayfasi(istenenSayfa: number) {
+  const kayitlar = await haberleriOku();
+  const toplam = kayitlar.length;
+  const sonSayfa = Math.max(1, Math.ceil(toplam / HABER_SAYFA_BOYUTU));
+  const sayfa = Math.min(Math.max(1, istenenSayfa), sonSayfa);
+  const baslangic = (sayfa - 1) * HABER_SAYFA_BOYUTU;
+  return {
+    kartlar: kayitlar.slice(baslangic, baslangic + HABER_SAYFA_BOYUTU).map(karta),
+    toplam,
+    sayfa,
+    sonSayfa,
+  };
+}
+
 export async function haberBul(slug: string) {
   return (await haberleriOku()).find((h) => h.slug === slug);
 }
