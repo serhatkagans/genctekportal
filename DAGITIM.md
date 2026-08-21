@@ -49,7 +49,7 @@ kurduğu için üretilmiş istemci siliniyor ve derleme
 
 ## İçerik dosyaları depoda değil
 
-`data/*.json` (haberler, koordinatörler, temalar, yönlendirmeler) **yönetim
+`data/*.json` (haberler, koordinatörler, yönlendirmeler) **yönetim
 panelinden yazılıyor**, yani canlı içeriğin tek sahibi sunucudur. Bu yüzden
 21 Ağustos 2026'da `.gitignore`'a alındılar.
 
@@ -68,6 +68,17 @@ data-ornek/temalar.json
 Yeni bir makinede kurulum betiği (`baslat.bat`) `node scripts/veri-hazirla.mjs`
 çağırır; bu betik yalnızca **eksik** dosyaları örnekten oluşturur, var olana
 dokunmaz.
+
+**Temalar artık dosyada değil.** 21 Ağustos 2026'da `"Theme"` tablosuna
+taşındılar; `data/temalar.json` yalnızca göçün kaynağı olarak duruyor.
+Tabloyu boş bulan yeni bir kurulumda bir kereliğine:
+
+```bash
+npm run goc:temalar
+```
+
+Betik tablo doluysa hiçbir şey yapmaz — ikinci çalıştırma panelden yapılan
+düzenlemeleri dosyadaki eski hâle döndürürdü.
 
 Sunucuda `data/` klasörü artık `git checkout -f`'ten etkilenmez — tıpkı
 aşağıdaki medya klasörleri gibi. Yedeklemek isteyen:

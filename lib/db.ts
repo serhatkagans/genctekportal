@@ -34,8 +34,26 @@ const zamanTipleri = {
   },
 };
 
+/*
+ * HAVUZ SINIRI YERELDE DAHA DÜŞÜK (21 Ağustos 2026).
+ *
+ * Yereldeki veritabanı `prisma dev` ile açılan sunucu ve DOKUZUNCU eşzamanlı
+ * bağlantıda çöküyor: sekize kadar sorunsuz, dokuzda açık tüm bağlantılar
+ * "read ECONNRESET" ile sıfırlanıyor ve sunucu bir daha kendine gelmiyor —
+ * portu dinlemeye devam ettiği için ayakta görünüyor. `max: 10` ile bir yönetim
+ * sayfasının paralel sorguları bu tavana değebiliyordu; belirti,
+ * dagitim/yerel-baslat.ps1'de "yarı ölü veritabanı" diye anlatılan durum.
+ *
+ * Üretimdeki Postgres'te böyle bir tavan yok, orada sınır 10 kalıyor.
+ * Gerekirse DB_HAVUZ_SINIRI ile elle verilebilir.
+ */
+const havuzSiniri =
+  Number(process.env.DB_HAVUZ_SINIRI) || (process.env.NODE_ENV === "production" ? 10 : 5);
+
 // Sürücü bağlantıyı ilk sorguya kadar açmaz; böylece Next build aşaması veritabanına bağımlı olmaz.
-const sql = globalForSql.genctekSql ?? postgres(baglantiYolu, { max: 10, idle_timeout: 20, types: zamanTipleri });
+const sql =
+  globalForSql.genctekSql ??
+  postgres(baglantiYolu, { max: havuzSiniri, idle_timeout: 20, types: zamanTipleri });
 if (process.env.NODE_ENV !== "production") globalForSql.genctekSql = sql;
 
 // Aşağıdaki prisma kabuğu yalnızca belge akışının ihtiyaç duyduğu birkaç sorguyu

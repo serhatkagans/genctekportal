@@ -143,11 +143,10 @@ Giriş ve çıkış çalışıyor. Geri kalanı statik sayfa olarak duruyor.
   büyük eksiği bu.
   (`Participant`, `ActivityParticipation` modelleri hazır)
 
-- [ ] **Etkinlik–tema bağı kurulamıyor.** `Event.themeId` Postgres'teki `Theme`
-  tablosuna bakıyor, ama temalar `data/temalar.json` içinde tutuluyor ve o tablo
-  boş. Ya temalar Postgres'e taşınmalı ya da bu alan yabancı anahtarsız bir slug
-  alanına çevrilmeli. Şu an editörde hiç gösterilmiyor.
-  (`prisma/schema.prisma`, `lib/tema.ts`)
+- [ ] **Etkinlik–tema bağı editörde gösterilmiyor.** `Event.themeId`'nin
+  baktığı `Theme` tablosu artık dolu (temalar 21 Ağustos 2026'da taşındı), yani
+  engel kalmadı; etkinlik editörüne tema seçimi eklenmeli.
+  (`app/yonetim/etkinlikler/[id]`, `lib/tema.ts`)
 
 - [ ] **Tema slug'ı değişince program içeriği kopuyor.** `lib/theme-programs.ts`
   içerikleri slug ile eşleşiyor ve kodda duruyor. Editörde uyarı yazılı ama
@@ -199,9 +198,9 @@ Giriş ve çıkış çalışıyor. Geri kalanı statik sayfa olarak duruyor.
 
 ## 9. Küçük işler
 
-- [ ] `data/haberler.json`, `data/temalar.json`, `data/koordinatorler.json`
-  dosya tabanlı; eşzamanlı iki kayıt birbirini ezebilir. Tek kullanıcıda sorun
-  değil, çok kullanıcıda Postgres'e taşınmalı.
+- [ ] `data/haberler.json` ve `data/koordinatorler.json` hâlâ dosya tabanlı;
+  eşzamanlı iki kayıt birbirini ezebilir. Temalar için yapılan göç (`lib/tema.ts`,
+  `scripts/goc-temalar.mjs`) bunların da deseni; sırada `haberler` var.
 
 - [ ] Haber editöründe önizleme yok — düz metnin nasıl görüneceği ancak
   kaydedince görülüyor.
@@ -225,7 +224,8 @@ Referans olsun diye; bunlar bu projede yapıldı ve çalışır durumda.
 - Haber editörü: normal yazım / HTML çift biçim, gövde içi görsel ekleme
 - Görsel yükleme altyapısı: `/api/yonetim/medya`, kütüphaneden seçme,
   sürükle-bırak, haber + tema + koordinatör ekranlarında ortak alan
-- Tema ekleme/düzenleme/silme (`data/temalar.json`)
+- Tema ekleme/düzenleme/silme; 21 Ağustos 2026'da `data/temalar.json`'dan
+  PostgreSQL `"Theme"` tablosuna taşındı (`scripts/goc-temalar.mjs`)
 - Etkinlik ekleme/düzenleme/silme + zaman damgası kayması düzeltmesi
 - Giriş/çıkış, hesap kilidi, oran sınırı, `AuthEvent` denetim kaydı
 - Başvuruların veritabanına yazılması (öncesinde bellekte tutulup kayboluyordu),

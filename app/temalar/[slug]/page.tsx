@@ -15,8 +15,6 @@ import { getThemeProgram } from "@/lib/theme-programs";
 // Temalar panelden düzenlenebildiği için her istekte dosyadan okunur.
 export const dynamic = "force-dynamic";
 
-export async function generateStaticParams() { return (await temalariOku()).map(({ slug }) => ({ slug })); }
-
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params; const theme = await temaBul(slug);
   return theme ? { title: theme.name, description: theme.shortDescription } : {};

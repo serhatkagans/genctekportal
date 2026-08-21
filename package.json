@@ -10,7 +10,8 @@
     "test": "vitest run",
     "db:seed": "node scripts/seed-veritabani.mjs",
     "import:themes": "node scripts/import-theme-content.mjs",
-    "import:site": "node scripts/import-wordpress-site.mjs"
+    "import:site": "node scripts/import-wordpress-site.mjs",
+    "goc:temalar": "node scripts/goc-temalar.mjs"
   },
   "dependencies": {
     "@prisma/client": "latest",

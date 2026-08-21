@@ -262,7 +262,10 @@ model Theme {
   slug         String   @unique
   summary      String
   description  Json
-  academicYear String
+  image        String   @default("")
+  focus        String[] @default([])
+  outcomes     String[] @default([])
+  academicYear String   @default("")
   iconName     String?
   order        Int      @default(0)
   active       Boolean  @default(true)
