@@ -78,13 +78,11 @@ export function GorselAlani({ name, baslangic = "", etiket, yardim, kompakt = fa
         </button>
         {hata ? <span className="gorsel-alani-hata" role="alert">{hata}</span> : null}
         {secici ? (
-          <div className="gorsel-alani-acilir">
-            <GorselSecici
-              baslik={seciciBasligi ?? "Görsel seç"}
-              onSec={secildi}
-              onKapat={() => setSecici(false)}
-            />
-          </div>
+          <GorselSecici
+            baslik={seciciBasligi ?? "Görsel seç"}
+            onSec={secildi}
+            onKapat={() => setSecici(false)}
+          />
         ) : null}
       </div>
     );

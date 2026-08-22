@@ -18,6 +18,7 @@ export type MedyaDosyasi = {
   boyut: number;
   gorselMi: boolean;
   kaynak: MedyaKaynagi;
+  degistirme: number;
 };
 
 const GORSEL_UZANTISI = /\.(png|jpe?g|webp|avif|gif|svg)$/i;
@@ -50,18 +51,58 @@ async function klasoruOku(klasor: string, urlOneki: string, kaynak: MedyaKaynagi
       boyut: bilgi.size,
       gorselMi: GORSEL_UZANTISI.test(ad),
       kaynak,
+      degistirme: bilgi.mtimeMs,
     } satisfies MedyaDosyasi;
   }));
   return dosyalar.filter((d): d is MedyaDosyasi => d !== null);
 }
 
+// İçe aktarılan klasörde binlerce dosya var; seçici arama yaparken ve sayfa
+// atlarken aynı listeyi tekrar tekrar tarayacağı için kısa ömürlü bir kopya
+// tutuyoruz. Yükleme kopyayı hemen düşürüyor, yeni dosya anında görünsün.
+let kopya: { liste: MedyaDosyasi[]; zaman: number } | null = null;
+const KOPYA_OMRU = 15_000;
+
+export function medyaKopyasiniDusur() {
+  kopya = null;
+}
+
 export async function medyaDosyalari(): Promise<MedyaDosyasi[]> {
+  if (kopya && Date.now() - kopya.zaman < KOPYA_OMRU) return kopya.liste;
+
   const [yuklenen, iceAktarilan] = await Promise.all([
     klasoruOku(YUKLEME_KLASORU, YUKLEME_URL_ONEKI, "yuklenen"),
     klasoruOku(ICE_AKTARIM_KLASORU, ICE_AKTARIM_URL_ONEKI, "ice-aktarilan"),
   ]);
   // Yeni yüklenenler önce: editörde en çok aranan dosya en son eklenendir.
-  return [...yuklenen, ...iceAktarilan];
+  // Aynı zaman damgasına düşen içe aktarım dosyaları ada göre sıralanıyor ki
+  // liste sayfadan sayfaya aynı sırayı korusun.
+  const liste = [...yuklenen, ...iceAktarilan].sort((a, b) =>
+    b.degistirme - a.degistirme || a.ad.localeCompare(b.ad, "tr-TR"));
+
+  kopya = { liste, zaman: Date.now() };
+  return liste;
+}
+
+export type MedyaSorgusu = {
+  arama?: string;
+  kaynak?: MedyaKaynagi | "hepsi";
+  yalnizGorsel?: boolean;
+  atla?: number;
+  adet?: number;
+};
+
+// Seçici tek seferde binlerce kaydı çekmesin: arama ve sayfalama sunucuda.
+export async function medyaSayfasi(sorgu: MedyaSorgusu = {}) {
+  const { arama = "", kaynak = "hepsi", yalnizGorsel = false, atla = 0, adet = 60 } = sorgu;
+  const q = arama.trim().toLocaleLowerCase("tr-TR");
+
+  const hepsi = (await medyaDosyalari()).filter((d) =>
+    (!yalnizGorsel || d.gorselMi)
+    && (kaynak === "hepsi" || d.kaynak === kaynak)
+    && (!q || d.ad.toLocaleLowerCase("tr-TR").includes(q)));
+
+  return { dosyalar: hepsi.slice(atla, atla + adet), toplam: hepsi.length };
 }
 
 function dosyaAdiUret(orijinalAd: string, uzanti: string) {
@@ -95,9 +136,17 @@ export async function gorselKaydet(dosya: File): Promise<YuklemeSonucu> {
   const ad = dosyaAdiUret(dosya.name, uzanti);
   await mkdir(YUKLEME_KLASORU, { recursive: true });
   await writeFile(path.join(YUKLEME_KLASORU, ad), Buffer.from(await dosya.arrayBuffer()));
+  medyaKopyasiniDusur();
 
   return {
     tamam: true,
-    dosya: { ad, url: `${YUKLEME_URL_ONEKI}/${ad}`, boyut: dosya.size, gorselMi: true, kaynak: "yuklenen" },
+    dosya: {
+      ad,
+      url: `${YUKLEME_URL_ONEKI}/${ad}`,
+      boyut: dosya.size,
+      gorselMi: true,
+      kaynak: "yuklenen",
+      degistirme: Date.now(),
+    },
   };
 }

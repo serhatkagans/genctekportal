@@ -48,7 +48,7 @@ export default async function EtkinliklerSayfasi() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="suren-etkinlikler">
         <div className="container">
           <div className="section-heading">
             <div>
@@ -68,7 +68,7 @@ export default async function EtkinliklerSayfasi() {
         olduğunu söyler ve ekranda yer kaplamasının bir karşılığı yoktur.
       */}
       {gecmis.length > 0 && (
-        <section className="section themes-section">
+        <section className="section themes-section" id="gecmis-etkinlikler">
           <div className="container">
             <div className="section-heading">
               <div>

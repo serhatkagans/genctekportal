@@ -258,9 +258,17 @@ html[data-theme="kirmizi"] .hero .eyebrow,
 html[data-theme="kirmizi"] .page-hero h1,
 html[data-theme="kirmizi"] .page-hero p,
 html[data-theme="kirmizi"] .page-hero .eyebrow{color:#fff}
-html[data-theme="kirmizi"] .hero-panel{background:#fff;color:#414042;border-color:#e4e4e5}
-html[data-theme="kirmizi"] .hero-panel strong{color:#414042}
-html[data-theme="kirmizi"] .hero-panel span{color:#66676a}
+/* Kırmızının üzerinde bembeyaz kart fazla sert kaçıyordu: panel hafif gri
+   bir zemine alındı, kenarlığı da bir ton koyulaştı ki kart yine ayrışsın. */
+/* Nötr gri: önceki ton maviye çalıp yeşilimsi görünüyordu, kırmızının
+   yanında renk sapması hemen okunuyor. Artık kanallar birbirine eşit. */
+html[data-theme="kirmizi"] .hero-panel{background:#d2d2d2;color:#2f2f30;border-color:#b4b4b4}
+/* Alt künye şeridi bir ton daha koyu: panelden açık kalırsa kart ters
+   dönmüş gibi duruyor. */
+html[data-theme="kirmizi"] .hero-panel .mini-stats{background:#c4c4c4;border-top-color:#b4b4b4}
+html[data-theme="kirmizi"] .hero-panel-head{border-bottom-color:#b4b4b4}
+html[data-theme="kirmizi"] .hero-panel strong{color:#2f2f30}
+html[data-theme="kirmizi"] .hero-panel span{color:#55565a}
 html[data-theme="kirmizi"] .hero-panel .live-dot,
 html[data-theme="kirmizi"] .signal strong em{color:#c4161c}
 html[data-theme="kirmizi"] .hero-panel:before{border-color:#939598;box-shadow:0 0 0 60px color-mix(in srgb,#939598 10%,transparent),0 0 0 120px color-mix(in srgb,#939598 6%,transparent)}
@@ -355,6 +363,16 @@ html[data-theme="kirmizi"] .hero-panel:before{border-color:color-mix(in srgb,#93
 .haber-galeri-denetimleri button:hover{border-color:var(--color-brand);background:var(--color-brand);color:var(--color-text-on-brand)}
 .haber-galeri-denetimleri span{min-width:74px;text-align:center;font-variant-numeric:tabular-nums}
 .haber-galeri-denetimleri strong{color:var(--color-brand);font-size:1rem}
+/* Haber şeridi ile etkinlikler arasındaki boşluk: iki bölüm de 96px dolgu
+   taşıyınca araya galerinin kendi 24px'iyle birlikte ~215px giriyordu.
+   Şerit zaten kendi içinde nefes aldığı için bu ek burada kısılıyor. */
+#haberler{padding-bottom:36px}
+#etkinlikler{padding-top:56px}
+/* Etkinlikler sayfasında "Şimdi" ile "Arşiv" de aynı çift dolgu yüzünden
+   birbirinden kopuyordu; iki liste aynı sayfanın iki yarısı, o kadar uzak
+   durmalarına gerek yok. */
+#suren-etkinlikler{padding-bottom:44px}
+#gecmis-etkinlikler{padding-top:60px}
 @media(max-width:900px){.haber-galeri-serit,.haber-galeri-tekrar{gap:14px}.haber-galeri-kart{width:min(84vw,360px)}.haber-galeri-kart .content-card{min-height:440px}}
 
 /* Tema kartları ve 16 tema detay sayfası */
@@ -597,25 +615,51 @@ html[data-theme="kirmizi"] .wordpress-article-header{background:#c4161c;color:#f
 .kapak-kaldir{padding:0 10px;border:0;background:none;color:var(--color-danger);font-size:.8rem;font-weight:650;cursor:pointer}
 .kapak-yol{overflow:hidden;padding:6px 8px;border-radius:4px;background:var(--color-bg-subtle);font-size:.7rem;color:var(--color-text-muted);text-overflow:ellipsis;white-space:nowrap}
 
-.gorsel-secici{display:grid;gap:12px;margin-top:4px;padding:16px;border:1px solid var(--color-border-strong);border-radius:10px;background:var(--color-bg-subtle)}
-.gorsel-secici-ust{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.gorsel-secici-kapat{width:28px;height:28px;border:0;border-radius:6px;background:none;color:var(--color-text-muted);font-size:1.3rem;line-height:1;cursor:pointer}
-.gorsel-secici-kapat:hover{background:var(--color-surface);color:var(--color-brand)}
-.gorsel-secici-araclar{display:flex;gap:10px;flex-wrap:wrap}
-.gorsel-secici-arama{display:flex;flex:1;align-items:center;gap:8px;min-width:180px;padding:0 12px;border:1px solid var(--color-border);border-radius:8px;background:var(--color-surface)}
-.gorsel-secici-arama input{width:100%;min-height:38px;border:0;outline:0;background:transparent}
+/* Gizli dosya girdisi taşıyan yükleme düğmesi ve hata şeridi: seçici dışında
+   medya sayfası ile görsel alanı da bunları kullanıyor. */
 .gorsel-secici-yukle{position:relative;overflow:hidden;min-height:38px;font-size:.82rem;cursor:pointer}
 .gorsel-secici-yukle input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
 .gorsel-secici-hata{margin:0;padding:10px 12px;border:1px solid var(--color-danger);border-radius:8px;background:color-mix(in srgb,var(--color-danger) 8%,var(--color-surface));color:var(--color-danger);font-size:.8rem}
-.gorsel-secici-izgara{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px;max-height:330px;overflow-y:auto}
-.gorsel-secici-oge{display:grid;gap:4px;overflow:hidden;padding:0 0 8px;border:1px solid var(--color-border);border-radius:8px;background:var(--color-surface);text-align:left;cursor:pointer;transition:border-color 120ms,transform 120ms}
-.gorsel-secici-oge:hover{border-color:var(--color-brand);transform:translateY(-2px)}
-.gorsel-secici-oge img{width:100%;aspect-ratio:4/3;object-fit:contain;background:var(--color-bg-subtle)}
-.gorsel-secici-ad{overflow:hidden;padding:0 8px;font-size:.72rem;font-weight:650;color:var(--color-text-strong);text-overflow:ellipsis;white-space:nowrap}
-.gorsel-secici-bilgi{padding:0 8px;font-size:.66rem;color:var(--color-text-muted)}
-.gorsel-secici-ipucu{margin:0;font-size:.76rem;color:var(--color-text-muted)}
-.gorsel-secici-birakma{border-color:var(--color-brand);border-style:dashed;background:var(--color-bg-brand-tint)}
-.gorsel-secici-birakma .gorsel-secici-ipucu{color:var(--color-brand);font-weight:650}
+
+/* ——— Medya seçici: galeri penceresi ———
+   Küçük resimler sabit yükseklikli kutularda duruyor; açılmayan ya da geç gelen
+   bir görsel hücreyi çökertmesin diye yüksekliği img taşımıyor. */
+.medya-secici-perde{position:fixed;z-index:60;inset:0;display:grid;place-items:center;padding:24px;background:color-mix(in srgb,#0b1220 55%,transparent);backdrop-filter:blur(2px)}
+.medya-secici{display:flex;overflow:hidden;flex-direction:column;width:min(1040px,100%);max-height:min(760px,100%);border:1px solid var(--color-border-strong);border-radius:14px;background:var(--color-surface);box-shadow:var(--shadow-lg)}
+.medya-secici-ust{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;border-bottom:1px solid var(--color-border)}
+.medya-secici-ust strong{font-size:1.05rem;color:var(--color-text-strong)}
+.medya-secici-sayi{margin-left:10px;font-size:.78rem;color:var(--color-text-muted)}
+.medya-secici-kapat{width:32px;height:32px;flex:none;border:0;border-radius:8px;background:none;color:var(--color-text-muted);font-size:1.4rem;line-height:1;cursor:pointer}
+.medya-secici-kapat:hover{background:var(--color-bg-subtle);color:var(--color-brand)}
+.medya-secici-araclar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid var(--color-border);background:var(--color-bg-subtle)}
+.medya-secici-arama{display:flex;flex:1 1 220px;align-items:center;gap:8px;min-width:180px;padding:0 12px;border:1px solid var(--color-border);border-radius:8px;background:var(--color-surface)}
+.medya-secici-arama input{width:100%;min-height:38px;border:0;outline:0;background:transparent}
+.medya-secici-suzgec{display:flex;overflow:hidden;flex:none;border:1px solid var(--color-border);border-radius:8px;background:var(--color-surface)}
+.medya-secici-suzgec button{min-height:38px;padding:0 14px;border:0;border-left:1px solid var(--color-border);background:none;color:var(--color-text-muted);font-size:.8rem;font-weight:650;cursor:pointer}
+.medya-secici-suzgec button:first-child{border-left:0}
+.medya-secici-suzgec button:hover{color:var(--color-brand)}
+.medya-secici-suzgec-etkin{background:var(--color-bg-brand-tint);color:var(--color-brand)}
+.medya-secici .gorsel-secici-hata{margin:14px 20px 0}
+.medya-secici-govde{flex:1;overflow-y:auto;padding:18px 20px}
+.medya-secici-durum{margin:0;padding:32px 0;color:var(--color-text-muted);font-size:.86rem;text-align:center}
+.medya-secici-izgara{display:grid;grid-auto-rows:max-content;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.medya-secici-oge{display:flex;overflow:hidden;flex-direction:column;gap:4px;padding:0 0 10px;border:1px solid var(--color-border);border-radius:10px;background:var(--color-surface);text-align:left;cursor:pointer;transition:border-color 120ms,box-shadow 120ms,transform 120ms}
+.medya-secici-oge:hover{border-color:var(--color-brand);box-shadow:0 6px 18px color-mix(in srgb,#0b1220 12%,transparent);transform:translateY(-2px)}
+.medya-secici-gorsel{display:grid;overflow:hidden;place-items:center;height:118px;flex:none;margin-bottom:8px;border-bottom:1px solid var(--color-border);background:var(--color-bg-subtle)}
+.medya-secici-gorsel img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.medya-secici-bozuk{color:var(--color-text-muted)}
+.medya-secici-ad{overflow:hidden;padding:0 10px;font-size:.75rem;font-weight:650;color:var(--color-text-strong);text-overflow:ellipsis;white-space:nowrap}
+.medya-secici-bilgi{padding:0 10px;font-size:.68rem;color:var(--color-text-muted)}
+.medya-secici-daha{display:grid;place-items:center;padding-top:18px}
+.medya-secici-alt{padding:12px 20px;border-top:1px solid var(--color-border);background:var(--color-bg-subtle);font-size:.76rem;color:var(--color-text-muted)}
+.medya-secici-birakma{outline:3px dashed var(--color-brand);outline-offset:-6px}
+.medya-secici-birakma .medya-secici-alt{color:var(--color-brand);font-weight:650}
+@media(max-width:720px){
+  .medya-secici-perde{padding:12px}
+  .medya-secici{max-height:100%}
+  .medya-secici-izgara{grid-template-columns:repeat(auto-fill,minmax(128px,1fr))}
+  .medya-secici-gorsel{height:92px}
+}
 
 /* ——— Görsel alanı: yol yazmak yerine seç, yükle ya da sürükleyip bırak ——— */
 .gorsel-birakma-alani{display:grid;border-radius:8px;transition:box-shadow 120ms}
@@ -631,10 +675,6 @@ html[data-theme="kirmizi"] .wordpress-article-header{background:#c4161c;color:#f
 .gorsel-kucuk img{width:100%;height:100%;object-fit:cover}
 .gorsel-kucuk-durum{color:var(--color-text-muted);font-size:1.15rem;line-height:1}
 .gorsel-kucuk.gorsel-birakma{border-color:var(--color-brand);border-style:dashed;box-shadow:0 0 0 3px color-mix(in srgb,var(--color-brand) 30%,transparent)}
-/* Açılır seçici satırı itmesin: listede 100+ satır var. */
-.gorsel-alani-acilir{position:absolute;z-index:5;top:52px;left:0;width:min(430px,78vw);box-shadow:var(--shadow-lg)}
-.gorsel-alani-acilir .gorsel-secici{background:var(--color-surface)}
-@media(max-width:720px){.gorsel-alani-acilir{width:min(430px,92vw)}}
 /* Satır satır madde girilen alanlar: kaydırma değil, her satır bir madde. */
 .liste-alani{font-family:ui-monospace,monospace;font-size:.86rem;line-height:1.7;white-space:pre;resize:vertical}
 

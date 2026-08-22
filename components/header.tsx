@@ -39,10 +39,13 @@ const baglantilar = [
  * uzatacaktı. Açılır menü JAVASCRIPT KULLANMAZ — `<details>` ile açılıyor,
  * tıpkı mobil menü gibi; betiğe bağlanan bir menü, betik yüklenene kadar
  * tıklanamaz olurdu.
+ *
+ * SIRA YENİDEN ESKİYE: menüyü açan kişi neredeyse her zaman güncel zirveyi
+ * arıyor, o yüzden en üstte o duruyor. Yeni zirve eklenirken başa yazılmalı.
  */
 const zirveler = [
-  ["Zirve 2025", "/zirve"],
   ["Zirve 2026", "/2-genctek-zirvesi-2026"],
+  ["Zirve 2025", "/zirve"],
 ] as const;
 
 export function Header() {
