@@ -11,6 +11,7 @@ import { ThemeSourceArticle } from "@/components/theme-source-article";
 import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
 import { temaBul, temaGorseli, temalariOku } from "@/lib/tema";
 import { getThemeProgram } from "@/lib/theme-programs";
+import { temaKaynagi } from "@/lib/tema-kaynak";
 
 // Temalar panelden düzenlenebildiği için her istekte dosyadan okunur.
 export const dynamic = "force-dynamic";
@@ -25,6 +26,7 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
   const themes = await temalariOku();
   const index = themes.findIndex((item) => item.slug === theme.slug);
   const program = getThemeProgram(theme.slug);
+  const arsivVar = Boolean(temaKaynagi(theme.slug));
   return <><Header/><main>
     <article className="theme-detail">
       <header className="theme-detail-hero"><div className="container theme-detail-grid">
@@ -39,7 +41,7 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
         </div>
       </div></section>
       {theme.slug === "oyun-tasarimi-egitijam" ? <EgitijamProgram /> : null}
-      {program ? <ThemeOfficialProgram program={program} /> : null}
+      {program ? <ThemeOfficialProgram program={program} arsivVar={arsivVar} /> : null}
       <ThemeSourceArticle slug={theme.slug} />
       <section className="section theme-detail-cta"><div className="container join-card"><div><span className="eyebrow eyebrow-light">Bu tema seni heyecanlandırdı mı?</span><h2>{theme.name} ekibinde yerini al.</h2><p>Öğrenci veya danışman öğretmen olarak GençTek ekosistemine katıl.</p></div><a className="button button-light" href={genctekGirisAdresi()}>Platforma giriş <Icon name="arrow"/></a></div></section>
     </article>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TEMA_ARSIV_CAPASI } from "@/lib/tema-kaynak";
 
 const hedefler = [
   "K12 düzeyinde oyun geliştirme farkındalığını artırmak",
@@ -60,7 +61,7 @@ export function EgitijamProgram() {
 
       <div className="egitijam-two-column egitijam-bottom-grid">
         <section><span className="theme-list-label">Değerlendirme</span><h3>100 puan + EğitiJAM Ruhu</h3><div className="egitijam-scores">{kriterler.map(([ad,puan])=><div key={ad}><span>{ad}</span><strong>{puan}</strong></div>)}</div></section>
-        <section><span className="theme-list-label">Katılım çerçevesi</span><h3>Temel kurallar</h3><details className="egitijam-rules"><summary>Kuralların özetini göster</summary><ul>{kurallar.map((kural)=><li key={kural}>{kural}</li>)}</ul></details><p className="egitijam-source-note">Bu bölüm bilgilendirme amaçlı bir özettir. Tam ve bağlayıcı metin için resmî duyuruyu inceleyin.</p><Link className="button button-secondary" href="https://genctek.eba.gov.tr/egitijam2026/" target="_blank" rel="noreferrer">Resmî EğitiJAM duyurusu ↗</Link></section>
+        <section><span className="theme-list-label">Katılım çerçevesi</span><h3>Temel kurallar</h3><details className="egitijam-rules"><summary>Kuralların özetini göster</summary><ul>{kurallar.map((kural)=><li key={kural}>{kural}</li>)}</ul></details><p className="egitijam-source-note">Bu bölüm bilgilendirme amaçlı bir özettir. Tam ve bağlayıcı metin için aşağıdaki arşivde duran resmî duyuruyu inceleyin.</p><Link className="button button-secondary" href={`#${TEMA_ARSIV_CAPASI}`}>Resmî EğitiJAM duyurusunun tamamı ↓</Link></section>
       </div>
 
       <aside className="egitijam-faq"><strong>Kimler katılabiliyordu?</strong><p>Türkiye’deki resmî ve özel okullarda öğrenim gören öğrenciler, danışman öğretmenli takımlarla katılabiliyordu. Yazılım veya oyun motoru sınırlaması bulunmuyordu; takımların birbirine destek olması EğitiJAM kültürünün bir parçasıydı.</p></aside>
