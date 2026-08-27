@@ -1,4 +1,5 @@
 "use server";
+import { icerikYonetebilirMi } from "@/lib/yetki/yonetim-erisimi";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import {
@@ -42,6 +43,7 @@ function girdiAl(formData: FormData): FaaliyetGirdi {
 }
 
 export async function etkinlikOlusturAction(formData: FormData) {
+  if (!(await icerikYonetebilirMi())) return;
   const girdi = girdiAl(formData);
   if (!girdi.title.trim() || !girdi.startsAt.trim()) return;
   const yeni = await faaliyetEkle(girdi);
@@ -50,6 +52,7 @@ export async function etkinlikOlusturAction(formData: FormData) {
 }
 
 export async function etkinlikKaydetAction(formData: FormData) {
+  if (!(await icerikYonetebilirMi())) return;
   const id = String(formData.get("id") ?? "");
   const girdi = girdiAl(formData);
   if (!id || !girdi.title.trim() || !girdi.startsAt.trim()) return;
@@ -59,6 +62,7 @@ export async function etkinlikKaydetAction(formData: FormData) {
 }
 
 export async function etkinlikSilAction(formData: FormData) {
+  if (!(await icerikYonetebilirMi())) return;
   const id = String(formData.get("id") ?? "");
   if (!id) return;
   await faaliyetSil(id);

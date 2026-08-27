@@ -1,4 +1,5 @@
 "use server";
+import { icerikYonetebilirMi } from "@/lib/yetki/yonetim-erisimi";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { haberEkle, haberGuncelle, haberSil, type HaberGirdi } from "@/lib/haber";
@@ -24,6 +25,7 @@ function girdiAl(formData: FormData): HaberGirdi {
 }
 
 export async function kaydetAction(formData: FormData) {
+  if (!(await icerikYonetebilirMi())) return;
   const id = Number(formData.get("id"));
   const girdi = girdiAl(formData);
   if (!Number.isFinite(id) || !girdi.title.trim()) return;
@@ -33,6 +35,7 @@ export async function kaydetAction(formData: FormData) {
 }
 
 export async function olusturAction(formData: FormData) {
+  if (!(await icerikYonetebilirMi())) return;
   const girdi = girdiAl(formData);
   if (!girdi.title.trim()) return;
   const yeni = await haberEkle(girdi);
@@ -41,6 +44,7 @@ export async function olusturAction(formData: FormData) {
 }
 
 export async function silAction(formData: FormData) {
+  if (!(await icerikYonetebilirMi())) return;
   const id = Number(formData.get("id"));
   if (!Number.isFinite(id)) return;
   await haberSil(id);

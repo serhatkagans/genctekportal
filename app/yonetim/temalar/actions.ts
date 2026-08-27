@@ -1,4 +1,5 @@
 "use server";
+import { icerikYonetebilirMi } from "@/lib/yetki/yonetim-erisimi";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { temaEkle, temaGuncelle, temaSil, type TemaGirdi } from "@/lib/tema";
@@ -24,6 +25,7 @@ function girdiAl(formData: FormData): TemaGirdi {
 }
 
 export async function temaKaydetAction(formData: FormData) {
+  if (!(await icerikYonetebilirMi())) return;
   const mevcutSlug = String(formData.get("mevcutSlug") ?? "");
   const girdi = girdiAl(formData);
   if (!mevcutSlug || !girdi.name.trim()) return;
@@ -35,6 +37,7 @@ export async function temaKaydetAction(formData: FormData) {
 }
 
 export async function temaOlusturAction(formData: FormData) {
+  if (!(await icerikYonetebilirMi())) return;
   const girdi = girdiAl(formData);
   if (!girdi.name.trim()) return;
   const yeni = await temaEkle(girdi);
@@ -43,6 +46,7 @@ export async function temaOlusturAction(formData: FormData) {
 }
 
 export async function temaSilAction(formData: FormData) {
+  if (!(await icerikYonetebilirMi())) return;
   const slug = String(formData.get("slug") ?? "");
   if (!slug) return;
   await temaSil(slug);
