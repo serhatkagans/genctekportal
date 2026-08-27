@@ -41,5 +41,16 @@ export async function proxy(request: NextRequest) {
   response.headers.set("X-Content-Type-Options", "nosniff");
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
   response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  // Çerçeveleme koruması: yönetim paneli dahil hiçbir sayfa iframe'e alınamaz
+  // (clickjacking). frame-ancestors CSP ile de veriliyor; ikisi birlikte eski
+  // ve yeni tarayıcıları kapsar.
+  response.headers.set("X-Frame-Options", "SAMEORIGIN");
+  // İlk HTTP ziyaretinde bile HTTPS'e kilitlensin (SSL-strip'e karşı). Site
+  // zaten HTTP'yi 301 ile HTTPS'e atıyor; HSTS bunu tarayıcıda kalıcı kılar.
+  response.headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+  // Dar CSP: script kilidi YOK (tema geçişi satır-içi script kullanıyor, nonce
+  // altyapısı gerektirir — ayrı iş). object/base/frame-ancestors kapatılıyor:
+  // eklenti gömülmesini, <base> ile adres kaçırmayı ve çerçevelemeyi engeller.
+  response.headers.set("Content-Security-Policy", "frame-ancestors 'self'; object-src 'none'; base-uri 'self'");
   return response;
 }
