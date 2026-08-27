@@ -132,6 +132,8 @@ const calismaGrubuEtkinlikleri = [
       { url: "/medya/egitijam-2.jpg", alt: "EğitiJAM 2024 K12 Oyun Geliştirme Maratonu programının salondaki açılış oturumu" },
       { url: "/medya/egitijam-1.jpg", alt: "Bir oyun geliştiricinin EğitiJAM programında kürsüden deneyimlerini anlatması" },
       { url: "/medya/egitijam-3.jpg", alt: "EğitiJAM 2024 ödül töreninde plaket ve belgelerini alan öğrenci ekipleri" },
+      { url: "/medya/egitijam-4.jpg", alt: "EğitiJAM'de dereceye giren bir ekibin plaketini alması" },
+      { url: "/medya/egitijam-5.jpg", alt: "EğitiJAM K12 Oyun Geliştirme Maratonu'nun 23-25 Ocak 2026 duyuru görseli" },
     ],
     aciklama:
       "“Eğitim Oyunla Başlar” — EğitiJAM K12 Oyun Geliştirme Maratonu, Türkiye genelinde öğrencilerin ve eğitimcilerin oyun geliştirme farkındalığını artırmak için düzenlenen 48 saatlik çevrimiçi bir Game Jam’dir. Game Jam’ler kısıtlı bir sürede, verilen temadan dijital oyun geliştirilmeye çalışılan bir hackathon etkinliğidir. “Eğitim Oyunla Başlar” sloganıyla düzenlenen EğitiJAM Oyun Geliştirme Maratonları ulusal olarak gerçekleştirilir.",
