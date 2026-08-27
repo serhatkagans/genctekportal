@@ -23,3 +23,10 @@ export function gorselYolu(kaynak: string | null | undefined): string {
   if (uygulamaOneki && (deger === uygulamaOneki || deger.startsWith(`${uygulamaOneki}/`))) return deger;
   return `${uygulamaOneki}${deger}`;
 }
+
+// Sitenin dışarıdan görünen tam adresi: site haritası, robots.txt ve paylaşım
+// önizlemeleri (OG) mutlak adres ister. .env'deki APP_URL alt dizin ekini de
+// taşır ("https://.../genctekportal"). Tanımsızsa yerel geliştirme adresi.
+export function siteAdresi(): string {
+  return (process.env.APP_URL ?? "http://localhost:3010").replace(/\/$/, "");
+}

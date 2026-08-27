@@ -12,7 +12,7 @@ export function ThemeSourceArticle({ slug }: { slug: string }) {
       <div className="theme-source-body" dangerouslySetInnerHTML={{ __html: sanitizeRichText(entry.html) }} />
       <footer>
         {entry.documentUrl ? <Link className="button button-secondary" href={entry.documentUrl} target="_blank">Dijital Yürüyüş bilgi notunu aç</Link> : null}
-        <Link className="text-link" href={entry.sourceUrl} target="_blank" rel="noreferrer">Özgün yayın: genctek.eba.gov.tr ↗</Link>
+        <span className="theme-source-credit">Özgün yayın: GençTek arşivi</span>
       </footer>
     </article>
   </div></section>;

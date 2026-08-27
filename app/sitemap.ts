@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { haberleriOku } from "@/lib/haber";
 import { temalariOku } from "@/lib/tema";
 import { wordpressPages } from "@/lib/wordpress-content";
+import { siteAdresi } from "@/lib/ortam";
 
 // Temalar veritabanından geliyor; öntanımlı davranışta bu dosya derleme
 // sırasında üretilirdi ve build'i veritabanına bağımlı kılardı. Sayfaların
@@ -9,7 +10,9 @@ import { wordpressPages } from "@/lib/wordpress-content";
 export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = "https://genctek.eba.gov.tr";
+  // Site haritası bu sitenin adreslerini listeler; eskiden kaynak sitenin
+  // adresi yazılıydı ve arama motorlarına kapanacak bir alan adı bildiriliyordu.
+  const base = siteAdresi();
   const routes = ["", "/haberler", "/temalar", "/hakkinda", "/hakkinda/il-koordinatorleri", "/hakkinda/genctek-nedir", "/hakkinda/amaclar", "/hakkinda/temel-etkinlikler", "/hakkinda/logolar", "/etkinlikler", "/zirve", "/katilim", "/kvkk"];
   const haberler = await haberleriOku();
   const themes = await temalariOku();

@@ -34,6 +34,30 @@ function medyaDonusumu(tagName: string, attribs: sanitizeHtml.Attributes) {
   return { tagName, attribs: yeni };
 }
 
+/*
+ * ESKİ SİTEYE GİDEN BAĞLANTILAR (27 Ağustos 2026).
+ *
+ * İçe aktarılan gövdeler genctek.eba.gov.tr'ye mutlak adreslerle bağlanıyordu:
+ * 223 bağlantının 220'sinin karşılığı bu sitede zaten var (aynı yol adları
+ * kullanıldı), yalnızca WordPress'in yazar ve kategori sayfalarının yok.
+ * Kaynak site kapanacağı için:
+ *   · karşılığı olan adres site içine çevriliyor,
+ *   · olmayan (author/, category/, tag/, wp-*) bağlantı çıkarılıyor —
+ *     etiket <span>'e dönüyor, metin kalıyor, tıklanacak bir şey kalmıyor.
+ */
+const ESKI_SITE = /^https?:\/\/(?:www\.)?genctek\.eba\.gov\.tr(\/.*)?$/i;
+const KARSILIGI_YOK = /^\/(?:author|category|tag|wp-)/i;
+
+type EskiBaglanti = { yol: string } | { kaldir: true } | null;
+
+function eskiSiteBaglantisi(href: string): EskiBaglanti {
+  const eslesme = ESKI_SITE.exec(href.trim());
+  if (!eslesme) return null;
+  const yol = eslesme[1] ?? "/";
+  if (KARSILIGI_YOK.test(yol)) return { kaldir: true };
+  return { yol };
+}
+
 export function sanitizeRichText(input: string) {
   return sanitizeHtml(input, {
     allowedTags: ["p", "h1", "h2", "h3", "h4", "h5", "h6", "strong", "b", "em", "i", "u", "ul", "ol", "li", "blockquote", "a", "br", "hr", "figure", "figcaption", "img", "div", "span", "table", "thead", "tbody", "tfoot", "tr", "th", "td", "caption", "pre", "code", "details", "summary", "sup", "sub", "iframe", "video", "source"],
@@ -46,10 +70,18 @@ export function sanitizeRichText(input: string) {
       video: medyaDonusumu,
       // Bağlantılarda yalnızca site içi yollar düzeltilir; dış adresler ve
       // mailto/tel gorselYolu tarafından olduğu gibi bırakılır.
-      a: (tagName, attribs) => ({
-        tagName,
-        attribs: { ...attribs, rel: "noopener noreferrer", ...(attribs.href ? { href: gorselYolu(attribs.href) } : {}) },
-      }),
+      a: (tagName, attribs) => {
+        const eski = attribs.href ? eskiSiteBaglantisi(attribs.href) : null;
+        if (eski && "kaldir" in eski) {
+          const { href: _href, target: _target, download: _download, ...kalan } = attribs;
+          return { tagName: "span", attribs: kalan };
+        }
+        const href = eski ? gorselYolu(eski.yol) : attribs.href ? gorselYolu(attribs.href) : undefined;
+        return {
+          tagName,
+          attribs: { ...attribs, rel: "noopener noreferrer", ...(href ? { href } : {}), ...(eski ? { target: "_self" } : {}) },
+        };
+      },
     },
   });
 }

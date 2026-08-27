@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteAdresi } from "@/lib/ortam";
 import { ayarlariOkuSessiz } from "@/lib/yonetim/ayar";
 import { Archivo, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
@@ -39,7 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: { default: `${baslik} | Sektörün Yeni Liderleri`, template: `%s | ${baslik}` },
     description: ayarlar["site.aciklama"],
-    metadataBase: new URL("https://genctek.eba.gov.tr"),
+    metadataBase: new URL(siteAdresi()),
   };
 }
 

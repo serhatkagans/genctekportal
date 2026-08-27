@@ -445,7 +445,7 @@ html[data-theme="kirmizi"] .official-program{background:#f7f7f7;color:#414042}
 @media(max-width:600px){.official-program{padding:60px 0}.official-program-facts{grid-template-columns:1fr}.official-program-facts article{min-height:110px}}
 
 /* WordPress'ten yerelleştirilen tam tema yazıları */
-.theme-source-section{padding:88px 0;background:var(--color-surface);scroll-margin-top:88px}
+.theme-source-section{padding:88px 0;background:var(--color-surface);scroll-margin-top:88px}.theme-source-credit{color:var(--color-text-muted);font-size:.92rem}
 .theme-source-article{max-width:940px;margin:auto}.theme-source-article>header{padding-bottom:30px;border-bottom:1px solid var(--color-border)}
 .theme-source-article>header h2{font-size:clamp(1.8rem,1.25rem + 1.8vw,3rem);margin:10px 0}.theme-source-meta{margin:0;color:var(--color-text-muted);font-size:.84rem}
 .theme-source-body{padding:38px 0;font-size:1.05rem;line-height:1.8}.theme-source-body h2,.theme-source-body h3,.theme-source-body h4{margin:38px 0 14px}.theme-source-body p{margin:0 0 18px}.theme-source-body ul,.theme-source-body ol{display:grid;gap:8px;margin:0 0 24px;padding-left:24px}
