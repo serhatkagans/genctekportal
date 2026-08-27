@@ -3,43 +3,24 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
 export const metadata = {
-  title: "Amaçlar · GençTek",
-  description: "GençTek'in hedefleri ve dayandığı ilkeler.",
+  title: "Hedefler · GençTek",
+  description: "GençTek'in hedefleri.",
 };
 
 /*
- * Amaç maddeleri tek dizide: sayfa iki yerde (giriş paragrafı ve liste)
- * anlatmıyor, listenin kendisi anlatıyor. Yeni bir amaç eklemek diziye bir
- * satır eklemek demek.
+ * Hedef maddeleri tek dizide: sayfa iki yerde (giriş paragrafı ve liste)
+ * anlatmıyor, listenin kendisi anlatıyor. Yeni bir hedef eklemek diziye bir
+ * satır eklemek demek. Maddelerin başlığı yok; her biri tek cümlelik bir
+ * hedef olduğu için numara + metin yeterli.
  */
-const amaclar = [
-  {
-    baslik: "Yeteneği erken keşfetmek",
-    metin: "Öğrencinin ilgisini ortaöğretim çağında görünür kılmak; bilişimin hangi dalında güçlü olduğunu deneyerek anlamasını sağlamak.",
-  },
-  {
-    baslik: "Gerçek problemlerle çalışmak",
-    metin: "Sınıf içi alıştırmaların ötesine geçip yerel ve ulusal ölçekte gerçek problemlere ekip olarak çözüm üretmek.",
-  },
-  {
-    baslik: "Sektörü yakından tanımak",
-    metin: "Bilişim sektöründeki rolleri, çalışma biçimlerini ve kariyer yollarını uzmanlarından doğrudan dinlemek.",
-  },
-  {
-    baslik: "Akran öğrenmesini yaymak",
-    metin: "Öğrenenin öğretene dönüştüğü bir kültür kurmak; bilgi paylaşımını okul ve il sınırlarının ötesine taşımak.",
-  },
-  {
-    baslik: "Öğretmeni güçlendirmek",
-    metin: "Danışman öğretmenin rehberliğini görünür kılmak, öğretmenler arası deneyim aktarımını sürekli hâle getirmek.",
-  },
-  {
-    baslik: "Ülke çapında ağ kurmak",
-    metin: "81 ilde aynı programın yürüdüğü, ekiplerin birbirini bulabildiği ortak bir üretim ağı oluşturmak.",
-  },
+const hedefler = [
+  "Hızlı yenilenen bilişim alanında öğrenci ve öğretmenlerin Yenilik ve Eğitim Teknolojileri Genel Müdürlüğümüzün uzmanlık alanında sürekli güncellenmesini sağlamak",
+  "Bilişim ekosisteminde akran öğretimini ve iş birliğini güçlendirerek, öğrencilerin ve öğretmenlerin ekosistemden ve paydaşlardan destek almasını sağlamak",
+  "Sektörün ihtiyaç duyduğu nitelikli bireylerin yetiştirilmesi için öğrencilere kariyer hedefleri sunarak ve sektör tanıtımlarına yer vererek sektörün gelişimini sağlamak",
+  "Yeni çalışma, proje ve etkinliklerin geliştirilmesine ve mevcut çalışmaların yaygınlaştırılmasına katkıda bulunmak",
 ];
 
-export default function AmaclarSayfasi() {
+export default function HedeflerSayfasi() {
   return <>
     <Header />
     <main>
@@ -47,19 +28,17 @@ export default function AmaclarSayfasi() {
         <div className="container">
           <Link className="back-link" href="/hakkinda">← Hakkında</Link>
           <span className="eyebrow">Neyi hedefliyoruz</span>
-          <h1>Amaçlar</h1>
-          <p>Öğrencilerin erken yaşta yeteneklerini keşfetmesi, gerçek problemlere ekip olarak çözüm üretmesi ve bilişim alanındaki kariyerleri yakından tanıması.</p>
+          <h1>Hedefler</h1>
         </div>
       </section>
 
       <section className="section">
         <div className="container">
           <div className="value-list">
-            {amaclar.map((amac, sira) => (
-              <article key={amac.baslik}>
+            {hedefler.map((hedef, sira) => (
+              <article key={hedef}>
                 <span>{String(sira + 1).padStart(2, "0")}</span>
-                <h3>{amac.baslik}</h3>
-                <p>{amac.metin}</p>
+                <p>{hedef}</p>
               </article>
             ))}
           </div>

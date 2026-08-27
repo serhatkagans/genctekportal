@@ -42,7 +42,7 @@ export default async function Home() {
             */}
             <span className="eyebrow">YEĞİTEK Genel Müdürlüğü</span>
             <h1>Sektörün yeni <em>liderleri</em>.</h1>
-            <p>Fikirlerin ekiplere, ekiplerin gerçek projelere dönüştüğü; öğrencileri, öğretmenleri ve sektörü buluşturan öğrenme ağı.</p>
+            <p>GençTek, Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü koordinasyonunda, bilişim alanında çalışma gerçekleştirmek isteyen, çalışmalar yürüten ya da mevcut çalışmalarının etkisini arttırmak isteyen öğrencilerin ve danışman öğretmenlerin desteklendiği, birbirleriyle ve paydaşlarla iletişim ve iş birliğinin sağlandığı Genç Bilişim Ekosistemidir.</p>
             {/*
               HERO DÜĞMESİ DE PLATFORMA (20 Ağustos 2026 · istek: "herodaki
               ekosisteme katıl da giriş olsun ve platforma girişe

@@ -28,8 +28,8 @@ export default function HakkindaSayfasi() {
       <section className="page-hero">
         <div className="container">
           <span className="eyebrow">Neden GençTek?</span>
-          <h1>Gençlerin birlikte ürettiği teknoloji ekosistemi.</h1>
-          <p>Ders dışı öğrenmeyi, akran paylaşımını ve sektör deneyimini Türkiye çapında buluşturuyoruz. Aşağıdaki başlıklardan her biri kendi sayfasında ayrıntılanıyor.</p>
+          <h1>Sektörün Yeni Liderleri</h1>
+          <p>GençTek, Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü koordinasyonunda, bilişim alanında çalışma gerçekleştirmek isteyen, çalışmalar yürüten ya da mevcut çalışmalarının etkisini arttırmak isteyen öğrencilerin ve danışman öğretmenlerin desteklendiği, birbirleriyle ve paydaşlarla iletişim ve iş birliğinin sağlandığı Genç Bilişim Ekosistemidir. Akran öğrenme modeline dayalı olarak bilişim ekosisteminin gelişip güçlendirilmesini hedefler.</p>
         </div>
       </section>
 
