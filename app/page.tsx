@@ -7,6 +7,7 @@ import { Icon } from "@/components/icons";
 import { haberKartlariOku } from "@/lib/haber";
 import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
 import { genctekEtkinlikleriOku } from "@/lib/genctek-etkinlik";
+import { genctekIstatistigiOku, sayiyiBicimle } from "@/lib/genctek-istatistik";
 
 // Ana sayfa da haber listesi/detayıyla aynı kaynağı kullanmalı; ayrı tohum verisi
 // kullanıldığında slug'lar tutmadığı için her kart 404'e gidiyordu.
@@ -24,6 +25,22 @@ export default async function Home() {
    * liste boş döner ve bölüm boş durumunu basar; ana sayfa çökmez.
    */
   const etkinlikler = await genctekEtkinlikleriOku(6);
+  /*
+   * PANELDEKİ SAYILAR DA AYNI UYGULAMADAN (28 Ağustos 2026 · istek: "buraya
+   * platformdan gelecek öğrenci sayısı öğretmen sayısı mentör sayısı, etkinlik
+   * sayısı, ürün sayısı"). Elle yazılmış "81 / 16 / 1200+" kaldırıldı: yazıldığı
+   * gün doğru, ertesi ay yanlıştı. Uç kapalıysa şerit hiç basılmaz.
+   */
+  const istatistik = await genctekIstatistigiOku();
+  const paneldekiSayilar = istatistik
+    ? [
+        { deger: istatistik.ogrenci, etiket: "Öğrenci" },
+        { deger: istatistik.ogretmen, etiket: "Öğretmen" },
+        { deger: istatistik.mentor, etiket: "Mentör" },
+        { deger: istatistik.etkinlik, etiket: "Etkinlik" },
+        { deger: istatistik.urun, etiket: "Ürün" },
+      ]
+    : [];
   return <>
     <Header />
     <main>
@@ -41,7 +58,7 @@ export default async function Home() {
               olarak konumluyor; vurgu "liderleri" kelimesinde.
             */}
             <span className="eyebrow">YEĞİTEK Genel Müdürlüğü</span>
-            <h1>Sektörün yeni <em>liderleri</em>.</h1>
+            <h1>Sektörün yeni <em>liderleri</em></h1>
             <p>GençTek, Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü koordinasyonunda, bilişim alanında çalışma gerçekleştirmek isteyen, çalışmalar yürüten ya da mevcut çalışmalarının etkisini arttırmak isteyen öğrencilerin ve danışman öğretmenlerin desteklendiği, birbirleriyle ve paydaşlarla iletişim ve iş birliğinin sağlandığı Genç Bilişim Ekosistemidir.</p>
             {/*
               HERO DÜĞMESİ DE PLATFORMA (20 Ağustos 2026 · istek: "herodaki
@@ -53,13 +70,19 @@ export default async function Home() {
           </div>
           <div className="hero-panel" aria-label="GençTek etki özeti">
             <div className="hero-panel-head"><span>2025–2026</span><span className="live-dot">Aktif dönem</span></div>
-            <div className="signal"><span>Bir fikir</span><strong><em>81</em> ile yayılır.</strong></div>
-            <div className="mini-stats"><div><strong>81</strong><span>İl ağı</span></div><div><strong>16</strong><span>Teknoloji teması</span></div><div><strong>1200+</strong><span>Genç üretici</span></div></div>
+            <div className="signal"><span>GençTek</span><strong>Genç bilişim <em>ekosistemi</em></strong></div>
+            {paneldekiSayilar.length > 0 && (
+              <div className="mini-stats mini-stats-bes">
+                {paneldekiSayilar.map((sayi) => (
+                  <div key={sayi.etiket}><strong>{sayiyiBicimle(sayi.deger)}</strong><span>{sayi.etiket}</span></div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      <section className="section stats-band"><div className="container stat-row"><span>Birlikte öğren.</span><span>Cesurca üret.</span><span>Geleceği paylaş.</span></div></section>
+      <section className="section stats-band"><div className="container stat-row"><span>Akran öğrenme modeli</span><span>Genç bilişim ekosistemi</span><span>Öğrenen topluluklar</span></div></section>
 
       <section className="section" id="haberler">
         <div className="container"><div className="section-heading"><div><span className="eyebrow">Ekosistemden</span><h2>Son gelişmeler</h2></div><Link className="text-link" href="/haberler">Tüm haberler <Icon name="arrow" /></Link></div>
