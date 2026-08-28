@@ -21,6 +21,7 @@
  */
 
 import { GENCTEK_ADRESI, genctekGirisAdresi } from "./genctek-baglanti";
+import { onbellekliOku } from "./genctek-onbellek";
 
 export type BasvuruDurumu = "ACILMADI" | "ACIK" | "KAPANDI";
 
@@ -53,6 +54,11 @@ const ZAMAN_ASIMI_MS = 4000;
  * Yanıt bir dakika önbelleklenir: her ziyaretçi için ayrı istek atmak gereksiz,
  * ama yeni açılan bir etkinliğin de saatlerce görünmemesi olmaz. Uç da aynı
  * süreyi öneriyor (Cache-Control).
+ *
+ * ÖNBELLEK NEXT'İN DEĞİL, BİZİM: `next: { revalidate }` bayat kaydı arka planda
+ * tazeliyor ve o denemenin hatasını doğrudan günlüğe yazıyordu — platform
+ * kapalıyken sunucu çıktısı `ECONNREFUSED` ile doluyordu (bkz.
+ * genctek-onbellek.ts). `no-store` ile istek Next'in önbelleğine hiç girmiyor.
  */
 const ONBELLEK_SANIYE = 60;
 
@@ -143,12 +149,26 @@ export async function genctekEtkinlikleriOku(
   const sorgu = new URLSearchParams({ adet: String(adet) });
   if (secenekler.gecmis) sorgu.set("gecmis", "1");
 
+  /*
+   * ÖNBELLEK ANAHTARI SORGUYU İÇERİR: ana sayfa altı yaklaşan etkinlik,
+   * etkinlik sayfası hem yaklaşanları hem geçmişi ayrı ayrı istiyor. Tek
+   * anahtar kullanılsaydı biri diğerinin listesini görürdü.
+   */
+  return onbellekliOku(
+    `etkinlikler?${sorgu}`,
+    ONBELLEK_SANIYE,
+    () => ucuOku(sorgu),
+    (liste) => liste.length > 0,
+  );
+}
+
+async function ucuOku(sorgu: URLSearchParams): Promise<AcikEtkinlik[]> {
   try {
     const yanit = await fetch(
       `${GENCTEK_ADRESI}/api/acik-etkinlikler?${sorgu.toString()}`,
       {
         signal: AbortSignal.timeout(ZAMAN_ASIMI_MS),
-        next: { revalidate: ONBELLEK_SANIYE },
+        cache: "no-store",
       },
     );
     if (!yanit.ok) return [];
