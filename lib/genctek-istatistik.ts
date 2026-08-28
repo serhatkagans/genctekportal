@@ -1,7 +1,7 @@
 /**
- * GENÇTEK UYGULAMASINDAKİ SAYILAR (28 Ağustos 2026 · istek: "buraya
+ * GENÇTEK UYGULAMASINDAKİ SAYILAR (28 Ağustos 2026 · istekler: "buraya
  * platformdan gelecek öğrenci sayısı öğretmen sayısı mentör sayısı, etkinlik
- * sayısı, ürün sayısı").
+ * sayısı, ürün sayısı", "bi de il sayısı ekleyelim kaç ilde var").
  *
  * Ana sayfa panelindeki rakamlar ELLE YAZILMIYOR. Elle yazılan sayı, yazıldığı
  * gün doğrudur; ekosistem büyüdükçe sessizce yanlışa döner ve kimse fark
@@ -22,6 +22,8 @@ export type GencTekIstatistigi = {
   mentor: number;
   etkinlik: number;
   urun: number;
+  /* Kaç FARKLI ilde kullanıcı var; il başına dağılım değil (uç kırılım vermez). */
+  il: number;
 };
 
 /* Ana sayfa başka bir uygulamanın yavaşlığını beklemesin. */
@@ -38,7 +40,7 @@ const ZAMAN_ASIMI_MS = 4000;
  */
 const ONBELLEK_SANIYE = 300;
 
-const ALANLAR = ["ogrenci", "ogretmen", "mentor", "etkinlik", "urun"] as const;
+const ALANLAR = ["ogrenci", "ogretmen", "mentor", "etkinlik", "urun", "il"] as const;
 
 /**
  * Platformdaki toplam sayılar; uç yanıt vermiyorsa `null`.
@@ -63,8 +65,9 @@ async function ucuOku(): Promise<GencTekIstatistigi | null> {
     if (!yanit.ok) return null;
 
     /*
-     * Gelen veri BAŞKA BİR UYGULAMANIN çıktısı: sürümü ayrı ilerler. Beş alanın
-     * beşi de sayı değilse yarım bir panel basmaktansa hiç basılmıyor.
+     * Gelen veri BAŞKA BİR UYGULAMANIN çıktısı: sürümü ayrı ilerler. Alanların
+     * hepsi sayı değilse yarım bir panel basmaktansa hiç basılmıyor — yeni bir
+     * alan eklenirken önce uç yayına alınır, sonra portal.
      */
     const govde = (await yanit.json()) as Record<string, unknown>;
     if (!ALANLAR.every((alan) => typeof govde[alan] === "number")) return null;
@@ -75,6 +78,7 @@ async function ucuOku(): Promise<GencTekIstatistigi | null> {
       mentor: govde.mentor as number,
       etkinlik: govde.etkinlik as number,
       urun: govde.urun as number,
+      il: govde.il as number,
     };
   } catch {
     /* Ağ hatası, zaman aşımı ve bozuk JSON aynı sonuca varır: sayı yok. */

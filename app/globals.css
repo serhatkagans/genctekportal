@@ -201,24 +201,30 @@ p{max-width:68ch}
   font:800 1.6rem/1 var(--font-display);letter-spacing:-.03em;
 }
 /*
-  BEŞ SAYI TEK ŞERİTTE (28 Ağustos 2026 · istek: "normalde 3 var 5 sığsın").
-  Üç sütunluk ölçüler beşte taşıyordu: rakam küçültülüp aralar daraltıldı ve
+  ÇOK SAYI TEK ŞERİTTE (28 Ağustos 2026 · istekler: "normalde 3 var 5 sığsın",
+  sonra "bi de il sayısı ekleyelim" → altı sütun).
+  Üç sütunluk ölçüler taşıyordu: rakam küçültülüp aralar daraltıldı ve
   etiketler tek satıra sabitlendi — "Öğretmen" ikiye bölünseydi şeridin
   yüksekliği sütundan sütuna değişirdi. Sütunlar grid ile EŞİT genişlikte:
   flex:1 ile içeriği uzun olan sütun (1.284 gibi) diğerlerini eziyordu.
+
+  ÖLÇÜLER clamp'li: panel 1025px ile 1200px arasında en dar hâlinde (~360px
+  içerik / 6 sütun ≈ 60px) ve orada sabit 1.25rem rakam taşıyordu. Sınıf adı
+  sayı vermiyor ("bes" değil "cok"): yedinci bir sayı geldiğinde adın da
+  değişmesi gerekmesin.
 */
-.mini-stats-bes{display:grid;grid-template-columns:repeat(5,1fr)}
-.mini-stats-bes div{padding-inline:12px}
-.mini-stats-bes div:first-child{padding-left:0}
-.mini-stats-bes div:last-child{padding-right:0}
-.mini-stats-bes div+div{padding-left:12px}
-.mini-stats-bes strong{font-size:1.25rem}
-.mini-stats-bes span{font-size:.68rem;white-space:nowrap}
+.mini-stats-cok{display:grid;grid-template-columns:repeat(6,1fr)}
+.mini-stats-cok div{padding-inline:8px}
+.mini-stats-cok div:first-child{padding-left:0}
+.mini-stats-cok div:last-child{padding-right:0}
+.mini-stats-cok div+div{padding-left:8px}
+.mini-stats-cok strong{font-size:clamp(1rem,1.7vw,1.25rem)}
+.mini-stats-cok span{font-size:clamp(.6rem,1vw,.68rem);white-space:nowrap}
 .hero-panel .mini-stats span{
   color:var(--color-text-muted);
   font-size:.74rem;font-weight:600;letter-spacing:.03em;
 }
-@media(max-width:720px){.hero-panel{--panel-pad:24px}.mini-stats div+div{padding-left:14px}.mini-stats-bes{grid-template-columns:repeat(3,1fr);row-gap:18px}.mini-stats-bes div+div{padding-left:12px}.mini-stats-bes div:nth-child(4){padding-left:0;border-left:0}}
+@media(max-width:720px){.hero-panel{--panel-pad:24px}.mini-stats div+div{padding-left:14px}.mini-stats-cok{grid-template-columns:repeat(3,1fr);row-gap:18px}.mini-stats-cok div+div{padding-left:12px}.mini-stats-cok div:nth-child(4){padding-left:0;border-left:0}}
 
 /* Dengeli kırmızı tema: kırmızı kurumsal kabuk, beyaz içerik, paletteki nötr tipografi. */
 html[data-theme="kirmizi"]{

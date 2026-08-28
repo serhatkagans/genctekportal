@@ -28,8 +28,12 @@ export default async function Home() {
   /*
    * PANELDEKİ SAYILAR DA AYNI UYGULAMADAN (28 Ağustos 2026 · istek: "buraya
    * platformdan gelecek öğrenci sayısı öğretmen sayısı mentör sayısı, etkinlik
-   * sayısı, ürün sayısı"). Elle yazılmış "81 / 16 / 1200+" kaldırıldı: yazıldığı
-   * gün doğru, ertesi ay yanlıştı. Uç kapalıysa şerit hiç basılmaz.
+   * sayısı, ürün sayısı", "bi de il sayısı ekleyelim kaç ilde var"). Elle
+   * yazılmış "81 / 16 / 1200+" kaldırıldı: yazıldığı gün doğru, ertesi ay
+   * yanlıştı. Uç kapalıysa şerit hiç basılmaz.
+   *
+   * İL SONDA: önce ekosistemi kuran insanlar (öğrenci, öğretmen, mentör),
+   * sonra ürettikleri (etkinlik, ürün), en sonda bunların yayıldığı alan.
    */
   const istatistik = await genctekIstatistigiOku();
   const paneldekiSayilar = istatistik
@@ -39,6 +43,7 @@ export default async function Home() {
         { deger: istatistik.mentor, etiket: "Mentör" },
         { deger: istatistik.etkinlik, etiket: "Etkinlik" },
         { deger: istatistik.urun, etiket: "Ürün" },
+        { deger: istatistik.il, etiket: "İl" },
       ]
     : [];
   return <>
@@ -72,7 +77,7 @@ export default async function Home() {
             <div className="hero-panel-head"><span>2025–2026</span><span className="live-dot">Aktif dönem</span></div>
             <div className="signal"><span>GençTek</span><strong>Genç bilişim <em>ekosistemi</em></strong></div>
             {paneldekiSayilar.length > 0 && (
-              <div className="mini-stats mini-stats-bes">
+              <div className="mini-stats mini-stats-cok">
                 {paneldekiSayilar.map((sayi) => (
                   <div key={sayi.etiket}><strong>{sayiyiBicimle(sayi.deger)}</strong><span>{sayi.etiket}</span></div>
                 ))}
