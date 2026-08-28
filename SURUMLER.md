@@ -17,16 +17,16 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 ## Yayımlanmamış
 
-<!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. Boşsa sürüm
-     kesilemez: neyin yayımlandığı yazılı olmayan bir sürüm, olmayan sürümden
-     iyi değildir. -->
+<!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
+
+---
+
+## v1.1.0 — 28 Ağustos 2026
 
 - Ana sayfa panelindeki sayı şeridine **il sayısı** eklendi: ekosistemin kaç
   ilde olduğu, öğrencisi ya da danışmanı bulunan farklı il sayısından
   hesaplanıyor. Kaynak platformun `/api/acik-istatistik` ucu; şerit altı
   sütuna çıktı, 720px altında 3+3 iki sıraya iniyor.
-
----
 
 ## v1.0.0 — 28 Ağustos 2026
 
