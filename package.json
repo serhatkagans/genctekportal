@@ -8,6 +8,7 @@
     "start": "next start -p 3010",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "surum": "node scripts/surum-yayinla.mjs",
     "db:seed": "node scripts/seed-veritabani.mjs",
     "import:themes": "node scripts/import-theme-content.mjs",
     "import:site": "node scripts/import-wordpress-site.mjs",

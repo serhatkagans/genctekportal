@@ -34,7 +34,8 @@ Sunucuda, `root` olarak:
 
 ```bash
 cd /opt/genctekportal
-git fetch origin main && git checkout -f -B main origin/main
+git fetch origin --tags --force
+git checkout -f -B main origin/main      # ya da bir etiket: git checkout -f v1.0.0
 chown -R genctekportal:genctekportal /opt/genctekportal
 sudo -u genctekportal env PATH=/opt/node24/bin:$PATH npm ci --no-audit --no-fund
 sudo -u genctekportal env PATH=/opt/node24/bin:$PATH npx prisma generate
@@ -46,6 +47,41 @@ systemctl restart genctekportal
 `npm ci`'den sonra **`prisma generate` şart**: `npm ci` node_modules'ü baştan
 kurduğu için üretilmiş istemci siliniyor ve derleme
 `import type { RoleCode } from "@prisma/client"` satırında düşüyor.
+
+## Sürümler
+
+Yayımlanan her durum `vBÜYÜK.KÜÇÜK.YAMA` biçiminde etiketlenir ve ne
+getirdiği `SURUMLER.md`'ye yazılır. Numaranın hangi bölümünün ne zaman
+arttığı o dosyanın başındadır. İlk etiket **v1.0.0**, 28 Ağustos 2026: yeni
+bir işin değil, o gün canlıda duran sitenin başlangıç noktası.
+
+Yerelde sürüm kesmek:
+
+```bash
+# 1. Değişiklikler commit'lendikten sonra SURUMLER.md · "Yayımlanmamış"
+#    başlığının altına ne değiştiği yazılır.
+npm run surum yama      # ya da: kucuk / buyuk / 1.4.2
+git push --follow-tags
+```
+
+Betik numarayı `package.json` ve `package-lock.json`'da yükseltir, notu
+tarihiyle sürüme çevirir, tek commit atar ve etiketi oluşturur. **İtmez** —
+yayına alma ayrı bir karardır. Kirli ağaçta ya da not yazılmamışsa çalışmaz:
+etiket, içinde ne olduğu yazılı olmayan bir işarete dönüşmesin.
+
+Sunucuda hangi sürümün çalıştığı:
+
+```bash
+git -C /opt/genctekportal describe --tags
+```
+
+Çıktı `v1.0.0` ise sunucu tam o etikette; `v1.0.0-3-g5bcd468` ise etiketten
+üç commit ileride, yani etiketsiz bir `main` üzerinde. İkisi de olağan —
+biri yayımlanmış sürüm, diğeri henüz sürüme bağlanmamış bir yama.
+
+Geri almak, etiket varken `git checkout -f v1.0.0` ile aynı derleme
+adımlarını tekrarlamaktır. Veritabanı göçleri geri alınmaz: `prisma migrate
+deploy` ileri yönlüdür, eski koda dönmek şemayı geri döndürmez.
 
 ## İçerik dosyaları depoda değil
 
