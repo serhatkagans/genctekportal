@@ -8,27 +8,37 @@ import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
  * etkinlikler, çalışma grupları, gençtek zirvesi olacak").
  *
  * Sıra istekte verildiği gibi: önce kurumu tanıtan (Hakkında), sonra akan
- * içerik (Haberler, Etkinlikler), sonra üretim alanları (Çalışma grupları), en
- * sonda yılın büyük buluşması (GençTek Zirvesi).
+ * içerik (Haberler, Etkinlikler), sonra her yıl tekrarlanan programlar (Temel
+ * GençTek etkinlikleri), en sonda yılın büyük buluşması (GençTek Zirvesi).
  *
  * ETKİNLİKLER kendi sayfasına gider (`/etkinlikler`): platformdaki bütün il
  * ve ulusal etkinlikler orada listeleniyor (istek: "etkinlik sayfasında
  * platformdaki tüm etkinlikler görülebilecekti"). Ana sayfadaki bölüm o
  * listenin ilk altısı; ikisi de aynı kaynaktan besleniyor.
  *
- * ÇALIŞMA GRUPLARI = /temalar: portalın "tema" dediği şey (Yapay Zekâ,
- * Robotik, Siber Güvenlik…) platformda "çalışma grubu" adıyla geçiyor. Menüde
- * platformun dili tercih edildi, sayfa adresi değişmedi — paylaşılmış
- * bağlantılar kırılmasın.
+ * ÇALIŞMA GRUPLARI MENÜDEN KALKTI, TEMEL ETKİNLİKLER GELDİ (28 Ağustos 2026 ·
+ * istekler: "üst menüden çalışma gruplarını kaldır", "temel gençtek
+ * etkinlikleri ana menüye gelsin").
  *
- * İL KOORDİNATÖRLERİ MENÜDEN KALKTI: istekteki beşli sıra onu içermiyor. Sayfa
- * duruyor ve Hakkında ekranındaki kartlardan açılıyor.
+ * İKİ ETKİNLİK BAŞLIĞI YAN YANA DURUYOR ve ayrımları şudur: "Etkinlikler"
+ * platformda AÇILMIŞ, tarihi ve başvurusu olan tekil etkinliklerdir;
+ * "Temel GençTek etkinlikleri" ise her yıl tekrarlanan PROGRAMLARIN kendisidir
+ * (EğitiJAM, Master Tek, Oyunun e Hâli…). Biri takvim, diğeri çerçeve — bu
+ * yüzden tek başlıkta birleştirilmedi.
+ *
+ * SAYFANIN ADRESİ DEĞİŞMEDİ (`/hakkinda/temel-etkinlikler`): sayfa Hakkında
+ * altında duruyor ve oradaki kartlardan da açılıyor. Menüye çıkarken adresi
+ * köke taşımak, paylaşılmış bağlantıları kırardı.
+ *
+ * ÇALIŞMA GRUPLARI (/temalar) SİLİNMEDİ: alt bilgideki "Temalar" ve Hakkında
+ * ekranındaki kart oraya gitmeye devam ediyor — menüden kalkması, sayfanın
+ * ulaşılmaz olması demek değil. İl koordinatörleri de aynı durumda.
  */
 const baglantilar = [
   ["Hakkında", "/hakkinda"],
   ["Haberler", "/haberler"],
   ["Etkinlikler", "/etkinlikler"],
-  ["Çalışma grupları", "/temalar"],
+  ["Temel GençTek etkinlikleri", "/hakkinda/temel-etkinlikler"],
 ] as const;
 
 /**

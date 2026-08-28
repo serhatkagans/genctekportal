@@ -767,6 +767,24 @@ html[data-theme="kirmizi"] .wordpress-article-header{background:#c4161c;color:#f
 html[data-theme="kirmizi"] .site-header .nav-acilir-govde a{color:var(--color-text);white-space:nowrap}
 .site-header .nav-acilir-govde a:hover{color:var(--color-brand)}
 
+/* MENÜ DAR MASAÜSTÜNDE SIĞSIN (28 Ağustos 2026).
+
+   Üst menüye "Temel GençTek etkinlikleri" girince başlık çubuğundaki en uzun
+   bağlantı 16 karakterden 26'ya çıktı. Menü 1025px'ten itibaren görünüyor
+   (altında mobil menüye düşüyor) ve o genişlikte marka + beş bağlantı + tema
+   seçici + Giriş düğmesi 1200px'lik kaba sığmıyordu: taşan kısım Giriş
+   düğmesini ekranın dışına itiyordu.
+
+   Bu aralıkta boşluklar ve yazı boyu bir tık kısılıyor; 1240px üstünde menü
+   tam ölçüsüne dönüyor. Bağlantılar nowrap: 72px'lik çubukta ikinci satıra
+   sarkan bir başlık, dar da olsa tek satırdan kötüdür. */
+@media(min-width:1025px) and (max-width:1240px){
+  .header-inner{gap:20px}
+  .main-nav{gap:18px}
+  .main-nav a,.nav-acilir>summary{font-size:.84rem}
+}
+.main-nav a,.nav-acilir>summary{white-space:nowrap}
+
 /* HAKKINDA KARTLARI (20 Ağustos 2026 · istek: "hakkında sayfasındaki kartlar
    çok gösterişsiz").
 
