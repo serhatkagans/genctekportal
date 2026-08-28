@@ -86,7 +86,7 @@ await writeFile(
   notYolu,
   not.slice(0, basi) +
     `${BASLIK}\n\n<!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->\n\n---\n\n` +
-    `## v${yeni} — ${bugun}\n\n${govde}\n` +
+    `## v${yeni} — ${bugun}\n\n${govde}\n\n---\n` +
     (sonu < 0 ? "" : not.slice(sonu)),
 );
 

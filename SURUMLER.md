@@ -28,6 +28,8 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
   hesaplanıyor. Kaynak platformun `/api/acik-istatistik` ucu; şerit altı
   sütuna çıktı, 720px altında 3+3 iki sıraya iniyor.
 
+---
+
 ## v1.0.0 — 28 Ağustos 2026
 
 Etiketlenen ilk sürüm. Portal Ağustos 2026'dan beri yayında; bu numara yeni
