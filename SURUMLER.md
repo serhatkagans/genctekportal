@@ -21,6 +21,11 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
      kesilemez: neyin yayımlandığı yazılı olmayan bir sürüm, olmayan sürümden
      iyi değildir. -->
 
+- Ana sayfa panelindeki sayı şeridine **il sayısı** eklendi: ekosistemin kaç
+  ilde olduğu, öğrencisi ya da danışmanı bulunan farklı il sayısından
+  hesaplanıyor. Kaynak platformun `/api/acik-istatistik` ucu; şerit altı
+  sütuna çıktı, 720px altında 3+3 iki sıraya iniyor.
+
 ---
 
 ## v1.0.0 — 28 Ağustos 2026
