@@ -19,6 +19,12 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Çalışma grupları sayfasının başlığı** "Teknoloji temaları" → **Çalışma
+  Grupları** (`/temalar`, adres değişmedi). Web Programlama grubuna görsel
+  bağlandı — dosya `public/temalar` altında ve depoda değil, sunucuya ayrıca
+  kopyalanır.
+- Alt bilgide YEĞİTEK logosu büyütüldü, iletişim satırı markanın altına çekildi.
+
 - **Çalışma grubu listesi YEĞİTEK'in 15 başlığıyla eşitlendi.** Adı tutan
   sekiz grubun metni yenilendi (adresleri, görselleri korunarak), yedi yeni
   grup eklendi (Bilgisayar Olimpiyatları, Web Programlama, Robotik, Siber
