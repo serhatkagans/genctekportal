@@ -15,7 +15,6 @@ export const dynamic = "force-dynamic";
 
 export default async function CoordinatorsPage() {
   const kayitlar = ileGoreSirala(await koordinatorleriOku());
-  const ilSayisi = new Set(kayitlar.map((k) => k.il)).size;
 
   return (
     <>
@@ -24,11 +23,9 @@ export default async function CoordinatorsPage() {
         <section className="page-hero compact">
           <div className="container">
             <Link className="back-link" href="/#hakkinda">← Hakkında</Link>
-            <span className="eyebrow">Ekosistem</span>
+            <span className="eyebrow">İl Millî Eğitim Müdürlükleri</span>
             <h1>İl Koordinatörleri</h1>
-            <p>
-              {ilSayisi} ilde görev yapan {kayitlar.length} koordinatör, il yöneticisi ve komisyon üyesi.
-            </p>
+            <p>İl koordinatörleri ve komisyon üyeleri.</p>
           </div>
         </section>
         <section className="section">

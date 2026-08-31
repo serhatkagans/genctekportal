@@ -4,6 +4,7 @@ import { Footer } from "@/components/footer";
 import { Icon } from "@/components/icons";
 import { gorselYolu } from "@/lib/ortam";
 import {
+  aciklamaOzeti,
   CALISMA_GRUBU_ETKINLIKLERI,
   TEMEL_ETKINLIKLER,
   type TemelEtkinlik,
@@ -44,7 +45,7 @@ function ProgramIzgarasi({ kayitlar }: { kayitlar: TemelEtkinlik[] }) {
             <span className="program-govde">
               <span className="program-numara">{String(sira + 1).padStart(2, "0")}</span>
               <h3>{kayit.ad}</h3>
-              {kayit.aciklama ? <p>{kayit.aciklama}</p> : null}
+              {kayit.aciklama ? <p>{aciklamaOzeti(kayit.aciklama)}</p> : null}
               <span className="program-git">Ayrıntılar <Icon name="arrow" /></span>
             </span>
           </Link>
@@ -69,12 +70,6 @@ export default function TemelEtkinliklerSayfasi() {
 
       <section className="section">
         <div className="container">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">Ulusal</span>
-              <h2>Temel Etkinlikler</h2>
-            </div>
-          </div>
           <ProgramIzgarasi kayitlar={TEMEL_ETKINLIKLER} />
         </div>
       </section>

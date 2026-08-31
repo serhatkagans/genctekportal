@@ -23,11 +23,10 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
   const son = ilk + kartlar.length - 1;
 
   return <><Header /><main>
-    <section className="page-hero"><div className="container"><span className="eyebrow">Güncel</span><h1>Haberler ve etkinlikler</h1><p>GençTek arşivindeki tüm haberler, etkinlikler ve duyurular.</p></div></section>
+    <section className="page-hero"><div className="container"><span className="eyebrow">GençTek Ekosisteminden</span><h1>Son Haberler</h1></div></section>
     <section className="section"><div className="container">
       <div className="archive-heading">
         <div className="archive-summary"><strong>{toplam}</strong><span>yayımlanmış içerik</span></div>
-        <Link className="button button-secondary" href="/arsiv/sayfalar">Sabit sayfalar arşivi</Link>
       </div>
       <div className="card-grid wordpress-grid">{kartlar.map((item, sira) => <WordPressCard item={item} key={item.id} oncelikli={sira < 3} />)}</div>
       {sonSayfa > 1 && (

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { gorselYolu } from "@/lib/ortam";
-import { temelEtkinlikBul, temelEtkinlikSluglari } from "@/lib/temel-etkinlik";
+import { aciklamaParcalari, temelEtkinlikBul, temelEtkinlikSluglari } from "@/lib/temel-etkinlik";
 
 /*
  * PROGRAMIN KENDİ SAYFASI (31 Ağustos 2026 · istek: "her birinin kendi sayfası
@@ -47,7 +47,9 @@ export default async function TemelEtkinlikSayfasi({ params }: { params: Promise
       <section className="section">
         <div className="container program-detay">
           {kayit.aciklama
-            ? <p className="program-detay-metin">{kayit.aciklama}</p>
+            ? aciklamaParcalari(kayit.aciklama).map((parca) => (parca.baslikMi
+                ? <h2 className="program-detay-baslik" key={parca.metin}>{parca.metin}</h2>
+                : <p className="program-detay-metin" key={parca.metin}>{parca.metin}</p>))
             : <p className="program-detay-metin">Bu programın tanıtım metni hazırlanıyor. Tarihli duyurular ve başvurular <Link className="text-link" href="/etkinlikler">Etkinlikler</Link> sayfasındadır.</p>}
 
           {kayit.gorseller?.length ? (

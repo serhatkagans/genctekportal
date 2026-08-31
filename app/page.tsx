@@ -72,11 +72,11 @@ export default async function Home() {
               yönlendirsin"). Sayfadaki üç çağrı — üst menü, hero ve alttaki
               şerit — artık aynı adı taşıyıp aynı kapıya gidiyor.
             */}
-            <div className="button-row"><a className="button button-primary" href={genctekGirisAdresi()}>Giriş <Icon name="arrow" /></a><Link className="text-link" href="/#hakkinda">GençTek’i keşfet <Icon name="arrow" /></Link></div>
+            <div className="button-row"><a className="button button-primary" href={genctekGirisAdresi()}>Ekosisteme Katıl <Icon name="arrow" /></a><Link className="text-link" href="/#hakkinda">GençTek’i keşfet <Icon name="arrow" /></Link></div>
           </div>
           <div className="hero-panel" aria-label="GençTek etki özeti">
-            <div className="hero-panel-head"><span>2025–2026</span><span className="live-dot">Aktif dönem</span></div>
-            <div className="signal"><span>GençTek</span><strong>Genç Bilişim <em>Ekosistemi</em></strong></div>
+            <div className="hero-panel-head"><span>2026–2027</span><span className="live-dot">Aktif dönem</span></div>
+            <div className="signal"><span>GençTek Akran Öğrenme Modeli</span><strong>Genç Bilişim <em>Ekosistemi</em></strong></div>
             {paneldekiSayilar.length > 0 && (
               <div className="mini-stats mini-stats-cok">
                 {paneldekiSayilar.map((sayi) => (
@@ -88,7 +88,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="section stats-band"><div className="container stat-row"><span>Akran Öğrenme Modeli</span><span>Genç Bilişim Ekosistemi</span><span>Öğrenen Topluluklar</span></div></section>
+      <section className="section stats-band"><div className="container stat-row"><span>Öğrenen Topluluklar</span><span>Ortak Üretim</span><span>Uluslararası Ağ</span></div></section>
 
       <section className="section" id="haberler">
         <div className="container"><div className="section-heading"><div><span className="eyebrow">GençTek Ekosisteminden</span><h2>Son Haberler</h2></div><Link className="text-link" href="/haberler">Tüm haberler <Icon name="arrow" /></Link></div>

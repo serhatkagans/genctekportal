@@ -23,10 +23,21 @@ export const metadata = {
  */
 const ogeler = [
   {
-    ad: "GençTek amblemi",
+    ad: "GençTek logo",
     dosya: "/Genc.png",
     aciklama: "Ana amblem. Açık ve koyu zeminde kullanılabilir.",
   },
+];
+
+/*
+ * HENÜZ AÇILMAYAN BAŞLIKLAR (31 Ağustos 2026 · istek: "sunum, video, yaka
+ * kartları sayfaları da olsun ama pasif şimdilik"). Kartlar görünür ama
+ * tıklanmaz; dosyalar geldiğinde yukarıdaki `ogeler` listesine taşınacak.
+ */
+const yakinda = [
+  { ad: "Sunum şablonları", aciklama: "GençTek sunum şablonu dosyaları." },
+  { ad: "Video", aciklama: "Tanıtım videoları ve jenerik öğeleri." },
+  { ad: "Yaka kartları", aciklama: "Etkinlik yaka kartı tasarımları." },
 ];
 
 /*
@@ -48,9 +59,8 @@ export default function LogolarSayfasi() {
       <section className="page-hero compact">
         <div className="container">
           <Link className="back-link" href="/#hakkinda">← Hakkında</Link>
-          <span className="eyebrow">Marka</span>
+          <span className="eyebrow">Tanıtım Tasarımları</span>
           <h1>GençTek Kurumsal</h1>
-          <p>GençTek görsel kimliğine ait öğeler ve kullanım kuralları. Etkinlik afişi, sunum ya da roll-up hazırlarken bu dosyaları kullanın.</p>
         </div>
       </section>
 
@@ -74,6 +84,17 @@ export default function LogolarSayfasi() {
                   <p>{oge.aciklama}</p>
                 </span>
               </a>
+            ))}
+          </div>
+          <div className="card-grid" style={{ marginTop: 24 }}>
+            {yakinda.map((oge) => (
+              <div className="content-card marka-karti marka-karti-pasif" key={oge.ad} aria-disabled="true">
+                <span className="card-body">
+                  <span className="chip">Yakında</span>
+                  <h3>{oge.ad}</h3>
+                  <p>{oge.aciklama}</p>
+                </span>
+              </div>
             ))}
           </div>
           {/*
