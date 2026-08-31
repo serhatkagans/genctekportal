@@ -29,7 +29,7 @@ export function HakkindaKartlari() {
   return (
     <div className="hakkinda-izgara">
       {HAKKINDA_KARTLARI.map((kart, sira) => (
-        <Link className="hakkinda-karti" href={kart.adres} key={kart.slug}>
+        <Link className="hakkinda-karti" href={kart.adres} key={kart.slug} id={`hakkinda-${kart.slug}`}>
           <span className={`hakkinda-bant hakkinda-bant-${kart.ikon}`}>
             <span className="hakkinda-filigran" aria-hidden="true">
               <Icon name={kart.ikon} />

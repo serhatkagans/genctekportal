@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { HaberGalerisi } from "@/components/HaberGalerisi";
+import { HakkindaKartlari } from "@/components/hakkinda-kartlari";
 import { EtkinlikKarti } from "@/components/etkinlik-karti";
 import { Icon } from "@/components/icons";
 import { haberKartlariOku } from "@/lib/haber";
@@ -14,7 +15,7 @@ import { genctekIstatistigiOku, sayiyiBicimle } from "@/lib/genctek-istatistik";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const sonHaberler = await haberKartlariOku(12);
+  const sonHaberler = await haberKartlariOku(15);
   /*
    * ETKİNLİKLER GENÇTEK UYGULAMASINDAN GELİR (20 Ağustos 2026 · istek: "ana
    * sayfada Üretim temaları yerine az önce oluşturulan etkinlikler gelecek,
@@ -63,7 +64,7 @@ export default async function Home() {
               olarak konumluyor; vurgu "liderleri" kelimesinde.
             */}
             <span className="eyebrow">YEĞİTEK Genel Müdürlüğü</span>
-            <h1>Sektörün yeni <em>liderleri</em></h1>
+            <h1>Sektörün Yeni <em>Liderleri</em></h1>
             <p>GençTek, Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü koordinasyonunda, bilişim alanında çalışma gerçekleştirmek isteyen, çalışmalar yürüten ya da mevcut çalışmalarının etkisini arttırmak isteyen öğrencilerin ve danışman öğretmenlerin desteklendiği, birbirleriyle ve paydaşlarla iletişim ve iş birliğinin sağlandığı Genç Bilişim Ekosistemidir.</p>
             {/*
               HERO DÜĞMESİ DE PLATFORMA (20 Ağustos 2026 · istek: "herodaki
@@ -71,11 +72,11 @@ export default async function Home() {
               yönlendirsin"). Sayfadaki üç çağrı — üst menü, hero ve alttaki
               şerit — artık aynı adı taşıyıp aynı kapıya gidiyor.
             */}
-            <div className="button-row"><a className="button button-primary" href={genctekGirisAdresi()}>Giriş <Icon name="arrow" /></a><Link className="text-link" href="/hakkinda">GençTek’i keşfet <Icon name="arrow" /></Link></div>
+            <div className="button-row"><a className="button button-primary" href={genctekGirisAdresi()}>Giriş <Icon name="arrow" /></a><Link className="text-link" href="/#hakkinda">GençTek’i keşfet <Icon name="arrow" /></Link></div>
           </div>
           <div className="hero-panel" aria-label="GençTek etki özeti">
             <div className="hero-panel-head"><span>2025–2026</span><span className="live-dot">Aktif dönem</span></div>
-            <div className="signal"><span>GençTek</span><strong>Genç bilişim <em>ekosistemi</em></strong></div>
+            <div className="signal"><span>GençTek</span><strong>Genç Bilişim <em>Ekosistemi</em></strong></div>
             {paneldekiSayilar.length > 0 && (
               <div className="mini-stats mini-stats-cok">
                 {paneldekiSayilar.map((sayi) => (
@@ -87,11 +88,30 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="section stats-band"><div className="container stat-row"><span>Akran öğrenme modeli</span><span>Genç bilişim ekosistemi</span><span>Öğrenen topluluklar</span></div></section>
+      <section className="section stats-band"><div className="container stat-row"><span>Akran Öğrenme Modeli</span><span>Genç Bilişim Ekosistemi</span><span>Öğrenen Topluluklar</span></div></section>
 
       <section className="section" id="haberler">
-        <div className="container"><div className="section-heading"><div><span className="eyebrow">Ekosistemden</span><h2>Son gelişmeler</h2></div><Link className="text-link" href="/haberler">Tüm haberler <Icon name="arrow" /></Link></div>
+        <div className="container"><div className="section-heading"><div><span className="eyebrow">GençTek Ekosisteminden</span><h2>Son Haberler</h2></div><Link className="text-link" href="/haberler">Tüm haberler <Icon name="arrow" /></Link></div>
           <HaberGalerisi haberler={sonHaberler} />
+        </div>
+      </section>
+
+      {/*
+        HAKKINDA KARTLARI ANA SAYFAYA TAŞINDI (31 Ağustos 2026 · istek:
+        "hakkımdaki 6 kart anasayfada haberlerin altına taşınacak … hakkında
+        sayfası kalkmış olacak").
+
+        Ayrı bir /hakkinda ekranı, altı karttan başka bir şey göstermiyordu:
+        menüden bir tık, karttan bir tık daha. Şimdi kartlar ana sayfada
+        duruyor, üst menüdeki "Hakkında" doğrudan buraya (#hakkinda) iniyor ve
+        açılır menüdeki başlıklar ilgili kartın çapasına gidiyor. Kartların
+        gittiği alt sayfalar (/hakkinda/…) olduğu gibi duruyor; kalkan yalnızca
+        aradaki liste sayfasıdır — eski adres kalıcı yönlendirmeyle bu bölüme
+        geliyor (bkz. next.config.ts).
+      */}
+      <section className="section" id="hakkinda">
+        <div className="container"><div className="section-heading"><div><span className="eyebrow">GençTek</span><h2>Hakkında</h2></div></div>
+          <HakkindaKartlari />
         </div>
       </section>
 
@@ -103,7 +123,7 @@ export default async function Home() {
         tarihli bir çağrı.
       */}
       <section className="section themes-section" id="etkinlikler">
-        <div className="container"><div className="section-heading"><div><span className="eyebrow">Takvimde ne var</span><h2>Takip edilebilecek etkinlikler</h2><p>GençTek panelinde açılmış, başvuruya açık ve yaklaşan etkinlikler.</p></div><Link className="text-link" href="/etkinlikler">Tüm etkinlikler <Icon name="arrow" /></Link></div>
+        <div className="container"><div className="section-heading"><div><span className="eyebrow">GençTek Etkinlikleri</span><h2>Yaklaşan Etkinlikler</h2><p>GençTek panelinde açılmış, başvuruya açık ve yaklaşan etkinlikler.</p></div><Link className="text-link" href="/etkinlikler">Tüm etkinlikler <Icon name="arrow" /></Link></div>
           {etkinlikler.length === 0
             ? <p className="etkinlik-bos">Şu an listelenecek etkinlik yok. Yeni etkinlikler açıldığında burada görünecek.</p>
             : <div className="card-grid">{etkinlikler.map((etkinlik) => <EtkinlikKarti etkinlik={etkinlik} key={etkinlik.id} />)}</div>}
@@ -119,7 +139,7 @@ export default async function Home() {
         adlar taşıması ("Başvuruyu başlat" / "Giriş") aynı kapıyı iki ayrı kapı
         gibi gösteriyordu.
       */}
-      <section className="section join-section"><div className="container join-card"><div><span className="eyebrow eyebrow-light">Sıra sende</span><h2>Fikrini ekibe, ekibini harekete dönüştür.</h2><p>Öğrenci veya danışman öğretmen olarak GençTek ekosistemine katıl.</p></div><a className="button button-light" href={genctekGirisAdresi()}>Platforma giriş <Icon name="arrow" /></a></div></section>
+      <section className="section join-section"><div className="container join-card"><div><span className="eyebrow eyebrow-light">Sıra sende</span><h2>Ürününü paylaş, çalışmalarını duyur, ekibini kur, destek al.</h2><p>Öğrenci, danışman öğretmen, mezun, mentör ve paydaş olarak ekosisteme katılmak için giriş yapınız.</p></div><a className="button button-light" href={genctekGirisAdresi()}>Ekosisteme Katıl <Icon name="arrow" /></a></div></section>
     </main>
     <Footer />
   </>;

@@ -1,15 +1,14 @@
 import Link from "next/link";
 import { MarkaSimgesi } from "./marka-simgesi";
-import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
 import { ayarlariOkuSessiz } from "@/lib/yonetim/ayar";
 
 /**
  * Alt bilgi.
  *
- * "Katılım" sütunundaki bağlantı da PLATFORMUN GİRİŞİNE gider (20 Ağustos
- * 2026): portaldaki başvuru formu yerine tek kapı bırakıldı, üst menü ve ana
- * sayfadaki çağrılarla aynı yere. Portalın kendi /katilim sayfası silinmedi,
- * yalnızca ziyaretçiye gösterilen bağlantılardan çıktı.
+ * "KEŞFET" VE "KATILIM" SÜTUNLARI KALKTI (31 Ağustos 2026 · istek: "en alttan
+ * bunlar kalksın"). Bağlantıların hepsi üst menüde zaten duruyor; alt bilgi
+ * artık kimin olduğunu ve nasıl ulaşılacağını söylüyor, menüyü tekrar etmiyor.
+ * Kurum satırının altına YEĞİTEK eklendi — GençTek'i yürüten genel müdürlük.
  */
 export async function Footer() {
   // İletişim bilgisi yönetim panelinden düzenleniyor (Genel ayarlar);
@@ -23,9 +22,7 @@ export async function Footer() {
           <div className="brand brand-inverse"><MarkaSimgesi /><span>GENÇ<span className="brand-accent">TEK</span></span></div>
           <p>Genç Bilişim Ekosistemi ve Akran Öğrenme Modeli.</p>
         </div>
-        <div><h2>Keşfet</h2><Link href="/zirve">1. GençTek Zirvesi 2025</Link><Link href="/2-genctek-zirvesi-2026">2. GençTek Zirvesi 2026</Link><Link href="/temalar">Temalar</Link><Link href="/haberler">Haberler</Link><Link href="/hakkinda">Hakkında</Link></div>
-        <div><h2>Katılım</h2><a href={genctekGirisAdresi()}>Platforma giriş</a><Link href="/hakkinda/il-koordinatorleri">İl Koordinatörleri</Link></div>
-        <div><h2>İletişim</h2><a href={`mailto:${ayarlar["iletisim.eposta"]}`}>{ayarlar["iletisim.eposta"]}</a><span>{ayarlar["iletisim.kurum"]}</span></div>
+        <div><h2>İletişim</h2><a href={`mailto:${ayarlar["iletisim.eposta"]}`}>{ayarlar["iletisim.eposta"]}</a><span>{ayarlar["iletisim.kurum"]}</span><span>Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü (YEĞİTEK)</span></div>
       </div>
       <div className="container footer-bottom"><span>© 2026 GençTek</span><Link href="/kvkk">KVKK ve Gizlilik</Link></div>
     </footer>

@@ -23,9 +23,9 @@ export default async function CoordinatorsPage() {
       <main>
         <section className="page-hero compact">
           <div className="container">
-            <Link className="back-link" href="/hakkinda">← Hakkında</Link>
+            <Link className="back-link" href="/#hakkinda">← Hakkında</Link>
             <span className="eyebrow">Ekosistem</span>
-            <h1>İl koordinatörleri</h1>
+            <h1>İl Koordinatörleri</h1>
             <p>
               {ilSayisi} ilde görev yapan {kayitlar.length} koordinatör, il yöneticisi ve komisyon üyesi.
             </p>

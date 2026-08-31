@@ -19,6 +19,23 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Hakkında liste sayfası kalktı.** Altı kart artık ana sayfada, haberlerin
+  altında duruyor. `/hakkinda` kalıcı olarak `/#hakkinda` çapasına
+  yönlendiriliyor; alt sayfalar (`/hakkinda/amaclar`, `/hakkinda/logolar` …)
+  yerinde.
+- **Üst menüye Hakkında açılır menüsü.** Başlıklar `lib/hakkinda.ts`'ten
+  geliyor, yani kartlarla tek kaynaktan besleniyor. Bağlantılar ana sayfadaki
+  kart çapalarına gidiyor; düz `<a>` kullanıldı, `next/link` adres zaten ana
+  sayfayken yalnızca karma değiştiğinde her zaman kaydırmıyordu.
+- **Temel GençTek etkinliklerinin ayrı sayfaları geri geldi:**
+  `/hakkinda/temel-etkinlikler/<slug>`. Program listesi sayfa dosyasından
+  `lib/temel-etkinlik.ts`'e taşındı — liste kartları ve detay sayfaları aynı
+  kaynaktan basılıyor, adresler site haritasına da giriyor.
+- Kart başlıkları düzeltildi (“Logolar ve roll-up'lar” → **GençTek
+  Kurumsal**, “Hedefler” → **GençTek Hedefleri**); alt bilgideki
+  “Keşfet” ve “Katılım” sütunları kaldırıldı, iletişim
+  bölümüne YEĞİTEK satırı eklendi.
+
 ---
 
 ## v1.1.0 — 28 Ağustos 2026

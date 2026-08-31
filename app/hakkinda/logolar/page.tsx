@@ -5,7 +5,7 @@ import { Footer } from "@/components/footer";
 import { gorselYolu } from "@/lib/ortam";
 
 export const metadata = {
-  title: "Logolar ve roll-up'lar · GençTek",
+  title: "GençTek Kurumsal · GençTek",
   description: "GençTek marka öğeleri, kullanım kuralları ve indirilebilir dosyalar.",
 };
 
@@ -47,9 +47,9 @@ export default function LogolarSayfasi() {
     <main>
       <section className="page-hero compact">
         <div className="container">
-          <Link className="back-link" href="/hakkinda">← Hakkında</Link>
+          <Link className="back-link" href="/#hakkinda">← Hakkında</Link>
           <span className="eyebrow">Marka</span>
-          <h1>Logolar ve roll-up&apos;lar</h1>
+          <h1>GençTek Kurumsal</h1>
           <p>GençTek görsel kimliğine ait öğeler ve kullanım kuralları. Etkinlik afişi, sunum ya da roll-up hazırlarken bu dosyaları kullanın.</p>
         </div>
       </section>

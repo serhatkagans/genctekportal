@@ -3,7 +3,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
 export const metadata = {
-  title: "Hedefler · GençTek",
+  title: "GençTek Hedefleri · GençTek",
   description: "GençTek'in hedefleri.",
 };
 
@@ -26,9 +26,9 @@ export default function HedeflerSayfasi() {
     <main>
       <section className="page-hero compact">
         <div className="container">
-          <Link className="back-link" href="/hakkinda">← Hakkında</Link>
+          <Link className="back-link" href="/#hakkinda">← Hakkında</Link>
           <span className="eyebrow">Neyi hedefliyoruz</span>
-          <h1>Hedefler</h1>
+          <h1>GençTek Hedefleri</h1>
         </div>
       </section>
 

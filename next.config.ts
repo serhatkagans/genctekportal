@@ -11,11 +11,23 @@ const nextConfig: NextConfig = {
    * 404 verirdi.
    */
   async redirects() {
-    return [{
-      source: "/il-koordinatorleri",
-      destination: "/hakkinda/il-koordinatorleri",
-      permanent: true,
-    }];
+    return [
+      {
+        source: "/il-koordinatorleri",
+        destination: "/hakkinda/il-koordinatorleri",
+        permanent: true,
+      },
+      /*
+       * Hakkında LİSTE sayfası kalktı (31 Ağustos 2026): altı kart artık ana
+       * sayfada, haberlerin altında duruyor. Alt sayfalar (/hakkinda/amaclar,
+       * /hakkinda/logolar …) yerinde; yönlendirilen yalnızca aradaki liste.
+       */
+      {
+        source: "/hakkinda",
+        destination: "/#hakkinda",
+        permanent: true,
+      },
+    ];
   },
   async headers() {
     return [{

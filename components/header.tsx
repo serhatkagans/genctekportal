@@ -2,6 +2,8 @@ import Link from "next/link";
 import { MarkaSimgesi } from "./marka-simgesi";
 import { TemaSecici } from "./TemaSecici";
 import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
+import { HAKKINDA_KARTLARI } from "@/lib/hakkinda";
+import { uygulamaYolu } from "@/lib/ortam";
 
 /**
  * ÜST MENÜ (20 Ağustos 2026 · istek: "üst menü sırayla: hakkında, haberler,
@@ -35,7 +37,6 @@ import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
  * ulaşılmaz olması demek değil. İl koordinatörleri de aynı durumda.
  */
 const baglantilar = [
-  ["Hakkında", "/hakkinda"],
   ["Haberler", "/haberler"],
   ["Etkinlikler", "/etkinlikler"],
   ["Temel GençTek etkinlikleri", "/hakkinda/temel-etkinlikler"],
@@ -57,6 +58,29 @@ const zirveler = [
   ["Zirve 2026", "/2-genctek-zirvesi-2026"],
   ["Zirve 2025", "/zirve"],
 ] as const;
+
+/*
+ * HAKKINDA AÇILIR MENÜSÜ (31 Ağustos 2026 · istek: "bu kartlar hakkımda
+ * menüsünün altına açılır olacak ve menüde tıklanınca ilgili karta gitsin
+ * anasayfadaki").
+ *
+ * Başlıklar lib/hakkinda.ts'ten geliyor — kart listesiyle menü tek kaynaktan
+ * besleniyor, yeni bir başlık eklendiğinde ikisi birden büyüsün diye. Hedef
+ * kartın KENDİ SAYFASI değil ana sayfadaki çapasıdır: menüden gelen kişi önce
+ * altı başlığı bir arada görüyor, sonra istediğine giriyor.
+ */
+/*
+ * ÇAPALAR DÜZ <a> İLE VERİLİYOR, next/link ile değil (31 Ağustos 2026 · istek:
+ * "menüdeki hakkında menüsüne tıklayınca aşağı kaymıyor"). İstemci tarafı
+ * gezinme, adres zaten ana sayfayken yalnızca karma (#) değiştiğinde her zaman
+ * kaydırmıyordu; düz bağlantıda kaydırmayı tarayıcının kendisi yapıyor.
+ * Adresin başına uygulama eki geliyor: portal bir alt dizinde de yayınlanıyor.
+ */
+const anaSayfaCapasi = (cengel: string) => `${uygulamaYolu("/")}#${cengel}`;
+
+const hakkindaBaglantilari = HAKKINDA_KARTLARI.map(
+  (kart) => [kart.baslik, anaSayfaCapasi(`hakkinda-${kart.slug}`)] as const,
+);
 
 export function Header() {
   /*
@@ -81,6 +105,15 @@ export function Header() {
           <MarkaSimgesi /><span>GENÇ<span className="brand-accent">TEK</span></span>
         </Link>
         <nav className="main-nav" aria-label="Ana menü">
+          <details className="nav-acilir">
+            {/* Başlığın kendisi de bir bağlantı: tıklayan kişi ana sayfadaki
+                kart bölümüne (#hakkinda) iniyor, oku tıklayan altı başlığı
+                açıyor. */}
+            <summary><a href={anaSayfaCapasi("hakkinda")}>Hakkında</a></summary>
+            <div className="nav-acilir-govde">
+              {hakkindaBaglantilari.map(([etiket, adres]) => <a href={adres} key={adres}>{etiket}</a>)}
+            </div>
+          </details>
           {baglantilar.map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
           <details className="nav-acilir">
             <summary>GençTek Zirvesi</summary>
@@ -94,6 +127,10 @@ export function Header() {
         <details className="mobile-menu">
           <summary aria-label="Menüyü aç">Menü</summary>
           <nav aria-label="Mobil menü">
+            <a href={anaSayfaCapasi("hakkinda")}>Hakkında</a>
+            {/* Mobilde iç içe açılır menü yok: Hakkında başlıkları girintili
+                olarak doğrudan listeleniyor. */}
+            {hakkindaBaglantilari.map(([etiket, adres]) => <a className="mobil-alt-baglanti" href={adres} key={adres}>{etiket}</a>)}
             {baglantilar.map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
             {/* Mobilde açılır menü İÇİNDE açılır menü olmaz: iki zirve doğrudan
                 listeleniyor, başlıkları zaten hangi yıl olduğunu söylüyor. */}

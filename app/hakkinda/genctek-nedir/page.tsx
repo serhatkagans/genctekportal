@@ -3,7 +3,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
 export const metadata = {
-  title: "GençTek nedir? · GençTek",
+  title: "GençTek Nedir? · GençTek",
   description:
     "GençTek; öğrencileri, danışman öğretmenleri ve bilişim sektörünü buluşturan ülke çapında bir üretim ekosistemidir.",
 };
@@ -14,9 +14,9 @@ export default function GenctekNedirSayfasi() {
     <main>
       <section className="page-hero compact">
         <div className="container">
-          <Link className="back-link" href="/hakkinda">← Hakkında</Link>
+          <Link className="back-link" href="/#hakkinda">← Hakkında</Link>
           <span className="eyebrow">Tanım</span>
-          <h1>GençTek nedir?</h1>
+          <h1>GençTek Nedir?</h1>
           <p>Gençlerin teknolojiyle ürettiği, paylaştığı ve birlikte büyüdüğü bilişim ekosistemi.</p>
         </div>
       </section>
