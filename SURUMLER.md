@@ -23,10 +23,12 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
   altında duruyor. `/hakkinda` kalıcı olarak `/#hakkinda` çapasına
   yönlendiriliyor; alt sayfalar (`/hakkinda/amaclar`, `/hakkinda/logolar` …)
   yerinde.
-- **Üst menüye Hakkında açılır menüsü.** Başlıklar `lib/hakkinda.ts`'ten
-  geliyor, yani kartlarla tek kaynaktan besleniyor. Bağlantılar ana sayfadaki
-  kart çapalarına gidiyor; düz `<a>` kullanıldı, `next/link` adres zaten ana
-  sayfayken yalnızca karma değiştiğinde her zaman kaydırmıyordu.
+- **Üst menüye Hakkında açılır menüsü.** Başlıklar ve adresler
+  `lib/hakkinda.ts`'ten geliyor, yani kartlarla tek kaynaktan besleniyor.
+  Başlıklar doğrudan **kendi sayfalarına** gidiyor. Menünün kendi başlığı ana
+  sayfadaki kart bölümüne (`/#hakkinda`) iniyor; bu çapa düz `<a>`, çünkü
+  `next/link` adres zaten ana sayfayken yalnızca karma değiştiğinde her zaman
+  kaydırmıyordu.
 - **Temel GençTek etkinliklerinin ayrı sayfaları geri geldi:**
   `/hakkinda/temel-etkinlikler/<slug>`. Program listesi sayfa dosyasından
   `lib/temel-etkinlik.ts`'e taşındı — liste kartları ve detay sayfaları aynı

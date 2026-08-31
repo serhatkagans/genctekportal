@@ -61,26 +61,33 @@ const zirveler = [
 
 /*
  * HAKKINDA AÇILIR MENÜSÜ (31 Ağustos 2026 · istek: "bu kartlar hakkımda
- * menüsünün altına açılır olacak ve menüde tıklanınca ilgili karta gitsin
- * anasayfadaki").
+ * menüsünün altına açılır olacak").
  *
- * Başlıklar lib/hakkinda.ts'ten geliyor — kart listesiyle menü tek kaynaktan
- * besleniyor, yeni bir başlık eklendiğinde ikisi birden büyüsün diye. Hedef
- * kartın KENDİ SAYFASI değil ana sayfadaki çapasıdır: menüden gelen kişi önce
- * altı başlığı bir arada görüyor, sonra istediğine giriyor.
+ * Başlıklar ve adresler lib/hakkinda.ts'ten geliyor — kart listesiyle menü tek
+ * kaynaktan besleniyor, yeni bir başlık eklendiğinde ikisi birden büyüsün diye.
+ *
+ * HEDEF KARTIN KENDİ SAYFASI (31 Ağustos 2026 · istek: "menüde tıklayınca
+ * ilgili kartın sayfasına gitsin, ana sayfadaki kartlara değil"). Önce ana
+ * sayfadaki çapaya gidiliyordu; menüden gelen kişi aradığı başlığı zaten
+ * seçmişken bir de kart bölümünde ikinci kez tıklamak zorunda kalıyordu.
+ * "Çalışma Grupları" portal içinde /temalar'a düşer — adres kart listesinde
+ * yazılı olduğu için burada ayrıca bilinmesi gerekmiyor.
  */
+const hakkindaBaglantilari = HAKKINDA_KARTLARI.map(
+  (kart) => [kart.baslik, kart.adres] as const,
+);
+
 /*
- * ÇAPALAR DÜZ <a> İLE VERİLİYOR, next/link ile değil (31 Ağustos 2026 · istek:
+ * Menü başlığının kendisi hâlâ ANA SAYFADAKİ kart bölümüne iniyor: altı
+ * başlığı bir arada görmek isteyen oraya gidiyor.
+ *
+ * Çapa düz <a> ile veriliyor, next/link ile değil (31 Ağustos 2026 · istek:
  * "menüdeki hakkında menüsüne tıklayınca aşağı kaymıyor"). İstemci tarafı
  * gezinme, adres zaten ana sayfayken yalnızca karma (#) değiştiğinde her zaman
  * kaydırmıyordu; düz bağlantıda kaydırmayı tarayıcının kendisi yapıyor.
  * Adresin başına uygulama eki geliyor: portal bir alt dizinde de yayınlanıyor.
  */
 const anaSayfaCapasi = (cengel: string) => `${uygulamaYolu("/")}#${cengel}`;
-
-const hakkindaBaglantilari = HAKKINDA_KARTLARI.map(
-  (kart) => [kart.baslik, anaSayfaCapasi(`hakkinda-${kart.slug}`)] as const,
-);
 
 export function Header() {
   /*
@@ -111,7 +118,7 @@ export function Header() {
                 açıyor. */}
             <summary><a href={anaSayfaCapasi("hakkinda")}>Hakkında</a></summary>
             <div className="nav-acilir-govde">
-              {hakkindaBaglantilari.map(([etiket, adres]) => <a href={adres} key={adres}>{etiket}</a>)}
+              {hakkindaBaglantilari.map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
             </div>
           </details>
           {baglantilar.map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
@@ -130,7 +137,7 @@ export function Header() {
             <a href={anaSayfaCapasi("hakkinda")}>Hakkında</a>
             {/* Mobilde iç içe açılır menü yok: Hakkında başlıkları girintili
                 olarak doğrudan listeleniyor. */}
-            {hakkindaBaglantilari.map(([etiket, adres]) => <a className="mobil-alt-baglanti" href={adres} key={adres}>{etiket}</a>)}
+            {hakkindaBaglantilari.map(([etiket, adres]) => <Link className="mobil-alt-baglanti" href={adres} key={adres}>{etiket}</Link>)}
             {baglantilar.map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
             {/* Mobilde açılır menü İÇİNDE açılır menü olmaz: iki zirve doğrudan
                 listeleniyor, başlıkları zaten hangi yıl olduğunu söylüyor. */}
