@@ -1,3 +1,5 @@
+import { ZIRVE_2026, zirveOzetMetni } from "@/lib/zirve";
+
 /**
  * TEMEL GENÇTEK ETKİNLİK PROGRAMLARI — TEK KAYNAK.
  *
@@ -134,29 +136,15 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
     slug: "genctek-zirvesi",
     ad: "GençTek Zirvesi",
     /*
-     * ZİRVE METİNLERİ YEĞİTEK'TEN GELDİ (31 Ağustos 2026 · istek: "gençtek
-     * zirvelerinin içeriği ve resimleri değişecek"). İki zirve de burada:
-     * önce son yapılan (2. Zirve · 2026), altında ilki (1. Zirve · 2025).
-     *
-     * 2025 ZİRVESİNİN FOTOĞRAFLARI YOK: eski tek kare ("genctek-zirvesi-1.jpg")
-     * istek üzerine kaldırıldı, yerine gelecek görseller sonra eklenecek.
-     * Şu an listelenen dokuz kare 2. Zirve'ye ait.
+     * ZİRVE İÇERİĞİ ARTIK lib/zirve.ts'TE (31 Ağustos 2026): aynı metin
+     * /zirve ve /2-genctek-zirvesi-2026 sayfalarında da basılıyor, üç yerde
+     * ayrı yazılı durmasın. Burada iki zirve alt alta gösteriliyor.
      */
-    aciklama:
-      "2. GençTek Zirvesi (2026)\n\nMillî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü koordinasyonunda yürütülen GençTek (Akran Öğrenme Modeli ve Genç Bilişim Ekosistemi) kapsamında Hacı Bayram Veli Kongre ve Kültür Merkezinde, 63 ilden 1200 katılımcının katılımıyla 2. GençTek Zirvesi düzenlenmiş ve zirve Millî Eğitim Bakanı Sayın Yusuf Tekin’in katılımlarıyla gerçekleştirilmiştir. Zirvede bilişim teknolojileri alanında yürütülen çalışmalar ve iyi uygulama örnekleri paylaşılmış, yeni dönem stratejilerine yönelik değerlendirmelerde bulunulmuş; bilişim teknolojileri alanında çalışmalar yürüten öğrenci ve danışman öğretmenlerin desteklenmesine, iş birliği ve iletişimlerinin güçlendirilmesine ve sektörel farkındalıklarının artırılmasına yönelik çalışmalar gerçekleştirilmiştir. Ayrıca öğrencilerin disiplinler arası üretim süreçlerine aktif katılımları desteklenmiş, geliştirdikleri projelere ilişkin uygulamalar gerçekleştirilerek teknoloji temelli üretim süreçlerini deneyimlemeleri sağlanmıştır. Zirve kapsamında yürütülen etkinliklerle öğrencilerin dijital becerileri, yenilikçi düşünme ve problem çözme becerilerinin geliştirilmesine katkı sağlanmış ve “Sektörün Yeni Liderleri” vizyonu doğrultusunda bilişim teknolojileri alanındaki çalışmaların yaygınlaştırılmasına yönelik değerlendirmelerde bulunulmuştur.\n\n1. GençTek Zirvesi (2025)\n\nMillî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü koordinasyonunda yürütülen GençTek (Akran Öğrenme Modeli ve Genç Bilişim Ekosistemi) kapsamında, 8-9 Mayıs 2025 tarihlerinde Ankara Hacı Bayram Veli Üniversitesi Itrî Kongre ve Kültür Merkezi’nde 1. GençTek Zirvesi gerçekleştirilmiştir. Zirvede farklı illerden öğrenci, öğretmen ve sektör temsilcileri bir araya getirilerek bilişim teknolojileri alanındaki iyi uygulama örnekleri paylaşılmış, öğrencilerin dijital becerileri, yenilikçi düşünme, problem çözme ve proje geliştirme becerilerinin desteklenmesine yönelik etkinlikler düzenlenmiştir. “Sahne Senin”, “Öğrenci Forumu”, “G2S GençTek Sektör Buluşmaları”, “MasterTek Şampiyonlar Ligi”, “EğitiJAM”, dijital oyun ve sergi alanları gibi etkinliklerle öğrencilerin akran öğrenmesi, sektör farkındalığı ve teknoloji temelli üretim süreçlerine aktif katılımları desteklenmiştir.",
-    gorseller: [
-      { url: "/medya/genctek-zirvesi-2026-1.jpg", alt: "2. GençTek Zirvesi · Zirvenin açılışında kürsüden konuşan yetkiliyi dolu salonda dinleyen katılımcılar" },
-      { url: "/medya/genctek-zirvesi-2026-2.jpg", alt: "2. GençTek Zirvesi · Sahnede belgelerini alan öğrenci ekibinin ödül töreni fotoğrafı" },
-      { url: "/medya/genctek-zirvesi-2026-3.jpg", alt: "2. GençTek Zirvesi · Genç Bilişim Ekosistemi paydaş panosunun önünde ekran başında sohbet eden öğrenciler" },
-      { url: "/medya/genctek-zirvesi-2026-4.jpg", alt: "2. GençTek Zirvesi · Millî Eğitim Bakanı ve beraberindeki heyetin öğrencilerin proje standını ziyaret etmesi" },
-      { url: "/medya/genctek-zirvesi-2026-5.jpg", alt: "2. GençTek Zirvesi · Millî Eğitim Bakanı Yusuf Tekin'in bir öğrenciyle proje masasında sohbet etmesi" },
-      { url: "/medya/genctek-zirvesi-2026-6.jpg", alt: "2. GençTek Zirvesi · 2. GençTek Zirvesi panosu önünde kırmızı GençTek tişörtlü iki öğrencinin projelerini anlatması" },
-      { url: "/medya/genctek-zirvesi-2026-7.jpg", alt: "2. GençTek Zirvesi · Zirve sahnesinde dev ekran önünde kürsüden yapılan konuşma" },
-      { url: "/medya/genctek-zirvesi-2026-8.jpg", alt: "2. GençTek Zirvesi · Zirveye katılan yüzlerce öğrenci ve öğretmenin salondaki toplu fotoğrafı" },
-      { url: "/medya/genctek-zirvesi-2026-9.jpg", alt: "2. GençTek Zirvesi · Yuvarlak masada yürütülen çalıştay oturumu ve sunum ekranı" },
-    ],
+    aciklama: zirveOzetMetni(),
+    gorseller: ZIRVE_2026.gorseller.map((gorsel) => ({ ...gorsel, alt: `${ZIRVE_2026.ad} · ${gorsel.alt}` })),
   },
 ];
+
 
 export const CALISMA_GRUBU_ETKINLIKLERI: TemelEtkinlik[] = [
   {

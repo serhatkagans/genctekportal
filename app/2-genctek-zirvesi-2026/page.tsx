@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { WordPressArticle } from "@/components/wordpress-article";
-import { getWordPressPage } from "@/lib/wordpress-content";
+import { ZirveSayfasi } from "@/components/zirve-sayfasi";
+import { ZIRVE_2026 } from "@/lib/zirve";
 
 export const metadata: Metadata = {
-  title: "2. GençTek Zirvesi 2026",
-  description: "2. GençTek Zirvesi 2026 programı ve etkinlik içeriği.",
+  title: "2. GençTek Zirvesi (2026) · GençTek",
+  description: ZIRVE_2026.ozet,
 };
 
-export default function SecondSummitPage() {
-  const item = getWordPressPage("2-genctek-zirvesi-2026");
-  if (!item) notFound();
-  return <WordPressArticle item={item}/>;
+export default function IkinciZirveSayfasi() {
+  return <ZirveSayfasi zirve={ZIRVE_2026} />;
 }
