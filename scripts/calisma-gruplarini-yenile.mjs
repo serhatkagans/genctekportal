@@ -124,6 +124,18 @@ const ESKI_KAYIT = {
   "Bilişim Hukuku ve Güvenli İnternet": "bilisim-hukuku-guvenli-internet",
 };
 
+// Depoda tutulmayan tema görsellerinin sunucudaki public/temalar yolları.
+// Liste eşitlenirken yeni kayıtların görselsiz kalmaması ve sonradan eklenen
+// kapakların mevcut kayıtlara bağlanması için burada açıkça eşleştirilir.
+const GORSELLER = {
+  Robotik: "/temalar/robotik.jpg",
+  "Siber Güvenlik": "/temalar/siber-guvenlik.jpg",
+  "Mobil Programlama": "/temalar/mobil-programlama.jpg",
+  "Eğitim Teknolojileri": "/temalar/egitim-teknolojileri.jpg",
+  GençX: "/temalar/gencx.jpg",
+  "Havacılık Sistemleri": "/temalar/havacilik-sistemleri.jpg",
+};
+
 // lib/tema.ts içindeki sluglastir ile aynı.
 function sluglastir(deger) {
   const harita = { ç: "c", ğ: "g", ı: "i", i: "i", ö: "o", ş: "s", ü: "u" };
@@ -150,9 +162,9 @@ try {
     const kayit = slugaGore.get(eskiSlug);
     if (kayit) {
       kalanlar.delete(kayit.slug);
-      guncellenecek.push({ ...grup, sira, slug: kayit.slug, eskiAd: kayit.name });
+      guncellenecek.push({ ...grup, sira, slug: kayit.slug, eskiAd: kayit.name, gorsel: GORSELLER[grup.ad] });
     } else {
-      eklenecek.push({ ...grup, sira, slug: sluglastir(grup.ad) });
+      eklenecek.push({ ...grup, sira, slug: sluglastir(grup.ad), gorsel: GORSELLER[grup.ad] ?? "" });
     }
   });
 
@@ -173,6 +185,7 @@ try {
         await tx`
           UPDATE "Theme"
           SET name = ${g.ad}, summary = ${g.ozet}, description = ${sql.json(g.metin)},
+              image = COALESCE(${g.gorsel ?? null}, image),
               "order" = ${g.sira}, "updatedAt" = CURRENT_TIMESTAMP
           WHERE slug = ${g.slug}
         `;
@@ -180,7 +193,7 @@ try {
       for (const g of eklenecek) {
         await tx`
           INSERT INTO "Theme" (id, slug, name, summary, description, image, focus, outcomes, "order", "updatedAt")
-          VALUES (${randomUUID()}, ${g.slug}, ${g.ad}, ${g.ozet}, ${sql.json(g.metin)}, '', ${[]}, ${[]}, ${g.sira}, CURRENT_TIMESTAMP)
+          VALUES (${randomUUID()}, ${g.slug}, ${g.ad}, ${g.ozet}, ${sql.json(g.metin)}, ${g.gorsel}, ${[]}, ${[]}, ${g.sira}, CURRENT_TIMESTAMP)
         `;
       }
       if (silinecek.length) {
