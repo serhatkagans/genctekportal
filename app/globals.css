@@ -410,7 +410,7 @@ html[data-theme="kirmizi"] .hero-panel:before{border-color:color-mix(in srgb,#93
 .theme-detail-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.82fr);align-items:center;gap:72px}
 .theme-detail-grid h1{font-size:clamp(2.25rem,1.5rem + 2.5vw,4.2rem);margin:18px 0;max-width:760px}
 .theme-detail-grid p{font-size:1.2rem;max-width:620px;margin:0}
-.theme-detail-image{position:relative;aspect-ratio:1;border-radius:20px;overflow:hidden;background:#fff;border:1px solid var(--color-border);box-shadow:var(--shadow-lg)}
+.theme-detail-image{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:#fff;border:1px solid var(--color-border);box-shadow:var(--shadow-lg)}
 .theme-detail-image img{object-fit:cover}
 .theme-detail-content{display:grid;gap:72px}
 .theme-intro{display:grid;grid-template-columns:.7fr 1.3fr;column-gap:64px;align-items:start}

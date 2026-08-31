@@ -19,6 +19,9 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- Çalışma grubu detay sayfalarındaki kapak görselleri kare yerine 16:9 yatay
+  oranda gösteriliyor.
+
 - **Çalışma grupları sayfasının başlığı** "Teknoloji temaları" → **Çalışma
   Grupları** (`/temalar`, adres değişmedi). Web Programlama grubuna görsel
   bağlandı — dosya `public/temalar` altında ve depoda değil, sunucuya ayrıca
