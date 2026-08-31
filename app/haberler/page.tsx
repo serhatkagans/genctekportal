@@ -23,8 +23,11 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
   const son = ilk + kartlar.length - 1;
 
   return <><Header /><main>
-    <section className="page-hero"><div className="container"><span className="eyebrow">GençTek Ekosisteminden</span><h1>Son Haberler</h1></div></section>
-    <section className="section"><div className="container">
+    {/* Başlık ile sayaç arasındaki boşluk azaltıldı (31 Ağustos 2026 · istek:
+        "Son Haberler / 74 yayımlanmış içerik bu ikisi arasında fazla boşluk
+        var"). Hero "compact", liste bölümü de kendi üst boşluğunu daraltıyor. */}
+    <section className="page-hero compact"><div className="container"><span className="eyebrow">GençTek Ekosisteminden</span><h1>Son Haberler</h1></div></section>
+    <section className="section haber-listesi"><div className="container">
       <div className="archive-heading">
         <div className="archive-summary"><strong>{toplam}</strong><span>yayımlanmış içerik</span></div>
       </div>

@@ -23,7 +23,7 @@ const takvim = [
 
 const kriterler = [
   ["Tema ile uyum", "20"], ["Oynanış", "20"], ["Naratif", "20"],
-  ["Görsel tasarım", "20"], ["İşitsel tasarım", "20"], ["EğitiJAM Ruhu", "+5"],
+  ["Görsel tasarım", "20"], ["İşitsel tasarım", "20"], ["EĞİTİJAM Ruhu", "+5"],
 ];
 
 const kurallar = [
@@ -41,7 +41,7 @@ export function EgitijamProgram() {
   return <section className="egitijam-program" aria-labelledby="egitijam-program-baslik">
     <div className="container">
       <header className="egitijam-program-head">
-        <div><span className="eyebrow">2026 program arşivi</span><h2 id="egitijam-program-baslik">EğitiJAM K12 Oyun Geliştirme Maratonu</h2></div>
+        <div><span className="eyebrow">2026 program arşivi</span><h2 id="egitijam-program-baslik">EĞİTİJAM K12 Oyun Geliştirme Maratonu</h2></div>
         <p>“Eğitim Oyunla Başlar” yaklaşımıyla düzenlenen ulusal ve çevrim içi Game Jam; verilen tema üzerinden 48 saat içinde oynanabilir bir oyun geliştirmeye odaklanır.</p>
       </header>
 
@@ -60,11 +60,11 @@ export function EgitijamProgram() {
       <section className="egitijam-timeline"><span className="theme-list-label">Takvim</span><h3>2026 program akışı</h3><ol>{takvim.map(([tarih,baslik],index)=><li key={tarih}><span className="egitijam-timeline-no">{String(index+1).padStart(2,"0")}</span><time>{tarih}</time><strong>{baslik}</strong></li>)}</ol></section>
 
       <div className="egitijam-two-column egitijam-bottom-grid">
-        <section><span className="theme-list-label">Değerlendirme</span><h3>100 puan + EğitiJAM Ruhu</h3><div className="egitijam-scores">{kriterler.map(([ad,puan])=><div key={ad}><span>{ad}</span><strong>{puan}</strong></div>)}</div></section>
-        <section><span className="theme-list-label">Katılım çerçevesi</span><h3>Temel kurallar</h3><details className="egitijam-rules"><summary>Kuralların özetini göster</summary><ul>{kurallar.map((kural)=><li key={kural}>{kural}</li>)}</ul></details><p className="egitijam-source-note">Bu bölüm bilgilendirme amaçlı bir özettir. Tam ve bağlayıcı metin için aşağıdaki arşivde duran resmî duyuruyu inceleyin.</p><Link className="button button-secondary" href={`#${TEMA_ARSIV_CAPASI}`}>Resmî EğitiJAM duyurusunun tamamı ↓</Link></section>
+        <section><span className="theme-list-label">Değerlendirme</span><h3>100 puan + EĞİTİJAM Ruhu</h3><div className="egitijam-scores">{kriterler.map(([ad,puan])=><div key={ad}><span>{ad}</span><strong>{puan}</strong></div>)}</div></section>
+        <section><span className="theme-list-label">Katılım çerçevesi</span><h3>Temel kurallar</h3><details className="egitijam-rules"><summary>Kuralların özetini göster</summary><ul>{kurallar.map((kural)=><li key={kural}>{kural}</li>)}</ul></details><p className="egitijam-source-note">Bu bölüm bilgilendirme amaçlı bir özettir. Tam ve bağlayıcı metin için aşağıdaki arşivde duran resmî duyuruyu inceleyin.</p><Link className="button button-secondary" href={`#${TEMA_ARSIV_CAPASI}`}>Resmî EĞİTİJAM duyurusunun tamamı ↓</Link></section>
       </div>
 
-      <aside className="egitijam-faq"><strong>Kimler katılabiliyordu?</strong><p>Türkiye’deki resmî ve özel okullarda öğrenim gören öğrenciler, danışman öğretmenli takımlarla katılabiliyordu. Yazılım veya oyun motoru sınırlaması bulunmuyordu; takımların birbirine destek olması EğitiJAM kültürünün bir parçasıydı.</p></aside>
+      <aside className="egitijam-faq"><strong>Kimler katılabiliyordu?</strong><p>Türkiye’deki resmî ve özel okullarda öğrenim gören öğrenciler, danışman öğretmenli takımlarla katılabiliyordu. Yazılım veya oyun motoru sınırlaması bulunmuyordu; takımların birbirine destek olması EĞİTİJAM kültürünün bir parçasıydı.</p></aside>
     </div>
   </section>;
 }

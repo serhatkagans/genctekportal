@@ -10,36 +10,26 @@ import { uygulamaYolu } from "@/lib/ortam";
  * etkinlikler, çalışma grupları, gençtek zirvesi olacak").
  *
  * Sıra istekte verildiği gibi: önce kurumu tanıtan (Hakkında), sonra akan
- * içerik (Haberler, Etkinlikler), sonra her yıl tekrarlanan programlar (Temel
- * GençTek etkinlikleri), en sonda yılın büyük buluşması (GençTek Zirvesi).
+ * içerik (Haberler, Etkinlikler), en sonda yılın büyük buluşması (GençTek
+ * Zirvesi).
  *
  * ETKİNLİKLER kendi sayfasına gider (`/etkinlikler`): platformdaki bütün il
  * ve ulusal etkinlikler orada listeleniyor (istek: "etkinlik sayfasında
  * platformdaki tüm etkinlikler görülebilecekti"). Ana sayfadaki bölüm o
  * listenin ilk altısı; ikisi de aynı kaynaktan besleniyor.
  *
- * ÇALIŞMA GRUPLARI MENÜDEN KALKTI, TEMEL ETKİNLİKLER GELDİ (28 Ağustos 2026 ·
- * istekler: "üst menüden çalışma gruplarını kaldır", "temel gençtek
- * etkinlikleri ana menüye gelsin").
+ * ÇALIŞMA GRUPLARI VE TEMEL ETKİNLİKLER MENÜDE DEĞİL (28 ve 31 Ağustos 2026 ·
+ * istekler: "üst menüden çalışma gruplarını kaldır", "menüden bunu kaldır ama
+ * sayfası dursun Temel GençTek etkinlikleri").
  *
- * İKİ ETKİNLİK BAŞLIĞI YAN YANA DURUYOR ve ayrımları şudur: "Etkinlikler"
- * platformda AÇILMIŞ, tarihi ve başvurusu olan tekil etkinliklerdir;
- * "Temel GençTek etkinlikleri" ise her yıl tekrarlanan PROGRAMLARIN kendisidir
- * (EğitiJAM, Master Tek, Oyunun e Hâli…). Biri takvim, diğeri çerçeve — bu
- * yüzden tek başlıkta birleştirilmedi.
- *
- * SAYFANIN ADRESİ DEĞİŞMEDİ (`/hakkinda/temel-etkinlikler`): sayfa Hakkında
- * altında duruyor ve oradaki kartlardan da açılıyor. Menüye çıkarken adresi
- * köke taşımak, paylaşılmış bağlantıları kırardı.
- *
- * ÇALIŞMA GRUPLARI (/temalar) SİLİNMEDİ: alt bilgideki "Temalar" ve Hakkında
- * ekranındaki kart oraya gitmeye devam ediyor — menüden kalkması, sayfanın
- * ulaşılmaz olması demek değil. İl koordinatörleri de aynı durumda.
+ * İKİSİ DE SİLİNMEDİ: `/hakkinda/temel-etkinlikler` ve `/temalar` yerinde
+ * duruyor; Hakkında açılır menüsündeki ve ana sayfadaki kartlar oraya gitmeye
+ * devam ediyor. Menüden kalkmak, sayfanın ulaşılmaz olması demek değil —
+ * paylaşılmış bağlantılar da çalışmayı sürdürüyor.
  */
 const baglantilar = [
   ["Haberler", "/haberler"],
   ["Etkinlikler", "/etkinlikler"],
-  ["Temel GençTek etkinlikleri", "/hakkinda/temel-etkinlikler"],
 ] as const;
 
 /**

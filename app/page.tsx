@@ -72,7 +72,7 @@ export default async function Home() {
               yönlendirsin"). Sayfadaki üç çağrı — üst menü, hero ve alttaki
               şerit — artık aynı adı taşıyıp aynı kapıya gidiyor.
             */}
-            <div className="button-row"><a className="button button-primary" href={genctekGirisAdresi()}>Ekosisteme Katıl <Icon name="arrow" /></a><Link className="text-link" href="/#hakkinda">GençTek’i keşfet <Icon name="arrow" /></Link></div>
+            <div className="button-row"><a className="button button-primary" href={genctekGirisAdresi()}>Ekosisteme Katıl <Icon name="arrow" /></a></div>
           </div>
           <div className="hero-panel" aria-label="GençTek etki özeti">
             <div className="hero-panel-head"><span>2026–2027</span><span className="live-dot">Aktif dönem</span></div>

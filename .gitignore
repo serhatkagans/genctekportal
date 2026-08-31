@@ -43,3 +43,8 @@ tsconfig.tsbuildinfo
 # kartından gelen asıl hâlleri (~64 MB). Ölçeklenmiş kopyalar public/medya
 # altında ve İZLENİYOR; ham dosyalar depoya girmez — tıpkı /resimler gibi.
 /gorseller
+
+# Zirve videoları: tek dosya 200 MB'ın üzerinde. public/wordpress ve
+# public/temalar ile aynı karar — depoya girmez, sunucuda
+# /opt/genctekportal/public/video altında durur, dağıtım dokunmaz.
+public/video

@@ -41,7 +41,7 @@ export const HAKKINDA_KARTLARI: HakkindaKarti[] = [
   {
     slug: "amaclar",
     ikon: "gauge",
-    baslik: "GençTek Hedefleri",
+    baslik: "Ekosistem Yapılanması",
     ozet: "GençTek'in kendine koyduğu hedefler.",
     adres: "/hakkinda/amaclar",
   },

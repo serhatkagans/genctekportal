@@ -20,7 +20,7 @@ export function ZirveSayfasi({ zirve }: { zirve: Zirve }) {
       <section className="page-hero compact">
         <div className="container">
           <Link className="back-link" href="/hakkinda/temel-etkinlikler/genctek-zirvesi">← GençTek Zirvesi</Link>
-          <span className="eyebrow">GençTek Zirvesi · {zirve.yil}</span>
+          <span className="eyebrow">{zirve.tarihYer}</span>
           <h1>{zirve.ad}</h1>
           <p>{zirve.ozet}</p>
         </div>
@@ -31,6 +31,18 @@ export function ZirveSayfasi({ zirve }: { zirve: Zirve }) {
           {zirve.metin.split(/\n{2,}/).map((paragraf) => (
             <p className="program-detay-metin" key={paragraf}>{paragraf}</p>
           ))}
+
+          {zirve.video && (
+            /* Video metnin hemen altında: sayfaya gelen önce anlatımı okuyor,
+               sonra kaydı izliyor. `preload="metadata"` — dosya büyük, sayfa
+               açılırken indirilmesin, yalnızca süresi okunsun. */
+            <figure className="zirve-video">
+              <video controls preload="metadata" poster={zirve.video.kapak ? gorselYolu(zirve.video.kapak) : undefined}>
+                <source src={gorselYolu(zirve.video.url)} type="video/mp4" />
+              </video>
+              <figcaption>{zirve.video.baslik}</figcaption>
+            </figure>
+          )}
 
           {zirve.gorseller.length ? (
             <div className="program-detay-gorseller">

@@ -19,6 +19,28 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Çalışma grubu listesi YEĞİTEK'in 15 başlığıyla eşitlendi.** Adı tutan
+  sekiz grubun metni yenilendi (adresleri, görselleri korunarak), yedi yeni
+  grup eklendi (Bilgisayar Olimpiyatları, Web Programlama, Robotik, Siber
+  Güvenlik, Mobil Programlama, Eğitim Teknolojileri, GençX), listede olmayan
+  sekiz grup silindi. Betik: `scripts/calisma-gruplarini-yenile.mjs`
+  (`--uygula` ile yazar) — **içerik veritabanında olduğu için sunucuda da
+  çalıştırılmalı**.
+- **Hedefler sayfası GençTek Yapılanma oldu** (`/hakkinda/amaclar`, adres
+  değişmedi): dört maddelik hedef listesi yerine ekosistemi oluşturan on iki
+  başlık ve üstünde yapılanma şeması.
+- **2. GençTek Zirvesi sayfası yenilendi:** beş yeni fotoğraf (sıra dosya
+  adlarındaki numaraya göre), tanıtım videosu ve başlık üstünde "13-14 Nisan
+  2026 / Ankara". Video `public/video` altında ve depoda değil — bkz.
+  DAGITIM.md · "Medya depoda değil".
+- **Alt bilgi yeniden düzenlendi:** en üstte yan yana üç kurum (YEĞİTEK
+  logosu ve altında kurum satırı · GençTek · ETKİM logosu), yalnızca adlardan
+  oluşan şerit ve "© 2026 GençTek" satırı kalktı, en altta KVKK ve Gizlilik.
+- **"Temel GençTek etkinlikleri" üst menüden kalktı**, sayfası ve Hakkında
+  kartı yerinde duruyor.
+- `/hakkinda/genctek-nedir` başlığındaki "Sektörün Yeni Lideri" → **"Sektörün
+  Yeni Liderleri"**.
+
 - **Hakkında liste sayfası kalktı.** Altı kart artık ana sayfada, haberlerin
   altında duruyor. `/hakkinda` kalıcı olarak `/#hakkinda` çapasına
   yönlendiriliyor; alt sayfalar (`/hakkinda/amaclar`, `/hakkinda/logolar` …)

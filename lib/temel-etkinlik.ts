@@ -33,7 +33,7 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
       { url: "/medya/genc-golge-sensiball-vr-2.jpg", alt: "Bir öğrencinin VR başlığıyla Sensiball VR sahasında uygulamayı denemesi" },
     ],
     aciklama:
-      "GençTek Ekosisteminde yer alan öğrencilerin Sektörün Yeni Liderleri olarak yetişebilmesi için sektör temsilcileri ile deneyim kazanmaları sağlanır. Genç Gölge, gençlerin bilişim sektörünü içeriden tanımalarını sağlayan bir öğrenme deneyimidir. Öğrenciler, profesyonellerin günlük iş yaşamına eşlik ederek mesleklerin dinamiklerini gözlemler, kariyer seçeneklerini daha bilinçli değerlendirir. Bu sayede hem sektörle gençler arasında köprü kurulmuş olur hem de öğrencilerin ufku genişler, motivasyonları artar. Öğrenci deneyimlerini ekosistemle paylaşır.",
+      "GençTek ekosisteminde yer alan öğrencilerin Sektörün Yeni Liderleri olarak yetişebilmesi için sektör temsilcileri ile deneyim kazanmaları sağlanır. Genç Gölge, gençlerin bilişim sektörünü içeriden tanımalarını sağlayan bir öğrenme deneyimidir. Öğrenciler, profesyonellerin günlük iş yaşamına eşlik ederek mesleklerin dinamiklerini gözlemler, kariyer seçeneklerini daha bilinçli değerlendirir. Bu sayede hem sektörle gençler arasında köprü kurulmuş olur hem de öğrencilerin ufku genişler, motivasyonları artar. Öğrenci deneyimlerini ekosistemle paylaşır.",
   },
   {
     slug: "sahne-senin",
@@ -47,7 +47,7 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
       { url: "/medya/sahne-senin-6.jpg", alt: "Bir öğrencinin mikrofonla donanım tasarımı sunumunu yapması" },
     ],
     aciklama:
-      "Genç Bilişim Ekosistemi, “Akran Öğrenme Modeli”ne dayalı olarak öğrencilerin birbirine bilgi ve deneyim aktardığı bir yapı sunmaktadır. İl etkinliklerinde ve GençTek Zirvesinde yer verilen “Sahne Senin” paylaşımlarında öğrencilere akranlarıyla bilgi ve deneyimlerini paylaşma fırsatı sunulmaktadır. Çevrimiçi olarak da yapılabilen “Sahne Senin” paylaşımları sayesinde çok daha fazla öğrenci etkinlikten yararlanabilmektedir.",
+      "Genç Bilişim Ekosistemi, “Akran Öğrenme Modeli”ne dayalı olarak öğrencilerin birbirine bilgi ve deneyim aktardığı bir yapı sunmaktadır. İl etkinliklerinde ve GençTek Zirvesi’nde yer verilen “Sahne Senin” paylaşımlarında öğrencilere akranlarıyla bilgi ve deneyimlerini paylaşma fırsatı sunulmaktadır. Çevrimiçi olarak da yapılabilen “Sahne Senin” paylaşımları sayesinde çok daha fazla öğrenci etkinlikten yararlanabilmektedir.",
   },
   {
     slug: "g2s-genc-sektor-bulusmalari",
@@ -77,13 +77,13 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
       { url: "/medya/sinir-otesi-5.jpg", alt: "Öğrencilerin ev sahibi ülkenin geleneksel kıyafetleriyle akranlarıyla birlikte çektirdiği fotoğraf" },
     ],
     aciklama:
-      "GençTek Ekosisteminde yer alan öğretmen, öğrenci ve paydaşların, uluslararası kurum ve kuruluşlarla, paydaşlarla, öğrenci ve öğretmenler ile iletişim ve iş birliği yaptığı etkinliklerdir. Çevrim içi düzenlenen etkinliklerde öğrencilerimiz, farklı ülkelerden akranlarıyla dijital ortamda bir araya gelmekte, teknolojik gelişmeler üzerine görüş alışverişinde bulunup deneyimlerini uluslararası bir platformda paylaşma fırsatı yakalamaktadırlar.",
+      "GençTek ekosisteminde yer alan öğretmen, öğrenci ve paydaşların, uluslararası kurum ve kuruluşlarla, paydaşlarla, öğrenci ve öğretmenler ile iletişim ve iş birliği yaptığı etkinliklerdir. Çevrim içi düzenlenen etkinliklerde öğrencilerimiz, farklı ülkelerden akranlarıyla dijital ortamda bir araya gelmekte, teknolojik gelişmeler üzerine görüş alışverişinde bulunup deneyimlerini uluslararası bir platformda paylaşma fırsatı yakalamaktadırlar.",
   },
   {
     slug: "ogrenci-forumu",
     ad: "Öğrenci Forumu",
     aciklama:
-      "Bilgi, görüş, deneyim paylaşma, tartışma, iş birliği, kişisel gelişim ve sosyal etkileşim odaklı, öğrencilerin bir araya gelerek fikirlerini paylaştıkları, tartıştıkları ve çözüm önerileri geliştirdikleri bir katılım ortamıdır. GençTek Ekosisteminde düzenlenen öğrenci forumu, özellikle Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü’nün çalışmalarını tanıtmak ve bu çalışmalara öğrencilerin gözünden bakmak için büyük önem taşır. Öğrencilerin görüş, öneri ve beklentilerinin alınması; eğitim teknolojilerinin daha etkili, daha yenilikçi ve gençlerin gerçek ihtiyaçlarına uygun şekilde gelişmesine katkı sağlar. Öğrenci forumu ile özellikle bilişim alanında belli bir yol almış öğrencilerin fikir ve önerileri ile sunulan hizmetlerin geliştirilmesi, eğitim politikalarına yön verilmesi hedeflenmektedir. “YEĞİTEK İçin Gençlerden 5 Öneri” başlıklı ilk Öğrenci Forumu, 1. GençTek Zirvesi kapsamında gerçekleştirilmiştir. 2. GençTek Zirvesi’nde ise “EBA İçin Gençlerden 5 Öneri” başlıklı Öğrenci Forumu düzenlenmiştir.",
+      "Bilgi, görüş, deneyim paylaşma, tartışma, iş birliği, kişisel gelişim ve sosyal etkileşim odaklı, öğrencilerin bir araya gelerek fikirlerini paylaştıkları, tartıştıkları ve çözüm önerileri geliştirdikleri bir katılım ortamıdır. GençTek ekosisteminde düzenlenen öğrenci forumu, özellikle Yenilik ve Eğitim Teknolojileri Genel Müdürlüğünün çalışmalarını tanıtmak ve bu çalışmalara öğrencilerin gözünden bakmak için büyük önem taşır. Öğrencilerin görüş, öneri ve beklentilerinin alınması; eğitim teknolojilerinin daha etkili, daha yenilikçi ve gençlerin gerçek ihtiyaçlarına uygun şekilde gelişmesine katkı sağlar. Öğrenci forumu ile özellikle bilişim alanında belli bir yol almış öğrencilerin fikir ve önerileri ile sunulan hizmetlerin geliştirilmesi, eğitim politikalarına yön verilmesi hedeflenmektedir. “YEĞİTEK İçin Gençlerden 5 Öneri” başlıklı ilk Öğrenci Forumu, 1. GençTek Zirvesi kapsamında gerçekleştirilmiştir. 2. GençTek Zirvesi’nde ise “EBA İçin Gençlerden 5 Öneri” başlıklı Öğrenci Forumu düzenlenmiştir.",
   },
   {
     slug: "hack-the-idea",
@@ -107,7 +107,7 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
     slug: "oyunun-e-hali",
     ad: "Oyunun e Hâli",
     aciklama:
-      "Öğrenmenin en doğal ve etkili yollarından biri olan “oyun” ve “oyunlaştırma” eğitimin temel unsurlarındandır. Oyunun e Hâli, GençTek Ekosistemi kapsamında öğrencilerin bilişim sektöründe ve gündelik hayatta ihtiyaç duyulan becerilerini geliştirirken, öğrenme deneyimlerini dijital oyunlar ile keyifli, kalıcı ve ilgi çekici hâle getirmeyi hedefler. Oyunun e Hâli çalışmaları ile öğrencilerin hayatlarında önemli bir yer kaplayan dijital oyunlardan gelişim fırsatı olarak yararlanırken, dijital oyun tasarımı, programlama, yapay zekâ ve espor gibi sektörler hakkında öğrencilerin bilgi ve deneyim kazanması sağlanır.",
+      "Öğrenmenin en doğal ve etkili yollarından biri olan “oyun” ve “oyunlaştırma” eğitimin temel unsurlarındandır. Oyunun e Hâli, GençTek Ekosistemi kapsamında öğrencilerin bilişim sektöründe ve gündelik hayatta ihtiyaç duyulan becerilerini geliştirirken öğrenme deneyimlerini dijital oyunlar ile keyifli, kalıcı ve ilgi çekici hâle getirmeyi hedefler. Oyunun e Hâli çalışmaları ile öğrencilerin hayatlarında önemli bir yer kaplayan dijital oyunlardan gelişim fırsatı olarak yararlanırken dijital oyun tasarımı, programlama, yapay zekâ ve espor gibi sektörler hakkında öğrencilerin bilgi ve deneyim kazanması sağlanır.",
   },
   {
     slug: "tek-maraton",
@@ -149,16 +149,16 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
 export const CALISMA_GRUBU_ETKINLIKLERI: TemelEtkinlik[] = [
   {
     slug: "egitijam",
-    ad: "EğitiJAM",
+    ad: "EĞİTİJAM",
     gorseller: [
-      { url: "/medya/egitijam-2.jpg", alt: "EğitiJAM 2024 K12 Oyun Geliştirme Maratonu programının salondaki açılış oturumu" },
-      { url: "/medya/egitijam-1.jpg", alt: "Bir oyun geliştiricinin EğitiJAM programında kürsüden deneyimlerini anlatması" },
-      { url: "/medya/egitijam-3.jpg", alt: "EğitiJAM 2024 ödül töreninde plaket ve belgelerini alan öğrenci ekipleri" },
-      { url: "/medya/egitijam-4.jpg", alt: "EğitiJAM'de dereceye giren bir ekibin plaketini alması" },
-      { url: "/medya/egitijam-5.jpg", alt: "EğitiJAM K12 Oyun Geliştirme Maratonu'nun 23-25 Ocak 2026 duyuru görseli" },
+      { url: "/medya/egitijam-2.jpg", alt: "EĞİTİJAM 2024 K12 Oyun Geliştirme Maratonu programının salondaki açılış oturumu" },
+      { url: "/medya/egitijam-1.jpg", alt: "Bir oyun geliştiricinin EĞİTİJAM programında kürsüden deneyimlerini anlatması" },
+      { url: "/medya/egitijam-3.jpg", alt: "EĞİTİJAM 2024 ödül töreninde plaket ve belgelerini alan öğrenci ekipleri" },
+      { url: "/medya/egitijam-4.jpg", alt: "EĞİTİJAM'de dereceye giren bir ekibin plaketini alması" },
+      { url: "/medya/egitijam-5.jpg", alt: "EĞİTİJAM K12 Oyun Geliştirme Maratonu'nun 23-25 Ocak 2026 duyuru görseli" },
     ],
     aciklama:
-      "“Eğitim Oyunla Başlar” — EğitiJAM K12 Oyun Geliştirme Maratonu, Türkiye genelinde öğrencilerin ve eğitimcilerin oyun geliştirme farkındalığını artırmak için düzenlenen 48 saatlik çevrimiçi bir Game Jam’dir. Game Jam’ler kısıtlı bir sürede, verilen temadan dijital oyun geliştirilmeye çalışılan bir hackathon etkinliğidir. “Eğitim Oyunla Başlar” sloganıyla düzenlenen EğitiJAM Oyun Geliştirme Maratonları ulusal olarak gerçekleştirilir.",
+      "“Eğitim Oyunla Başlar” — EĞİTİJAM K12 Oyun Geliştirme Maratonu, Türkiye genelinde öğrencilerin ve eğitimcilerin oyun geliştirme farkındalığını artırmak için düzenlenen 48 saatlik çevrimiçi bir Game Jam’dir. Game Jam’ler kısıtlı bir sürede, verilen temadan dijital oyun geliştirilmeye çalışılan bir hackathon etkinliğidir. “Eğitim Oyunla Başlar” sloganıyla düzenlenen EĞİTİJAM Oyun Geliştirme Maratonları ulusal olarak gerçekleştirilir.",
   },
   {
     slug: "capture-the-flag",

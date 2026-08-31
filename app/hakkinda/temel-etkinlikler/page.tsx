@@ -64,7 +64,7 @@ export default function TemelEtkinliklerSayfasi() {
           <Link className="back-link" href="/#hakkinda">← Hakkında</Link>
           <span className="eyebrow">Program ailesi</span>
           <h1>Temel GençTek Etkinlikleri</h1>
-          <p>Her yıl tekrarlanan program adları. Bir etkinlik açılırken adı bu listeden seçilir; tarihli duyurular ve başvurular <Link className="text-link" href="/etkinlikler">Etkinlikler</Link> sayfasındadır.</p>
+          <p>Her yıl düzenli olarak gerçekleştirilen programların adları bu listede yer almaktadır. Yeni bir etkinlik oluşturulurken ilgili program adı bu listeden seçilir. Etkinliklere ilişkin tarih, duyuru ve başvuru bilgilerine ise <Link className="text-link" href="/etkinlikler">Etkinlikler</Link> sayfasından ulaşılabilir.</p>
         </div>
       </section>
 

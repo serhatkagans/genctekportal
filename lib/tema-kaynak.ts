@@ -26,6 +26,21 @@ export type TemaKaynagi = {
 // Arşiv bölümünün çapası; düğmeler buraya iniyor.
 export const TEMA_ARSIV_CAPASI = "genctek-arsivi";
 
+/*
+ * "Milli Eğitim" → "Millî Eğitim" (31 Ağustos 2026 · istek: "Milli Eğitimdeki
+ * milli'nin sonundaki i şapkalı olacak").
+ *
+ * DÜZELTME OKURKEN YAPILIYOR, arşiv dosyasında değil: o dosyayı
+ * scripts/import-theme-content.mjs kaynak siteden üretiyor, elle düzeltilse
+ * bir sonraki içe aktarımda geri giderdi. Etiket biçimi (#BalıkesirİlMilli-
+ * EğitimMüdürlüğü) de aynı kalıba giriyor.
+ */
+function yazimDuzelt(metin: string) {
+  return metin.replace(/Milli(?=\s*Eğitim)/g, "Millî");
+}
+
 export function temaKaynagi(slug: string): TemaKaynagi | undefined {
-  return (sourceContent as Record<string, TemaKaynagi>)[slug];
+  const kayit = (sourceContent as Record<string, TemaKaynagi>)[slug];
+  if (!kayit) return undefined;
+  return { ...kayit, title: yazimDuzelt(kayit.title), html: yazimDuzelt(kayit.html) };
 }

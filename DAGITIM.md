@@ -125,16 +125,18 @@ rsync -az genctek:/opt/genctekportal/data ./data-yedek/
 
 ## Medya depoda değil
 
-`public/wordpress` (~805 MB) ve `public/temalar` (~175 MB) `.gitignore`'da.
+`public/wordpress` (~805 MB), `public/temalar` (~175 MB) ve `public/video`
+(~200 MB, zirve tanıtım videosu) `.gitignore`'da.
 WordPress'ten aktarılan bu dosyalar sunucuda duruyor ve dağıtım onlara
 dokunmuyor — `git checkout -f` yalnızca izlenen dosyaları değiştirir.
 
-Depoyu başka bir makineye klonlayan kişi bu iki klasörü sunucudan ayrıca
+Depoyu başka bir makineye klonlayan kişi bu klasörleri sunucudan ayrıca
 kopyalamalıdır:
 
 ```bash
 rsync -az genctek:/opt/genctekportal/public/wordpress public/
 rsync -az genctek:/opt/genctekportal/public/temalar   public/
+rsync -az genctek:/opt/genctekportal/public/video     public/
 ```
 
 ## Platform bağlantısı

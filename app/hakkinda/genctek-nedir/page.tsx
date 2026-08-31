@@ -32,7 +32,7 @@ export default function GenctekNedirSayfasi() {
           <Link className="back-link" href="/#hakkinda">← Hakkında</Link>
           <span className="eyebrow">YEĞİTEK</span>
           <h1>GençTek</h1>
-          <p>Akran Öğrenme Modeli ve Genç Bilişim Ekosistemi / Sektörün Yeni Lideri</p>
+          <p>Akran Öğrenme Modeli ve Genç Bilişim Ekosistemi / Sektörün Yeni Liderleri</p>
         </div>
       </section>
 
@@ -45,7 +45,7 @@ export default function GenctekNedirSayfasi() {
               yazdığı özet metin yerine kurumun resmî tanımı basılıyor.
             */}
             <h2>Genç Bilişim Ekosistemi Koordinatörlüğü</h2>
-            <p>GençTek, Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü koordinasyonunda, bilişim alanında çalışma gerçekleştirmek isteyen, çalışmalar yürüten ya da mevcut çalışmalarının etkisini arttırmak isteyen öğrencilerin ve danışman öğretmenlerin desteklendiği, birbirleriyle ve paydaşlarla iletişim ve iş birliğinin sağlandığı Genç Bilişim Ekosistemidir.</p>
+            <p>GençTek, Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü koordinasyonunda, bilişim alanında çalışma gerçekleştirmek isteyen, çalışmalar yürüten ya da mevcut çalışmalarının etkisini arttırmak isteyen öğrencilerin ve danışman öğretmenlerin desteklendiği, birbirleriyle ve paydaşlarla iletişim ve iş birliğinin sağlandığı genç bilişim ekosistemidir.</p>
             <p>YEĞİTEK Genç Bilişim Koordinatörlüğü tarafından yürütülen ekosistem çalışmaları; İl Millî Eğitim Müdürlüklerinde görevlendirilen İl GençTek Koordinatörü Öğretmenler ve gönüllü komisyon üyeleri aracılığıyla yerel düzeyde yaygınlaştırılmakta, öğrencilerin ve öğretmenlerin ekosisteme aktif katılımı desteklenmektedir.</p>
             <p>GençTek; akran öğrenmesini, ekip çalışmasını, üretimi, paylaşımı ve sektörle etkileşimi destekleyen bir ekosistem yaklaşımıyla faaliyetlerini sürdürmektedir.</p>
           </div>
