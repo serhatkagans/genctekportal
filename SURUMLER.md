@@ -21,6 +21,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 - Çalışma grubu detay sayfalarındaki kapak görselleri kare yerine 16:9 yatay
   oranda gösteriliyor.
+- Çalışma grubu detay sayfalarında kalan “tema” ifadeleri “çalışma grubu”
+  olarak güncellendi.
+- Robotik, Siber Güvenlik, Mobil Programlama, Eğitim Teknolojileri, GençX ve
+  Havacılık Sistemleri çalışma gruplarının kapak görselleri eklendi.
 
 - **Çalışma grupları sayfasının başlığı** "Teknoloji temaları" → **Çalışma
   Grupları** (`/temalar`, adres değişmedi). Web Programlama grubuna görsel

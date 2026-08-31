@@ -30,11 +30,11 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
   return <><Header/><main>
     <article className="theme-detail">
       <header className="theme-detail-hero"><div className="container theme-detail-grid">
-        <div><Link className="back-link" href="/temalar">← Tüm temalar</Link><span className="eyebrow">Tema {String(index + 1).padStart(2,"0")} / {themes.length}</span><h1>{theme.name}</h1><p>{theme.shortDescription}</p></div>
-        <div className="theme-detail-image"><Image src={temaGorseli(theme)} alt={`${theme.name} tema görseli`} fill priority sizes="(max-width: 900px) 100vw, 44vw" /></div>
+        <div><Link className="back-link" href="/temalar">← Tüm çalışma grupları</Link><span className="eyebrow">Çalışma grubu {String(index + 1).padStart(2,"0")} / {themes.length}</span><h1>{theme.name}</h1><p>{theme.shortDescription}</p></div>
+        <div className="theme-detail-image"><Image src={temaGorseli(theme)} alt={`${theme.name} çalışma grubu görseli`} fill priority sizes="(max-width: 900px) 100vw, 44vw" /></div>
       </div></header>
       <section className="section"><div className="container theme-detail-content">
-        <div className="theme-intro"><span className="eyebrow">Tema hakkında</span><h2>Keşfet, dene, birlikte üret.</h2><p>{theme.description}</p></div>
+        <div className="theme-intro"><span className="eyebrow">Çalışma grubu hakkında</span><h2>Keşfet, dene, birlikte üret.</h2><p>{theme.description}</p></div>
         <div className="theme-detail-lists">
           <section><span className="theme-list-label">Odak alanları</span><h2>Neler öğreneceksin?</h2><ol>{theme.focus.map((item,i)=><li key={item}><span>{String(i+1).padStart(2,"0")}</span>{item}</li>)}</ol></section>
           <section><span className="theme-list-label">Üretim çıktıları</span><h2>Neler geliştirebilirsin?</h2><ol>{theme.outcomes.map((item,i)=><li key={item}><span>{String(i+1).padStart(2,"0")}</span>{item}</li>)}</ol></section>
@@ -43,7 +43,7 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
       {theme.slug === "oyun-tasarimi-egitijam" ? <EgitijamProgram /> : null}
       {program ? <ThemeOfficialProgram program={program} arsivVar={arsivVar} /> : null}
       <ThemeSourceArticle slug={theme.slug} />
-      <section className="section theme-detail-cta"><div className="container join-card"><div><span className="eyebrow eyebrow-light">Bu tema seni heyecanlandırdı mı?</span><h2>{theme.name} ekibinde yerini al.</h2><p>Öğrenci veya danışman öğretmen olarak GençTek ekosistemine katıl.</p></div><a className="button button-light" href={genctekGirisAdresi()}>Platforma giriş <Icon name="arrow"/></a></div></section>
+      <section className="section theme-detail-cta"><div className="container join-card"><div><span className="eyebrow eyebrow-light">Bu çalışma grubu seni heyecanlandırdı mı?</span><h2>{theme.name} ekibinde yerini al.</h2><p>Öğrenci veya danışman öğretmen olarak GençTek ekosistemine katıl.</p></div><a className="button button-light" href={genctekGirisAdresi()}>Platforma giriş <Icon name="arrow"/></a></div></section>
     </article>
   </main><Footer/></>;
 }
