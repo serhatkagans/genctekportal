@@ -188,7 +188,29 @@ export const ZIRVE_2025: Zirve = {
   ozet: "8-9 Mayıs 2025, Ankara Hacı Bayram Veli Üniversitesi Itrî Kongre ve Kültür Merkezi.",
   metin:
     "Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü koordinasyonunda yürütülen GençTek (Akran Öğrenme Modeli ve Genç Bilişim Ekosistemi) kapsamında, 8-9 Mayıs 2025 tarihlerinde Ankara Hacı Bayram Veli Üniversitesi Itrî Kongre ve Kültür Merkezi’nde 1. GençTek Zirvesi gerçekleştirilmiştir.\n\nZirvede farklı illerden öğrenci, öğretmen ve sektör temsilcileri bir araya getirilerek bilişim teknolojileri alanındaki iyi uygulama örnekleri paylaşılmış, öğrencilerin dijital becerileri, yenilikçi düşünme, problem çözme ve proje geliştirme becerilerinin desteklenmesine yönelik etkinlikler düzenlenmiştir. “Sahne Senin”, “Öğrenci Forumu”, “G2S GençTek Sektör Buluşmaları”, “MasterTek Şampiyonlar Ligi”, “EğitiJAM”, dijital oyun ve sergi alanları gibi etkinliklerle öğrencilerin akran öğrenmesi, sektör farkındalığı ve teknoloji temelli üretim süreçlerine aktif katılımları desteklenmiştir.",
-  gorseller: [],
+  gorseller: [
+  /* Zirve fotoğrafları 1 Eylül 2026'da eklendi (istek: "buradaki görselleri ve
+     videoyu genctek 2025 sayfasına ekleyelim"). Sıra dosya adına göre değil,
+     günün akışına göre: açılış, oturumlar, ödüller, sergi ve stant alanı.
+     Asıl kareler 3-12 MB'lık makine çıktılarıydı; web için 1600px webp. */
+    { url: "/medya/genctek-zirvesi-2025-3.webp", alt: "Zirvenin açılışında kürsüden yapılan konuşma; arkada Türk bayrağı ve “Genç Bilişim Ekosistemi · GençTek Zirvesi” panosu" },
+    { url: "/medya/genctek-zirvesi-2025-6.webp", alt: "Sahnedeki dev ekranda Yenilik ve Eğitim Teknolojileri Genel Müdürlüğünün sunum kapağı" },
+    { url: "/medya/genctek-zirvesi-2025-11.webp", alt: "Oturumu izleyen öğrencilerle dolu salon" },
+    { url: "/medya/genctek-zirvesi-2025-7.webp", alt: "Sunumu dinleyen öğrenci ve öğretmenlerin oluşturduğu ön sıralar" },
+    { url: "/medya/genctek-zirvesi-2025-12.webp", alt: "Protokol sırasında oturumu izleyen yöneticiler" },
+    { url: "/medya/genctek-zirvesi-2025-5.webp", alt: "Sahnede mikrofonla programı sunan iki öğrenci" },
+    { url: "/medya/genctek-zirvesi-2025-8.webp", alt: "Sahnede belgelerini alan katılımcıların toplu fotoğrafı" },
+    { url: "/medya/genctek-zirvesi-2025-4.webp", alt: "Salonun sahnesinde çekilen toplu hatıra fotoğrafı" },
+    { url: "/medya/genctek-zirvesi-2025-2.webp", alt: "Fuayede toplanan yüzlerce katılımcının üstten çekilmiş toplu fotoğrafı" },
+    { url: "/medya/genctek-zirvesi-2025-10.webp", alt: "Sergi alanının üstten görünümü: standlar arasında dolaşan katılımcılar" },
+    { url: "/medya/genctek-zirvesi-2025-9.webp", alt: "Çalışma alanında masalarda dizüstü bilgisayarlarla üreten ekipler" },
+    { url: "/medya/genctek-zirvesi-2025-1.webp", alt: "Standında geliştirdiği sabit kanatlı insansız hava aracını tanıtan öğrenci" },
+  ],
+  video: {
+    url: "/video/genctek-zirvesi-2025.mp4",
+    kapak: "/medya/genctek-zirvesi-2025-2.webp",
+    baslik: "1. GençTek Zirvesi tanıtım videosu",
+  },
 };
 
 /** Yeniden eskiye: zirve listesi bir yerde toplanınca sıralama da tek yerde kalıyor. */
