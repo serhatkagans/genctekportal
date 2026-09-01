@@ -16,23 +16,27 @@
     "temalar:tamamla": "node scripts/calisma-gruplarini-tamamla.mjs"
   },
   "dependencies": {
-    "@prisma/client": "latest",
+    "@prisma/client": "^7.10.0",
     "argon2": "^0.45.1",
-    "next": "latest",
+    "next": "^16.3.4",
     "otpauth": "^9.5.1",
     "postgres": "^3.4.7",
-    "react": "latest",
-    "react-dom": "latest",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "sanitize-html": "^2.17.6",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
+    "@types/node": "^26.1.2",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
     "@types/sanitize-html": "^2.16.1",
-    "prisma": "latest",
+    "prisma": "^7.10.0",
     "typescript": "^6.0.3",
-    "vitest": "latest"
+    "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "mysql2": "^3.22.0",
+    "deepmerge-ts": "^8.0.0"
   }
 }

@@ -19,6 +19,16 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Güvenlik: il koordinatörü ekleme/düzenleme/silme eylemleri yetki kontrolüne
+  bağlandı.** Üç sunucu eylemi de kontrolsüzdü; sayfayı koruyan layout sunucu
+  eylemlerini kapsamıyor.
+- **İçerik güvenliği politikası (CSP) genişletildi**: varsayılan olarak yalnızca
+  kendi kaynağımız; gömü olarak yalnızca YouTube, form gönderimi yalnızca kendi
+  köküne. Çerçeveleme koruması `SAMEORIGIN` yerine `DENY`.
+- Bağımlılıklardaki sekiz yüksek seviyeli güvenlik açığı kapatıldı (Next 16.3.4,
+  sharp 0.35.4, postcss 8.5.23, nanoid 3.3.18; prisma zinciri `overrides` ile).
+  `package.json`'daki `"latest"` sürümler gerçek aralıklara sabitlendi.
+
 - **Zirve ve haber sayfalarındaki fotoğraflar kayan galeriye alındı.** Alt alta
   dizilmek yerine kendiliğinden akan yatay bir şeritte duruyorlar; sol ve sağ
   oklarla elle de gezilebiliyor, imleç üzerindeyken ya da bir düğmeye
