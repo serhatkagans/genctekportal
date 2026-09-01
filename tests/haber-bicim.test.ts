@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { duzMetindenHtml, htmldenDuzMetin, gorselEtiketi } from "../lib/haber-bicim";
-import { galeriGorselleriBuyut, oneCikanTekrariniAt, sanitizeRichText } from "../lib/content-services/sanitize";
+import { altyazilariAt, galeriGorselleriBuyut, oneCikanTekrariniAt, sanitizeRichText } from "../lib/content-services/sanitize";
 
 describe("düz metinden HTML", () => {
   it("boş satırı paragrafa çevirir", () =>
@@ -25,9 +25,10 @@ describe("düz metinden HTML", () => {
     expect(duzMetindenHtml("**kalın** ve *italik* ve [site](https://ornek.gov.tr)"))
       .toBe('<p><strong>kalın</strong> ve <em>italik</em> ve <a href="https://ornek.gov.tr">site</a></p>'));
 
-  it("görsel etiketini figure'e çevirir", () =>
+  // Alt metin `alt`'ta kalır, görselin altına açıklama basılmaz.
+  it("görsel etiketini altyazısız figure'e çevirir", () =>
     expect(duzMetindenHtml(gorselEtiketi("/medya/a.png", "Atölye")))
-      .toBe('<figure><img src="/medya/a.png" alt="Atölye" loading="lazy" /><figcaption>Atölye</figcaption></figure>'));
+      .toBe('<figure><img src="/medya/a.png" alt="Atölye" loading="lazy" /></figure>'));
 
   it("kullanıcının yazdığı HTML'i etiket olarak yorumlamaz", () =>
     expect(duzMetindenHtml("<script>alert(1)</script>"))
@@ -85,4 +86,13 @@ describe("Haber gövdesi görselleri", () => {
     const html = '<a href="/wordpress/media/1.jpg"><img src="/wordpress/media/1-300x200.jpg" width="300" height="200" /></a>';
     expect(galeriGorselleriBuyut(html)).toContain('src="/wordpress/media/1.jpg"');
   });
+});
+
+describe("altyazilariAt", () => {
+  it("figure içindeki açıklamayı söker, görseli bırakır", () =>
+    expect(altyazilariAt('<figure><img src="/medya/a.png" alt="Atölye" /><figcaption>Atölye</figcaption></figure>'))
+      .toBe('<figure><img src="/medya/a.png" alt="Atölye" /></figure>'));
+
+  it("altyazısı olmayan gövdeye dokunmaz", () =>
+    expect(altyazilariAt("<p>Metin</p>")).toBe("<p>Metin</p>"));
 });

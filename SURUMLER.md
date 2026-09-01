@@ -19,6 +19,13 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- Ana sayfadaki haber şeridine sola/sağa kaydırma düğmeleri eklendi; şerit
+  artık gerçek bir kaydırma kutusu olduğu için kaçan haber geri getirilebiliyor
+  ve dokunmatik ekranda parmakla da kaydırılıyor.
+- Üst menüdeki "Hakkında" tıklandığında ana sayfadaki kart bölümüne iniyor.
+- Haber gövdelerinde görsellerin altındaki açıklama satırları kaldırıldı; metin
+  ekran okuyucular için `alt` olarak duruyor.
+- Yapay Zekâ çalışma grubunun kapak görseli yenilendi.
 - Haber detay sayfalarının altına önceki ve sonraki habere geçiş bağlantıları
   eklendi.
 - Haber sayfalarında başlık, kapak, metin ve fotoğraflar tek sütun genişliğine

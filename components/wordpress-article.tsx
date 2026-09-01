@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import { oneCikanTekrariniAt, sanitizeRichText } from "@/lib/content-services/sanitize";
+import { altyazilariAt, oneCikanTekrariniAt, sanitizeRichText } from "@/lib/content-services/sanitize";
 import { gorselYolu } from "@/lib/ortam";
 import { categoryName, type WordPressContent } from "@/lib/wordpress-content";
 
@@ -13,6 +13,14 @@ type ArticleNavigation = {
   previous?: Pick<WordPressContent, "slug" | "title">;
   next?: Pick<WordPressContent, "slug" | "title">;
 };
+
+/* Haberlerde gövde iki elden geçiyor: kapak görselinin tekrarı ve görsel
+   altyazıları çıkarılıyor. Arşivden gelen sayfalarda altyazı bilgi taşıyor
+   olabilir, onlara dokunulmuyor. */
+function govdeHtmli(item: WordPressContent) {
+  const govde = oneCikanTekrariniAt(item.html, item.featuredImage);
+  return item.type === "post" ? altyazilariAt(govde) : govde;
+}
 
 export function WordPressArticle({ item, archiveHref = "/haberler", navigation }: { item: WordPressContent; archiveHref?: string; navigation?: ArticleNavigation }) {
   const label = item.type === "page" ? "GençTek" : categoryName(item.categories);
@@ -26,7 +34,7 @@ export function WordPressArticle({ item, archiveHref = "/haberler", navigation }
     </div></header>
     {item.featuredImage ? <div className="container wordpress-article-container wordpress-featured"><img src={gorselYolu(item.featuredImage)} alt="" /></div> : null}
     <div className="container wordpress-article-container">
-      <div className={`theme-source-body wordpress-content${hasNavigation ? " wordpress-content-has-navigation" : ""}`} dangerouslySetInnerHTML={{ __html: sanitizeRichText(oneCikanTekrariniAt(item.html, item.featuredImage)) }} />
+      <div className={`theme-source-body wordpress-content${hasNavigation ? " wordpress-content-has-navigation" : ""}`} dangerouslySetInnerHTML={{ __html: sanitizeRichText(govdeHtmli(item)) }} />
       {hasNavigation ? <nav className="haber-gezinme" aria-label="Haberler arasında gezinme">
         {navigation?.previous ? <Link className="haber-gezinme-baglanti haber-gezinme-onceki" href={`/haberler/${navigation.previous.slug}`}>
           <span>← Önceki Haber</span><strong>{navigation.previous.title}</strong>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HakkindaBaglantisi } from "./hakkinda-baglantisi";
 import { MarkaSimgesi } from "./marka-simgesi";
 import { TemaSecici } from "./TemaSecici";
 import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
@@ -71,10 +72,12 @@ const hakkindaBaglantilari = HAKKINDA_KARTLARI.map(
  * Menü başlığının kendisi hâlâ ANA SAYFADAKİ kart bölümüne iniyor: altı
  * başlığı bir arada görmek isteyen oraya gidiyor.
  *
- * Çapa düz <a> ile veriliyor, next/link ile değil (31 Ağustos 2026 · istek:
- * "menüdeki hakkında menüsüne tıklayınca aşağı kaymıyor"). İstemci tarafı
- * gezinme, adres zaten ana sayfayken yalnızca karma (#) değiştiğinde her zaman
- * kaydırmıyordu; düz bağlantıda kaydırmayı tarayıcının kendisi yapıyor.
+ * Çapa next/link ile değil, `HakkindaBaglantisi` ile veriliyor (31 Ağustos ve
+ * 1 Eylül 2026 · istekler: "menüdeki hakkında menüsüne tıklayınca aşağı
+ * kaymıyor", "anasayfada Hakkımdaya basınca aşağı hakkımda kartlarına
+ * gitsin"). Önce istemci tarafı gezinme, sonra düz <a> denendi; ikisi de
+ * <summary>'nin açılıp kapanmasıyla çakışıyordu. Bileşen bölüm sayfadaysa
+ * kaydırmayı kendisi yapıyor, değilse bağlantı olağan şekilde çalışıyor.
  * Adresin başına uygulama eki geliyor: portal bir alt dizinde de yayınlanıyor.
  */
 const anaSayfaCapasi = (cengel: string) => `${uygulamaYolu("/")}#${cengel}`;
@@ -106,7 +109,7 @@ export function Header() {
             {/* Başlığın kendisi de bir bağlantı: tıklayan kişi ana sayfadaki
                 kart bölümüne (#hakkinda) iniyor, oku tıklayan altı başlığı
                 açıyor. */}
-            <summary><a href={anaSayfaCapasi("hakkinda")}>Hakkında</a></summary>
+            <summary><HakkindaBaglantisi href={anaSayfaCapasi("hakkinda")}>Hakkında</HakkindaBaglantisi></summary>
             <div className="nav-acilir-govde">
               {hakkindaBaglantilari.map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
             </div>
@@ -127,7 +130,7 @@ export function Header() {
             <details className="mobil-alt-menu">
               <summary>Hakkında</summary>
               <div className="mobil-alt-menu-govde">
-                <a className="mobil-alt-baglanti" href={anaSayfaCapasi("hakkinda")}>Genel Bakış</a>
+                <HakkindaBaglantisi className="mobil-alt-baglanti" href={anaSayfaCapasi("hakkinda")}>Genel Bakış</HakkindaBaglantisi>
                 {hakkindaBaglantilari.map(([etiket, adres]) => <Link className="mobil-alt-baglanti" href={adres} key={adres}>{etiket}</Link>)}
               </div>
             </details>

@@ -46,9 +46,11 @@ function blokCevir(blok: string): string {
   if (gorsel) {
     const [, url, alt = ""] = gorsel;
     if (!baglantiGuvenliMi(url)) return `<p>${satirIci(satirlar[0])}</p>`;
+    // Alt metin yalnızca `alt` özniteliğinde: görselin altına yazılan açıklama
+    // istenmiyor (1 Eylül 2026 · istek: "görsellerin altındaki açıklamalar
+    // silinecek"). Bkz. lib/content-services/sanitize.ts · altyazilariAt.
     const altMetni = kacir(alt.trim());
-    const yazi = altMetni ? `<figcaption>${altMetni}</figcaption>` : "";
-    return `<figure><img src="${url.trim()}" alt="${altMetni}" loading="lazy" />${yazi}</figure>`;
+    return `<figure><img src="${url.trim()}" alt="${altMetni}" loading="lazy" /></figure>`;
   }
 
   if (satirlar.length === 1) {

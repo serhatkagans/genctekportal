@@ -106,6 +106,20 @@ export function oneCikanTekrariniAt(html: string, oneCikan?: string) {
   return figurlu.test(html) ? html.replace(figurlu, "") : html.replace(yalin, "");
 }
 
+/*
+ * GÖRSEL ALTYAZILARI (1 Eylül 2026 · istek: "haberlerdeki görsellerin
+ * altındaki açıklamalar silinecek").
+ *
+ * Panelden yazılan haberlerde `[gorsel:url|alt]` etiketinin alt metni hem
+ * `alt` özniteliğine hem de <figcaption>'a yazılıyordu; sonuç, her fotoğrafın
+ * altında fotoğrafı tarif eden bir satırdı. Alt metin ekran okuyucu için
+ * duruyor, ekranda görünen açıklama kalkıyor. Eski kayıtların gövdesi
+ * kaydedildiği anda html'e çevrildiği için burada, basım sırasında sökülüyor.
+ */
+export function altyazilariAt(html: string) {
+  return html.replace(/<figcaption\b[^>]*>[\s\S]*?<\/figcaption>/gi, "");
+}
+
 export function sanitizeRichText(input: string) {
   return sanitizeHtml(galeriGorselleriBuyut(input), {
     allowedTags: ["p", "h1", "h2", "h3", "h4", "h5", "h6", "strong", "b", "em", "i", "u", "ul", "ol", "li", "blockquote", "a", "br", "hr", "figure", "figcaption", "img", "div", "span", "table", "thead", "tbody", "tfoot", "tr", "th", "td", "caption", "pre", "code", "details", "summary", "sup", "sub", "iframe", "video", "source"],
