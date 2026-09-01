@@ -120,6 +120,51 @@ export function altyazilariAt(html: string) {
   return html.replace(/<figcaption\b[^>]*>[\s\S]*?<\/figcaption>/gi, "");
 }
 
+export type IcerikGorseli = { url: string; alt: string };
+
+/** Haber gövdesindeki fotoğrafları metinden ayırıp tek bir galeri listesine taşır. */
+export function gorselleriGaleriyeAyir(html: string): { html: string; gorseller: IcerikGorseli[] } {
+  const gorseller: IcerikGorseli[] = [];
+  const gorulen = new Set<string>();
+
+  const ozellik = (etiket: string, ad: string) =>
+    new RegExp(`\\b${ad}="([^"]*)"`, "i").exec(etiket)?.[1] ?? "";
+  const ekle = (url: string, alt: string) => {
+    const temizUrl = url.trim();
+    if (!temizUrl || gorulen.has(temizUrl)) return;
+    gorulen.add(temizUrl);
+    gorseller.push({ url: temizUrl, alt: alt.trim() });
+  };
+
+  const baglantiliEtiketler = new Set<string>();
+  html.replace(/<a\b[^>]*href="([^"]+)"[^>]*>\s*(<img\b[^>]*>)/gi, (tam, href: string, img: string) => {
+    baglantiliEtiketler.add(img);
+    ekle(GORSEL_UZANTI.test(href.split(/[?#]/)[0]) ? href : ozellik(img, "src"), ozellik(img, "alt"));
+    return tam;
+  });
+
+  html.replace(/<img\b[^>]*>/gi, (img) => {
+    if (!baglantiliEtiketler.has(img)) ekle(ozellik(img, "src"), ozellik(img, "alt"));
+    return img;
+  });
+
+  let metin = html.replace(/<img\b[^>]*>/gi, "");
+  const bosKap = /<(figure|a|p|div)\b[^>]*>\s*(?:<br\s*\/?>(?:\s*)?)?<\/\1>/gi;
+  let onceki = "";
+  while (metin !== onceki) {
+    onceki = metin;
+    metin = metin.replace(bosKap, "");
+  }
+
+  /*
+   * Boşluk kısma BURADA da çalışmalı: fotoğraflar sökülünce geriye kalan
+   * <br> dizileri ancak bu adımdan sonra yan yana geliyor. Gövde
+   * sanitizeRichText'ten geçerken aralarında hâlâ <img> vardı, o yüzden orada
+   * "ard arda satır sonu" gibi görünmüyorlardı.
+   */
+  return { html: bosSatirlariKis(metin), gorseller };
+}
+
 /*
  * GÖVDEDEN GÖRSELLERİ ÇIKARMAK (1 Eylül 2026 · istek: "çalışma gruplarında
  * sayfa içi fotoları sil ama kartlarda kalsın").
@@ -129,15 +174,62 @@ export function altyazilariAt(html: string) {
  * Görseli saran figure/bağlantı da gidiyor, yoksa geriye boş kutular kalırdı.
  */
 export function gorselleriAt(html: string) {
-  return html
-    .replace(/<figure[^>]*>[\s\S]*?<\/figure>/gi, "")
-    .replace(/<a[^>]*>\s*<img[^>]*>\s*<\/a>/gi, "")
-    .replace(/<img[^>]*>/gi, "")
-    .replace(/<p>\s*<\/p>/gi, "");
+  // Görseller çıkınca yan yana kalan satır sonları da kısılıyor; gerekçe
+  // bosSatirlariKis içinde, gorselleriGaleriyeAyir ile aynı.
+  return bosSatirlariKis(
+    html
+      .replace(/<figure[^>]*>[\s\S]*?<\/figure>/gi, "")
+      .replace(/<a[^>]*>\s*<img[^>]*>\s*<\/a>/gi, "")
+      .replace(/<img[^>]*>/gi, "")
+      .replace(/<p>\s*<\/p>/gi, ""),
+  );
+}
+
+/*
+ * GÖVDE SONUNDAKİ BOŞLUK YIĞINI (1 Eylül 2026 · istek: "yazılarla butonlar
+ * arasında çok boşluk var", "burada da boşluk fazla").
+ *
+ * Arşivden gelen gövdeler WordPress editöründe enter'a basıla basıla bırakılmış
+ * <br> dizileriyle bitiyor — ör. amasya haberinde son hashtag'den sonra 24,
+ * bilecik'te 10 tane arka arkaya. Ekranda bu, metinle "Önceki/Sonraki Haber"
+ * bağlantıları arasında yüzlerce piksellik boş alan demek. Metnin kendi
+ * paragraf aralığı zaten CSS'ten geliyor; yazarın niyeti "biraz boşluk"tu,
+ * "yarım ekran" değil.
+ *
+ * Kayıtların gövdesini düzeltmek yerine basım sırasında kısıyoruz: kaynak
+ * olduğu gibi kalsın, aynı içerik başka bir yerde de temiz baskı versin.
+ * Bilinçli tek satır atlama (tek/çift <br>) korunuyor, üçüncüden sonrası ve
+ * blok sonundaki takıntı boşlukları gidiyor.
+ */
+const BOSLUK = String.raw`(?:\s|&nbsp;|\u00a0)`;
+const SATIR_SONU = String.raw`<br\s*/?>`;
+const BLOKLAR = String.raw`p|div|li|td|blockquote|h[1-6]`;
+
+const BLOK_ACILIS = String.raw`\b[^>]*>`;
+
+export function bosSatirlariKis(html: string) {
+  let metin = html
+    // Üç ve daha fazla ard arda satır sonu → tek boş satır.
+    .replace(new RegExp(`(?:${SATIR_SONU}${BOSLUK}*){3,}`, "gi"), "<br /><br />")
+    // Blok kapanmadan hemen önceki satır sonları ve boşluklar.
+    .replace(new RegExp(`(?:${SATIR_SONU}|${BOSLUK})+(</(?:${BLOKLAR})>)`, "gi"), "$1")
+    // Blok açıldıktan hemen sonraki satır sonları.
+    .replace(new RegExp(`(<(?:${BLOKLAR})${BLOK_ACILIS})(?:${SATIR_SONU}${BOSLUK}*)+`, "gi"), "$1");
+
+  // Geriye kalan boş paragraf/kutular; iç içe olabildikleri için sabitlenene dek.
+  const bosBlok = new RegExp(`<(p|div)${BLOK_ACILIS}(?:${BOSLUK}|${SATIR_SONU})*</${String.raw`\1`}>`, "gi");
+  let onceki = "";
+  while (metin !== onceki) {
+    onceki = metin;
+    metin = metin.replace(bosBlok, "");
+  }
+
+  // Gövdenin en sonunda kalan satır sonları (kapsayıcısı olmayan hâli).
+  return metin.replace(new RegExp(`(?:${SATIR_SONU}|${BOSLUK})+$`, "i"), "");
 }
 
 export function sanitizeRichText(input: string) {
-  return sanitizeHtml(galeriGorselleriBuyut(input), {
+  return bosSatirlariKis(sanitizeHtml(galeriGorselleriBuyut(input), {
     allowedTags: ["p", "h1", "h2", "h3", "h4", "h5", "h6", "strong", "b", "em", "i", "u", "ul", "ol", "li", "blockquote", "a", "br", "hr", "figure", "figcaption", "img", "div", "span", "table", "thead", "tbody", "tfoot", "tr", "th", "td", "caption", "pre", "code", "details", "summary", "sup", "sub", "iframe", "video", "source"],
     allowedAttributes: { "*": ["class", "id", "title", "aria-label", "aria-hidden"], a: ["href", "target", "rel", "download"], img: ["src", "srcset", "sizes", "alt", "width", "height", "loading", "decoding"], iframe: ["src", "width", "height", "title", "allow", "allowfullscreen", "loading"], video: ["src", "poster", "controls", "width", "height"], source: ["src", "srcset", "type", "media"], td: ["colspan", "rowspan"], th: ["colspan", "rowspan", "scope"] },
     allowedSchemes: ["https", "http", "mailto", "tel"],
@@ -161,5 +253,5 @@ export function sanitizeRichText(input: string) {
         };
       },
     },
-  });
+  }));
 }
