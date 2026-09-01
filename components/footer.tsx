@@ -38,7 +38,7 @@ import { ayarlariOkuSessiz } from "@/lib/yonetim/ayar";
  */
 const KURUM_MARKALARI = [
   { ad: "MEB YEĞİTEK", logo: "/logo-yegitek.png", adres: "https://yegitek.meb.gov.tr" },
-  { ad: "ETKİM", logo: "/logo-etkim.png", adres: "https://etkim.meb.gov.tr" },
+  { ad: "ETKİM", logo: "/logo-etkim.png", adres: "https://etkim.gov.tr/" },
 ];
 
 function logoVarMi(dosya: string) {
