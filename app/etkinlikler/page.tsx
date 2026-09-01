@@ -1,6 +1,8 @@
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { EtkinlikKarti } from "@/components/etkinlik-karti";
+import { Icon } from "@/components/icons";
+import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
 import { genctekEtkinlikleriOku } from "@/lib/genctek-etkinlik";
 
 /**
@@ -44,18 +46,12 @@ export default async function EtkinliklerSayfasi() {
         <div className="container">
           <span className="eyebrow">Takvimde ne var</span>
           <h1>Etkinlikler</h1>
-          <p>GençTek platformunda açılan il ve ulusal etkinliklerin tamamı. Başvuru, etkinliğin kendi sayfasında ve giriş yaptıktan sonra yapılır.</p>
+          <p>Başvuru yapabilmek ve etkinlik oluşturabilmek için ekosisteme giriş yapınız.</p>
         </div>
       </section>
 
       <section className="section" id="suren-etkinlikler">
         <div className="container">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">Şimdi</span>
-              <h2>Süren ve yaklaşan etkinlikler</h2>
-            </div>
-          </div>
           {suren.length === 0
             ? <p className="etkinlik-bos">Şu an süren ya da yaklaşan etkinlik yok. Yeni etkinlikler açıldığında burada görünecek.</p>
             : <div className="card-grid">{suren.map((etkinlik) => <EtkinlikKarti etkinlik={etkinlik} key={etkinlik.id} />)}</div>}
@@ -81,6 +77,11 @@ export default async function EtkinliklerSayfasi() {
           </div>
         </section>
       )}
+
+      {/* Ana sayfanın altındaki çağrı şeridinin aynısı (1 Eylül 2026 · istek:
+         "en alta ekosisteme giriş gri banner ekle"): başvuru da etkinlik açmak
+         da platformda yapıldığı için sayfanın sonu oraya çıkıyor. */}
+      <section className="section join-section"><div className="container join-card"><div><span className="eyebrow eyebrow-light">Sıra sende</span><h2>Ürününü paylaş, çalışmalarını duyur, ekibini kur, destek al.</h2><p>Öğrenci, danışman öğretmen, mezun, mentör ve paydaş olarak ekosisteme katılmak için giriş yapınız.</p></div><a className="button button-light" href={genctekGirisAdresi()}>Ekosisteme Katıl <Icon name="arrow" /></a></div></section>
     </main>
     <Footer />
   </>;

@@ -28,12 +28,17 @@ import { ayarlariOkuSessiz } from "@/lib/yonetim/ayar";
  * başlıyor.
  *
  * TELİF SATIRI KALKTI (31 Ağustos 2026 · istek: "© 2026 GençTek bunları
- * kaldır"). En alttaki tek bağlantı KVKK ve Gizlilik — o yüzden satır sağa
- * yaslanıyor.
+ * kaldır").
+ *
+ * YALNIZCA LOGOLAR, LOGOLAR DA BAĞLANTI (1 Eylül 2026 · istek: "alttaki
+ * footerda yazılar kalksın, resimlere link ver, kvkknın yanına mail adresini
+ * koy"). Logoların altındaki kurum satırları ve ayrı iletişim satırı kalktı;
+ * kurum adları logolarda zaten yazılı. E-posta en alta, KVKK bağlantısının
+ * yanına taşındı — alt bilgide kalan tek iki bilgi bunlar.
  */
 const KURUM_MARKALARI = [
-  { ad: "MEB YEĞİTEK", logo: "/logo-yegitek.png" },
-  { ad: "ETKİM", logo: "/logo-etkim.png" },
+  { ad: "MEB YEĞİTEK", logo: "/logo-yegitek.png", adres: "https://yegitek.meb.gov.tr" },
+  { ad: "ETKİM", logo: "/logo-etkim.png", adres: "https://etkim.meb.gov.tr" },
 ];
 
 function logoVarMi(dosya: string) {
@@ -50,38 +55,26 @@ export async function Footer() {
     <footer className="site-footer">
       <div className="container footer-brands">
         <div className="footer-brand">
-          <div className="footer-brand-marka">
+          <a className="footer-brand-marka" href={yegitek.adres} target="_blank" rel="noreferrer">
             {logoVarMi(yegitek.logo)
               ? <img src={gorselYolu(yegitek.logo)} alt={`${yegitek.ad} logosu`} />
               : <span className="footer-brand-ad">{yegitek.ad}</span>}
-          </div>
-          {/* Kurum satırları logoların hemen altında (31 Ağustos 2026 ·
-              istekler: "bu yazı yeğitek görselinin altına gelecek",
-              "etkim görselinin altında da bu yazı gelsin"). YEĞİTEK satırı
-              iletişim bölümünden buraya taşındı, iki yerde durmasın diye. */}
-          <p>{ayarlar["iletisim.kurum"]}<br />Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü (YEĞİTEK)</p>
+          </a>
         </div>
         <div className="footer-brand">
-          <div className="footer-brand-marka">
-            <div className="brand brand-inverse"><MarkaSimgesi /><span>GENÇ<span className="brand-accent">TEK</span></span></div>
-          </div>
-          <p>Genç Bilişim Ekosistemi ve Akran Öğrenme Modeli.</p>
-          {/* İletişim GençTek sütununun altında ve tek satır (31 Ağustos 2026 ·
-              istekler: "bunu da gençtekin altına koyalım", "mail adresini
-              iletişimin yanına koy iletişim: şeklinde"). En altta yalnızca
-              KVKK bağlantısı kalıyor. */}
-          <p className="footer-iletisim"><span>İletişim:</span> <a href={`mailto:${ayarlar["iletisim.eposta"]}`}>{ayarlar["iletisim.eposta"]}</a></p>
+          <Link className="footer-brand-marka" href="/">
+            <span className="brand brand-inverse"><MarkaSimgesi /><span>GENÇ<span className="brand-accent">TEK</span></span></span>
+          </Link>
         </div>
         <div className="footer-brand">
-          <div className="footer-brand-marka">
+          <a className="footer-brand-marka" href={etkim.adres} target="_blank" rel="noreferrer">
             {logoVarMi(etkim.logo)
               ? <img src={gorselYolu(etkim.logo)} alt={`${etkim.ad} logosu`} />
               : <span className="footer-brand-ad">{etkim.ad}</span>}
-          </div>
-          <p>Eğitim Teknolojileri Kuluçka ve İnovasyon Merkezi (ETKİM)</p>
+          </a>
         </div>
       </div>
-      <div className="container footer-bottom"><Link href="/kvkk">KVKK ve Gizlilik</Link></div>
+      <div className="container footer-bottom"><Link href="/kvkk">KVKK ve Gizlilik</Link><a href={`mailto:${ayarlar["iletisim.eposta"]}`}>{ayarlar["iletisim.eposta"]}</a></div>
     </footer>
   );
 }

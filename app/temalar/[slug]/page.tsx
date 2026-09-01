@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Icon } from "@/components/icons";
-import { EgitijamProgram } from "@/components/egitijam-program";
 import { ThemeOfficialProgram } from "@/components/theme-official-program";
 import { ThemeSourceArticle } from "@/components/theme-source-article";
 import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
-import { temaBul, temaGorseli, temalariOku } from "@/lib/tema";
+import { temaBul, temalariOku } from "@/lib/tema";
 import { getThemeProgram } from "@/lib/theme-programs";
 import { temaKaynagi } from "@/lib/tema-kaynak";
 
@@ -31,16 +29,20 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
     <article className="theme-detail">
       <header className="theme-detail-hero"><div className="container theme-detail-grid">
         <div><Link className="back-link" href="/temalar">← Tüm çalışma grupları</Link><span className="eyebrow">Çalışma grubu {String(index + 1).padStart(2,"0")} / {themes.length}</span><h1>{theme.name}</h1><p>{theme.shortDescription}</p></div>
-        <div className="theme-detail-image"><Image src={temaGorseli(theme)} alt={`${theme.name} çalışma grubu görseli`} fill priority sizes="(max-width: 900px) 100vw, 44vw" /></div>
       </div></header>
+      {/*
+        SAYFADA YALNIZCA GÖVDE METNİ (1 Eylül 2026 · istekler: "çalışma
+        gruplarında sayfa içi fotoları sil ama kartlarda kalsın" ve "Keşfet,
+        dene, birlikte üret. / ODAK ALANLARI / ÜRETİM ÇIKTILARI … bu yazıları
+        kaldır, sadece gövde metni kalsın").
+
+        Kapak görseli, tanıtım başlığı ve iki liste kalktı. Odak alanları ile
+        üretim çıktıları kayıtta duruyor (panelden düzenlenebiliyor); sayfada
+        basılmıyorlar.
+      */}
       <section className="section"><div className="container theme-detail-content">
-        <div className="theme-intro"><span className="eyebrow">Çalışma grubu hakkında</span><h2>Keşfet, dene, birlikte üret.</h2><p>{theme.description}</p></div>
-        <div className="theme-detail-lists">
-          <section><span className="theme-list-label">Odak alanları</span><h2>Neler öğreneceksin?</h2><ol>{theme.focus.map((item,i)=><li key={item}><span>{String(i+1).padStart(2,"0")}</span>{item}</li>)}</ol></section>
-          <section><span className="theme-list-label">Üretim çıktıları</span><h2>Neler geliştirebilirsin?</h2><ol>{theme.outcomes.map((item,i)=><li key={item}><span>{String(i+1).padStart(2,"0")}</span>{item}</li>)}</ol></section>
-        </div>
+        <p className="theme-govde-metni">{theme.description}</p>
       </div></section>
-      {theme.slug === "oyun-tasarimi-egitijam" ? <EgitijamProgram /> : null}
       {program ? <ThemeOfficialProgram program={program} arsivVar={arsivVar} /> : null}
       <ThemeSourceArticle slug={theme.slug} />
       <section className="section theme-detail-cta"><div className="container join-card"><div><span className="eyebrow eyebrow-light">Bu çalışma grubu seni heyecanlandırdı mı?</span><h2>{theme.name} ekibinde yerini al.</h2><p>Öğrenci veya danışman öğretmen olarak GençTek ekosistemine katıl.</p></div><a className="button button-light" href={genctekGirisAdresi()}>Platforma giriş <Icon name="arrow"/></a></div></section>

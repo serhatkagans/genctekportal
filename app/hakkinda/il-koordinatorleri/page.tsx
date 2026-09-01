@@ -6,7 +6,7 @@ import { KoordinatorRehberi } from "@/components/koordinator-rehberi";
 import { ileGoreSirala, koordinatorleriOku } from "@/lib/koordinator";
 
 export const metadata: Metadata = {
-  title: "İl Koordinatörleri",
+  title: "İl GençTek Koordinatörleri",
   description: "81 ildeki GençTek il koordinatörleri, il yöneticileri ve komisyon üyeleri.",
 };
 
@@ -24,7 +24,7 @@ export default async function CoordinatorsPage() {
           <div className="container">
             <Link className="back-link" href="/#hakkinda">← Hakkında</Link>
             <span className="eyebrow">İl Millî Eğitim Müdürlükleri</span>
-            <h1>İl Koordinatörleri</h1>
+            <h1>İl GençTek Koordinatörleri</h1>
             <p>İl koordinatörleri ve komisyon üyeleri.</p>
           </div>
         </section>

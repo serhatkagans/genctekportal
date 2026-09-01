@@ -120,6 +120,22 @@ export function altyazilariAt(html: string) {
   return html.replace(/<figcaption\b[^>]*>[\s\S]*?<\/figcaption>/gi, "");
 }
 
+/*
+ * GÖVDEDEN GÖRSELLERİ ÇIKARMAK (1 Eylül 2026 · istek: "çalışma gruplarında
+ * sayfa içi fotoları sil ama kartlarda kalsın").
+ *
+ * Çalışma grubu sayfalarında arşivden gelen fotoğraf dizileri kaldırıldı;
+ * görsel yalnızca listedeki kartlarda duruyor. Metin olduğu gibi kalıyor.
+ * Görseli saran figure/bağlantı da gidiyor, yoksa geriye boş kutular kalırdı.
+ */
+export function gorselleriAt(html: string) {
+  return html
+    .replace(/<figure[^>]*>[\s\S]*?<\/figure>/gi, "")
+    .replace(/<a[^>]*>\s*<img[^>]*>\s*<\/a>/gi, "")
+    .replace(/<img[^>]*>/gi, "")
+    .replace(/<p>\s*<\/p>/gi, "");
+}
+
 export function sanitizeRichText(input: string) {
   return sanitizeHtml(galeriGorselleriBuyut(input), {
     allowedTags: ["p", "h1", "h2", "h3", "h4", "h5", "h6", "strong", "b", "em", "i", "u", "ul", "ol", "li", "blockquote", "a", "br", "hr", "figure", "figcaption", "img", "div", "span", "table", "thead", "tbody", "tfoot", "tr", "th", "td", "caption", "pre", "code", "details", "summary", "sup", "sub", "iframe", "video", "source"],

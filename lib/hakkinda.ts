@@ -62,7 +62,7 @@ export const HAKKINDA_KARTLARI: HakkindaKarti[] = [
   {
     slug: "il-koordinatorleri",
     ikon: "users",
-    baslik: "İl Koordinatörleri",
+    baslik: "İl GençTek Koordinatörleri",
     ozet: "81 ildeki koordinatörler ve iletişim bilgileri.",
     adres: "/hakkinda/il-koordinatorleri",
   },

@@ -19,6 +19,21 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Çalışma grupları sayfasına "Yardımlaşma Grupları" bölümü eklendi**: MEB
+  Robot Yarışması, TEKNOFEST, TÜBİTAK ve Oyun Tasarımı. Her birinin kendi
+  sayfası var; tanıtım metinleri gelene kadar sayfa metnin hazırlandığını
+  söylüyor. EğitiJAM programı, çalışma grubu sayfasından Oyun Tasarımı
+  yardımlaşma grubunun sayfasına taşındı.
+- Çalışma grubu sayfalarında yalnızca gövde metni kalıyor: kapak görseli,
+  "Keşfet, dene, birlikte üret." başlığı, odak alanları ve üretim çıktıları
+  listeleri ile arşiv fotoğrafları kaldırıldı. Görseller listedeki kartlarda
+  duruyor.
+- Etkinlikler sayfasının üst yazısı değişti, "Süren ve yaklaşan etkinlikler"
+  başlığı kalktı ve sayfanın altına ana sayfadaki ekosisteme giriş şeridi
+  eklendi.
+- Alt bilgide logoların altındaki yazılar kaldırıldı, logolar kurum sitelerine
+  bağlandı ve e-posta adresi KVKK bağlantısının yanına taşındı.
+- "İl Koordinatörleri" başlığı "İl GençTek Koordinatörleri" oldu.
 - Temel GençTek Etkinlikleri sayfasındaki açıklama kaldırıldı, üst etiket
   "Ekosistem etkinlikleri" oldu; etkinlik sayfalarına haberlerdeki gibi önceki
   ve sonraki etkinlik bağlantıları eklendi, görseller de haberlerdeki gibi tek
