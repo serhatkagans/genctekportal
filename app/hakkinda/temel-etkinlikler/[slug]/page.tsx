@@ -61,7 +61,7 @@ export default async function TemelEtkinlikSayfasi({ params }: { params: Promise
           {/* Haber sayfalarındaki gezinmenin aynısı: aynı biçim, aynı sınıflar
              (bkz. components/wordpress-article.tsx). */}
           {onceki || sonraki ? (
-            <nav className="haber-gezinme" aria-label="Etkinlikler arasında gezinme">
+            <nav className="haber-gezinme etkinlik-gezinme" aria-label="Etkinlikler arasında gezinme">
               {onceki ? <Link className="haber-gezinme-baglanti haber-gezinme-onceki" href={`/hakkinda/temel-etkinlikler/${onceki.slug}`}>
                 <span>← Önceki Etkinlik</span><strong>{onceki.ad}</strong>
               </Link> : null}

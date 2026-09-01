@@ -377,11 +377,14 @@ html[data-theme="kirmizi"] .hero-panel:before{border-color:color-mix(in srgb,#93
 .haber-galeri-kart{width:clamp(290px,34vw,430px);flex:0 0 auto;transition:transform 180ms ease}
 .haber-galeri-kart:hover,.haber-galeri-kart:focus-within{position:relative;z-index:2;transform:translateY(-7px)}
 .haber-galeri-kart .content-card{height:100%;min-height:470px}
-.haber-galeri-denetimleri{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--color-text-muted);font-size:.85rem}
-.haber-galeri-denetimleri button{display:inline-grid;min-width:42px;min-height:42px;place-items:center;border:1px solid var(--color-border-strong);border-radius:9999px;background:var(--color-surface);color:var(--color-text-strong);font-size:1.15rem;cursor:pointer;transition:background 120ms,color 120ms,border-color 120ms}
-.haber-galeri-denetimleri button:hover{border-color:var(--color-brand);background:var(--color-brand);color:var(--color-text-on-brand)}
+.haber-galeri-denetimleri{display:flex;width:max-content;align-items:center;justify-content:center;gap:5px;margin-inline:auto;padding:5px;border:1px solid var(--color-border);border-radius:9999px;background:var(--color-bg-subtle);color:var(--color-text-muted);font-size:.82rem;box-shadow:var(--shadow-sm)}
+.haber-galeri-denetimleri button{display:inline-grid;min-width:40px;min-height:40px;place-items:center;border:0;border-radius:9999px;background:var(--color-surface);color:var(--color-brand);cursor:pointer;box-shadow:0 0 0 1px var(--color-border);transition:background 120ms,color 120ms,box-shadow 120ms,transform 120ms}
+.haber-galeri-denetimleri button:hover{background:var(--color-brand);color:var(--color-text-on-brand);box-shadow:0 0 0 1px var(--color-brand);transform:scale(1.04)}
 .haber-galeri-denetimleri span{min-width:74px;text-align:center;font-variant-numeric:tabular-nums}
 .haber-galeri-denetimleri strong{color:var(--color-brand);font-size:1rem}
+.galeri-yon-oku::before{content:"";display:block;width:9px;height:9px;border-top:2px solid currentColor;border-right:2px solid currentColor}
+.galeri-yon-oku-sol::before{transform:translateX(2px) rotate(-135deg)}
+.galeri-yon-oku-sag::before{transform:translateX(-2px) rotate(45deg)}
 /* Haber şeridi ile etkinlikler arasındaki boşluk: iki bölüm de 96px dolgu
    taşıyınca araya galerinin kendi 24px'iyle birlikte ~215px giriyordu.
    Şerit zaten kendi içinde nefes aldığı için bu ek burada kısılıyor. */
@@ -920,9 +923,14 @@ html[data-theme="kirmizi"] .site-header .nav-acilir-govde a{color:var(--color-te
 
 .marka-karti-pasif{opacity:.55;cursor:default;pointer-events:none}
 .program-detay-baslik{font-size:1.15rem;margin-top:8px}
-/* Etkinlik sayfasında gezinme: haberdekiyle aynı kutu, ama üstündeki boşluk
-   bölümün kendi dolgusundan geliyor. */
-.program-detay .haber-gezinme{margin-top:48px;padding-top:26px;padding-bottom:0}
+/* Etkinlik sayfasında gezinme: haber kartlarından daha kısa ve dar. Tek komşu
+   olduğunda bağlantı bütün satıra yayılmaz; önceki solda, sonraki sağda kalır. */
+.program-detay .etkinlik-gezinme{display:flex;align-items:stretch;justify-content:space-between;gap:14px;margin-top:48px;padding-top:26px;padding-bottom:0}
+.etkinlik-gezinme .haber-gezinme-baglanti{flex:0 1 320px;min-height:88px;padding:16px 18px;gap:5px}
+.etkinlik-gezinme .haber-gezinme-baglanti span{font-size:.7rem}
+.etkinlik-gezinme .haber-gezinme-baglanti strong{font-size:.96rem}
+.etkinlik-gezinme .haber-gezinme-sonraki{margin-left:auto}
+@media(max-width:620px){.program-detay .etkinlik-gezinme{flex-direction:column}.etkinlik-gezinme .haber-gezinme-baglanti{width:100%;max-width:none;min-height:82px;flex-basis:auto}.etkinlik-gezinme .haber-gezinme-sonraki{margin-left:0}}
 
 /* Zirve/program sayfalarında hero ile gövde tek sütun: başlık, özet, metin ve
    görseller aynı sol/sağ kenardan başlasın. */
@@ -945,6 +953,25 @@ html[data-theme="kirmizi"] .site-header .nav-acilir-govde a{color:var(--color-te
 
 /* Zirve tanıtım videosu: metin genişliğinde, köşeleri sayfa kartlarıyla aynı. */
 .zirve-video{margin:32px 0}.zirve-video video{width:100%;aspect-ratio:16/9;background:#000;border-radius:14px;display:block}.zirve-video figcaption{color:var(--color-text-muted);font-size:.85rem;margin-top:10px}
+
+/* Zirve fotoğrafları: haber şeridiyle aynı kesintisiz yatay akış, yalnızca görsel. */
+.zirve-gorsel-galerisi{position:relative;overflow:hidden;margin-top:36px}
+.zirve-galeri-pencere{width:100%;overflow-x:auto;overflow-y:hidden;padding:4px 0 10px;scrollbar-width:none;overscroll-behavior-x:contain}
+.zirve-galeri-pencere::-webkit-scrollbar{display:none}
+.zirve-galeri-serit,.zirve-galeri-tekrar{display:flex;width:max-content;gap:18px}
+.zirve-galeri-gorsel{width:clamp(310px,52vw,620px);aspect-ratio:16/10;flex:0 0 auto;margin:0;overflow:hidden;border-radius:14px;background:var(--color-bg-subtle)}
+.zirve-galeri-gorsel img{display:block;width:100%;height:100%;object-fit:cover}
+.zirve-galeri-oku{position:absolute;z-index:3;top:50%;display:grid;width:46px;height:46px;place-items:center;transform:translateY(-50%);border:1px solid color-mix(in srgb,var(--color-brand) 35%,transparent);border-radius:9999px;background:color-mix(in srgb,var(--color-surface) 92%,transparent);box-shadow:var(--shadow-md);color:var(--color-brand);line-height:1;cursor:pointer;transition:background 120ms,color 120ms,border-color 120ms,box-shadow 120ms}
+.zirve-galeri-oku:hover{border-color:var(--color-brand);background:var(--color-brand);color:var(--color-text-on-brand)}
+.zirve-galeri-oku-sol{left:12px}.zirve-galeri-oku-sag{right:12px}
+/* Haber gövdesindeki galeri, zirve sayfasındakinin aynısı (1 Eylül 2026 · istek:
+   "resimlerin arkası gri ve köşeler sivri", "zirve sayfasındaki gibi yap").
+   Önceki "object-fit:contain" kırpmıyordu ama 16/10 çerçeveyi dolduramayan her
+   fotoğrafın çevresine gri bant koyuyordu; bant yuvarlatılmış köşeye kadar
+   uzandığı için kartlar köşeli görünüyordu. Ölçü ve kırpma artık base kuraldan
+   geliyor, tek fark üstteki boşluk. */
+.haber-icerik-galerisi{margin:48px 0 0}
+@media(max-width:720px){.zirve-galeri-serit,.zirve-galeri-tekrar{gap:12px}.zirve-galeri-gorsel{width:min(84vw,430px)}.zirve-galeri-oku{width:42px;height:42px}.zirve-galeri-oku-sol{left:8px}.zirve-galeri-oku-sag{right:8px}}
 
 /* GençTek yapılanma şeması: beyaz zeminli çizim, sayfa genişliğinde. */
 .yapilanma-sema{margin:0 0 40px}.yapilanma-sema img{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--color-border);border-radius:14px}

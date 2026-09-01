@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import { altyazilariAt, oneCikanTekrariniAt, sanitizeRichText } from "@/lib/content-services/sanitize";
+import { KayanGorselGalerisi } from "@/components/zirve-gorsel-galerisi";
+import { altyazilariAt, gorselleriGaleriyeAyir, oneCikanTekrariniAt, sanitizeRichText } from "@/lib/content-services/sanitize";
 import { gorselYolu } from "@/lib/ortam";
 import { categoryName, type WordPressContent } from "@/lib/wordpress-content";
 
@@ -25,6 +26,14 @@ function govdeHtmli(item: WordPressContent) {
 export function WordPressArticle({ item, archiveHref = "/haberler", navigation }: { item: WordPressContent; archiveHref?: string; navigation?: ArticleNavigation }) {
   const label = item.type === "page" ? "GençTek" : categoryName(item.categories);
   const hasNavigation = Boolean(navigation?.previous || navigation?.next);
+  const temizGovde = sanitizeRichText(govdeHtmli(item));
+  const ayrilmis = item.type === "post" ? gorselleriGaleriyeAyir(temizGovde) : { html: temizGovde, gorseller: [] };
+  const galeriGorselleri = item.type === "post"
+    ? [
+        ...(item.featuredImage ? [{ url: item.featuredImage, alt: `${item.title} kapak görseli` }] : []),
+        ...ayrilmis.gorseller.filter((gorsel) => gorsel.url !== item.featuredImage),
+      ]
+    : [];
   return <><Header/><main><article className="wordpress-article">
     <header className="wordpress-article-header"><div className="container wordpress-article-container">
       <Link className="back-link" href={archiveHref}>← {item.type === "page" ? "Ana sayfa" : "Haberler"}</Link>
@@ -32,9 +41,10 @@ export function WordPressArticle({ item, archiveHref = "/haberler", navigation }
       {item.excerpt ? <p className="article-lede">{item.excerpt}</p> : null}
       {item.type === "post" ? <p className="wordpress-article-date">{formatDate(item.date)}</p> : null}
     </div></header>
-    {item.featuredImage ? <div className="container wordpress-article-container wordpress-featured"><img src={gorselYolu(item.featuredImage)} alt="" /></div> : null}
+    {item.type === "page" && item.featuredImage ? <div className="container wordpress-article-container wordpress-featured"><img src={gorselYolu(item.featuredImage)} alt="" /></div> : null}
     <div className="container wordpress-article-container">
-      <div className={`theme-source-body wordpress-content${hasNavigation ? " wordpress-content-has-navigation" : ""}`} dangerouslySetInnerHTML={{ __html: sanitizeRichText(govdeHtmli(item)) }} />
+      {galeriGorselleri.length ? <KayanGorselGalerisi className="haber-icerik-galerisi" gorseller={galeriGorselleri} galeriAdi={item.title} /> : null}
+      <div className={`theme-source-body wordpress-content${hasNavigation ? " wordpress-content-has-navigation" : ""}`} dangerouslySetInnerHTML={{ __html: ayrilmis.html }} />
       {hasNavigation ? <nav className="haber-gezinme" aria-label="Haberler arasında gezinme">
         {navigation?.previous ? <Link className="haber-gezinme-baglanti haber-gezinme-onceki" href={`/haberler/${navigation.previous.slug}`}>
           <span>← Önceki Haber</span><strong>{navigation.previous.title}</strong>

@@ -112,9 +112,9 @@ export function HaberGalerisi({ haberler }: { haberler: HaberKarti[] }) {
       </div>
 
       <div className="haber-galeri-denetimleri">
-        <button type="button" aria-label="Önceki haberler" onClick={() => kaydir(-1)}>←</button>
+        <button className="galeri-yon-oku galeri-yon-oku-sol" type="button" aria-label="Önceki haberler" onClick={() => kaydir(-1)} />
         <span><strong>{haberler.length}</strong> güncel içerik</span>
-        <button type="button" aria-label="Sonraki haberler" onClick={() => kaydir(1)}>→</button>
+        <button className="galeri-yon-oku galeri-yon-oku-sag" type="button" aria-label="Sonraki haberler" onClick={() => kaydir(1)} />
       </div>
     </section>
   );

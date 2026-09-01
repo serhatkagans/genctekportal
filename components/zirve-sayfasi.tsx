@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { ZirveGorselGalerisi } from "@/components/zirve-gorsel-galerisi";
 import { gorselYolu } from "@/lib/ortam";
 import { ZIRVELER, type Zirve } from "@/lib/zirve";
 
@@ -72,13 +73,7 @@ export function ZirveSayfasi({ zirve }: { zirve: Zirve }) {
           )}
 
           {zirve.gorseller.length ? (
-            <div className="program-detay-gorseller">
-              {zirve.gorseller.map((gorsel) => (
-                <figure key={gorsel.url}>
-                  <img src={gorselYolu(gorsel.url)} alt={`${zirve.ad} · ${gorsel.alt}`} loading="lazy" decoding="async" />
-                </figure>
-              ))}
-            </div>
+            <ZirveGorselGalerisi gorseller={zirve.gorseller} zirveAdi={zirve.ad} />
           ) : (
             /* Fotoğraflar gelmediyse sessizce boş bırakmak yerine bunu yazmak,
                dosyayı elinde tutan kişiye neyin beklendiğini gösterir. */
