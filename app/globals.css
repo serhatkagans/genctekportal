@@ -806,7 +806,14 @@ html[data-theme="kirmizi"] .site-header .nav-acilir-govde a{color:var(--color-te
    yoksa kartın tepesi çubuğun altında kalırdı (31 Ağustos 2026). */
 #hakkinda{scroll-margin-top:88px}
 .hakkinda-karti{scroll-margin-top:88px}
-.mobile-menu nav .mobil-alt-baglanti{padding-left:16px;font-size:.9rem;color:var(--color-text-muted)}
+.mobile-menu nav{max-height:calc(100dvh - 72px);overflow-y:auto;overscroll-behavior:contain;padding-bottom:max(24px,env(safe-area-inset-bottom))}
+.mobile-menu nav .mobil-alt-menu>summary{display:flex;align-items:center;justify-content:space-between;list-style:none;color:#fff;font-weight:700;cursor:pointer}
+.mobile-menu nav .mobil-alt-menu>summary::-webkit-details-marker{display:none}
+.mobile-menu nav .mobil-alt-menu>summary:after{content:"+";font-size:1.2rem;font-weight:400;line-height:1}
+.mobile-menu nav .mobil-alt-menu[open]>summary:after{content:"−"}
+.mobile-menu nav .mobil-alt-menu-govde{display:grid;gap:10px;margin-top:12px;padding-left:4px}
+.mobile-menu nav .mobil-alt-baglanti{display:block;padding:7px 14px;border-left:2px solid rgba(255,255,255,.6);font-size:.9rem;color:#fff;background:rgba(255,255,255,.08)}
+@media(max-width:720px){.mobile-menu nav{gap:12px;padding:18px 20px max(20px,env(safe-area-inset-bottom))}}
 .hakkinda-izgara{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .hakkinda-karti{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--color-border);border-radius:14px;background:var(--color-surface);box-shadow:var(--shadow-sm);transition:transform 160ms,box-shadow 160ms,border-color 160ms}
 .hakkinda-karti:hover{transform:translateY(-4px);border-color:var(--color-brand);box-shadow:var(--shadow-lg)}

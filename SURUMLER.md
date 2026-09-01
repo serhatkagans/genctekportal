@@ -19,6 +19,9 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- Oyun Tasarımı - EğitiJAM çalışma grubunun kapak görseli yenilendi ve web için
+  küçültüldü; mobil menüdeki Hakkında bağlantıları açılır bir alt menüye alınarak
+  taşma ve renk uyumsuzluğu giderildi.
 - Çalışma grubu detay sayfalarındaki kapak görselleri kare yerine 16:9 yatay
   oranda gösteriliyor.
 - Çalışma grubu detay sayfalarında kalan “tema” ifadeleri “çalışma grubu”

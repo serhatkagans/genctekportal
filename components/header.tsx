@@ -124,10 +124,13 @@ export function Header() {
         <details className="mobile-menu">
           <summary aria-label="Menüyü aç">Menü</summary>
           <nav aria-label="Mobil menü">
-            <a href={anaSayfaCapasi("hakkinda")}>Hakkında</a>
-            {/* Mobilde iç içe açılır menü yok: Hakkında başlıkları girintili
-                olarak doğrudan listeleniyor. */}
-            {hakkindaBaglantilari.map(([etiket, adres]) => <Link className="mobil-alt-baglanti" href={adres} key={adres}>{etiket}</Link>)}
+            <details className="mobil-alt-menu">
+              <summary>Hakkında</summary>
+              <div className="mobil-alt-menu-govde">
+                <a className="mobil-alt-baglanti" href={anaSayfaCapasi("hakkinda")}>Genel Bakış</a>
+                {hakkindaBaglantilari.map(([etiket, adres]) => <Link className="mobil-alt-baglanti" href={adres} key={adres}>{etiket}</Link>)}
+              </div>
+            </details>
             {baglantilar.map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
             {/* Mobilde açılır menü İÇİNDE açılır menü olmaz: iki zirve doğrudan
                 listeleniyor, başlıkları zaten hangi yıl olduğunu söylüyor. */}
