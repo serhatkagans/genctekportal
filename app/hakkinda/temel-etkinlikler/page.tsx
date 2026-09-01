@@ -78,13 +78,9 @@ export default function TemelEtkinliklerSayfasi() {
 
       <section className="section themes-section">
         <div className="container">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">Çalışma gruplarıyla</span>
-              <h2>Çalışma Grubu Etkinlikleri</h2>
-              <p>Çalışma gruplarının yıl boyunca planlayıp yürüttüğü programlar.</p>
-            </div>
-          </div>
+          {/* Bölüm başlığı 1 Eylül 2026'da kaldırıldı (istek: "alttan Çalışma
+             gruplarıyla / Çalışma Grubu Etkinlikleri … bunları kaldır");
+             kartlar iki dizi hâlinde ama tek liste gibi akıyor. */}
           <ProgramIzgarasi kayitlar={CALISMA_GRUBU_ETKINLIKLERI} />
         </div>
       </section>

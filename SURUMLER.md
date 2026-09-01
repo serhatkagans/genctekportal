@@ -19,6 +19,7 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- Temel GençTek Etkinlikleri sayfasındaki "Çalışma Grubu Etkinlikleri" bölüm başlığı kaldırıldı; kartlar tek liste gibi akıyor.
 - Temel GençTek Etkinlikleri kartlarının kapakları yenilendi: Genç Gölge, Sahne
   Senin, G2S, Sınır Ötesi, Öğrenci Forumu, Oyunun e Hâli, Tek Maraton, Misafir
   Öğretmenlik/Öğrencilik ve GençTek Zirvesi.
