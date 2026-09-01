@@ -5,7 +5,6 @@ import { Icon } from "@/components/icons";
 import { gorselYolu } from "@/lib/ortam";
 import {
   aciklamaOzeti,
-  CALISMA_GRUBU_ETKINLIKLERI,
   TEMEL_ETKINLIKLER,
   type TemelEtkinlik,
 } from "@/lib/temel-etkinlik";
@@ -76,14 +75,17 @@ export default function TemelEtkinliklerSayfasi() {
         </div>
       </section>
 
-      <section className="section themes-section">
-        <div className="container">
-          {/* Bölüm başlığı 1 Eylül 2026'da kaldırıldı (istek: "alttan Çalışma
-             gruplarıyla / Çalışma Grubu Etkinlikleri … bunları kaldır");
-             kartlar iki dizi hâlinde ama tek liste gibi akıyor. */}
-          <ProgramIzgarasi kayitlar={CALISMA_GRUBU_ETKINLIKLERI} />
-        </div>
-      </section>
+      {/*
+        ÇALIŞMA GRUBU ETKİNLİKLERİ BÖLÜMÜ KALKTI (1 Eylül 2026 · istekler:
+        "alttan Çalışma gruplarıyla / Çalışma Grubu Etkinlikleri … bunları
+        kaldır" ve "kartlar da kalkacaktı çalışma grubu etkinliklerinin").
+
+        Kayıtlar SİLİNMEDİ: EĞİTİJAM, Capture The Flag, Mobil Uygulama
+        Geliştirme Yarışması, Teknik Gezi, Master Tek ve E-Ticaret Ideathonu
+        `lib/temel-etkinlik.ts`'te duruyor, kendi sayfaları da açılıyor —
+        paylaşılmış bağlantılar çalışmayı sürdürsün diye. Kalkan yalnızca bu
+        listedeki kartlar.
+      */}
 
     </main>
     <Footer />
