@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { EgitijamProgram } from "@/components/egitijam-program";
+import { ThemeSourceArticle } from "@/components/theme-source-article";
 import { YARDIMLASMA_GRUPLARI, yardimlasmaGrubuBul } from "@/lib/yardimlasma";
 
 /*
@@ -47,6 +48,7 @@ export default async function YardimlasmaGrubuSayfasi({ params }: { params: Prom
       </section>
 
       {grup.slug === "oyun-tasarimi" ? <EgitijamProgram /> : null}
+      {grup.arsivTemasi ? <ThemeSourceArticle slug={grup.arsivTemasi} /> : null}
     </main>
     <Footer />
   </>;

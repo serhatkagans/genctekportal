@@ -10,6 +10,7 @@ import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
 import { temaBul, temalariOku } from "@/lib/tema";
 import { getThemeProgram } from "@/lib/theme-programs";
 import { temaKaynagi } from "@/lib/tema-kaynak";
+import { arsiviTasinanTema } from "@/lib/yardimlasma";
 
 // Temalar panelden düzenlenebildiği için her istekte dosyadan okunur.
 export const dynamic = "force-dynamic";
@@ -44,7 +45,8 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
         <p className="theme-govde-metni">{theme.description}</p>
       </div></section>
       {program ? <ThemeOfficialProgram program={program} arsivVar={arsivVar} /> : null}
-      <ThemeSourceArticle slug={theme.slug} />
+      {/* Arşiv içeriği bir yardımlaşma grubuna taşındıysa burada basılmaz. */}
+      {arsiviTasinanTema(theme.slug) ? null : <ThemeSourceArticle slug={theme.slug} />}
       <section className="section theme-detail-cta"><div className="container join-card"><div><span className="eyebrow eyebrow-light">Bu çalışma grubu seni heyecanlandırdı mı?</span><h2>{theme.name} ekibinde yerini al.</h2><p>Öğrenci veya danışman öğretmen olarak GençTek ekosistemine katıl.</p></div><a className="button button-light" href={genctekGirisAdresi()}>Platforma giriş <Icon name="arrow"/></a></div></section>
     </article>
   </main><Footer/></>;

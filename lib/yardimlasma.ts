@@ -16,15 +16,31 @@ export type YardimlasmaGrubu = {
   ad: string;
   gorsel: string;
   metin?: string;
+  /*
+   * Bu gruba taşınmış çalışma grubu arşivi (1 Eylül 2026 · istek: "oyun
+   * tasarımında üst yazı kalsın, alttaki eğitijam içeriği yeni kart sayfası
+   * olsun … bölelim yani bunu").
+   *
+   * EğitiJAM maratonu ve finalistleri, oyun tasarımı çalışma grubunun tanıtım
+   * metninin altında duruyordu: sayfanın yarısı grubu, yarısı bir etkinliği
+   * anlatıyordu. Arşiv içeriği burada basılıyor, çalışma grubu sayfasında
+   * basılmıyor — kaynak tek yerde, iki sayfada birden görünmüyor.
+   */
+  arsivTemasi?: string;
 };
 
 export const YARDIMLASMA_GRUPLARI: YardimlasmaGrubu[] = [
   { slug: "meb-robot-yarismasi", ad: "MEB Robot Yarışması", gorsel: "/medya/yardimlasma/meb-robot-yarismasi.webp" },
   { slug: "teknofest", ad: "TEKNOFEST", gorsel: "/medya/yardimlasma/teknofest.webp" },
   { slug: "tubitak", ad: "TÜBİTAK", gorsel: "/medya/yardimlasma/tubitak.webp" },
-  { slug: "oyun-tasarimi", ad: "Oyun Tasarımı", gorsel: "/medya/yardimlasma/oyun-tasarimi.webp" },
+  { slug: "oyun-tasarimi", ad: "Oyun Tasarımı", gorsel: "/medya/yardimlasma/oyun-tasarimi.webp", arsivTemasi: "oyun-tasarimi-egitijam" },
 ];
 
 export function yardimlasmaGrubuBul(slug: string) {
   return YARDIMLASMA_GRUPLARI.find((grup) => grup.slug === slug);
+}
+
+/** Arşivi bir yardımlaşma grubuna taşınmış çalışma grupları. */
+export function arsiviTasinanTema(temaSlug: string) {
+  return YARDIMLASMA_GRUPLARI.some((grup) => grup.arsivTemasi === temaSlug);
 }

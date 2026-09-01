@@ -19,6 +19,9 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- EğitiJAM arşiv içeriği (maraton ve finalistler) Oyun Tasarımı çalışma grubu
+  sayfasından Oyun Tasarımı yardımlaşma grubunun sayfasına taşındı; çalışma
+  grubu sayfasında yalnızca tanıtım metni kaldı.
 - **Çalışma grupları sayfasına "Yardımlaşma Grupları" bölümü eklendi**: MEB
   Robot Yarışması, TEKNOFEST, TÜBİTAK ve Oyun Tasarımı. Her birinin kendi
   sayfası var; tanıtım metinleri gelene kadar sayfa metnin hazırlandığını
