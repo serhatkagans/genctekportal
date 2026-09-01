@@ -58,8 +58,56 @@ function eskiSiteBaglantisi(href: string): EskiBaglanti {
   return { yol };
 }
 
+/*
+ * GALERİ GÖRSELLERİNİN ÇÖZÜNÜRLÜĞÜ.
+ *
+ * Aktarılan gövdelerde görseller <a href="tam-boy.jpg"> içinde ve WordPress'in
+ * 300x200'lük kopyasıyla geliyor: srcset varsa sizes="...300px" tarayıcıya hep
+ * en küçük kopyayı seçtiriyor, srcset yoksa src zaten küçük kopya. Gövde
+ * görsellerini sütun genişliğinde bastığımız için ikisi de bulanık kalıyordu.
+ * Yalnızca bağlantı içine konmuş (yani galeri) görsellerde düzeltiyoruz;
+ * bağlantısız küçük görseller — ör. koordinatör vesikalıkları — dokunulmadan
+ * kalsın, aksi halde 96px'lik avatar için 1024px'lik dosya inerdi.
+ */
+const GOVDE_GENISLIK = "(max-width: 940px) 100vw, 940px";
+const KUCUK_ESIK = 600;
+const GORSEL_UZANTI = /\.(?:jpe?g|png|webp|gif)$/i;
+
+export function galeriGorselleriBuyut(html: string) {
+  return html.replace(
+    /<a\b[^>]*href="([^"]+)"[^>]*>(\s*)<img\b([^>]*)>/gi,
+    (tam, href: string, bosluk: string, imgOzellik: string) => {
+      if (!GORSEL_UZANTI.test(href)) return tam;
+      const srcsetVar = /\bsrcset=/i.test(imgOzellik);
+      const genislik = Number(/\bwidth="(\d+)"/i.exec(imgOzellik)?.[1] ?? 0);
+      if (!srcsetVar && genislik > KUCUK_ESIK) return tam;
+      let yeni = imgOzellik.replace(/\s(?:width|height)="\d+"/gi, "");
+      yeni = srcsetVar
+        ? yeni.replace(/\ssizes="[^"]*"/i, "") + ` sizes="${GOVDE_GENISLIK}"`
+        : yeni.replace(/\ssrc="[^"]*"/i, ` src="${href}"`);
+      return tam.replace(`<img${imgOzellik}>`, `<img${yeni}>`);
+    },
+  );
+}
+
+/*
+ * ÖNE ÇIKAN GÖRSELİN GÖVDEDE TEKRARI.
+ *
+ * Bazı haberlerde kapak görseli gövdenin ilk figure'ü olarak da duruyor;
+ * sayfanın başında aynı fotoğraf iki kez görünüyordu. Kapakla aynı dosyayı
+ * gösteren figure/görsel gövdeden çıkarılıyor, altyazısı varsa onunla birlikte.
+ */
+export function oneCikanTekrariniAt(html: string, oneCikan?: string) {
+  if (!oneCikan) return html;
+  const kacis = oneCikan.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const gorsel = `<img[^>]*src="${kacis}"[^>]*>`;
+  const figurlu = new RegExp(`<figure[^>]*>\\s*${gorsel}(?:\\s*<figcaption[^>]*>[\\s\\S]*?</figcaption>)?\\s*</figure>`, "i");
+  const yalin = new RegExp(`(?:<p>\\s*)?${gorsel}(?:\\s*</p>)?`, "i");
+  return figurlu.test(html) ? html.replace(figurlu, "") : html.replace(yalin, "");
+}
+
 export function sanitizeRichText(input: string) {
-  return sanitizeHtml(input, {
+  return sanitizeHtml(galeriGorselleriBuyut(input), {
     allowedTags: ["p", "h1", "h2", "h3", "h4", "h5", "h6", "strong", "b", "em", "i", "u", "ul", "ol", "li", "blockquote", "a", "br", "hr", "figure", "figcaption", "img", "div", "span", "table", "thead", "tbody", "tfoot", "tr", "th", "td", "caption", "pre", "code", "details", "summary", "sup", "sub", "iframe", "video", "source"],
     allowedAttributes: { "*": ["class", "id", "title", "aria-label", "aria-hidden"], a: ["href", "target", "rel", "download"], img: ["src", "srcset", "sizes", "alt", "width", "height", "loading", "decoding"], iframe: ["src", "width", "height", "title", "allow", "allowfullscreen", "loading"], video: ["src", "poster", "controls", "width", "height"], source: ["src", "srcset", "type", "media"], td: ["colspan", "rowspan"], th: ["colspan", "rowspan", "scope"] },
     allowedSchemes: ["https", "http", "mailto", "tel"],

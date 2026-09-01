@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { duzMetindenHtml, htmldenDuzMetin, gorselEtiketi } from "../lib/haber-bicim";
-import { sanitizeRichText } from "../lib/content-services/sanitize";
+import { galeriGorselleriBuyut, oneCikanTekrariniAt, sanitizeRichText } from "../lib/content-services/sanitize";
 
 describe("düz metinden HTML", () => {
   it("boş satırı paragrafa çevirir", () =>
@@ -57,5 +57,32 @@ describe("HTML'den düz metne", () => {
   it("gidip gelen içerik anlamını korur", () => {
     const html = "<h2>Başlık</h2>\n<p>Metin <strong>kalın</strong>.</p>\n<ul><li>Bir</li></ul>";
     expect(duzMetindenHtml(htmldenDuzMetin(html))).toBe(html);
+  });
+});
+
+describe("Haber gövdesi görselleri", () => {
+  const kapak = "/medya/kamp-1.jpg";
+  const govde = `<p>Metin</p> <figure><img src="${kapak}" alt="a" /><figcaption>Altyazı</figcaption></figure> <p>Devam</p>`;
+
+  it("kapakla aynı görseli gövdeden çıkarır", () => {
+    const cikti = oneCikanTekrariniAt(govde, kapak);
+    expect(cikti).not.toContain(kapak);
+    expect(cikti).not.toContain("Altyazı");
+    expect(cikti).toContain("<p>Devam</p>");
+  });
+
+  it("başka görsellere dokunmaz", () =>
+    expect(oneCikanTekrariniAt(govde, "/medya/baska.jpg")).toBe(govde));
+
+  it("galeri görselinin sizes değerini gövde genişliğine çeker", () => {
+    const html = '<a href="/wordpress/media/1.jpg"><img src="/wordpress/media/1-300x200.jpg" srcset="/wordpress/media/1-300x200.jpg 300w, /wordpress/media/1.jpg 1600w" sizes="(max-width: 300px) 100vw, 300px" width="300" height="200" /></a>';
+    const cikti = galeriGorselleriBuyut(html);
+    expect(cikti).toContain('sizes="(max-width: 940px) 100vw, 940px"');
+    expect(cikti).not.toContain('width="300"');
+  });
+
+  it("srcset'i olmayan küçük görseli tam boy dosyaya çevirir", () => {
+    const html = '<a href="/wordpress/media/1.jpg"><img src="/wordpress/media/1-300x200.jpg" width="300" height="200" /></a>';
+    expect(galeriGorselleriBuyut(html)).toContain('src="/wordpress/media/1.jpg"');
   });
 });

@@ -13,7 +13,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const item = await haberBul((await params).slug);
-  if (!item) notFound();
-  return <WordPressArticle item={item}/>;
+  const { slug } = await params;
+  const haberler = await haberleriOku();
+  const index = haberler.findIndex((haber) => haber.slug === slug);
+  if (index < 0) notFound();
+
+  const item = haberler[index];
+  const previous = haberler[index + 1];
+  const next = haberler[index - 1];
+
+  return <WordPressArticle item={item} navigation={{ previous, next }}/>;
 }

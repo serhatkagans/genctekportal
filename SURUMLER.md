@@ -19,6 +19,13 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- Haber detay sayfalarının altına önceki ve sonraki habere geçiş bağlantıları
+  eklendi.
+- Haber sayfalarında başlık, kapak, metin ve fotoğraflar tek sütun genişliğine
+  alındı; kapak görselinin gövdede tekrarı kaldırıldı ve WordPress'ten küçük
+  kopyasıyla gelen galeri görselleri tam boy sürümüyle basılıyor.
+- 2. GençTek Zirvesi sayfasına katılım sayılarının şeridi ve zirve programının
+  başlıklı bölümleri (oturumlar ve alanlar) eklendi; giriş metni yenilendi.
 - Oyun Tasarımı - EğitiJAM çalışma grubunun kapak görseli yenilendi ve web için
   küçültüldü; mobil menüdeki Hakkında bağlantıları açılır bir alt menüye alınarak
   taşma ve renk uyumsuzluğu giderildi.

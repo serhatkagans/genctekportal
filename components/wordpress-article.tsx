@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import { sanitizeRichText } from "@/lib/content-services/sanitize";
+import { oneCikanTekrariniAt, sanitizeRichText } from "@/lib/content-services/sanitize";
 import { gorselYolu } from "@/lib/ortam";
 import { categoryName, type WordPressContent } from "@/lib/wordpress-content";
 
@@ -9,8 +9,14 @@ function formatDate(value: string) {
   return new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "long", year: "numeric" }).format(new Date(value));
 }
 
-export function WordPressArticle({ item, archiveHref = "/haberler" }: { item: WordPressContent; archiveHref?: string }) {
+type ArticleNavigation = {
+  previous?: Pick<WordPressContent, "slug" | "title">;
+  next?: Pick<WordPressContent, "slug" | "title">;
+};
+
+export function WordPressArticle({ item, archiveHref = "/haberler", navigation }: { item: WordPressContent; archiveHref?: string; navigation?: ArticleNavigation }) {
   const label = item.type === "page" ? "GençTek" : categoryName(item.categories);
+  const hasNavigation = Boolean(navigation?.previous || navigation?.next);
   return <><Header/><main><article className="wordpress-article">
     <header className="wordpress-article-header"><div className="container wordpress-article-container">
       <Link className="back-link" href={archiveHref}>← {item.type === "page" ? "Ana sayfa" : "Haberler"}</Link>
@@ -18,7 +24,17 @@ export function WordPressArticle({ item, archiveHref = "/haberler" }: { item: Wo
       {item.excerpt ? <p className="article-lede">{item.excerpt}</p> : null}
       {item.type === "post" ? <p className="wordpress-article-date">{formatDate(item.date)}</p> : null}
     </div></header>
-    {item.featuredImage ? <div className="container wordpress-featured"><img src={gorselYolu(item.featuredImage)} alt="" /></div> : null}
-    <div className="container wordpress-article-container"><div className="theme-source-body wordpress-content" dangerouslySetInnerHTML={{ __html: sanitizeRichText(item.html) }} /></div>
+    {item.featuredImage ? <div className="container wordpress-article-container wordpress-featured"><img src={gorselYolu(item.featuredImage)} alt="" /></div> : null}
+    <div className="container wordpress-article-container">
+      <div className={`theme-source-body wordpress-content${hasNavigation ? " wordpress-content-has-navigation" : ""}`} dangerouslySetInnerHTML={{ __html: sanitizeRichText(oneCikanTekrariniAt(item.html, item.featuredImage)) }} />
+      {hasNavigation ? <nav className="haber-gezinme" aria-label="Haberler arasında gezinme">
+        {navigation?.previous ? <Link className="haber-gezinme-baglanti haber-gezinme-onceki" href={`/haberler/${navigation.previous.slug}`}>
+          <span>← Önceki Haber</span><strong>{navigation.previous.title}</strong>
+        </Link> : null}
+        {navigation?.next ? <Link className="haber-gezinme-baglanti haber-gezinme-sonraki" href={`/haberler/${navigation.next.slug}`}>
+          <span>Sonraki Haber →</span><strong>{navigation.next.title}</strong>
+        </Link> : null}
+      </nav> : null}
+    </div>
   </article></main><Footer/></>;
 }

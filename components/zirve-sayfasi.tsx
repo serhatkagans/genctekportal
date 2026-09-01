@@ -18,11 +18,23 @@ export function ZirveSayfasi({ zirve }: { zirve: Zirve }) {
     <Header />
     <main>
       <section className="page-hero compact">
-        <div className="container">
+        <div className="container program-detay">
           <Link className="back-link" href="/hakkinda/temel-etkinlikler/genctek-zirvesi">← GençTek Zirvesi</Link>
           <span className="eyebrow">{zirve.tarihYer}</span>
           <h1>{zirve.ad}</h1>
           <p>{zirve.ozet}</p>
+
+          {/* Sayı şeridi: zirvenin ölçeği metne dalmadan da okunsun. */}
+          {zirve.vurgular?.length ? (
+            <dl className="zirve-vurgular">
+              {zirve.vurgular.map((vurgu) => (
+                <div key={vurgu.etiket}>
+                  <dt>{vurgu.deger}</dt>
+                  <dd>{vurgu.etiket}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
         </div>
       </section>
 
@@ -31,6 +43,21 @@ export function ZirveSayfasi({ zirve }: { zirve: Zirve }) {
           {zirve.metin.split(/\n{2,}/).map((paragraf) => (
             <p className="program-detay-metin" key={paragraf}>{paragraf}</p>
           ))}
+
+          {/* Program bölümleri: giriş metninin ardından, fotoğraflardan önce.
+             Her biri kendi başlığıyla duruyor ki sayfada göz gezdiren okuyucu
+             aradığı oturumu tek bakışta bulabilsin. */}
+          {zirve.bolumler?.length ? (
+            <div className="zirve-bolumler">
+              <h2 className="zirve-bolumler-baslik">Zirve programından</h2>
+              {zirve.bolumler.map((bolum) => (
+                <section className="zirve-bolum" key={bolum.baslik}>
+                  <h3>{bolum.baslik}</h3>
+                  <p>{bolum.metin}</p>
+                </section>
+              ))}
+            </div>
+          ) : null}
 
           {zirve.video && (
             /* Video metnin hemen altında: sayfaya gelen önce anlatımı okuyor,
