@@ -154,6 +154,24 @@ export const ZIRVE_2026: Zirve = {
     { url: "/medya/genctek-zirvesi-2026-3.jpg", alt: "Millî Eğitim Bakanı ve beraberindeki heyetin öğrencilerin proje standını ziyaret edip ürünleri incelemesi" },
     { url: "/medya/genctek-zirvesi-2026-4.jpg", alt: "Sahneden salona bakış: kürsüdeki konuşmayı dolu koltuklarda dinleyen yüzlerce öğrenci ve öğretmen" },
     { url: "/medya/genctek-zirvesi-2026-5.jpg", alt: "Fuaye alanında masalarda dizüstü bilgisayar ve tabletlerle çalışan öğrenciler ve arkadaki zirve panosu" },
+    /* 1 Eylül 2026'da eklenen kare (istek: "mevcut görsellere ek"): asıl
+       dosyalar 5-15 MB'lık fotoğraf makinesi çıktısıydı, web için 1600px
+       genişliğinde webp'e indirildi. */
+    { url: "/medya/genctek-zirvesi-2026-6.webp", alt: "GençTek tişörtlü öğrenci ekibinin, robotik çalışmalarını sergiledikleri stant masasının başında verdiği fotoğraf" },
+    { url: "/medya/genctek-zirvesi-2026-7.webp", alt: "Aynı il ekibinin danışman öğretmeniyle birlikte proje standının önünde topluca poz vermesi" },
+    { url: "/medya/genctek-zirvesi-2026-8.webp", alt: "Zirve oturumlarından biri: koltukları dolduran katılımcılar ve sahnedeki sunum ekranı" },
+    { url: "/medya/genctek-zirvesi-2026-9.webp", alt: "Kürsüdeki konuşmacının arkasında zirvenin adını ve paydaş kurumların logolarını taşıyan dev ekran" },
+    { url: "/medya/genctek-zirvesi-2026-10.webp", alt: "Sahnede belgelerini alan öğrenci takımının protokolle birlikte hatıra fotoğrafı" },
+    { url: "/medya/genctek-zirvesi-2026-11.webp", alt: "Paydaş kurumların logolarının yer aldığı fotoğraf duvarının önünde öğrenciler, öğretmenler ve yöneticiler" },
+    { url: "/medya/genctek-zirvesi-2026-12.webp", alt: "“Sahne Senin” bölümünde mikrofonla deneyimini anlatan öğrenci" },
+    { url: "/medya/genctek-zirvesi-2026-13.webp", alt: "Sahnede “Kör tornavidayla dünya üçüncülüğü mümkün mü?” başlıklı sunumun yapılması" },
+    { url: "/medya/genctek-zirvesi-2026-14.webp", alt: "Stantta dizüstü bilgisayarındaki projesini ziyaretçilere anlatan öğrenci" },
+    { url: "/medya/genctek-zirvesi-2026-15.webp", alt: "Sergi alanında bir öğrencinin geliştirdiği uygulamayı dizüstü bilgisayar başında yöneticiye göstermesi" },
+    { url: "/medya/genctek-zirvesi-2026-16.webp", alt: "Stant başında ziyaretçilere çalışmalarını anlatan GençTek öğrencileri" },
+    { url: "/medya/genctek-zirvesi-2026-17.webp", alt: "Kürsüden birlikte sunum yapan iki öğrenci" },
+    { url: "/medya/genctek-zirvesi-2026-18.webp", alt: "Drone alanında kullanılan, koruma kafesli iki drone futbolu topu" },
+    { url: "/medya/genctek-zirvesi-2026-19.webp", alt: "Sergi ve stant alanının üstten görünümü: standlar arasında dolaşan kalabalık" },
+    { url: "/medya/genctek-zirvesi-2026-20.webp", alt: "Zirvenin toplu hatıra fotoğrafı: sergi alanını dolduran yüzlerce katılımcının el sallaması" },
   ],
   video: {
     url: "/video/genctek-zirvesi-2026.mp4",

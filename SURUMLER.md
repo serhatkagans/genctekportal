@@ -19,6 +19,7 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- 2. GençTek Zirvesi sayfasının fotoğraf galerisine on beş yeni kare eklendi.
 - EğitiJAM arşiv içeriği (maraton ve finalistler) Oyun Tasarımı çalışma grubu
   sayfasından Oyun Tasarımı yardımlaşma grubunun sayfasına taşındı; çalışma
   grubu sayfasında yalnızca tanıtım metni kaldı.
