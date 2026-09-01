@@ -19,6 +19,18 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Zirve ve haber sayfalarındaki fotoğraflar kayan galeriye alındı.** Alt alta
+  dizilmek yerine kendiliğinden akan yatay bir şeritte duruyorlar; sol ve sağ
+  oklarla elle de gezilebiliyor, imleç üzerindeyken ya da bir düğmeye
+  basıldığında akış duruyor.
+- Haber gövdelerinin sonunda, arşivden gelen boş satır yığınları kısıldı: metin
+  ile "Önceki/Sonraki Haber" bağlantıları arasındaki yarım ekranlık boşluk
+  kalktı. Bilinçli tek satır atlamaları duruyor.
+- Ana sayfadaki haber şeridinin kaydırma düğmeleri ok simgesine dönüştü,
+  denetim çubuğu tek bir kapsül hâlinde toplandı.
+- Temel etkinlik sayfalarının altındaki önceki/sonraki bağlantıları
+  haberlerdekinden daha dar ve kısa; tek komşu varken satırı kaplamıyor.
+- Alt bilgideki ETKİM bağlantısı `etkim.gov.tr` olarak düzeltildi.
 - Temel GençTek Etkinlikleri sayfasından "Çalışma Grubu Etkinlikleri" bölümü
   tamamen kaldırıldı (başlık ve kartlar). EĞİTİJAM, Capture The Flag, Mobil
   Uygulama Geliştirme Yarışması, Teknik Gezi, Master Tek ve E-Ticaret

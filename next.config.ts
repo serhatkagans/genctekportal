@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   basePath: (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(/\/$/, ""),
   poweredByHeader: false,
   compress: true,
+  // Yerel Prisma Postgres aynı anda dokuzuncu bağlantıda yarı kilitleniyor.
+  // Statik üretim işçilerini sınırlamak, build sırasında veritabanını çökertmez.
+  experimental: { cpus: 1 },
   /*
    * İl koordinatörleri sayfası Hakkında'nın altına taşındı (20 Ağustos 2026).
    * Eski adres KALICI OLARAK yönlendiriliyor: sayfa dışarıda paylaşılmış ve
