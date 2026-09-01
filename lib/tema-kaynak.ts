@@ -39,8 +39,23 @@ function yazimDuzelt(metin: string) {
   return metin.replace(/Milli(?=\s*Eğitim)/g, "Millî");
 }
 
+/*
+ * ARŞİVİ BAŞKA BİR ÇALIŞMA GRUBUNA TAŞINAN KAYITLAR (1 Eylül 2026 · istek:
+ * "oyun tasarımının altındaki eğitijam yazılarından yeni bir çalışma grubu
+ * kartı oluşturacaktın").
+ *
+ * Oyun Tasarımı sayfasında tanıtım metninin altında EğitiJAM maratonu
+ * duruyordu: sayfanın yarısı grubu, yarısı bir etkinliği anlatıyordu. Arşiv
+ * yazısı artık EğitiJAM çalışma grubunun sayfasında basılıyor; eski slug'ın
+ * sayfası onu basmıyor, yoksa aynı metin iki yerde birden görünürdü.
+ */
+const ARSIVI_TASINAN: Record<string, string> = { "oyun-tasarimi-egitijam": "egitijam" };
+
 export function temaKaynagi(slug: string): TemaKaynagi | undefined {
-  const kayit = (sourceContent as Record<string, TemaKaynagi>)[slug];
+  if (ARSIVI_TASINAN[slug]) return undefined;
+  const kaynakSlug =
+    Object.keys(ARSIVI_TASINAN).find((eski) => ARSIVI_TASINAN[eski] === slug) ?? slug;
+  const kayit = (sourceContent as Record<string, TemaKaynagi>)[kaynakSlug];
   if (!kayit) return undefined;
   return { ...kayit, title: yazimDuzelt(kayit.title), html: yazimDuzelt(kayit.html) };
 }

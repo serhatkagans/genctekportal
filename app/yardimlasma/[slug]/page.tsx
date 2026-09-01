@@ -3,17 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { EgitijamProgram } from "@/components/egitijam-program";
-import { ThemeSourceArticle } from "@/components/theme-source-article";
 import { YARDIMLASMA_GRUPLARI, yardimlasmaGrubuBul } from "@/lib/yardimlasma";
 
 /*
  * YARDIMLAŞMA GRUBU SAYFASI.
  *
- * EĞİTİJAM İÇERİĞİ BURAYA TAŞINDI (1 Eylül 2026 · istek: "oyun tasarımında
- * üst yazı kalsın, alttaki eğitijam içeriği yeni kart sayfası olsun").
- * Çalışma grubu sayfasında tanıtım metninin altında duran uzun EğitiJAM
- * programı, artık Oyun Tasarımı yardımlaşma grubunun kendi sayfasında.
+ * Tanıtım metinleri gelene kadar sayfa yalnızca adı ve bir bekleme satırını
+ * gösteriyor; metin `lib/yardimlasma.ts` içindeki `metin` alanına yazılacak.
  */
 export function generateStaticParams() {
   return YARDIMLASMA_GRUPLARI.map(({ slug }) => ({ slug }));
@@ -47,8 +43,6 @@ export default async function YardimlasmaGrubuSayfasi({ params }: { params: Prom
         </div>
       </section>
 
-      {grup.slug === "oyun-tasarimi" ? <EgitijamProgram /> : null}
-      {grup.arsivTemasi ? <ThemeSourceArticle slug={grup.arsivTemasi} /> : null}
     </main>
     <Footer />
   </>;

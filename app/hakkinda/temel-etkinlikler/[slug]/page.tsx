@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { gorselYolu } from "@/lib/ortam";
 import { aciklamaParcalari, temelEtkinlikBul, temelEtkinlikKomsulari, temelEtkinlikSluglari } from "@/lib/temel-etkinlik";
 
 /*
@@ -54,15 +53,10 @@ export default async function TemelEtkinlikSayfasi({ params }: { params: Promise
                 : <p className="program-detay-metin" key={parca.metin}>{parca.metin}</p>))
             : <p className="program-detay-metin">Bu programın tanıtım metni hazırlanıyor. Tarihli duyurular ve başvurular <Link className="text-link" href="/etkinlikler">Etkinlikler</Link> sayfasındadır.</p>}
 
-          {kayit.gorseller?.length ? (
-            <div className="program-detay-gorseller">
-              {kayit.gorseller.map((gorsel) => (
-                <figure key={gorsel.url}>
-                  <img src={gorselYolu(gorsel.url)} alt={gorsel.alt} loading="lazy" decoding="async" />
-                </figure>
-              ))}
-            </div>
-          ) : null}
+          {/* SAYFA İÇİ FOTOĞRAFLAR KALKTI (1 Eylül 2026 · istek: "temel
+             etkinlikler kartlarında resimler dursun ama sayfa içlerindeki
+             görseller kalksın sadece yazılar kalsın"). Görseller kayıtta
+             duruyor: liste ekranındaki kapak oradan geliyor. */}
 
           {/* Haber sayfalarındaki gezinmenin aynısı: aynı biçim, aynı sınıflar
              (bkz. components/wordpress-article.tsx). */}

@@ -19,6 +19,11 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **EğitiJAM ayrı bir çalışma grubu kartı oldu.** Oyun Tasarımı sayfasının
+  altında duran maraton programı ve arşiv yazısı artık kendi kartının
+  sayfasında; Oyun Tasarımı'nda yalnızca grubun tanıtım metni kaldı.
+- Temel etkinlik sayfalarındaki fotoğraflar kaldırıldı; görseller listedeki
+  kartlarda duruyor.
 - 2. GençTek Zirvesi sayfasının fotoğraf galerisine on beş yeni kare eklendi.
 - EğitiJAM arşiv içeriği (maraton ve finalistler) Oyun Tasarımı çalışma grubu
   sayfasından Oyun Tasarımı yardımlaşma grubunun sayfasına taşındı; çalışma
