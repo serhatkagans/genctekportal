@@ -43,8 +43,10 @@ export default function GenctekNedirSayfasi() {
               METİN YEĞİTEK'İN KENDİ TANIMI (31 Ağustos 2026 · istek: "Kısaca
               yerine Genç Bilişim Ekosistemi Koordinatörlüğü"). Portalın kendi
               yazdığı özet metin yerine kurumun resmî tanımı basılıyor.
+              Başlıktan "Koordinatörlüğü" 1 Eylül 2026'da çıkarıldı: bölüm
+              koordinatörlüğü değil, ekosistemin kendisini anlatıyor.
             */}
-            <h2>Genç Bilişim Ekosistemi Koordinatörlüğü</h2>
+            <h2>Genç Bilişim Ekosistemi</h2>
             <p>GençTek, Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü koordinasyonunda, bilişim alanında çalışma gerçekleştirmek isteyen, çalışmalar yürüten ya da mevcut çalışmalarının etkisini arttırmak isteyen öğrencilerin ve danışman öğretmenlerin desteklendiği, birbirleriyle ve paydaşlarla iletişim ve iş birliğinin sağlandığı genç bilişim ekosistemidir.</p>
             <p>YEĞİTEK Genç Bilişim Koordinatörlüğü tarafından yürütülen ekosistem çalışmaları; İl Millî Eğitim Müdürlüklerinde görevlendirilen İl GençTek Koordinatörü Öğretmenler ve gönüllü komisyon üyeleri aracılığıyla yerel düzeyde yaygınlaştırılmakta, öğrencilerin ve öğretmenlerin ekosisteme aktif katılımı desteklenmektedir.</p>
             <p>GençTek; akran öğrenmesini, ekip çalışmasını, üretimi, paylaşımı ve sektörle etkileşimi destekleyen bir ekosistem yaklaşımıyla faaliyetlerini sürdürmektedir.</p>

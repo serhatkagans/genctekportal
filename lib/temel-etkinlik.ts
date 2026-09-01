@@ -204,3 +204,20 @@ export function temelEtkinlikBul(slug: string): TemelEtkinlik | undefined {
 export function temelEtkinlikSluglari(): string[] {
   return [...TEMEL_ETKINLIKLER, ...CALISMA_GRUBU_ETKINLIKLERI].map((kayit) => kayit.slug);
 }
+
+/*
+ * ÖNCEKİ/SONRAKİ ETKİNLİK (1 Eylül 2026 · istek: "buraya da önceki sonraki
+ * etkinlik ekleyelim haberlerdeki gibi").
+ *
+ * Komşuluk kaydın kendi listesi içinde kalıyor: temel etkinliklerin sonundan
+ * çalışma grubu etkinliklerine geçmek, iki ayrı başlık altında listelenen
+ * programları tek sıraymış gibi gösterirdi. Liste başında/sonunda o yön boş
+ * bırakılıyor — döngü, okuyucuya nerede olduğunu unutturur.
+ */
+export function temelEtkinlikKomsulari(slug: string) {
+  for (const liste of [TEMEL_ETKINLIKLER, CALISMA_GRUBU_ETKINLIKLERI]) {
+    const sira = liste.findIndex((kayit) => kayit.slug === slug);
+    if (sira >= 0) return { onceki: liste[sira - 1], sonraki: liste[sira + 1] };
+  }
+  return { onceki: undefined, sonraki: undefined };
+}

@@ -19,6 +19,11 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- Temel GençTek Etkinlikleri sayfasındaki açıklama kaldırıldı, üst etiket
+  "Ekosistem etkinlikleri" oldu; etkinlik sayfalarına haberlerdeki gibi önceki
+  ve sonraki etkinlik bağlantıları eklendi, görseller de haberlerdeki gibi tek
+  sütunda ve kırpılmadan basılıyor.
+- "GençTek nedir" sayfasının başlığı "Genç Bilişim Ekosistemi" olarak kısaldı.
 - Ana sayfadaki haber şeridine sola/sağa kaydırma düğmeleri eklendi; şerit
   artık gerçek bir kaydırma kutusu olduğu için kaçan haber geri getirilebiliyor
   ve dokunmatik ekranda parmakla da kaydırılıyor.

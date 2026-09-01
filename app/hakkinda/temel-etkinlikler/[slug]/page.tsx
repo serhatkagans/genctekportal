@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { gorselYolu } from "@/lib/ortam";
-import { aciklamaParcalari, temelEtkinlikBul, temelEtkinlikSluglari } from "@/lib/temel-etkinlik";
+import { aciklamaParcalari, temelEtkinlikBul, temelEtkinlikKomsulari, temelEtkinlikSluglari } from "@/lib/temel-etkinlik";
 
 /*
  * PROGRAMIN KENDİ SAYFASI (31 Ağustos 2026 · istek: "her birinin kendi sayfası
@@ -33,6 +33,8 @@ export default async function TemelEtkinlikSayfasi({ params }: { params: Promise
   const kayit = temelEtkinlikBul(slug);
   if (!kayit) notFound();
 
+  const { onceki, sonraki } = temelEtkinlikKomsulari(slug);
+
   return <>
     <Header />
     <main>
@@ -60,6 +62,19 @@ export default async function TemelEtkinlikSayfasi({ params }: { params: Promise
                 </figure>
               ))}
             </div>
+          ) : null}
+
+          {/* Haber sayfalarındaki gezinmenin aynısı: aynı biçim, aynı sınıflar
+             (bkz. components/wordpress-article.tsx). */}
+          {onceki || sonraki ? (
+            <nav className="haber-gezinme" aria-label="Etkinlikler arasında gezinme">
+              {onceki ? <Link className="haber-gezinme-baglanti haber-gezinme-onceki" href={`/hakkinda/temel-etkinlikler/${onceki.slug}`}>
+                <span>← Önceki Etkinlik</span><strong>{onceki.ad}</strong>
+              </Link> : null}
+              {sonraki ? <Link className="haber-gezinme-baglanti haber-gezinme-sonraki" href={`/hakkinda/temel-etkinlikler/${sonraki.slug}`}>
+                <span>Sonraki Etkinlik →</span><strong>{sonraki.ad}</strong>
+              </Link> : null}
+            </nav>
           ) : null}
         </div>
       </section>

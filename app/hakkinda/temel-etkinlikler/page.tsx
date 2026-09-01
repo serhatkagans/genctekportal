@@ -62,9 +62,11 @@ export default function TemelEtkinliklerSayfasi() {
       <section className="page-hero compact">
         <div className="container">
           <Link className="back-link" href="/#hakkinda">← Hakkında</Link>
-          <span className="eyebrow">Program ailesi</span>
+          {/* Üstteki açıklama 1 Eylül 2026'da kaldırıldı (istek: "burada
+             açıklama silinecek"); kartların kendisi zaten ne olduklarını
+             söylüyordu. */}
+          <span className="eyebrow">Ekosistem etkinlikleri</span>
           <h1>Temel GençTek Etkinlikleri</h1>
-          <p>Her yıl düzenli olarak gerçekleştirilen programların adları bu listede yer almaktadır. Yeni bir etkinlik oluşturulurken ilgili program adı bu listeden seçilir. Etkinliklere ilişkin tarih, duyuru ve başvuru bilgilerine ise <Link className="text-link" href="/etkinlikler">Etkinlikler</Link> sayfasından ulaşılabilir.</p>
         </div>
       </section>
 
