@@ -29,6 +29,7 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
     slug: "genc-golge",
     ad: "Genç Gölge",
     gorseller: [
+      { url: "/medya/temel-etkinlikler/genc-golge.webp", alt: "" },
       { url: "/medya/genc-golge-sensiball-vr-1.jpg", alt: "Genç Gölge kapsamında Sensiball VR'ı ziyaret eden öğrenci ve öğretmenlerin toplu fotoğrafı" },
       { url: "/medya/genc-golge-sensiball-vr-2.jpg", alt: "Bir öğrencinin VR başlığıyla Sensiball VR sahasında uygulamayı denemesi" },
     ],
@@ -39,6 +40,7 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
     slug: "sahne-senin",
     ad: "Sahne Senin",
     gorseller: [
+      { url: "/medya/temel-etkinlikler/sahne-senin.webp", alt: "" },
       { url: "/medya/sahne-senin-1.jpg", alt: "Bir öğrencinin sahnede kürsüden projesinin işlem basamaklarını anlatması" },
       { url: "/medya/sahne-senin-2.jpg", alt: "Dört kişilik bir öğrenci ekibinin sahnede araç projelerini perdedeki görüntü eşliğinde sunması" },
       { url: "/medya/sahne-senin-3.jpg", alt: "Salonu dolduran izleyicilerin önünde iki öğrencinin robotik takım çalışmasını anlatması" },
@@ -53,6 +55,7 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
     slug: "g2s-genc-sektor-bulusmalari",
     ad: "G2S Genç Sektör Buluşmaları",
     gorseller: [
+      { url: "/medya/temel-etkinlikler/g2s-genc-sektor-bulusmalari.webp", alt: "" },
       { url: "/medya/g2s-6.jpg", alt: "G2S buluşmasının açılışında kürsüden konuşan yetkiliyi masalarda dinleyen öğrenciler" },
       { url: "/medya/g2s-1.jpg", alt: "Masada bir sektör uzmanının karşısında oturan iki öğrenciyle 15 dakikalık eşleşme görüşmesi" },
       { url: "/medya/g2s-4.jpg", alt: "Bir uzmanın masadaki öğrencilerle sohbeti" },
@@ -69,6 +72,7 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
     slug: "sinir-otesi",
     ad: "Sınır Ötesi (Beyond The Borders)",
     gorseller: [
+      { url: "/medya/temel-etkinlikler/sinir-otesi.webp", alt: "" },
       { url: "/medya/sinir-otesi-1.jpg", alt: "GençTek Beyond The Borders çevrim içi etkinliğinin koordinatör, mentör ve öğrenci moderatörlerini duyuran afişi" },
       { url: "/medya/sinir-otesi-2.jpg", alt: "Farklı ülkelerden altmıştan fazla katılımcının bağlandığı çevrim içi Sınır Ötesi oturumu" },
       { url: "/medya/sinir-otesi-3.jpg", alt: "Çevrim içi oturumda GençTek'i tanıtan videonun İngilizce altyazıyla izlenmesi" },
@@ -82,6 +86,9 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
   {
     slug: "ogrenci-forumu",
     ad: "Öğrenci Forumu",
+    gorseller: [
+      { url: "/medya/temel-etkinlikler/ogrenci-forumu.webp", alt: "" },
+    ],
     aciklama:
       "Bilgi, görüş, deneyim paylaşma, tartışma, iş birliği, kişisel gelişim ve sosyal etkileşim odaklı, öğrencilerin bir araya gelerek fikirlerini paylaştıkları, tartıştıkları ve çözüm önerileri geliştirdikleri bir katılım ortamıdır. GençTek ekosisteminde düzenlenen öğrenci forumu, özellikle Yenilik ve Eğitim Teknolojileri Genel Müdürlüğünün çalışmalarını tanıtmak ve bu çalışmalara öğrencilerin gözünden bakmak için büyük önem taşır. Öğrencilerin görüş, öneri ve beklentilerinin alınması; eğitim teknolojilerinin daha etkili, daha yenilikçi ve gençlerin gerçek ihtiyaçlarına uygun şekilde gelişmesine katkı sağlar. Öğrenci forumu ile özellikle bilişim alanında belli bir yol almış öğrencilerin fikir ve önerileri ile sunulan hizmetlerin geliştirilmesi, eğitim politikalarına yön verilmesi hedeflenmektedir. “YEĞİTEK İçin Gençlerden 5 Öneri” başlıklı ilk Öğrenci Forumu, 1. GençTek Zirvesi kapsamında gerçekleştirilmiştir. 2. GençTek Zirvesi’nde ise “EBA İçin Gençlerden 5 Öneri” başlıklı Öğrenci Forumu düzenlenmiştir.",
   },
@@ -106,12 +113,18 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
   {
     slug: "oyunun-e-hali",
     ad: "Oyunun e Hâli",
+    gorseller: [
+      { url: "/medya/temel-etkinlikler/oyunun-e-hali.webp", alt: "" },
+    ],
     aciklama:
       "Öğrenmenin en doğal ve etkili yollarından biri olan “oyun” ve “oyunlaştırma” eğitimin temel unsurlarındandır. Oyunun e Hâli, GençTek Ekosistemi kapsamında öğrencilerin bilişim sektöründe ve gündelik hayatta ihtiyaç duyulan becerilerini geliştirirken öğrenme deneyimlerini dijital oyunlar ile keyifli, kalıcı ve ilgi çekici hâle getirmeyi hedefler. Oyunun e Hâli çalışmaları ile öğrencilerin hayatlarında önemli bir yer kaplayan dijital oyunlardan gelişim fırsatı olarak yararlanırken dijital oyun tasarımı, programlama, yapay zekâ ve espor gibi sektörler hakkında öğrencilerin bilgi ve deneyim kazanması sağlanır.",
   },
   {
     slug: "tek-maraton",
     ad: "Tek Maraton",
+    gorseller: [
+      { url: "/medya/temel-etkinlikler/tek-maraton.webp", alt: "" },
+    ],
     aciklama:
       "Eğitim Teknolojileri Fikir Maratonu olan Tek Maraton, GençTek öğrencilerinin ve öğretmenlerinin eğitim teknolojileri sektörüne ilişkin çözüm önerileri ve fikir geliştirdikleri bir ideathon türüdür.",
   },
@@ -119,6 +132,7 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
     slug: "misafir-ogretmenlik-ogrencilik",
     ad: "Misafir Öğretmenlik/Öğrencilik",
     gorseller: [
+      { url: "/medya/temel-etkinlikler/misafir-ogretmenlik-ogrencilik.webp", alt: "" },
       { url: "/medya/misafir-ogrenci-osmangazi-1.jpg", alt: "Eskişehir Osmangazi Üniversitesi Mühendislik Fakültesi'ndeki Üniversite Misafir Öğrenci Etkinliği afişi" },
       { url: "/medya/misafir-ogrenci-anadolu-1.jpg", alt: "Anadolu Üniversitesi'ndeki Üniversite Misafir Öğrenci Etkinliği afişi" },
       { url: "/medya/misafir-ogrenci-anadolu-2.jpg", alt: "Misafir öğrencilerin üniversitenin hareket yakalama stüdyosunda animasyon çekimini izlemesi" },
@@ -141,7 +155,11 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
      * ayrı yazılı durmasın. Burada iki zirve alt alta gösteriliyor.
      */
     aciklama: zirveOzetMetni(),
-    gorseller: ZIRVE_2026.gorseller.map((gorsel) => ({ ...gorsel, alt: `${ZIRVE_2026.ad} · ${gorsel.alt}` })),
+    // Kartın kapağı listeye ayrıca verilen kare; ardından zirve galerisi geliyor.
+    gorseller: [
+      { url: "/medya/temel-etkinlikler/genctek-zirvesi.webp", alt: "" },
+      ...ZIRVE_2026.gorseller.map((gorsel) => ({ ...gorsel, alt: `${ZIRVE_2026.ad} · ${gorsel.alt}` })),
+    ],
   },
 ];
 

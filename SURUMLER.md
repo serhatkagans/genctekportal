@@ -19,6 +19,9 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- Temel GençTek Etkinlikleri kartlarının kapakları yenilendi: Genç Gölge, Sahne
+  Senin, G2S, Sınır Ötesi, Öğrenci Forumu, Oyunun e Hâli, Tek Maraton, Misafir
+  Öğretmenlik/Öğrencilik ve GençTek Zirvesi.
 - 1. GençTek Zirvesi (2025) sayfasına on iki fotoğraf ve tanıtım videosu eklendi.
 - **EğitiJAM ayrı bir çalışma grubu kartı oldu.** Oyun Tasarımı sayfasının
   altında duran maraton programı ve arşiv yazısı artık kendi kartının
