@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { HakkindaBaglantisi } from "./hakkinda-baglantisi";
 import { MarkaSimgesi } from "./marka-simgesi";
+import { MenuKapatici } from "./menu-kapatici";
 import { TemaSecici } from "./TemaSecici";
 import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
 import { HAKKINDA_KARTLARI } from "@/lib/hakkinda";
@@ -130,18 +131,21 @@ export function Header() {
             <details className="mobil-alt-menu">
               <summary>Hakkında</summary>
               <div className="mobil-alt-menu-govde">
-                <HakkindaBaglantisi className="mobil-alt-baglanti" href={anaSayfaCapasi("hakkinda")}>Genel Bakış</HakkindaBaglantisi>
                 {hakkindaBaglantilari.map(([etiket, adres]) => <Link className="mobil-alt-baglanti" href={adres} key={adres}>{etiket}</Link>)}
               </div>
             </details>
             {baglantilar.map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
-            {/* Mobilde açılır menü İÇİNDE açılır menü olmaz: iki zirve doğrudan
-                listeleniyor, başlıkları zaten hangi yıl olduğunu söylüyor. */}
-            {zirveler.map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
+            <details className="mobil-alt-menu">
+              <summary>GençTek Zirvesi</summary>
+              <div className="mobil-alt-menu-govde">
+                {zirveler.map(([etiket, adres]) => <Link className="mobil-alt-baglanti" href={adres} key={adres}>{etiket}</Link>)}
+              </div>
+            </details>
             <a href={katilimAdresi}>Giriş</a>
           </nav>
         </details>
       </div>
+      <MenuKapatici />
     </header>
   );
 }
