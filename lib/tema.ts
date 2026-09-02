@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { sql } from "./db";
 import { gorselYolu } from "./ortam";
+import temaYedegi from "@/data-ornek/temalar.json";
 
 // Temalar önce lib/content.ts içinde sabit diziydi, sonra panelden düzenlenebilmesi
 // için data/temalar.json'a taşındı; 21 Ağustos 2026'da "Theme" tablosuna geçti.
@@ -51,25 +52,50 @@ function satirdanTema(satir: TemaSatiri): Tema {
   };
 }
 
+const YEDEK_TEMALAR = temaYedegi as Tema[];
+
+/* Yerel Prisma sunucusu bağlantı sınırına ulaştığında port açık görünmesine
+   rağmen sorguları ECONNRESET ile düşürebiliyor. Kamu sayfalarını hata ekranına
+   çevirmek yerine son sağlam tema anlık görüntüsünü göster; şema ve sorgu
+   hataları ise gizlenmeden yukarı iletilmeye devam eder. */
+function geciciBaglantiHatasi(hata: unknown) {
+  const kod = typeof hata === "object" && hata !== null && "code" in hata
+    ? String((hata as { code?: unknown }).code ?? "")
+    : "";
+  const mesaj = hata instanceof Error ? hata.message : String(hata);
+  return ["ECONNRESET", "ECONNREFUSED", "ETIMEDOUT", "EPIPE"].includes(kod)
+    || /ECONNRESET|ECONNREFUSED|connection terminated|connection closed/i.test(mesaj);
+}
+
 // Sıra "order" sütununda: dosya sürümünde temaların JSON dizisindeki yeri anlamlıydı,
 // göçte o sıra sütuna yazıldı ve panelden eklenen kayıtlar sona ekleniyor.
 export async function temalariOku(): Promise<Tema[]> {
-  const satirlar = await sql<TemaSatiri[]>`
-    SELECT slug, name, summary, description, image, focus, outcomes
-    FROM "Theme"
-    ORDER BY "order", "createdAt"
-  `;
-  return satirlar.map(satirdanTema);
+  try {
+    const satirlar = await sql<TemaSatiri[]>`
+      SELECT slug, name, summary, description, image, focus, outcomes
+      FROM "Theme"
+      ORDER BY "order", "createdAt"
+    `;
+    return satirlar.map(satirdanTema);
+  } catch (hata) {
+    if (!geciciBaglantiHatasi(hata)) throw hata;
+    return YEDEK_TEMALAR;
+  }
 }
 
 export async function temaBul(slug: string) {
-  const [satir] = await sql<TemaSatiri[]>`
-    SELECT slug, name, summary, description, image, focus, outcomes
-    FROM "Theme"
-    WHERE slug = ${slug}
-    LIMIT 1
-  `;
-  return satir ? satirdanTema(satir) : undefined;
+  try {
+    const [satir] = await sql<TemaSatiri[]>`
+      SELECT slug, name, summary, description, image, focus, outcomes
+      FROM "Theme"
+      WHERE slug = ${slug}
+      LIMIT 1
+    `;
+    return satir ? satirdanTema(satir) : undefined;
+  } catch (hata) {
+    if (!geciciBaglantiHatasi(hata)) throw hata;
+    return YEDEK_TEMALAR.find((tema) => tema.slug === slug);
+  }
 }
 
 export type TemaGirdi = {

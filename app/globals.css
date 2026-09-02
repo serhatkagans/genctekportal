@@ -989,3 +989,8 @@ html[data-theme="kirmizi"] .site-header .nav-acilir-govde a{color:var(--color-te
 
 /* Haber listesi: başlıkla sayaç arasındaki üst boşluk daraltıldı. */
 .haber-listesi{padding-top:40px}
+
+/* Kamuya açık sayfalardaki okuma metinleri iki yana yaslanır. Seçici header'ın
+   hemen ardındaki ana içerikle sınırlıdır; menü, düğme, yönetim ekranı ve alt
+   bilgi gibi arayüz metinlerinin kendi hizası korunur. */
+.site-header + main :where(p,li){text-align:justify;text-justify:inter-word}

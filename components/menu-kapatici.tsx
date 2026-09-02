@@ -40,15 +40,24 @@ export function MenuKapatici() {
       }
     };
 
-    /* Tıklama değil "pointerdown": bağlantıya basıldığında gezinme başlamadan
-       önce kutuyu kapatmak, kapanmanın sayfa geçişine takılmasını önlüyor. */
+    /* Dışarı basma pointerdown ile yakalanır. Bağlantılar burada kapatılmaz;
+       details erken kapanırsa tarayıcı click olayını üretemeyebilir. */
     const disariBasildi = (olay: PointerEvent) => {
       const hedef = olay.target;
       if (!(hedef instanceof Element)) return;
-      /* Menü içindeki bir bağlantıya basıldıysa hepsi kapanır; başka bir yere
-         basıldıysa yalnızca o tıklamayı içermeyen kutular kapanır. */
+      /* Bağlantıysa click tamamlanır; başka bir yerse yalnızca o basmayı
+         içermeyen kutular kapanır. */
       const baglanti = hedef.closest(".site-header a");
-      kapat(baglanti ? null : hedef);
+      if (baglanti) return;
+      kapat(hedef);
+    };
+
+    /* Menüyü pointerdown sırasında kapatmak bağlantıyı click gelmeden gizler.
+       Bağlantı tıklamasının tamamlanmasını bekleyip menüyü sonraki turda kapat. */
+    const baglantiTiklandi = (olay: MouseEvent) => {
+      const hedef = olay.target;
+      if (!(hedef instanceof Element) || !hedef.closest(".site-header a")) return;
+      window.setTimeout(() => kapat(), 0);
     };
 
     const tusaBasildi = (olay: KeyboardEvent) => {
@@ -73,10 +82,12 @@ export function MenuKapatici() {
     };
 
     document.addEventListener("pointerdown", disariBasildi);
+    document.addEventListener("click", baglantiTiklandi);
     document.addEventListener("keydown", tusaBasildi);
     document.addEventListener("toggle", acildi, true);
     return () => {
       document.removeEventListener("pointerdown", disariBasildi);
+      document.removeEventListener("click", baglantiTiklandi);
       document.removeEventListener("keydown", tusaBasildi);
       document.removeEventListener("toggle", acildi, true);
     };

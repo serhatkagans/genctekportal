@@ -38,7 +38,7 @@ export default async function TemelEtkinlikSayfasi({ params }: { params: Promise
     <Header />
     <main>
       <section className="page-hero compact">
-        <div className="container">
+        <div className="container program-detay">
           <Link className="back-link" href="/hakkinda/temel-etkinlikler">← Temel GençTek Etkinlikleri</Link>
           <span className="eyebrow">Temel GençTek etkinliği</span>
           <h1>{kayit.ad}</h1>

@@ -19,6 +19,15 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- Hakkında ve GençTek Zirvesi açılır menülerindeki bağlantılar artık menü
+  kapanmadan tıklamayı tamamlıyor; alt sayfalara geçiş yeniden çalışıyor.
+- Ziyaretçi sayfalarındaki paragraf ve madde metinleri iki yana yaslandı; temel
+  etkinlik detaylarında üst başlık ile gövde aynı sütunda hizalandı.
+- WordPress'in `[…]` ile yarım bıraktığı haber özetleri tam paragraf sonunda
+  tamamlanıyor; sonraki içe aktarımlarda da kesik özet üretilmiyor.
+- Çalışma grupları sayfası, veritabanının geçici olarak bağlantıyı sıfırlaması
+  durumunda hata ekranı yerine depodaki son sağlam tema listesini gösteriyor.
+
 - **Güvenlik: il koordinatörü ekleme/düzenleme/silme eylemleri yetki kontrolüne
   bağlandı.** Üç sunucu eylemi de kontrolsüzdü; sayfayı koruyan layout sunucu
   eylemlerini kapsamıyor.

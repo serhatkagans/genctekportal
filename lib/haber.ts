@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import sanitizeHtml from "sanitize-html";
 import { govdeHtmlUret, type HaberBicimi } from "@/lib/haber-bicim";
 import type { WordPressContent } from "@/lib/wordpress-content";
 
@@ -12,11 +13,46 @@ export type Haber = WordPressContent & {
 
 const DOSYA = path.join(process.cwd(), "data", "haberler.json");
 
+const KESIK_OZET_SONU = /\s*(?:\[…\]|\[\.\.\.\]|…)\s*$/u;
+
+function duzMetin(html: string) {
+  return sanitizeHtml(html, { allowedTags: [], allowedAttributes: {} })
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/* WordPress otomatik özetleri yaklaşık 150 karakterde kesip sonuna […] koyar.
+   Kesilmiş cümleyi yalnızca işareti atarak bırakmak yerine, gövdedeki ilgili
+   paragrafın sonuna kadar tamamlarız. Elle yazılmış özetlere dokunulmaz. */
+export function haberOzetiniTamamla(excerpt: string, html: string) {
+  const ozet = excerpt.trim();
+  if (!KESIK_OZET_SONU.test(ozet)) return ozet;
+
+  const kesik = ozet.replace(KESIK_OZET_SONU, "").trim();
+  const paragraflar = Array.from(html.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi))
+    .map((eslesme) => duzMetin(eslesme[1]))
+    .filter(Boolean);
+  const govde = paragraflar.join(" ") || duzMetin(html);
+  const onEk = kesik.slice(0, Math.min(40, kesik.length));
+  if (!kesik || !govde.startsWith(onEk)) return kesik;
+
+  let tamamlanan = "";
+  for (const paragraf of paragraflar) {
+    tamamlanan = `${tamamlanan} ${paragraf}`.trim();
+    if (tamamlanan.length >= kesik.length) return tamamlanan;
+  }
+
+  return kesik;
+}
+
 // Tek yazma noktası. Postgres'e geçilirse yalnızca bu dosya değişir.
 export async function haberleriOku(): Promise<Haber[]> {
   try {
     const ham = await readFile(DOSYA, "utf8");
-    return JSON.parse(ham) as Haber[];
+    return (JSON.parse(ham) as Haber[]).map((haber) => ({
+      ...haber,
+      excerpt: haberOzetiniTamamla(haber.excerpt, haber.html),
+    }));
   } catch (hata) {
     if ((hata as NodeJS.ErrnoException).code === "ENOENT") return [];
     throw hata;

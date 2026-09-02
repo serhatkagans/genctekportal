@@ -57,6 +57,28 @@ function plainText(html = "") {
   return sanitizeHtml(html, { allowedTags: [], allowedAttributes: {} }).replace(/\s+/g, " ").trim();
 }
 
+// WordPress otomatik özetleri yarım cümlede […] ile keser. İçeri aktarırken
+// gövdedeki aynı paragrafın sonuna kadar uzat; özel/elle yazılmış özeti koru.
+function completeExcerpt(excerptHtml = "", contentHtml = "") {
+  const excerpt = plainText(excerptHtml);
+  const truncatedEnd = /\s*(?:\[…\]|\[\.\.\.\]|…)\s*$/u;
+  if (!truncatedEnd.test(excerpt)) return excerpt;
+
+  const truncated = excerpt.replace(truncatedEnd, "").trim();
+  const paragraphs = Array.from(contentHtml.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi))
+    .map((match) => plainText(match[1]))
+    .filter(Boolean);
+  const body = paragraphs.join(" ") || plainText(contentHtml);
+  if (!truncated || !body.startsWith(truncated.slice(0, Math.min(40, truncated.length)))) return truncated;
+
+  let completed = "";
+  for (const paragraph of paragraphs) {
+    completed = `${completed} ${paragraph}`.trim();
+    if (completed.length >= truncated.length) return completed;
+  }
+  return truncated;
+}
+
 function extensionFor(url, contentType = "") {
   const ext = path.extname(new URL(url).pathname).toLowerCase();
   if (/^\.(?:jpe?g|png|webp|gif|svg|avif|pdf|mp4|webm|mp3|wav|docx?|xlsx?|pptx?|zip)$/.test(ext)) return ext;
@@ -141,7 +163,7 @@ async function serialize(item, type) {
     slug: item.slug,
     path: originalPath(item.link),
     title: plainText(item.title?.rendered),
-    excerpt: plainText(item.excerpt?.rendered),
+    excerpt: completeExcerpt(item.excerpt?.rendered, html),
     date: item.date,
     modified: item.modified,
     link: item.link,
