@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { participationSchema } from "@/lib/validation/participation";
 import { createReference, hashToken } from "@/lib/security/tokens";
+import { ipOzeti, istemciIp } from "@/lib/security/istemci-ip";
 import { checkRateLimit } from "@/lib/security/rate-limit";
 import { basvuruKaydet } from "@/lib/forms/basvuru";
 
@@ -8,7 +9,7 @@ export const runtime = "nodejs";
 const ACCEPTED = new Set(["application/pdf", "image/jpeg", "image/png", "image/webp"]);
 
 export async function POST(request: NextRequest){
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
+  const ip = istemciIp(request.headers) ?? "local";
   const limit = await checkRateLimit(`participation:${hashToken(ip)}`, {limit:5,windowMs:15*60_000});
   if(!limit.allowed) return NextResponse.json({message:"Çok fazla gönderim yapıldı. Lütfen daha sonra tekrar deneyin."},{status:429,headers:{"Retry-After":String(Math.ceil(limit.retryAfterMs/1000))}});
   const form = await request.formData();
@@ -31,7 +32,7 @@ export async function POST(request: NextRequest){
   // Kayıt yazılamazsa başarılı yanıt dönmemeli: başvuran referans numarasıyla
   // ayrılıp kaydın kaybolduğunu asla öğrenemezdi.
   try{
-    await basvuruKaydet({reference,cevaplar:parsed.data,ipOzeti:hashToken(ip).slice(0,32),ek});
+    await basvuruKaydet({reference,cevaplar:parsed.data,ipOzeti:ipOzeti(ip),ek});
   }catch(hata){
     console.error("Başvuru kaydedilemedi:",hata);
     return NextResponse.json({message:"Başvurunuz şu anda kaydedilemedi. Lütfen daha sonra tekrar deneyin."},{status:503});

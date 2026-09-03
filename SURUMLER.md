@@ -19,6 +19,12 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Hız sınırı artık `X-Forwarded-For` ile atlatılamıyor.** Başlık ilk
+  öğesinden okunuyordu; Apache o başlığı ezmeyip sonuna eklediği için ilk öğe
+  istemcinin yazdığı değerdi. Giriş ve başvuru sınırları başlık döndürülerek
+  aşılabiliyor, denetim kayıtlarına uydurma IP özeti yazılıyordu. Okuma son
+  öğeye çevrildi (`lib/security/istemci-ip.ts`).
+
 ---
 
 ## v2.0.1 — 3 Eylül 2026
