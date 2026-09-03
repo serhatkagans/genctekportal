@@ -24,6 +24,9 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
   istemcinin yazdığı değerdi. Giriş ve başvuru sınırları başlık döndürülerek
   aşılabiliyor, denetim kayıtlarına uydurma IP özeti yazılıyordu. Okuma son
   öğeye çevrildi (`lib/security/istemci-ip.ts`).
+- `npm run db:seed` var olan hesabın parolasını döndürürken açık oturumları da
+  iptal ediyor. Eskiden yeni parola yazılıyor ama elinde eski çerez olan biri
+  panelde gezmeye devam ediyordu.
 
 ---
 

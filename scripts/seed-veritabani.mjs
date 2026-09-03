@@ -149,8 +149,21 @@ async function yoneticiEkle() {
     ON CONFLICT (email) DO UPDATE
       SET "passwordHash" = EXCLUDED."passwordHash",
           status = 'ACTIVE',
+          "passwordChangedAt" = CURRENT_TIMESTAMP,
           "updatedAt" = CURRENT_TIMESTAMP
     RETURNING id
+  `;
+
+  /* PAROLA DEĞİŞTİ, ESKİ OTURUMLAR DÜŞSÜN: bu betik var olan hesabın
+     parolasını döndürüyor (ON CONFLICT dalı). Oturumlar iptal edilmezse
+     elinde eski çerez olan biri, parola artık onun bilmediği bir değer
+     olmasına rağmen panelde gezmeye devam ederdi — oturum doğrulaması
+     parolaya değil kaydın revokedAt alanına bakıyor (lib/auth/oturum.ts).
+     Aynı gerekçe scripts/test-hesaplari.mjs ve lib/yonetim/kullanici.ts ·
+     oturumlariKapat içinde de yazılı. */
+  await sql`
+    UPDATE "Session" SET "revokedAt" = CURRENT_TIMESTAMP
+    WHERE "userId" = ${kullanici.id} AND "revokedAt" IS NULL
   `;
 
   await sql`

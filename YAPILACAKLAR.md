@@ -68,7 +68,11 @@ Giriş ve çıkış çalışıyor. Geri kalanı statik sayfa olarak duruyor.
 
 - [ ] **Parola sıfırlama.** `/parola-sifirla` işlevsiz bir sayfa. `PasswordReset`
   tablosu hazır ama e-posta gönderimi gerekiyor — `.env` içindeki `SMTP_URL` boş.
-  (`app/parola-sifirla/page.tsx`)
+  Yazılırken PAROLA YAZAN DAL `oturumlariKapat()` ÇAĞIRMALI ve
+  `passwordChangedAt`'i tazelemeli: oturum doğrulaması parolaya değil
+  `revokedAt`'e bakıyor, yoksa parola değişse de eski çerez geçerli kalır.
+  Mekanizma hazır, çağrılması yeter.
+  (`app/parola-sifirla/page.tsx`, `lib/yonetim/kullanici.ts`, `lib/auth/oturum.ts`)
 
 - [ ] **MFA / TOTP.** `lib/security/totp.ts` yazılmış ve test ediliyor, `/mfa` ve
   `/mfa/kurtarma` ekranları duruyor, `User` tablosunda `totpSecretEncrypted`,
