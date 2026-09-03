@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import sanitizeHtml from "sanitize-html";
 import { govdeHtmlUret, type HaberBicimi } from "@/lib/haber-bicim";
@@ -45,23 +45,42 @@ export function haberOzetiniTamamla(excerpt: string, html: string) {
   return kesik;
 }
 
-// Tek yazma noktası. Postgres'e geçilirse yalnızca bu dosya değişir.
+/* Okuma sonucu dosyanın mtime+boyutuna göre bellekte tutulur.
+   NEDEN: özet tamamlama 74 haberin gövdesindeki her paragrafı sanitize ediyor;
+   yük testinde (3 Eylül 2026) bu istek başına ~41 ms saf CPU çıktı ve /haberler
+   eşzamanlılıktan bağımsız 24 istek/sn'de tıkandı, ana sayfa 21'de. Dosya
+   değişmedikçe sonuç aynı olduğundan maliyet istek başına değil, veri değişimi
+   başına bir kez ödenir. "Panelden yapılan düzenleme anında yansısın" kuralı
+   korunur: her yazma dosyayı değiştirir, anahtar tutmaz, kayıtlar baştan okunur.
+   Döndürülen kayıtlar salt okunur sayılmalı; çağıranlar zaten kopyalayarak
+   değiştiriyor. */
+let bellek: { anahtar: string; kayitlar: Haber[] } | null = null;
+
 export async function haberleriOku(): Promise<Haber[]> {
   try {
+    const { mtimeMs, size } = await stat(DOSYA);
+    const anahtar = `${mtimeMs}:${size}`;
+    if (bellek?.anahtar === anahtar) return bellek.kayitlar;
+
     const ham = await readFile(DOSYA, "utf8");
-    return (JSON.parse(ham) as Haber[]).map((haber) => ({
+    const kayitlar = (JSON.parse(ham) as Haber[]).map((haber) => ({
       ...haber,
       excerpt: haberOzetiniTamamla(haber.excerpt, haber.html),
     }));
+    bellek = { anahtar, kayitlar };
+    return kayitlar;
   } catch (hata) {
     if ((hata as NodeJS.ErrnoException).code === "ENOENT") return [];
     throw hata;
   }
 }
 
+// Tek yazma noktası. Postgres'e geçilirse yalnızca bu dosya değişir.
 async function yaz(kayitlar: Haber[]) {
   await mkdir(path.dirname(DOSYA), { recursive: true });
   await writeFile(DOSYA, JSON.stringify(kayitlar, null, 2) + "\n", "utf8");
+  // mtime anahtarı zaten bozar; aynı milisaniyede iki yazma olursa diye elle de düşür.
+  bellek = null;
 }
 
 // Kart listeleri yalnızca bu alanları gösterir. Gövde html'i (72 haberde ~500 KB)
