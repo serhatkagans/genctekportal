@@ -70,11 +70,12 @@ export const prisma = {
         revokedAt: Date | null;
         idleExpiresAt: Date;
         expiresAt: Date;
+        lastSeenAt: Date;
         userId: string;
         userName: string;
         provinceCode: string | null;
       }[]>`
-        SELECT s.id, s."revokedAt", s."idleExpiresAt", s."expiresAt",
+        SELECT s.id, s."revokedAt", s."idleExpiresAt", s."expiresAt", s."lastSeenAt",
                u.id AS "userId", u.name AS "userName", u."provinceCode"
         FROM "Session" s
         JOIN "User" u ON u.id = s."userId"
@@ -90,6 +91,7 @@ export const prisma = {
         revokedAt: kayit.revokedAt,
         idleExpiresAt: kayit.idleExpiresAt,
         expiresAt: kayit.expiresAt,
+        lastSeenAt: kayit.lastSeenAt,
         user: {
           id: kayit.userId,
           name: kayit.userName,
@@ -97,6 +99,31 @@ export const prisma = {
           roles: roller,
         },
       };
+    },
+
+    /*
+     * KAYAN OTURUM. Boşta kalma sayacı yalnızca girişte yazılıyordu; kullanıcı
+     * panelde kesintisiz çalışsa bile 30 dakika sonra çıkışa düşüyordu.
+     *
+     * Tazeleme koşullu bir UPDATE: oturum hâlâ geçerliyse (iptal edilmemiş, iki
+     * süre de dolmamış) ve son görülmenin üstünden aralık geçmişse yazıyor.
+     * Koşullar SQL'in içinde çünkü okuma ile yazma arasında oturum iptal
+     * edilmiş olabilir — ölmüş oturumu diriltmemeli.
+     *
+     * Yeni bitiş LEAST ile mutlak süreye kırpılıyor: 12 saatlik tavan kayan
+     * pencereyle aşılabilir olsaydı oturum sonsuza kadar uzardı.
+     */
+    async touch({ id, idleMs, araMs }: { id: string; idleMs: number; araMs: number }) {
+      await sql`
+        UPDATE "Session" SET
+          "idleExpiresAt" = LEAST("expiresAt", CURRENT_TIMESTAMP + make_interval(secs => ${idleMs / 1000})),
+          "lastSeenAt" = CURRENT_TIMESTAMP
+        WHERE id = ${id}
+          AND "revokedAt" IS NULL
+          AND "idleExpiresAt" > CURRENT_TIMESTAMP
+          AND "expiresAt" > CURRENT_TIMESTAMP
+          AND "lastSeenAt" < CURRENT_TIMESTAMP - make_interval(secs => ${araMs / 1000})
+      `;
     },
   },
   event: {

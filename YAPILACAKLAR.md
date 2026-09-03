@@ -3,7 +3,7 @@
 Bu dosya projedeki bilinen eksikleri ve hataları toplar. Her madde koda bakılarak
 doğrulanmıştır; parantez içindeki yollar ilgili dosyalardır.
 
-Son güncelleme: 4 Ağustos 2026
+Son güncelleme: 3 Eylül 2026
 
 ---
 
@@ -11,11 +11,12 @@ Son güncelleme: 4 Ağustos 2026
 
 Bunlar çalışan bir şeyi bozuyor; sırayı buradan başlatmak mantıklı.
 
-- [ ] **Oturum 30 dakikada düşüyor, kullanımdan bağımsız.**
-  `idleExpiresAt` girişte `şimdi + 30dk` olarak yazılıyor ve bir daha hiç
-  güncellenmiyor. Yani kesintisiz çalışsan bile 30 dakika sonra çıkışa
-  düşüyorsun. Her istekte `idleExpiresAt` ve `lastSeenAt` tazelenmeli.
-  (`lib/auth/oturum.ts`, `lib/security/session.ts`, `lib/db.ts`)
+- [x] **Oturum 30 dakikada düşüyor, kullanımdan bağımsız.** (3 Eylül 2026)
+  Geçerli her istek artık `idleExpiresAt` ve `lastSeenAt` alanlarını tazeliyor
+  (`prisma.session.touch`). Yazma `TAZELEME_ARALIGI_MS` = 1 dakika ile
+  seyreltiliyor; yeni bitiş `LEAST(..., "expiresAt")` ile 12 saatlik mutlak
+  tavana kırpılıyor ve koşullar SQL'in içinde, iptal edilmiş oturum
+  dirilmiyor. (`lib/auth/oturum.ts`, `lib/security/session.ts`, `lib/db.ts`)
 
 - [ ] **Hydration uyuşmazlığı.** Tarayıcı konsolunda tekrar tekrar
   "Hydration failed because the server rendered text didn't match the client"
@@ -98,10 +99,13 @@ Giriş ve çıkış çalışıyor. Geri kalanı statik sayfa olarak duruyor.
 
 ## 4. KVKK ve kişisel veri
 
-- [ ] **Saklama süresi otomatik uygulanmıyor.** Her başvuru için `retentionUntil`
-  hesaplanıyor ve ekranda görünüyor, ama süresi dolan kayıtları silen bir iş yok.
-  Zamanlanmış bir temizlik görevi gerekiyor (kayıt + ek dosya + notlar birlikte).
-  (`lib/forms/basvuru.ts`)
+- [x] **Saklama süresi otomatik uygulanmıyor.** (3 Eylül 2026)
+  `scripts/kvkk-temizlik.mjs` süresi dolan başvuruyu, notlarını, eklerini,
+  `Media` satırlarını ve diskteki dosyalarını siliyor; denetim günlüğüne
+  `KVKK_SAKLAMA_SILME` yazıyor. Bayraksız çağrı kuru çalıştırma, silmek için
+  `--uygula`. Sunucuda günlük systemd timer ile çalışır — kurulum adımları
+  DAGITIM.md'de. **Timer sunucuda henüz kurulmadı.**
+  (`scripts/kvkk-temizlik.mjs`, `lib/forms/basvuru.ts`)
 
 - [ ] **Yalnızca telefon ve e-posta şifreli.** Ad, kurum, il ve çalışma
   açıklaması listeleme/filtreleme için açık duruyor. Bunlar da kişisel veri;

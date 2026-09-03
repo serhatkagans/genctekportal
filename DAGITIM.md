@@ -88,6 +88,58 @@ systemctl restart genctekportal
 kurduğu için üretilmiş istemci siliniyor ve derleme
 `import type { RoleCode } from "@prisma/client"` satırında düşüyor.
 
+## KVKK saklama temizliği (günlük görev)
+
+Saklama süresi (`retentionUntil`) dolan başvurular otomatik silinmiyor;
+`scripts/kvkk-temizlik.mjs` bunu yapar. Başvuru kaydını, notlarını, ek
+kayıtlarını, eklerin `Media` satırlarını ve `veri/basvuru-ekleri/<id>`
+klasörünü siler; denetim günlüğüne `KVKK_SAKLAMA_SILME` satırı bırakır.
+
+Bayraksız çağrı **hiçbir şey silmez**, yalnızca ne silineceğini yazar:
+
+```bash
+sudo -u genctekportal env PATH=/opt/node24/bin:$PATH npm run kvkk:temizle
+```
+
+Sunucuda günlük çalışması için iki dosya (`root` olarak):
+
+```ini
+# /etc/systemd/system/genctekportal-kvkk.service
+[Unit]
+Description=Genctek portal KVKK saklama temizligi
+After=network.target
+
+[Service]
+Type=oneshot
+User=genctekportal
+WorkingDirectory=/opt/genctekportal
+Environment=PATH=/opt/node24/bin:/usr/bin:/bin
+ExecStart=/opt/node24/bin/node scripts/kvkk-temizlik.mjs --uygula
+```
+
+```ini
+# /etc/systemd/system/genctekportal-kvkk.timer
+[Unit]
+Description=Genctek portal KVKK temizligini her gun calistir
+
+[Timer]
+OnCalendar=*-*-* 03:30:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+```bash
+systemctl daemon-reload
+systemctl enable --now genctekportal-kvkk.timer
+systemctl list-timers genctekportal-kvkk.timer   # sıradaki çalışma
+journalctl -u genctekportal-kvkk.service         # ne silindiği
+```
+
+`Persistent=true` önemli: sunucu 03:30'da kapalıysa görev açılışta telafi
+edilir, yoksa süresi dolmuş kayıt bir gün fazladan durur.
+
 ## Sürümler
 
 Yayımlanan her durum `vBÜYÜK.KÜÇÜK.YAMA` biçiminde etiketlenir ve ne

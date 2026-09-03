@@ -19,6 +19,21 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Oturum artık kullanımdayken düşmüyor.** Boşta kalma sayacı yalnızca girişte
+  yazılıyordu; panelde kesintisiz çalışan kullanıcı 30 dakika sonra çıkışa
+  düşüyordu. Geçerli her istek sayacı sıfırlıyor. Yazma dakikada bire
+  seyreltildi ve yeni bitiş 12 saatlik mutlak süreye kırpılıyor — kayan pencere
+  oturumu sonsuza uzatmıyor. İptal edilmiş oturum tazelenmiyor
+  (`lib/auth/oturum.ts`, `lib/db.ts`, `lib/security/session.ts`).
+- **KVKK saklama süresi artık uygulanıyor.** `npm run kvkk:temizle` süresi dolan
+  başvuruyu, notlarını, eklerini, eklerin medya kayıtlarını ve diskteki
+  dosyalarını siliyor; denetim günlüğüne satır bırakıyor. Bayraksız çağrı hiçbir
+  şey silmez, yalnızca raporlar; silmek için `--uygula`. Sunucuda günlük systemd
+  timer ile çalışır, kurulum adımları DAGITIM.md'de
+  (`scripts/kvkk-temizlik.mjs`).
+- `npm run test:load` ile yerel yük testi ve genişletilmiş güvenlik testleri
+  depoya alındı (`scripts/yuk-testi.mjs`, `tests/guvenlik-kapsamli.test.ts`).
+
 ---
 
 ## v2.0.2 — 3 Eylül 2026

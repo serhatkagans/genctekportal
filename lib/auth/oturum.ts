@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import type { RoleCode } from "@prisma/client";
 import { prisma } from "@/lib/db";
-import { sessionCookie } from "@/lib/security/session";
+import { IDLE_MS, TAZELEME_ARALIGI_MS, sessionCookie } from "@/lib/security/session";
 import { hashToken } from "@/lib/security/tokens";
 
 export interface OturumKullanicisi {
@@ -28,6 +28,17 @@ export async function oturumKullanicisi(): Promise<OturumKullanicisi | null> {
   });
   if (!oturum || oturum.revokedAt || oturum.idleExpiresAt <= now || oturum.expiresAt <= now) {
     return null;
+  }
+
+  // Kayan oturum: geçerli her istek boşta kalma sayacını sıfırlar, yoksa
+  // kesintisiz çalışan kullanıcı 30 dakikada çıkışa düşüyordu. Yazma aralıkla
+  // seyreltiliyor; tek sayfa açılışı oturumu çok kez sorabiliyor.
+  if (now.getTime() - oturum.lastSeenAt.getTime() >= TAZELEME_ARALIGI_MS) {
+    await prisma.session.touch({
+      id: oturum.id,
+      idleMs: IDLE_MS,
+      araMs: TAZELEME_ARALIGI_MS,
+    });
   }
 
   return {

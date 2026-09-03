@@ -3,6 +3,12 @@ import { createOpaqueToken } from "./tokens";
 export const IDLE_MS = 30 * 60 * 1000;
 export const ABSOLUTE_MS = 12 * 60 * 60 * 1000;
 
+// Boşta kalma sayacı her istekte sıfırlanıyor; ama her istekte bir UPDATE
+// yazmak da gereksiz. Tek bir sayfa açılışı onlarca sunucu bileşeninden
+// oturumu sorabiliyor. Son görülme bu aralıktan yeniyse yazma atlanıyor:
+// 30 dakikalık pencerede bir dakikalık sapmanın karşılığı yok.
+export const TAZELEME_ARALIGI_MS = 60 * 1000;
+
 export function createSessionMaterial(now = new Date()) {
   const session = createOpaqueToken(32);
   const csrf = createOpaqueToken(32);
