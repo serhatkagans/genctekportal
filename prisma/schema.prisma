@@ -43,6 +43,7 @@ enum SubmissionStatus {
 
 enum CoordinatorRole {
   PROVINCE_COORDINATOR
+  PROVINCE_MANAGER
   COMMISSION_MEMBER
   YEGITEK_PROVINCE_MANAGER
 }
@@ -344,7 +345,7 @@ model Coordinator {
   id            String          @id @default(cuid())
   name          String
   title         String?
-  role          CoordinatorRole
+  role          CoordinatorRole?
   email         String?
   phone         String?
   contactPublic Boolean         @default(false)
@@ -354,6 +355,7 @@ model Coordinator {
   district      District?       @relation(fields: [districtId], references: [id], onDelete: SetNull)
   institution   String?
   photoMediaId  String?
+  photo         String          @default("")
   order         Int             @default(0)
   activeFrom    DateTime?
   activeUntil   DateTime?
