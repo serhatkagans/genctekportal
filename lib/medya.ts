@@ -1,6 +1,7 @@
 import { mkdir, readdir, stat, writeFile } from "node:fs/promises";
 import { randomBytes } from "node:crypto";
 import path from "node:path";
+import { dosyaImzasiUyuyorMu } from "@/lib/security/dosya-imzasi";
 
 // İki kaynak var: WordPress içe aktarımıyla gelen dosyalar ve panelden yüklenenler.
 // İçe aktarılan klasöre yazmıyoruz ki yeniden içe aktarma yüklenenleri ezmesin.
@@ -133,9 +134,23 @@ export async function gorselKaydet(dosya: File): Promise<YuklemeSonucu> {
     return { tamam: false, hata: `Dosya ${(EN_BUYUK_BOYUT / 1024 / 1024).toFixed(0)} MB sınırını aşıyor.` };
   }
 
+  /*
+   * İÇERİK, BİLDİRİLEN TÜRLE UYUŞMALI. `dosya.type` istemciden gelir ve bu
+   * dosyalar public/ altından siteyle AYNI KÖKENDEN sunuluyor — sahte türlü
+   * bir yükleme, sniffing'e açık bir tarayıcıda aynı kökende çalışan içeriğe
+   * dönüşebilirdi. SVG'nin kapalı olmasıyla aynı gerekçe (bkz. yukarısı).
+   *
+   * Baytlar burada BİR KEZ okunur; diske de aynı tampon yazılır.
+   */
+  const icerik = Buffer.from(await dosya.arrayBuffer());
+  const imza = dosyaImzasiUyuyorMu(icerik, dosya.type);
+  if (!imza.olurMu) {
+    return { tamam: false, hata: imza.neden ?? "Dosya içeriği doğrulanamadı." };
+  }
+
   const ad = dosyaAdiUret(dosya.name, uzanti);
   await mkdir(YUKLEME_KLASORU, { recursive: true });
-  await writeFile(path.join(YUKLEME_KLASORU, ad), Buffer.from(await dosya.arrayBuffer()));
+  await writeFile(path.join(YUKLEME_KLASORU, ad), icerik);
   medyaKopyasiniDusur();
 
   return {

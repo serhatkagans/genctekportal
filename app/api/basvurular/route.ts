@@ -4,11 +4,40 @@ import { createReference, hashToken } from "@/lib/security/tokens";
 import { ipOzeti, istemciIp } from "@/lib/security/istemci-ip";
 import { checkRateLimit } from "@/lib/security/rate-limit";
 import { basvuruKaydet } from "@/lib/forms/basvuru";
+import { istekKokeniGecerliMi } from "@/lib/security/koken";
+import { dosyaImzasiUyuyorMu } from "@/lib/security/dosya-imzasi";
+import { siteAdresi } from "@/lib/ortam";
 
 export const runtime = "nodejs";
 const ACCEPTED = new Set(["application/pdf", "image/jpeg", "image/png", "image/webp"]);
+const EN_BUYUK_EK = 8 * 1024 * 1024;
 
 export async function POST(request: NextRequest){
+  /*
+   * KÖKEN KONTROLÜ EN BAŞTA (3 Eylül 2026 · dış güvenlik incelemesi). Route
+   * handler'lar Next'in sunucu eylemlerine uyguladığı CSRF kontrolünün dışında;
+   * gerekçe ve bu kontrolün sınırı lib/security/koken.ts başlığında.
+   *
+   * Hız sınırından da ÖNCE: reddedilecek bir istek başkasının kotasını
+   * yememeli.
+   */
+  if(!istekKokeniGecerliMi(request.headers, siteAdresi()).gecerliMi){
+    return NextResponse.json({message:"İstek reddedildi."},{status:403});
+  }
+
+  /*
+   * GÖVDE BOYUTU formData()'DAN ÖNCE. `formData()` çok parçalı gövdeyi belleğe
+   * alıyor ve 8 MB kontrolü ondan SONRA çalışıyordu — yani sınır, belleğe
+   * alınmayı hiç engellemiyordu. Uç kimlik istemiyor, dolayısıyla bunu herkes
+   * tetikleyebilirdi; sunucuda GençTek'in üç kopyası da aynı belleği
+   * paylaşıyor. Content-Length istemciden gelir ve yalanlanabilir; gerçek
+   * kontrol aşağıda duruyor, bu yalnızca ucuz bir ön eleme.
+   */
+  const bildirilenBoyut = Number(request.headers.get("content-length") ?? 0);
+  if(bildirilenBoyut > EN_BUYUK_EK * 2){
+    return NextResponse.json({message:"Gönderilen dosya çok büyük."},{status:413});
+  }
+
   const ip = istemciIp(request.headers) ?? "local";
   const limit = await checkRateLimit(`participation:${hashToken(ip)}`, {limit:5,windowMs:15*60_000});
   if(!limit.allowed) return NextResponse.json({message:"Çok fazla gönderim yapıldı. Lütfen daha sonra tekrar deneyin."},{status:429,headers:{"Retry-After":String(Math.ceil(limit.retryAfterMs/1000))}});
@@ -23,9 +52,14 @@ export async function POST(request: NextRequest){
   const attachment=form.get("attachment");
   let ek: {ad:string;tur:string;boyut:number;icerik:Buffer}|undefined;
   if(attachment instanceof File && attachment.size>0){
-    if(attachment.size>8*1024*1024) return NextResponse.json({message:"Dosya en fazla 8 MB olabilir.",errors:{attachment:["Dosya boyutu sınırı aşıldı."]}},{status:400});
+    if(attachment.size>EN_BUYUK_EK) return NextResponse.json({message:"Dosya en fazla 8 MB olabilir.",errors:{attachment:["Dosya boyutu sınırı aşıldı."]}},{status:400});
     if(!ACCEPTED.has(attachment.type)) return NextResponse.json({message:"Yalnızca PDF, JPG, PNG veya WebP yükleyebilirsiniz.",errors:{attachment:["Dosya türü kabul edilmiyor."]}},{status:400});
-    ek={ad:attachment.name,tur:attachment.type,boyut:attachment.size,icerik:Buffer.from(await attachment.arrayBuffer())};
+    // İçerik bildirilen türle uyuşmalı: attachment.type istemcinin yazdığı bir
+    // dizedir (bkz. lib/security/dosya-imzasi.ts). Baytlar bir kez okunuyor.
+    const icerik=Buffer.from(await attachment.arrayBuffer());
+    const imza=dosyaImzasiUyuyorMu(icerik,attachment.type);
+    if(!imza.olurMu) return NextResponse.json({message:"Dosya içeriği türüyle uyuşmuyor.",errors:{attachment:[imza.neden??"Dosya doğrulanamadı."]}},{status:400});
+    ek={ad:attachment.name,tur:attachment.type,boyut:attachment.size,icerik};
   }
 
   const reference=createReference();

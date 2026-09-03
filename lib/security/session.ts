@@ -9,6 +9,25 @@ export const ABSOLUTE_MS = 12 * 60 * 60 * 1000;
 // 30 dakikalık pencerede bir dakikalık sapmanın karşılığı yok.
 export const TAZELEME_ARALIGI_MS = 60 * 1000;
 
+/*
+ * `csrfToken`/`csrfHash` ÜRETİLİYOR AMA HİÇBİR YERDE DOĞRULANMIYOR — bu bir
+ * unutkanlık değil, bilinçli bir durum (3 Eylül 2026 · dış güvenlik
+ * incelemesinde soruldu).
+ *
+ * CSRF'e karşı fiilen çalışan koruma iki yerde: Next sunucu eylemlerinde
+ * Origin↔Host kontrolünü kendisi yapıyor, POST kabul eden iki route handler'da
+ * ise aynı kontrol elle uygulanıyor (lib/security/koken.ts).
+ *
+ * Jetonun bunlara EKLEYECEĞİ bir şey yok: portal aiotechs.cloud/genctekportal
+ * adresinde ve komşu uygulamalar aynı HOST üzerinde. Aynı köken tarayıcı için
+ * tek bir güven alanıdır — oradaki bir sayfa portalın yanıtlarını okuyabilir ve
+ * çerezlerini görebilir, yani jetonu da elde eder. Jeton yalnızca farklı
+ * kökenden gelen isteği durdurur, onu da köken kontrolü zaten durduruyor.
+ *
+ * Alanlar YİNE DE KALDIRILMADI: portal kendi alt alan adına taşındığı gün
+ * (gerçek ayrımın tek yolu budur) jeton anlamlı hâle gelir ve altyapısı hazır
+ * durur. Kaldırılırsa o gün sıfırdan yazılması gerekirdi.
+ */
 export function createSessionMaterial(now = new Date()) {
   const session = createOpaqueToken(32);
   const csrf = createOpaqueToken(32);
