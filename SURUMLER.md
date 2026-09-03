@@ -28,6 +28,8 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
   kök girdi eğik çizgili yazılıyor (`app/sitemap.ts`).
 - `fast-uri` güvenlik uyarısı (yüksek) kapatıldı. Paket yalnızca yerel
   geliştirme zincirinden geliyordu, üretimdeki uygulamada yok.
+- `next dev`'in ürettiği `AGENTS.md`/`CLAUDE.md` izlemeye alındı; izlenmedikçe
+  her dev çalıştırması ağacı kirletiyor ve sürüm betiğini durduruyordu.
 
 ---
 
