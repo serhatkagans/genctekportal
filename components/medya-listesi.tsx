@@ -1,7 +1,7 @@
 "use client";
 import { useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { apiYolu, gorselYolu } from "@/lib/ortam";
+import { gorselYolu, uygulamaYolu } from "@/lib/ortam";
 import { Icon } from "./icons";
 
 type Dosya = { ad: string; url: string; boyut: number; gorselMi: boolean; kaynak: "yuklenen" | "ice-aktarilan" };
@@ -31,7 +31,7 @@ export function MedyaListesi({ dosyalar }: { dosyalar: Dosya[] }) {
     try {
       const govde = new FormData();
       govde.append("dosya", dosya);
-      const yanit = await fetch(apiYolu("/api/yonetim/medya"), { method: "POST", body: govde });
+      const yanit = await fetch(uygulamaYolu("/api/yonetim/medya"), { method: "POST", body: govde });
       const veri = await yanit.json();
       if (!yanit.ok) throw new Error(veri.hata ?? "Yükleme başarısız.");
       router.refresh();

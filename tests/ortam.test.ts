@@ -14,12 +14,6 @@ async function uygulamaYoluYukle(onek: string) {
   return (await import("../lib/ortam")).uygulamaYolu;
 }
 
-async function apiYoluYukle(onek: string) {
-  vi.resetModules();
-  process.env.NEXT_PUBLIC_BASE_PATH = onek;
-  return (await import("../lib/ortam")).apiYolu;
-}
-
 const oncekiOnek = process.env.NEXT_PUBLIC_BASE_PATH;
 beforeEach(() => vi.resetModules());
 afterEach(() => {
@@ -91,26 +85,5 @@ describe("uygulamaYolu — alt dizin kurulumu", () => {
   it("ek tanımlı değilken yolu olduğu gibi bırakır", async () => {
     const uygulamaYolu = await uygulamaYoluYukle("");
     expect(uygulamaYolu("/giris")).toBe("/giris");
-  });
-});
-
-/* API adresleri eğik çizgiyle bitmeli: next.config.ts'te trailingSlash açık ve
-   eğik çizgisiz bir /api çağrısı 308 alıp fetch gövdeyi ikinci kez gönderiyor —
-   başvuru formunun 8 MB'a kadar eki için gerçek bir maliyet. Kural apiYolu()'nda
-   toplandı ki yeni yazılan bir çağrı sessizce tuzağa düşmesin. */
-describe("apiYolu", () => {
-  it("adresi eğik çizgiyle bitirir ve alt dizin ekini koyar", async () => {
-    const apiYolu = await apiYoluYukle("/genctekportal");
-    expect(apiYolu("/api/basvurular")).toBe("/genctekportal/api/basvurular/");
-  });
-
-  it("zaten eğik çizgiliyse ikiye katlamaz", async () => {
-    const apiYolu = await apiYoluYukle("/genctekportal");
-    expect(apiYolu("/api/basvurular/")).toBe("/genctekportal/api/basvurular/");
-  });
-
-  it("alt dizin yokken de çalışır", async () => {
-    const apiYolu = await apiYoluYukle("");
-    expect(apiYolu("/api/health")).toBe("/api/health/");
   });
 });

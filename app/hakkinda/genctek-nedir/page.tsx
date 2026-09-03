@@ -52,6 +52,15 @@ export default function GenctekNedirSayfasi() {
             <p>YEĞİTEK Ar-Ge ve Ekosistem Daire Başkanlığı Genç Bilişim Ekosistemi Koordinatörlüğü tarafından yürütülen ekosistem çalışmaları; İl Millî Eğitim Müdürlüklerinde görevlendirilen İl GençTek Koordinatörü Öğretmenler ve gönüllü komisyon üyeleri aracılığıyla yerel düzeyde yaygınlaştırılmakta, öğrencilerin ve öğretmenlerin ekosisteme aktif katılımı desteklenmektedir.</p>
             <p>GençTek; akran öğrenmesini, ekip çalışmasını, üretimi, paylaşımı ve sektörle etkileşimi destekleyen bir ekosistem yaklaşımıyla faaliyetlerini sürdürmektedir.</p>
 
+            {/* GençTek tanıtım videosu, kendi bölümünün sonunda ve ETKİM
+                anlatımının üstünde. Dosya 21 MB; sayfa açılırken inmesin diye
+                yalnızca süresi okunuyor. */}
+            <figure className="zirve-video">
+              <video controls preload="metadata">
+                <source src={gorselYolu("/video/genctek-tanitim.mp4")} type="video/mp4" />
+              </video>
+            </figure>
+
             {/*
               ETKİM (3 Eylül 2026 · istek: "yazının altına sayfa hizasını
               bozmadan aynı başlıktan atalım. Adı ETKİM olsun").
@@ -66,18 +75,13 @@ export default function GenctekNedirSayfasi() {
             <h2>ETKİM</h2>
             <p>Eğitim Teknolojileri Kuluçka ve İnovasyon Merkezi (ETKİM), Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü tarafından ODTÜ Teknokent yerleşkesinde hayata geçirilmiştir. ETKİM, Millî Eğitim Bakanlığı’nın FATİH Projesi ile başlattığı, eğitimde dijital dönüşüm hamlesinin önemli bir ayağını oluşturarak eğitim teknolojilerine yönelik yatırımların fark yaratan eğitim çıktılarına dönüşmesine odaklanmaktadır. Aynı zamanda, eğitim teknolojileri sektörünü sahiplenerek girişimcileri desteklemeyi ve sektördeki gelişmeleri yakından takip ederek paydaşlarla iş birliği içinde bulunmayı hedeflemektedir.</p>
             <p>Genç Bilişim Ekosistemi çalışmaları ETKİM merkezli olarak sürdürülmektedir.</p>
-            {/* İki video metnin altında, zirve sayfasındaki kalıbın aynısı.
-                Dosyalar büyük (21 ve 44 MB), sayfa açılırken inmesinler diye
-                yalnızca süreleri okunuyor. Kaynaklar public/video altında ve
-                depoya girmiyor — sunucuya elle kopyalanır.
+            {/* ETKİM videosu kendi metninin altında, zirve sayfasındaki kalıbın
+                aynısı. Dosya 44 MB, sayfa açılırken inmesin diye yalnızca
+                süresi okunuyor. Kaynaklar public/video altında ve depoya
+                girmiyor — sunucuya elle kopyalanır.
 
                 ALTYAZI YOK (3 Eylül 2026 · istek: "açıklama olmasın"):
-                oynatıcıların ne olduğunu üstteki bölüm zaten söylüyordu. */}
-            <figure className="zirve-video">
-              <video controls preload="metadata">
-                <source src={gorselYolu("/video/genctek-tanitim.mp4")} type="video/mp4" />
-              </video>
-            </figure>
+                oynatıcıların ne olduğunu üstlerindeki bölüm zaten söylüyor. */}
             <figure className="zirve-video">
               <video controls preload="metadata">
                 <source src={gorselYolu("/video/etkim.mp4")} type="video/mp4" />
