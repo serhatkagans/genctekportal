@@ -19,6 +19,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+---
+
+## v2.0.2 — 3 Eylül 2026
+
 - **Hız sınırı artık `X-Forwarded-For` ile atlatılamıyor.** Başlık ilk
   öğesinden okunuyordu; Apache o başlığı ezmeyip sonuna eklediği için ilk öğe
   istemcinin yazdığı değerdi. Giriş ve başvuru sınırları başlık döndürülerek
