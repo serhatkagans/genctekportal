@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   basePath: (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(/\/$/, ""),
+  trailingSlash: true,
   poweredByHeader: false,
   compress: true,
   // Yerel Prisma Postgres aynı anda dokuzuncu bağlantıda yarı kilitleniyor.

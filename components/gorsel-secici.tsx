@@ -18,7 +18,7 @@ const KAYNAKLAR: { deger: Kaynak; etiket: string }[] = [
 export async function gorselYukle(dosya: File): Promise<MedyaOgesi> {
   const govde = new FormData();
   govde.append("dosya", dosya);
-  const yanit = await fetch(uygulamaYolu("/api/yonetim/medya"), { method: "POST", body: govde });
+  const yanit = await fetch(uygulamaYolu("/api/yonetim/medya/"), { method: "POST", body: govde });
   const veri = await yanit.json();
   if (!yanit.ok) throw new Error(veri.hata ?? "Yükleme başarısız.");
   return veri.dosya as MedyaOgesi;
@@ -75,7 +75,7 @@ export function GorselSecici({ baslik, onSec, onKapat }: {
     setSayfaAliniyor(true);
     try {
       const sorgu = new URLSearchParams({ arama: aramaMetni, kaynak: secilenKaynak, atla: String(atla) });
-      const yanit = await fetch(`${uygulamaYolu("/api/yonetim/medya")}?${sorgu}`);
+      const yanit = await fetch(`${uygulamaYolu("/api/yonetim/medya/")}?${sorgu}`);
       if (!yanit.ok) throw new Error("Medya listesi alınamadı.");
       const veri = await yanit.json() as { dosyalar: MedyaOgesi[]; toplam: number; dahaVar: boolean };
       setDosyalar((onceki) => (atla === 0 ? veri.dosyalar : [...(onceki ?? []), ...veri.dosyalar]));

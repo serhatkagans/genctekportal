@@ -31,7 +31,7 @@ export function MedyaListesi({ dosyalar }: { dosyalar: Dosya[] }) {
     try {
       const govde = new FormData();
       govde.append("dosya", dosya);
-      const yanit = await fetch(uygulamaYolu("/api/yonetim/medya"), { method: "POST", body: govde });
+      const yanit = await fetch(uygulamaYolu("/api/yonetim/medya/"), { method: "POST", body: govde });
       const veri = await yanit.json();
       if (!yanit.ok) throw new Error(veri.hata ?? "Yükleme başarısız.");
       router.refresh();
