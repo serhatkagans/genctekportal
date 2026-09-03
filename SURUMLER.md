@@ -19,6 +19,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+---
+
+## v2.1.0 — 3 Eylül 2026
+
 - **Oturum artık kullanımdayken düşmüyor.** Boşta kalma sayacı yalnızca girişte
   yazılıyordu; panelde kesintisiz çalışan kullanıcı 30 dakika sonra çıkışa
   düşüyordu. Geçerli her istek sayacı sıfırlıyor. Yazma dakikada bire
