@@ -529,3 +529,12 @@ model MigrationMapping {
   @@unique([sourceType, sourceId])
   @@index([targetType, targetId])
 }
+
+model RateLimit {
+  key          String    @id
+  count        Int
+  resetAt      DateTime
+  blockedUntil DateTime?
+
+  @@index([resetAt])
+}

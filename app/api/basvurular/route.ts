@@ -9,7 +9,7 @@ const ACCEPTED = new Set(["application/pdf", "image/jpeg", "image/png", "image/w
 
 export async function POST(request: NextRequest){
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
-  const limit = checkRateLimit(`participation:${hashToken(ip)}`, {limit:5,windowMs:15*60_000});
+  const limit = await checkRateLimit(`participation:${hashToken(ip)}`, {limit:5,windowMs:15*60_000});
   if(!limit.allowed) return NextResponse.json({message:"Çok fazla gönderim yapıldı. Lütfen daha sonra tekrar deneyin."},{status:429,headers:{"Retry-After":String(Math.ceil(limit.retryAfterMs/1000))}});
   const form = await request.formData();
   const raw = Object.fromEntries([...form.entries()].filter(([,value])=>typeof value==="string"));

@@ -29,7 +29,7 @@ export async function girisAction(_oncekiDurum: string | undefined, formData: Fo
 
   // Hem hesap hem kaynak bazlı sınır: tek hesabı deneme ve dağıtık deneme ayrı sayılır.
   const anahtar = `giris:${ipOzeti ?? "bilinmeyen"}:${eposta.toLocaleLowerCase("tr-TR")}`;
-  const sinir = checkRateLimit(anahtar);
+  const sinir = await checkRateLimit(anahtar);
   if (!sinir.allowed) {
     const dakika = Math.ceil((sinir.retryAfterMs ?? 0) / 60000);
     return `Çok fazla deneme yapıldı. ${dakika} dakika sonra tekrar deneyin.`;
@@ -61,7 +61,7 @@ export async function girisAction(_oncekiDurum: string | undefined, formData: Fo
   }
   if (!sonuc.tamam) return sonuc.hata;
 
-  resetRateLimit(anahtar);
+  await resetRateLimit(anahtar);
   const depo = await cookies();
   depo.set(sessionCookie.name, sonuc.jeton, sessionCookie.options);
   redirect(hedef);
