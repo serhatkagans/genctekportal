@@ -19,6 +19,8 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- Logolar sayfasına "Renk kodları" kartı eklendi (PDF); "GençTek logo" kartı
+  artık tek bir PNG yerine logo arşivini (RAR) indiriyor.
 - Logolar sayfasındaki "İndirilebilir · Marka öğeleri" ara başlığı kaldırıldı;
   kartlar doğrudan sayfa başlığının altında. GençTek logo kartı da diğerleriyle
   aynı biçimde: önizleme görseli yok, indirme bağlantısı duruyor.

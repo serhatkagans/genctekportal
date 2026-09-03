@@ -11,20 +11,27 @@ export const metadata = {
 /**
  * MARKA ÖĞELERİ.
  *
- * DOSYALAR HENÜZ TEK: portalın `public` klasöründe bugün yalnızca GençTek
- * amblemi (Genc.png) var. Roll-up, afiş ve yatay/dikey logo varyantları
- * eklendiğinde bu diziye birer satır eklenmesi yeterli — sayfa listeden
- * besleniyor, elle kart yazılmıyor.
+ * Dosyalar public/marka altında ve depoda İZLENİYOR: indirilebilir marka
+ * dosyaları sayfanın kendisi kadar koddur, dağıtımla birlikte gitsinler.
+ * Videolarla aynı kefeye konmadılar — onlar yüzlerce MB, bunlar toplam 10 MB.
  *
- * OLMAYAN DOSYA UYDURULMADI: "logo-yatay.svg" gibi var sayılan bağlantılar
+ * Yeni bir dosya geldiğinde bu diziye bir satır eklemek yeterli; sayfa
+ * listeden besleniyor, elle kart yazılmıyor.
+ *
+ * OLMAYAN DOSYA UYDURULMAZ: "logo-yatay.svg" gibi var sayılan bağlantılar
  * koymak, tıklayan herkese 404 verirdi. Eksikler aşağıdaki notta açıkça
  * yazılı.
  */
 const ogeler = [
   {
     ad: "GençTek logo",
-    dosya: "/Genc.png",
-    aciklama: "Ana amblem. Açık ve koyu zeminde kullanılabilir.",
+    dosya: "/marka/genctek-logo.rar",
+    aciklama: "Amblemin kullanıma hazır sürümlerini içeren arşiv (RAR).",
+  },
+  {
+    ad: "Renk kodları",
+    dosya: "/marka/genctek_logo_2024_b.pdf",
+    aciklama: "Marka renkleri ve logo kullanımı (PDF).",
   },
 ];
 
