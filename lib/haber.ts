@@ -76,6 +76,19 @@ const ALANLAR = sql`
 // Dosya sürümündeki sıra "en yeni önce"ydi; sitede de, panelde de o sıra bekleniyor.
 const SIRA = sql`COALESCE("publishedAt", "createdAt") DESC, "refNo" DESC`;
 
+/* Kamuya açık okumalar yalnızca yayımlanmış haberi görür. Bugün tabloya yazan
+   iki yer de (bu dosya ve scripts/goc-haberler.mjs) hep 'PUBLISHED' yazıyor,
+   yani koşul şu an hiçbir satırı elemiyor; taslak ya da zamanlanmış yayın
+   eklendiği gün yayımlanmamış haberin siteye sızmasını engellemek için
+   şimdiden duruyor. Panel okumaları bu koşulun dışında: haberBulId hiç
+   uygulamaz, haberleriOku ise taslaklarDahil ile atlar. */
+const YAYINDA = sql`status = 'PUBLISHED'`;
+
+/* ALANLAR/SIRA gibi bir kez kurulup yeniden kullanılan parçalar: haberleriOku
+   iki koşuldan birini seçiyor, bunları çağrı anında üretmenin faydası yok. */
+const YAYINDA_KOSULU = sql`WHERE ${YAYINDA}`;
+const KOSULSUZ = sql``;
+
 function satirdanHaber(satir: HaberSatiri): Haber {
   return {
     id: satir.refNo,
@@ -122,9 +135,13 @@ function geciciBaglantiHatasi(hata: unknown) {
     || /ECONNRESET|ECONNREFUSED|connection terminated|connection closed/i.test(mesaj);
 }
 
-export async function haberleriOku(): Promise<Haber[]> {
+export async function haberleriOku(taslaklarDahil = false): Promise<Haber[]> {
   try {
-    const satirlar = await sql<HaberSatiri[]>`SELECT ${ALANLAR} FROM "Article" ORDER BY ${SIRA}`;
+    const satirlar = await sql<HaberSatiri[]>`
+      SELECT ${ALANLAR} FROM "Article"
+      ${taslaklarDahil ? KOSULSUZ : YAYINDA_KOSULU}
+      ORDER BY ${SIRA}
+    `;
     return satirlar.map(satirdanHaber);
   } catch (hata) {
     if (!geciciBaglantiHatasi(hata)) throw hata;
@@ -165,6 +182,7 @@ export async function haberKartlariOku(limit?: number): Promise<HaberKarti[]> {
   try {
     const satirlar = await sql<KartSatiri[]>`
       SELECT ${KART_ALANLARI} FROM "Article"
+      WHERE ${YAYINDA}
       ORDER BY ${SIRA}
       ${limit ? sql`LIMIT ${limit}` : sql``}
     `;
@@ -179,11 +197,12 @@ export async function haberKartlariOku(limit?: number): Promise<HaberKarti[]> {
 // dönmektense ilk/son sayfayı göstermek kullanıcıyı çıkmaza sokmaz.
 export async function haberSayfasi(istenenSayfa: number) {
   try {
-    const [{ toplam }] = await sql<{ toplam: number }[]>`SELECT count(*)::int AS toplam FROM "Article"`;
+    const [{ toplam }] = await sql<{ toplam: number }[]>`SELECT count(*)::int AS toplam FROM "Article" WHERE ${YAYINDA}`;
     const sonSayfa = Math.max(1, Math.ceil(toplam / HABER_SAYFA_BOYUTU));
     const sayfa = Math.min(Math.max(1, istenenSayfa), sonSayfa);
     const satirlar = await sql<KartSatiri[]>`
       SELECT ${KART_ALANLARI} FROM "Article"
+      WHERE ${YAYINDA}
       ORDER BY ${SIRA}
       LIMIT ${HABER_SAYFA_BOYUTU} OFFSET ${(sayfa - 1) * HABER_SAYFA_BOYUTU}
     `;
@@ -206,7 +225,7 @@ export async function haberSayfasi(istenenSayfa: number) {
 export async function haberBul(slug: string) {
   try {
     const [satir] = await sql<HaberSatiri[]>`
-      SELECT ${ALANLAR} FROM "Article" WHERE slug = ${slug} LIMIT 1
+      SELECT ${ALANLAR} FROM "Article" WHERE slug = ${slug} AND ${YAYINDA} LIMIT 1
     `;
     return satir ? satirdanHaber(satir) : undefined;
   } catch (hata) {
@@ -241,13 +260,13 @@ export async function haberDetayi(slug: string) {
     const [[onceki], [sonraki]] = await Promise.all([
       sql<HaberKomsusu[]>`
         SELECT slug, title FROM "Article"
-        WHERE COALESCE("publishedAt", "createdAt") < ${new Date(item.date)}
+        WHERE ${YAYINDA} AND COALESCE("publishedAt", "createdAt") < ${new Date(item.date)}
         ORDER BY COALESCE("publishedAt", "createdAt") DESC, "refNo" DESC
         LIMIT 1
       `,
       sql<HaberKomsusu[]>`
         SELECT slug, title FROM "Article"
-        WHERE COALESCE("publishedAt", "createdAt") > ${new Date(item.date)}
+        WHERE ${YAYINDA} AND COALESCE("publishedAt", "createdAt") > ${new Date(item.date)}
         ORDER BY COALESCE("publishedAt", "createdAt") ASC, "refNo" ASC
         LIMIT 1
       `,

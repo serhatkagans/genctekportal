@@ -7,7 +7,7 @@ import { haberleriOku } from "@/lib/haber";
 export const dynamic = "force-dynamic";
 
 export default async function ContentList({ searchParams }: { searchParams: Promise<{ silindi?: string }> }) {
-  const haberler = await haberleriOku();
+  const haberler = await haberleriOku(true);
   const silindi = (await searchParams).silindi === "1";
 
   return (

@@ -21,7 +21,7 @@ async function medyaSayisi() {
 
 export default async function AdminDashboard() {
   const [haberler, koordinatorler, medya, themes] = await Promise.all([
-    haberleriOku(),
+    haberleriOku(true),
     koordinatorleriOku(),
     medyaSayisi(),
     temalariOku(),
