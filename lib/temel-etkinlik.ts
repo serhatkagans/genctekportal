@@ -95,18 +95,27 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
   {
     slug: "hack-the-idea",
     ad: "Hack The Idea",
+    gorseller: [
+      { url: "/medya/temel-etkinlikler/hack-the-idea.webp", alt: "" },
+    ],
     aciklama:
       "GençTek öğrencilerinin ve öğretmenlerinin bilişim alanında karşıt görüşleri savunan takımların fikirlerini çarpıştırdıkları bir sohbet ve tartışma platformudur.",
   },
   {
     slug: "akran-ogretimi",
     ad: "Akran Öğretimi",
+    gorseller: [
+      { url: "/medya/temel-etkinlikler/akran-ogretimi.webp", alt: "" },
+    ],
     aciklama:
       "Genç Bilişim Ekosistemi akran öğretim modeline dayanmaktadır. Benzer sosyal gruplardan gelen kişilerin birbirlerine öğrenmede yardım etmesi ve öğreterek kendilerinin de öğrenmesini sağlayan, öğrencilerin akademik, sosyal ve davranışsal beceriler geliştirmek için birlikte çalıştığı öğrenme stratejisidir. Öğrencilerin birbirleriyle etkileşimleri arttırılırken öğrenen topluluklar hedeflenmektedir.",
   },
   {
     slug: "dijital-yuruyus-stem",
     ad: "Dijital Yürüyüş STEM",
+    gorseller: [
+      { url: "/medya/temel-etkinlikler/dijital-yuruyus-stem.webp", alt: "" },
+    ],
     aciklama:
       "Öğrencilerin verilen gerçek dünya problemlerine ilişkin ekip çalışması ile çözümler ürettiği, bu çözümleri jüri üyelerine sunup akranlarıyla paylaştığı bir STEM etkinliğidir.",
   },
@@ -143,6 +152,9 @@ export const TEMEL_ETKINLIKLER: TemelEtkinlik[] = [
   {
     slug: "hatalarindan-ders-cikar",
     ad: "Hatalarından Ders Çıkar / Harika Bir Başarısızlık Tasarla",
+    gorseller: [
+      { url: "/medya/temel-etkinlikler/hatalarindan-ders-cikar.webp", alt: "" },
+    ],
     aciklama:
       "Öğrencilerin bilişim sektöründeki kriz yönetimine ilişkin becerilerini geliştirmek üzere planlanmış “Hatalarından Ders Çıkar” etkinliklerinde ekipler, bilişim firmalarının başına gelebilecek kriz durumlarına ilişkin teknik ve stratejik kararlar ile çözüm önerileri geliştirir.",
   },

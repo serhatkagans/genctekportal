@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { gorselYolu } from "@/lib/ortam";
 
 export const metadata = {
   title: "GençTek Nedir? · GençTek",
@@ -48,8 +49,33 @@ export default function GenctekNedirSayfasi() {
             */}
             <h2>Genç Bilişim Ekosistemi</h2>
             <p>GençTek, Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü koordinasyonunda, bilişim alanında çalışma gerçekleştirmek isteyen, çalışmalar yürüten ya da mevcut çalışmalarının etkisini arttırmak isteyen öğrencilerin ve danışman öğretmenlerin desteklendiği, birbirleriyle ve paydaşlarla iletişim ve iş birliğinin sağlandığı genç bilişim ekosistemidir.</p>
-            <p>YEĞİTEK Genç Bilişim Koordinatörlüğü tarafından yürütülen ekosistem çalışmaları; İl Millî Eğitim Müdürlüklerinde görevlendirilen İl GençTek Koordinatörü Öğretmenler ve gönüllü komisyon üyeleri aracılığıyla yerel düzeyde yaygınlaştırılmakta, öğrencilerin ve öğretmenlerin ekosisteme aktif katılımı desteklenmektedir.</p>
+            <p>YEĞİTEK Ar-Ge ve Ekosistem Daire Başkanlığı Genç Bilişim Ekosistemi Koordinatörlüğü tarafından yürütülen ekosistem çalışmaları; İl Millî Eğitim Müdürlüklerinde görevlendirilen İl GençTek Koordinatörü Öğretmenler ve gönüllü komisyon üyeleri aracılığıyla yerel düzeyde yaygınlaştırılmakta, öğrencilerin ve öğretmenlerin ekosisteme aktif katılımı desteklenmektedir.</p>
             <p>GençTek; akran öğrenmesini, ekip çalışmasını, üretimi, paylaşımı ve sektörle etkileşimi destekleyen bir ekosistem yaklaşımıyla faaliyetlerini sürdürmektedir.</p>
+
+            {/*
+              ETKİM (3 Eylül 2026 · istek: "yazının altına sayfa hizasını
+              bozmadan aynı başlıktan atalım. Adı ETKİM olsun").
+
+              Bölüm sol sütunun İÇİNDE duruyor: sağdaki on iki maddelik liste
+              çok daha uzun olduğu için burada zaten boşluk vardı, ızgara da
+              olduğu gibi kalıyor — yeni bir section açmak iki sütunun hizasını
+              bozardı.
+
+              Metin YEĞİTEK'ten geldi (3 Eylül 2026).
+            */}
+            <h2>ETKİM</h2>
+            <p>Eğitim Teknolojileri Kuluçka ve İnovasyon Merkezi (ETKİM), Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü tarafından ODTÜ Teknokent yerleşkesinde hayata geçirilmiştir. ETKİM, Millî Eğitim Bakanlığı’nın FATİH Projesi ile başlattığı, eğitimde dijital dönüşüm hamlesinin önemli bir ayağını oluşturarak eğitim teknolojilerine yönelik yatırımların fark yaratan eğitim çıktılarına dönüşmesine odaklanmaktadır. Aynı zamanda, eğitim teknolojileri sektörünü sahiplenerek girişimcileri desteklemeyi ve sektördeki gelişmeleri yakından takip ederek paydaşlarla iş birliği içinde bulunmayı hedeflemektedir.</p>
+            <p>Genç Bilişim Ekosistemi çalışmaları ETKİM merkezli olarak sürdürülmektedir.</p>
+            {/* Video metnin altında, zirve sayfasındaki kalıbın aynısı:
+                dosya 44 MB, sayfa açılırken inmesin diye yalnızca süresi
+                okunuyor. Kaynak public/video altında ve depoya girmiyor —
+                sunucuya elle kopyalanır. */}
+            <figure className="zirve-video">
+              <video controls preload="metadata">
+                <source src={gorselYolu("/video/etkim.mp4")} type="video/mp4" />
+              </video>
+              <figcaption>ETKİM tanıtım videosu</figcaption>
+            </figure>
           </div>
           {/*
             KOORDİNATÖRLÜĞÜN GÖREVLERİ (31 Ağustos 2026 · istek: "SAĞDAKİ
