@@ -19,6 +19,26 @@ veritabanı**: `https://aiotechs.cloud/genctek`.
 Apache blokunda **sıra önemlidir**: `/genctekportal` bloğu `/genctek`
 bloğunun ÜSTÜNDE durmalı, yoksa uzun yol kısa olanın içinde eşleşir.
 
+### Çıplak `/genctekportal` sonuna eğik çizgi alır
+
+Next, basePath'in çıplak hâlinde iç yolu **boş** bırakıyor ve ara katmanı hiç
+çağırmıyor; sonuç, ana sayfanın CSP, HSTS ve çerçeveleme koruması olmadan
+servis edilmesiydi (3 Eylül 2026, canlıda ölçüldü). Matcher'la çözülmüyor —
+`"/"`, `"/:path*"` ve `next.config` başlıkları denendi, üçü de tutmadı.
+
+Apache çıplak yolu **iç aktarımla** eğik çizgili hâline çeviriyor; tarayıcıdaki
+adres değişmiyor:
+
+```apache
+# Diğer ProxyPass satırlarından ÖNCE gelmeli.
+ProxyPassMatch ^/genctekportal$ http://127.0.0.1:3011/genctekportal/
+```
+
+Bu kural `next.config.ts`'teki `skipTrailingSlashRedirect` ile **birlikte**
+çalışır: o ayar olmadan Next eğik çizgiyi 308 ile atar ve Apache ile sonsuz
+döngü oluşur. **Yayın sırası:** önce uygulama (ayarı taşıyan sürüm), sonra
+Apache kuralı.
+
 ## Yayın akışı
 
 Depo 20 Ağustos 2026'da kuruldu; öncesinde kod sunucuya elle aktarılıyordu.
