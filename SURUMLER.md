@@ -19,6 +19,33 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **İçerik veritabanına taşındı.** Haberler, koordinatörler ve yönlendirmeler
+  artık `data/*.json` dosyalarında değil PostgreSQL'de. Dosyalar yedeklenmiyordu
+  ve panelden yapılan iki eşzamanlı düzenleme birbirini eziyordu. Kurulum artık
+  `prisma migrate deploy` ve bir kereliğine `npm run goc:haberler` /
+  `goc:koordinatorler` gerektiriyor; ayrıntı DAGITIM.md'de.
+- Koordinatör listesindeki bir yazım hatası göçte düzeldi: Artvin "Artin"
+  yazılıyordu. İSTANBUL, TOKAT ve Hakkari de doğru yazımlarına çevrildi.
+- **Olmayan adresler artık 404 dönüyor.** Eskiden "sayfa burada değil" ekranı
+  200 ile veriliyordu; arama motorları onu geçerli içerik sayıp indeksliyor,
+  yayından kaldırılan sayfa kaldırıldığını bildiremiyordu.
+- **Ana sayfa güvenlik başlıklarını alıyor.** Alt sayfalar CSP, HSTS ve
+  çerçeveleme korumasını alırken ana sayfa hiçbirini almıyordu. Çözüm iki
+  parçalı ve İKİSİ BİRLİKTE uygulanmalı: `next.config.ts` ·
+  `skipTrailingSlashRedirect` ve Apache'de çıplak `/genctekportal` yolunun
+  eğik çizgili hâline yönlendirilmesi. Biri diğeri olmadan sonsuz döngü olur;
+  yayın sırası ve DirectAdmin yenileme adımı DAGITIM.md'de.
+  Ziyaretçi açısından tek fark: ana sayfa adresi `/genctekportal/` hâline
+  yönleniyor, alt sayfaların adresi değişmedi.
+- **Haber sayfaları hızlandı.** Haber listesi her istekte bütün gövdeleri
+  yeniden işliyordu; iş bir kez göçte yapılıp saklandı. Ölçüm: `/haberler`
+  24 → 68 istek/sn, ana sayfa 21 → 46, haber detayı 84.
+- Giriş ve başvuru formundaki deneme sınırı artık veritabanında tutuluyor.
+  Eskiden süreç belleğindeydi: her yayın sonrası sıfırlanıyordu ve uygulama
+  çok sürece çıkarılsaydı sınır fiilen süreç sayısı kadar katlanacaktı.
+- `sanitize-html` yamalı sürüme çekildi (2.17.6 → 2.17.7). Kayıtlı açık bu
+  yapılandırmada sömürülebilir değildi (SVG etiketleri kapalı), yine de kapatıldı.
+
 - Logolar sayfasına "Renk kodları" kartı eklendi (PDF); "GençTek logo" kartı
   artık tek bir PNG yerine logo arşivini (RAR) indiriyor.
 - Logolar sayfasındaki "İndirilebilir · Marka öğeleri" ara başlığı kaldırıldı;

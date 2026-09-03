@@ -48,3 +48,8 @@ tsconfig.tsbuildinfo
 # public/temalar ile aynı karar — depoya girmez, sunucuda
 # /opt/genctekportal/public/video altında durur, dağıtım dokunmaz.
 public/video
+
+# tmp/ karalama alanı: içine bakılan/indirilen dosyalar birikiyor ve sürüm
+# betiği kirli ağaçta çalışmıyor. İzlenen tek şey tmp/pdfs.
+/tmp/*
+!/tmp/pdfs/
