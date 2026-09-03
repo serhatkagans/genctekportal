@@ -19,6 +19,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+---
+
+## v2.0.1 — 3 Eylül 2026
+
 - **Yayımlanmamış haber siteye sızamaz.** Kamuya açık haber sorguları artık
   `status = 'PUBLISHED'` koşulunu uyguluyor. Bugün tabloya yalnızca yayımlanmış
   haber yazıldığı için görünen bir değişiklik yok; taslak ya da zamanlanmış
