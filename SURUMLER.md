@@ -20,7 +20,8 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
 - Logolar sayfasındaki "İndirilebilir · Marka öğeleri" ara başlığı kaldırıldı;
-  kartlar doğrudan sayfa başlığının altında.
+  kartlar doğrudan sayfa başlığının altında. GençTek logo kartı da diğerleriyle
+  aynı biçimde: önizleme görseli yok, indirme bağlantısı duruyor.
 
 - Temel etkinlikler listesinde Hack The Idea, Akran Öğretimi, Dijital Yürüyüş
   STEM ve Hatalarından Ders Çıkar kartları artık kendi kapak fotoğraflarıyla

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -69,9 +68,6 @@ export default function LogolarSayfasi() {
           <div className="card-grid">
             {ogeler.map((oge) => (
               <a className="content-card marka-karti" href={gorselYolu(oge.dosya)} download key={oge.dosya}>
-                <span className="marka-onizleme">
-                  <Image src={gorselYolu(oge.dosya)} alt={`${oge.ad} önizlemesi`} width={220} height={140} sizes="220px" />
-                </span>
                 <span className="card-body">
                   <span className="chip">Dosyayı indir</span>
                   <h3>{oge.ad}</h3>
