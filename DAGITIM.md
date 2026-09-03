@@ -19,25 +19,45 @@ veritabanı**: `https://aiotechs.cloud/genctek`.
 Apache blokunda **sıra önemlidir**: `/genctekportal` bloğu `/genctek`
 bloğunun ÜSTÜNDE durmalı, yoksa uzun yol kısa olanın içinde eşleşir.
 
-### Çıplak `/genctekportal` sonuna eğik çizgi alır
+### Çıplak `/genctekportal` eğik çizgili hâline yönlendirilir
 
-Next, basePath'in çıplak hâlinde iç yolu **boş** bırakıyor ve ara katmanı hiç
-çağırmıyor; sonuç, ana sayfanın CSP, HSTS ve çerçeveleme koruması olmadan
-servis edilmesiydi (3 Eylül 2026, canlıda ölçüldü). Matcher'la çözülmüyor —
-`"/"`, `"/:path*"` ve `next.config` başlıkları denendi, üçü de tutmadı.
+Next, basePath çıplak hâldeyken iç yolu **boş** bırakıyor ve ara katmanı hiç
+çağırmıyor (ara katman günlüğüyle doğrulandı: `/genctekportal/haberler` için
+`pathname="/haberler"` geliyor, çıplak yol için proxy hiç çalışmıyor). Sonuç,
+ana sayfanın CSP, HSTS ve çerçeveleme koruması olmadan servis edilmesiydi.
+Uygulama tarafında çözülmüyor — `"/"`, `"/:path*"` matcher'ları ve
+`next.config` başlıkları denendi, üçü de tutmadı.
 
-Apache çıplak yolu **iç aktarımla** eğik çizgili hâline çeviriyor; tarayıcıdaki
-adres değişmiyor:
+Çözüm iki parçalı ve **ikisi birlikte** olmalı:
+
+1. `next.config.ts` · `skipTrailingSlashRedirect: true` — yoksa Next eğik
+   çizgiyi 308 ile geri atar ve Apache ile sonsuz döngü oluşur.
+2. Apache · çıplak yol yönlendirilir, çıplak `ProxyPass` satırı **kaldırılır**
+   (dururken adresi kapıyor ve yönlendirme hiç ateşlenmiyor):
 
 ```apache
-# Diğer ProxyPass satırlarından ÖNCE gelmeli.
-ProxyPassMatch ^/genctekportal$ http://127.0.0.1:3011/genctekportal/
+RedirectMatch 301 ^/genctekportal$ /genctekportal/
+ProxyPass /genctekportal/ http://127.0.0.1:3011/genctekportal/
+ProxyPassReverse /genctekportal/ http://127.0.0.1:3011/genctekportal/
 ```
 
-Bu kural `next.config.ts`'teki `skipTrailingSlashRedirect` ile **birlikte**
-çalışır: o ayar olmadan Next eğik çizgiyi 308 ile atar ve Apache ile sonsuz
-döngü oluşur. **Yayın sırası:** önce uygulama (ayarı taşıyan sürüm), sonra
-Apache kuralı.
+Aynı kalıp `/merveapartmani` için de kullanılıyor. Yalnızca ana sayfa bir
+301 alır; alt sayfaların adresi değişmez. **Yayın sırası:** önce uygulama
+(ayarı taşıyan sürüm), sonra Apache.
+
+### Apache düzenlemesi tek başına ETKİSİZDİR
+
+`cust_httpd` yalnızca **kaynak** dosyadır. DirectAdmin onu
+`/usr/local/directadmin/data/users/admin/httpd.conf` içine birleştirir ve
+Apache o üretilmiş dosyayı okur. Kaynağı düzenleyip `apachectl graceful`
+demek hiçbir şey değiştirmez — değişiklik sessizce ölü kalır:
+
+```bash
+# cust_httpd düzenlendikten SONRA, her seferinde:
+echo "action=rewrite&value=httpd" >> /usr/local/directadmin/data/task.queue
+/usr/local/directadmin/dataskq d
+apachectl configtest && apachectl graceful
+```
 
 ## Yayın akışı
 

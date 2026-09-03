@@ -11,13 +11,14 @@ const nextConfig: NextConfig = {
      çerçeveleme koruması olmadan servis ediliyordu.
 
      Çözüm iki parçalı ve İKİSİ BİRLİKTE olmalı:
-       1. Apache çıplak yolu sonuna eğik çizgi ekleyerek proxy eder (yönlendirme
-          DEĞİL, iç aktarım) — tarayıcıdaki adres değişmez.
+       1. Apache çıplak yolu eğik çizgili hâline 301 ile yönlendirir ve çıplak
+          ProxyPass satırı kaldırılır (dururken adresi kapıyor).
        2. Burada skipTrailingSlashRedirect: yoksa Next "/genctekportal/" adresini
           308 ile geri atar ve Apache ile sonsuz döngü oluşur.
      Eğik çizgi eklenince iç yol "/" oluyor ve ara katman çalışıyor.
 
-     SIRA: bu ayar CANLIYA ÖNCE gitmeli, Apache kuralı sonra. Tersi döngü demek. */
+     SIRA: bu ayar CANLIYA ÖNCE gitmeli, Apache kuralı sonra. Tersi döngü demek.
+     Apache tarafının ayrıntısı ve DirectAdmin yenileme adımı DAGITIM.md-de. */
   skipTrailingSlashRedirect: true,
   poweredByHeader: false,
   compress: true,
