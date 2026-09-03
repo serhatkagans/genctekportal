@@ -19,6 +19,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+---
+
+## v2.0.0 — 3 Eylül 2026
+
 - **İçerik veritabanına taşındı.** Haberler, koordinatörler ve yönlendirmeler
   artık `data/*.json` dosyalarında değil PostgreSQL'de. Dosyalar yedeklenmiyordu
   ve panelden yapılan iki eşzamanlı düzenleme birbirini eziyordu. Kurulum artık
