@@ -8,6 +8,17 @@ export function uygulamaYolu(yol: string): string {
   return `${uygulamaOneki}${mutlakYol}`;
 }
 
+/* API uçlarının adresi HER ZAMAN buradan geçmeli.
+   next.config.ts'te trailingSlash açık: eğik çizgisiz bir /api adresine
+   yapılan çağrı 308 alır ve fetch gövdeyi ikinci kez gönderir — başvuru
+   formunun 8 MB'a kadar eki için gerçek bir maliyet. Eğik çizgiyi tek tek
+   çağrı yerlerinde hatırlamak yerine burada ekliyoruz ki yeni yazılan bir
+   çağrı da sessizce bu tuzağa düşmesin. Sorgu dizesi ayrı eklenir. */
+export function apiYolu(yol: string): string {
+  const temiz = yol.replace(/\/+$/, "");
+  return `${uygulamaYolu(temiz)}/`;
+}
+
 // Veritabanında ve içerik dosyalarında duran görsel yolları site köküne göre
 // yazılmıştır ("/temalar/espor.jpg"). Uygulama bir alt dizinde yayınlandığında
 // bunların önüne ek gelmeli, yoksa tarayıcı görseli alan adının kökünde arar.

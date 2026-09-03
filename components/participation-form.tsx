@@ -1,13 +1,13 @@
 "use client";
 import { useState } from "react";
-import { uygulamaYolu } from "@/lib/ortam";
+import { apiYolu, uygulamaYolu } from "@/lib/ortam";
 
 type Errors=Record<string,string[]>;
 const districts:Record<string,string[]>={Ankara:["Çankaya","Keçiören","Yenimahalle"],Eskişehir:["Odunpazarı","Tepebaşı"],İzmir:["Bornova","Konak","Karşıyaka"]};
 
 export function ParticipationForm(){
  const [type,setType]=useState<"STUDENT"|"TEACHER">("STUDENT"); const [province,setProvince]=useState(""); const [errors,setErrors]=useState<Errors>({}); const [reference,setReference]=useState(""); const [loading,setLoading]=useState(false); const [startedAt]=useState(()=>Date.now());
- async function submit(event:React.FormEvent<HTMLFormElement>){event.preventDefault();setLoading(true);setErrors({});const response=await fetch(uygulamaYolu("/api/basvurular/"),{method:"POST",body:new FormData(event.currentTarget)});const result=await response.json();setLoading(false);if(!response.ok){setErrors(result.errors??{form:[result.message]});document.getElementById("form-errors")?.focus();return}setReference(result.reference);window.scrollTo({top:0,behavior:"smooth"});}
+ async function submit(event:React.FormEvent<HTMLFormElement>){event.preventDefault();setLoading(true);setErrors({});const response=await fetch(apiYolu("/api/basvurular"),{method:"POST",body:new FormData(event.currentTarget)});const result=await response.json();setLoading(false);if(!response.ok){setErrors(result.errors??{form:[result.message]});document.getElementById("form-errors")?.focus();return}setReference(result.reference);window.scrollTo({top:0,behavior:"smooth"});}
  if(reference)return <div className="public-form success-state" role="status"><span className="state-code">✓</span><h2>Başvurunuz alındı.</h2><p>Başvuru numaranızı saklayın:</p><strong>{reference}</strong><button className="button button-secondary" onClick={()=>setReference("")}>Yeni başvuru yap</button></div>;
  return <form className="public-form" onSubmit={submit} noValidate>
   <div className="form-progress"><span>Güvenli başvuru</span><span>Tüm zorunlu alanlar * ile işaretlidir</span></div>
