@@ -66,15 +66,22 @@ export default function GenctekNedirSayfasi() {
             <h2>ETKİM</h2>
             <p>Eğitim Teknolojileri Kuluçka ve İnovasyon Merkezi (ETKİM), Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü tarafından ODTÜ Teknokent yerleşkesinde hayata geçirilmiştir. ETKİM, Millî Eğitim Bakanlığı’nın FATİH Projesi ile başlattığı, eğitimde dijital dönüşüm hamlesinin önemli bir ayağını oluşturarak eğitim teknolojilerine yönelik yatırımların fark yaratan eğitim çıktılarına dönüşmesine odaklanmaktadır. Aynı zamanda, eğitim teknolojileri sektörünü sahiplenerek girişimcileri desteklemeyi ve sektördeki gelişmeleri yakından takip ederek paydaşlarla iş birliği içinde bulunmayı hedeflemektedir.</p>
             <p>Genç Bilişim Ekosistemi çalışmaları ETKİM merkezli olarak sürdürülmektedir.</p>
-            {/* Video metnin altında, zirve sayfasındaki kalıbın aynısı:
-                dosya 44 MB, sayfa açılırken inmesin diye yalnızca süresi
-                okunuyor. Kaynak public/video altında ve depoya girmiyor —
-                sunucuya elle kopyalanır. */}
+            {/* İki video metnin altında, zirve sayfasındaki kalıbın aynısı.
+                Dosyalar büyük (21 ve 44 MB), sayfa açılırken inmesinler diye
+                yalnızca süreleri okunuyor. Kaynaklar public/video altında ve
+                depoya girmiyor — sunucuya elle kopyalanır.
+
+                ALTYAZI YOK (3 Eylül 2026 · istek: "açıklama olmasın"):
+                oynatıcıların ne olduğunu üstteki bölüm zaten söylüyordu. */}
+            <figure className="zirve-video">
+              <video controls preload="metadata">
+                <source src={gorselYolu("/video/genctek-tanitim.mp4")} type="video/mp4" />
+              </video>
+            </figure>
             <figure className="zirve-video">
               <video controls preload="metadata">
                 <source src={gorselYolu("/video/etkim.mp4")} type="video/mp4" />
               </video>
-              <figcaption>ETKİM tanıtım videosu</figcaption>
             </figure>
           </div>
           {/*

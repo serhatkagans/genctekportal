@@ -24,7 +24,8 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
   çıkıyor; Misafir Öğretmenlik/Öğrencilik kapağı yenisiyle değişti.
 - "GençTek Nedir?" sayfasında koordinatörlüğün adı YEĞİTEK Ar-Ge ve Ekosistem
   Daire Başkanlığı Genç Bilişim Ekosistemi Koordinatörlüğü olarak güncellendi.
-- Aynı sayfaya ETKİM bölümü eklendi: tanıtım metni ve tanıtım videosu.
+- Aynı sayfaya ETKİM bölümü eklendi: tanıtım metni, GençTek tanıtım videosu ve
+  ETKİM videosu.
 
 - Hakkında ve GençTek Zirvesi açılır menülerindeki bağlantılar artık menü
   kapanmadan tıklamayı tamamlıyor; alt sayfalara geçiş yeniden çalışıyor.
