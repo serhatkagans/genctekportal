@@ -19,6 +19,9 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- Logolar sayfasındaki "İndirilebilir · Marka öğeleri" ara başlığı kaldırıldı;
+  kartlar doğrudan sayfa başlığının altında.
+
 - Temel etkinlikler listesinde Hack The Idea, Akran Öğretimi, Dijital Yürüyüş
   STEM ve Hatalarından Ders Çıkar kartları artık kendi kapak fotoğraflarıyla
   çıkıyor; Misafir Öğretmenlik/Öğrencilik kapağı yenisiyle değişti.

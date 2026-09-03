@@ -66,12 +66,6 @@ export default function LogolarSayfasi() {
 
       <section className="section">
         <div className="container">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">İndirilebilir</span>
-              <h2>Marka öğeleri</h2>
-            </div>
-          </div>
           <div className="card-grid">
             {ogeler.map((oge) => (
               <a className="content-card marka-karti" href={gorselYolu(oge.dosya)} download key={oge.dosya}>
