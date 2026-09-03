@@ -13,6 +13,7 @@
     "import:themes": "node scripts/import-theme-content.mjs",
     "import:site": "node scripts/import-wordpress-site.mjs",
     "goc:temalar": "node scripts/goc-temalar.mjs",
+    "goc:haberler": "node scripts/goc-haberler.mjs",
     "temalar:tamamla": "node scripts/calisma-gruplarini-tamamla.mjs"
   },
   "dependencies": {

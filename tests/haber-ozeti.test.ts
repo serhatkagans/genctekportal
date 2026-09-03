@@ -1,7 +1,33 @@
-import { stat, utimes } from "node:fs/promises";
-import path from "node:path";
-import { describe, expect, it } from "vitest";
-import { haberOzetiniTamamla, haberleriOku } from "@/lib/haber";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+/* Haberler 3 Eylül 2026'da data/haberler.json'dan "Article" tablosuna geçti.
+   Buradaki testler göçün iki kırılgan yerini tutuyor: sütunların Haber
+   alanlarına eşlenmesi ve bağlantı düştüğünde yedek anlık görüntüye düşme.
+   Dosya sürümündeki mtime belleği testleri konusuz kaldı, kaldırıldı. */
+
+const sahte = vi.hoisted(() => ({
+  satirlar: [] as unknown[],
+  patlasin: false,
+}));
+
+vi.mock("@/lib/db", () => {
+  const etiket = (..._parcalar: unknown[]) => {
+    if (sahte.patlasin) {
+      const hata = new Error("connection terminated") as Error & { code?: string };
+      hata.code = "ECONNRESET";
+      return Promise.reject(hata);
+    }
+    return Promise.resolve(sahte.satirlar);
+  };
+  return { sql: Object.assign(etiket, { json: (deger: unknown) => deger }) };
+});
+
+const { haberOzetiniTamamla, haberBul, haberleriOku, haberSayfasi } = await import("@/lib/haber");
+
+beforeEach(() => {
+  sahte.satirlar = [];
+  sahte.patlasin = false;
+});
 
 describe("haberOzetiniTamamla", () => {
   it("WordPress tarafından yarım bırakılan özeti paragraf sonunda tamamlar", () => {
@@ -20,36 +46,70 @@ describe("haberOzetiniTamamla", () => {
     expect(haberOzetiniTamamla("Eksiksiz haber özeti.", "<p>Başka bir metin.</p>"))
       .toBe("Eksiksiz haber özeti.");
   });
+});
 
-  it("mevcut haberlerde kesilmiş özet bırakmaz", async () => {
+describe("satır → Haber eşlemesi", () => {
+  const satir = {
+    refNo: 42,
+    slug: "ornek-haber",
+    title: "Örnek Haber",
+    summary: "Özet.",
+    body: "<p>Gövde.</p>",
+    coverImage: "/temalar/ornek.jpg",
+    categories: [7, 9],
+    format: "duz",
+    source: "Gövde.",
+    publishedAt: new Date("2026-08-31T09:00:00.000Z"),
+    updatedAt: new Date("2026-09-01T10:00:00.000Z"),
+  };
+
+  it("sütunları dosya sürümündeki alan adlarına çevirir", async () => {
+    sahte.satirlar = [satir];
+    const haber = await haberBul("ornek-haber");
+
+    // refNo uygulamanın haber kimliği; cuid birincil anahtar dışarı sızmıyor.
+    expect(haber?.id).toBe(42);
+    expect(haber?.excerpt).toBe("Özet.");
+    expect(haber?.html).toBe("<p>Gövde.</p>");
+    expect(haber?.featuredImage).toBe("/temalar/ornek.jpg");
+    expect(haber?.categories).toEqual([7, 9]);
+    expect(haber?.bicim).toBe("duz");
+    expect(haber?.kaynak).toBe("Gövde.");
+    expect(haber?.date).toBe("2026-08-31T09:00:00.000Z");
+    expect(haber?.modified).toBe("2026-09-01T10:00:00.000Z");
+  });
+
+  it("[...slug] rotası haberleri statik sayfalarla birleştirdiği için tip alanları da dolar", async () => {
+    sahte.satirlar = [satir];
+    const haber = await haberBul("ornek-haber");
+    expect(haber?.type).toBe("post");
+    expect(haber?.path).toBe("ornek-haber");
+  });
+
+  it("bilinmeyen biçim html sayılır", async () => {
+    sahte.satirlar = [{ ...satir, format: "bilinmeyen" }];
+    expect((await haberBul("ornek-haber"))?.bicim).toBe("html");
+  });
+});
+
+describe("veritabanı düştüğünde", () => {
+  it("yedek anlık görüntüye düşer ve orada kesik özet bırakmaz", async () => {
+    sahte.patlasin = true;
     const haberler = await haberleriOku();
+
+    expect(haberler.length).toBeGreaterThan(0);
     expect(haberler.some((haber) => /\[…\]\s*$/u.test(haber.excerpt))).toBe(false);
     expect(haberler.find((haber) => haber.slug === "genctek-eskisehir-akran-bulusmasi")?.excerpt)
       .toContain("büyük bir başarıyla gerçekleştirildi.");
   });
-});
 
-/* Özet tamamlama istek başına ~41 ms CPU tutuyordu ve /haberler'i 24 istek/sn'de
-   tıkıyordu; sonuç artık dosyanın mtime+boyutuna göre saklanıyor. İki koşul da
-   sınanmalı: aynı dosyada iş tekrarlanmamalı, dosya değişince bayat kayıt
-   dönmemeli — ikincisi bozulursa panelden yapılan düzenleme sitede görünmez. */
-describe("haberleriOku belleği", () => {
-  const dosya = path.join(process.cwd(), "data", "haberler.json");
+  it("sayfalama yedekte de çalışır", async () => {
+    sahte.patlasin = true;
+    const { kartlar, sayfa, sonSayfa, toplam } = await haberSayfasi(2);
 
-  it("dosya değişmedikçe aynı sonucu yeniden hesaplamaz", async () => {
-    expect(await haberleriOku()).toBe(await haberleriOku());
-  });
-
-  it("dosya değişince kayıtları baştan okur", async () => {
-    const once = await haberleriOku();
-    const { atime, mtime } = await stat(dosya);
-    try {
-      await utimes(dosya, atime, new Date(mtime.getTime() + 1000));
-      const sonra = await haberleriOku();
-      expect(sonra).not.toBe(once);
-      expect(sonra.map((h) => h.slug)).toEqual(once.map((h) => h.slug));
-    } finally {
-      await utimes(dosya, atime, mtime);
-    }
+    expect(sayfa).toBe(2);
+    expect(sonSayfa).toBeGreaterThan(1);
+    expect(kartlar.length).toBeGreaterThan(0);
+    expect(toplam).toBeGreaterThan(kartlar.length);
   });
 });

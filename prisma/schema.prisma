@@ -224,15 +224,20 @@ model Article {
   slug         String            @unique
   summary      String
   body         Json
-  category     String
+  category     String            @default("")
   status       PublishStatus     @default(DRAFT)
   provinceCode String?           @db.VarChar(2)
   province     Province?         @relation(fields: [provinceCode], references: [code], onDelete: SetNull)
   coverMediaId String?
   coverMedia   Media?            @relation("ArticleCover", fields: [coverMediaId], references: [id], onDelete: SetNull)
   featured     Boolean           @default(false)
-  authorId     String
-  author       User              @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  coverImage   String            @default("")
+  format       String            @default("html")
+  source       String            @default("")
+  categories   Int[]
+  refNo        Int               @unique @default(autoincrement())
+  authorId     String?
+  author       User?             @relation(fields: [authorId], references: [id], onDelete: Restrict)
   publishedAt  DateTime?
   scheduledAt  DateTime?
   archivedAt   DateTime?

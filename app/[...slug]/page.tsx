@@ -18,10 +18,6 @@ async function yoldanBul(contentPath: string) {
   return (await tumIcerik()).find((item) => item.path === normalized);
 }
 
-export async function generateStaticParams() {
-  return (await tumIcerik()).filter((item) => item.path && !reserved.has(item.path.split("/")[0])).map((item) => ({ slug: item.path.split("/") }));
-}
-
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }): Promise<Metadata> {
   const item = await yoldanBul((await params).slug.join("/"));
   return item ? { title: item.title, description: item.excerpt || undefined } : {};
