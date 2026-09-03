@@ -19,6 +19,16 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Yayımlanmamış haber siteye sızamaz.** Kamuya açık haber sorguları artık
+  `status = 'PUBLISHED'` koşulunu uyguluyor. Bugün tabloya yalnızca yayımlanmış
+  haber yazıldığı için görünen bir değişiklik yok; taslak ya da zamanlanmış
+  yayın eklendiği gün açık kapıyı kapatıyor. Panel taslakları görmeye devam
+  ediyor (`lib/haber.ts`, `app/yonetim`).
+- Site haritasının ana sayfa satırı 301 yerine doğrudan kanonik adresi veriyor;
+  kök girdi eğik çizgili yazılıyor (`app/sitemap.ts`).
+- `fast-uri` güvenlik uyarısı (yüksek) kapatıldı. Paket yalnızca yerel
+  geliştirme zincirinden geliyordu, üretimdeki uygulamada yok.
+
 ---
 
 ## v2.0.0 — 3 Eylül 2026
