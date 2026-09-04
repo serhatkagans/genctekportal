@@ -1,0 +1,168 @@
+[
+  {
+    "slug": "genctek-nedir",
+    "baslik": "GençTek Nedir?",
+    "sayfaBasligi": "GençTek",
+    "ozet": "Ekosistemin ne olduğu, kimleri kapsadığı ve nasıl işlediği.",
+    "ikon": "badge",
+    "adres": "",
+    "ustEtiket": "YEĞİTEK",
+    "spot": "Akran Öğrenme Modeli ve Genç Bilişim Ekosistemi / Sektörün Yeni Liderleri",
+    "duzen": "ikili",
+    "seoBaslik": "GençTek Nedir? · GençTek",
+    "seoAciklama": "GençTek; öğrencileri, danışman öğretmenleri ve bilişim sektörünü buluşturan ülke çapında bir üretim ekosistemidir.",
+    "bloklar": [
+      { "tur": "baslik", "metin": "Genç Bilişim Ekosistemi" },
+      {
+        "tur": "metin",
+        "metin": "GençTek, Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü koordinasyonunda, bilişim alanında çalışma gerçekleştirmek isteyen, çalışmalar yürüten ya da mevcut çalışmalarının etkisini arttırmak isteyen öğrencilerin ve danışman öğretmenlerin desteklendiği, birbirleriyle ve paydaşlarla iletişim ve iş birliğinin sağlandığı genç bilişim ekosistemidir.\n\nYEĞİTEK Ar-Ge ve Ekosistem Daire Başkanlığı Genç Bilişim Ekosistemi Koordinatörlüğü tarafından yürütülen ekosistem çalışmaları; İl Millî Eğitim Müdürlüklerinde görevlendirilen İl GençTek Koordinatörü Öğretmenler ve gönüllü komisyon üyeleri aracılığıyla yerel düzeyde yaygınlaştırılmakta, öğrencilerin ve öğretmenlerin ekosisteme aktif katılımı desteklenmektedir.\n\nGençTek; akran öğrenmesini, ekip çalışmasını, üretimi, paylaşımı ve sektörle etkileşimi destekleyen bir ekosistem yaklaşımıyla faaliyetlerini sürdürmektedir."
+      },
+      { "tur": "video", "url": "/video/genctek-tanitim.mp4" },
+      { "tur": "baslik", "metin": "ETKİM" },
+      {
+        "tur": "metin",
+        "metin": "Eğitim Teknolojileri Kuluçka ve İnovasyon Merkezi (ETKİM), Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü tarafından ODTÜ Teknokent yerleşkesinde hayata geçirilmiştir. ETKİM, Millî Eğitim Bakanlığı’nın FATİH Projesi ile başlattığı, eğitimde dijital dönüşüm hamlesinin önemli bir ayağını oluşturarak eğitim teknolojilerine yönelik yatırımların fark yaratan eğitim çıktılarına dönüşmesine odaklanmaktadır. Aynı zamanda, eğitim teknolojileri sektörünü sahiplenerek girişimcileri desteklemeyi ve sektördeki gelişmeleri yakından takip ederek paydaşlarla iş birliği içinde bulunmayı hedeflemektedir.\n\nGenç Bilişim Ekosistemi çalışmaları ETKİM merkezli olarak sürdürülmektedir."
+      },
+      { "tur": "video", "url": "/video/etkim.mp4" },
+      {
+        "tur": "liste",
+        "sutun": "sag",
+        "ogeler": [
+          { "metin": "Bilişim alanında çalışma gerçekleştirmek isteyen, bu alanda çalışmalar yürüten ya da mevcut çalışmalarının etkisini ve niteliğini arttırmak isteyen öğrencileri ve öğretmenleri desteklemek," },
+          { "metin": "Genel Müdürlüğün yenilik ve eğitim teknolojileri alanındaki bilgi birikimi ve uygulama deneyimini, bilişim alanında çalışan öğrenci ve öğretmenlere aktaracak model, etkinlik, içerik ve paylaşım mekanizmaları geliştirmek ve uygulamak," },
+          { "metin": "Bilişim ekosisteminde akran öğretimini, iş birliğini ve bilgi paylaşımını güçlendirerek öğrenci ve öğretmenlerin ekosistemden ve paydaşlardan destek almasını sağlamak," },
+          { "metin": "Sektörün ihtiyaç duyduğu nitelikli insan kaynağının yetiştirilmesine katkı sağlamak amacıyla; öğrencilere kariyer farkındalığı kazandırmak, sektör tanıtım faaliyetleri düzenlemek ve sektör temsilcileri ile öğrenciler arasında bilgi, deneyim ve fırsat paylaşımını desteklemek," },
+          { "metin": "Yeni çalışma, proje ve etkinliklerin geliştirilmesine, genç bilişim ekiplerinin kurulmasına, mevcut ekiplerin güçlendirilmesine, ekip çalışmalarının ekosistem aracılığıyla yaygınlaştırılmasına ve sürdürülebilirliğine katkıda bulunmak," },
+          { "metin": "Bakanlık tarafından geliştirilen uygulama, platform, içerik ve projeleri genç bilişim ekosistemi öğrencilerine tanıtmak; bu çalışmalara ilişkin öğrencilerin görüş ve önerilerini değerlendirmek," },
+          { "metin": "Bilişim alanında beceri kazanmış öğrencileri; eğitim öğretim süreçlerinde kullanılabilecek oyun, dijital içerik, uygulama ve benzeri ürünler geliştirmeye teşvik etmek," },
+          { "metin": "Okullar, ilçeler, iller ve farklı sınıf seviyeleri arasında karma ekipler oluşturarak; dikey inovasyonu, disiplinler arası çalışmaları ve iletişimi desteklemek," },
+          { "metin": "Genç bilişim ekosistemindeki öğrencilere yönelik ulusal ve uluslararası çalışmaları takip etmek, ilgili kurum ve kuruluşlarla iş birliği fırsatlarını değerlendirmek," },
+          { "metin": "Genç bilişim ekosisteminde ulusal ve uluslararası düzeyde düzenlenen bilişim etkinliklerini, eğitim hedefleri, öğrenme çıktıları, yaygınlaştırılabilirlik ve etik ilkeler çerçevesinde değerlendirerek eğitim öğretim süreçlerini destekleyici modeller sunmak," },
+          { "metin": "Genç bilişim ekosisteminde yer alan öğrencilerle eğitim süreçleri ve sonrasında iletişimi sürdürerek; ekosistem içindeki öğrenciler arasında akran öğrenmesi, mezun öğrenciler aracılığıyla rehberlik ve mentörlük ile sosyal sorumluluk temelli destek mekanizmalarının devamlılığını sağlamak," },
+          { "metin": "Genç bilişim ekosisteminin geliştirilmesi ve genişletilmesine yönelik olarak Genel Müdürlüğün ihtiyaçları doğrultusunda ulusal ve uluslararası paydaşlarla ortak çalışma modelleri oluşturmak, iş birlikleri geliştirmek, pilot uygulamalar ve projeler yürütmek; bu kapsamdaki yaygınlaştırma ve topluluk oluşturma faaliyetlerini planlamak ve gerçekleştirmek," }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "amaclar",
+    "baslik": "Ekosistem Yapılanması",
+    "sayfaBasligi": "",
+    "ozet": "GençTek'in kendine koyduğu hedefler.",
+    "ikon": "gauge",
+    "adres": "",
+    "ustEtiket": "Ekosistemi kimler oluşturuyor",
+    "spot": "",
+    "duzen": "tek",
+    "seoBaslik": "Ekosistem Yapılanması · GençTek",
+    "seoAciklama": "GençTek ekosistemini oluşturan roller ve paydaşlar.",
+    "bloklar": [
+      {
+        "tur": "gorsel",
+        "url": "/medya/genctek-yapilanma.jpg",
+        "alt": "GençTek yapılanma şeması: Danışman Öğretmen, Okul Temsilcisi, Okul GençTek Ekibi, İl GençTek Koordinatörlüğü, Çalışma Grupları, GençTek Zirve Ekipleri, Kamu Kurumları, Üniversite Toplulukları, Mezun Mentörler, Sivil Toplum Kuruluşları, Sınır Ötesi Oluşumlar ve Sektör Temsilcileri"
+      },
+      {
+        "tur": "liste",
+        "ogeler": [
+          { "baslik": "Danışman Öğretmen", "metin": "Danışman Öğretmen, okulundaki öğrencilerin bilişim alanındaki ilgi ve yeteneklerini keşfetmelerine, çalışmalarını geliştirmelerine ve GençTek ekosisteminden etkin biçimde yararlanmalarına rehberlik eden öğretmendir. Danışman Öğretmen; bilişim alanında çalışma yapmak isteyen öğrencileri ve mevcut öğrenci ekiplerini destekler, okul GençTek Ekibinin oluşturulmasına rehberlik eder ve öğrencilerin GençTek etkinlikleri, Çalışma Grupları, görevler, projeler ve diğer ekosistem fırsatlarına erişimini kolaylaştırır." },
+          { "baslik": "Okul / İlçe / İl Temsilcisi", "metin": "Okul Temsilcisi, danışman öğretmenin rehberliğinde okulundaki öğrenciler arasından belirlenir. Belirlenen öğrenciye Okul Temsilcisi Belgesi verilir ve Öğrenci Temsilcileri Grubuna dâhil edilir. Okul Temsilcisi; GençTek ile okulundaki öğrenciler arasında iletişim ve bilgi akışını güçlendiren, öğrencilerin ihtiyaç ve önerilerini GençTek'e taşıyan ve okulundaki GençTek çalışmalarının planlanmasına destek olan öğrencidir.\n\nİlçe ve İl Temsilcileri, ihtiyaç duyulması hâlinde İl GençTek Koordinatörleri tarafından belirlenir. Temsilciler, bulundukları düzeyde öğrencilerin görüşlerinin alınmasına, öğrenciler arası iletişimin güçlendirilmesine ve GençTek çalışmalarının yaygınlaştırılmasına katkı sağlar." },
+          { "baslik": "Okul GençTek Ekibi", "metin": "Okul GençTek Ekibi; bilişim alanında üreten, öğrenen ve üretmek isteyen öğrencilerin bir araya geldiği okul düzeyindeki ekip yapısıdır. Danışman öğretmenin rehberliğinde okul temsilcileri ve öğrenciler tarafından oluşturulabilir. Okulda hâlihazırda faaliyet gösteren bilişim kulüpleri, takımlar veya öğrenci toplulukları da GençTek Ekosistemine dâhil olabilir. Ekipler; etkinlik düzenleme, çalışma gruplarına katılma, okul içi akran öğrenmesini destekleme ve GençTek fırsatlarını diğer öğrencilerle buluşturma gibi çalışmalar yürütür." },
+          { "baslik": "İl GençTek Koordinatörlüğü / Komisyonu", "metin": "İl GençTek çalışmaları, İl Millî Eğitim Müdürlüklerinin Yenilik ve Eğitim Teknolojileri Hizmetleri Şube Müdürlüklerinde görevlendirilen İl GençTek Koordinatörleri tarafından yürütülür. İl GençTek Koordinatörleri; ildeki okul ekipleri, danışman öğretmenler, öğrenciler ve paydaşlar arasındaki iletişimi güçlendirir; GençTek çalışmalarını planlar, ihtiyaçları belirler ve öğrencilerin ekosistem olanaklarından yararlanmasını destekler.\n\nGerekli hâllerde öğretmen, yönetici, akademisyen, öğrenci, girişimci ve sektör temsilcilerinden oluşan GençTek Komisyonu oluşturularak ilde yürütülecek çalışmalar, ekiplerin destek talepleri ve yerel ihtiyaçlar birlikte değerlendirilir. İl düzeyinde üniversiteler, kurum ve kuruluşlar, sektör temsilcileri, öğrenci toplulukları ve okul ekipleri bir araya getirilerek yerel bilişim ekosisteminin güçlendirilmesine ve yeni iş birliklerinin geliştirilmesine katkı sağlanır." },
+          { "baslik": "Çalışma Grupları", "metin": "Öğrenciler, ilgi ve üretim alanlarına göre Türkiye'nin farklı illerinden öğrencilerin bir araya geldiği Oyun Tasarımı, Siber Güvenlik, Yapay Zekâ, Robotik ve benzeri Çalışma Gruplarına katılabilir. Çalışma Grupları; aynı alana ilgi duyan öğrencilerin öğrenmesi, birlikte üretmesi, deneyimlerini paylaşması ve alanlarında derinleşmesi amacıyla oluşturulur. Öğrenciler bu gruplarda projeler geliştirir, etkinlik ve maratonlara katılır, uzman ve mentörlerle buluşur ve ortaya çıkardıkları ürünleri diğer öğrencilerle paylaşır.\n\nÇalışma Grupları, GençTek Koordinatörlerinin, danışman öğretmenlerin ve okul temsilcilerinin görüşleri doğrultusunda Genel Müdürlük koordinasyonunda oluşturulur ve geliştirilebilir." },
+          { "baslik": "GençTek Zirve Ekipleri", "metin": "GençTek Zirvesi; ekosistemin farklı bileşenlerinin bir araya geldiği, üretilen çalışmaların paylaşıldığı ve yeni dönemin birlikte şekillendirildiği ulusal buluşma alanıdır. GençTek Koordinatörleri, Çalışma Grubu temsilcileri, öğrenciler, danışman öğretmenler ve paydaşlar Zirve kapsamında bir araya gelir. İllerde yürütülen çalışmalar ve ortaya çıkan ürünler paylaşılır; Çalışma Gruplarının yeni dönem planlamaları yapılır. Öğrenci Forumu, G2S, Sahne Senin, Master Tek, Tek Maraton ve Hack The Idea gibi GençTek etkinliklerinin ulusal katılımlı çalışmalarıyla öğrencilerin üretimlerini sergilemeleri, fikirlerini paylaşmaları, farklı illerden akranlarıyla iş birliği kurmaları ve sektör temsilcileriyle buluşmaları desteklenir." },
+          { "baslik": "Kamu Kurumları", "metin": "Bilişim alanında öğretmen ve öğrencilere yönelik çalışma yürüten kamu kurumlarıyla; öğrencilerin ve öğretmenlerin ihtiyaçlarına uygun fırsatların geliştirilmesi, çalışmaların etkisinin artırılması ve kamu kaynaklarının etkili kullanılması amacıyla iş birlikleri geliştirilir. Kamu kurumlarının bilgi, deneyim, altyapı ve imkânlarının GençTek ekosistemine kazandırılması; öğrencilerin de kamu tarafından yürütülen çalışmaları tanıması ve katkı sunabileceği alanların oluşturulması desteklenir." },
+          { "baslik": "Üniversite Toplulukları", "metin": "Üniversitelerin bilişim, teknoloji, mühendislik, tasarım ve ilgili alanlardaki öğrenci topluluklarıyla iş birlikleri geliştirilir. Üniversite öğrencilerinin sosyal sorumluluk, akran öğrenmesi ve mentörlük yoluyla GençTek öğrencilerine destek olmaları; kendi deneyimlerini paylaşmaları ve ortak çalışmalar yürütmeleri teşvik edilir. Bu iş birlikleri aynı zamanda GençTek öğrencilerinin üniversite yaşamını, üniversite topluluklarını ve bilişim alanındaki farklı eğitim ve kariyer yollarını daha yakından tanımalarına katkı sağlar." },
+          { "baslik": "Mentörler", "metin": "Mentörler; bilişim ve teknoloji alanında deneyim sahibi sektör profesyonelleri, akademisyenler, öğretmenler ve öğrencilerden oluşur. Öğrencilerin ilgi duydukları alanlarda deneyimli kişilerle iletişim kurmaları, sorularına yanıt bulmaları ve çalışmalarını geliştirmeleri için rehberlik desteği sunarlar. Özellikle GençTek öğrencilerinin mezuniyet sonrasında da ekosistemle bağlarını sürdürmeleri ve edindikleri deneyimleri yeni nesillere aktarmaları desteklenir. Mezun mentörler; Çalışma Gruplarında, proje ekiplerinde ve organizasyon ekiplerinde danışman veya ekip lideri olarak görev alarak GençTek'e katkılarını sürdürebilir." },
+          { "baslik": "Sivil Toplum Kuruluşları", "metin": "Bilişim ve teknoloji alanında öğretmen ve öğrencilere yönelik çalışmalar yürüten sivil toplum kuruluşlarıyla; etki alanını genişletmek, ihtiyaçları doğru analiz etmek, sosyal fayda üretmek ve gönüllülük kültürünü güçlendirmek amacıyla iş birlikleri geliştirilir. STK'ların bilgi, deneyim ve gönüllü ağlarının GençTek öğrencileriyle buluşturulması; öğrencilerin de sosyal sorumluluk projelerinde aktif rol almaları ve teknoloji yoluyla toplumsal fayda üretmeleri desteklenir." },
+          { "baslik": "Sınır Ötesi Oluşumlar", "metin": "GençTek'in ulusal bir ekosistem olmanın ötesinde, öğrencilerin ve öğretmenlerin dünyadaki akranları ve teknoloji ekosistemleriyle bağlantı kurmasını hedefler. Öğretmen, öğrenci ve paydaşların uluslararası kurum ve kuruluşlar, öğrenci toplulukları, eğitim ağları ve teknoloji ekosistemleriyle iletişim kurmaları; ortak çalışmalar, deneyim paylaşımları ve uluslararası projeler geliştirmeleri için fırsatlar değerlendirilir. Bu çalışmalarla öğrencilerin dünyadaki teknoloji eğilimlerini takip etmeleri, farklı kültürlerden akranlarıyla üretmeleri ve kendilerini küresel teknoloji ekosisteminin bir parçası olarak görmeleri desteklenir." },
+          { "baslik": "Sektör Temsilcileri", "metin": "Bilişim ve teknoloji sektöründe faaliyet gösteren firma temsilcileri, yöneticiler ve uzmanlar GençTek ekosisteminin öğrencilerle sektör arasındaki bağlantısını güçlendiren önemli paydaşlarıdır. Sektör temsilcileri; Çalışma Gruplarında ve GençTek etkinliklerinde deneyim paylaşımı, mentörlük, eğitmenlik, proje desteği, organizasyon desteği ve sektör buluşmaları gibi farklı yollarla öğrencilere katkı sunabilir. Öğrencilerin sektörün bugünkü ihtiyaçlarını, gelecekteki dönüşümünü, farklı meslek ve uzmanlık alanlarını ve kariyer fırsatlarını yakından tanımaları sağlanırken; sektörün de gençlerin fikirlerini, beklentilerini ve ürettikleri projeleri keşfetmesine imkân oluşturulur." }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "temel-etkinlikler",
+    "baslik": "Temel GençTek Etkinlikleri",
+    "sayfaBasligi": "",
+    "ozet": "Her yıl tekrarlanan program ailesi ve çalışma grubu etkinlikleri.",
+    "ikon": "calendar",
+    "adres": "/hakkinda/temel-etkinlikler",
+    "ustEtiket": "",
+    "spot": "",
+    "duzen": "tek",
+    "seoBaslik": "",
+    "seoAciklama": "",
+    "bloklar": []
+  },
+  {
+    "slug": "calisma-gruplari",
+    "baslik": "Çalışma Grupları",
+    "sayfaBasligi": "",
+    "ozet": "Öğrencilerin ilgi alanına göre buluştuğu teknoloji başlıkları.",
+    "ikon": "tag",
+    "adres": "/temalar",
+    "ustEtiket": "",
+    "spot": "",
+    "duzen": "tek",
+    "seoBaslik": "",
+    "seoAciklama": "",
+    "bloklar": []
+  },
+  {
+    "slug": "il-koordinatorleri",
+    "baslik": "İl GençTek Koordinatörleri",
+    "sayfaBasligi": "",
+    "ozet": "81 ildeki koordinatörler ve iletişim bilgileri.",
+    "ikon": "users",
+    "adres": "/hakkinda/il-koordinatorleri",
+    "ustEtiket": "",
+    "spot": "",
+    "duzen": "tek",
+    "seoBaslik": "",
+    "seoAciklama": "",
+    "bloklar": []
+  },
+  {
+    "slug": "logolar",
+    "baslik": "GençTek Kurumsal",
+    "sayfaBasligi": "",
+    "ozet": "Logolar, roll-up'lar ve kurumsal kullanım kuralları.",
+    "ikon": "image",
+    "adres": "",
+    "ustEtiket": "Tanıtım Tasarımları",
+    "spot": "",
+    "duzen": "tek",
+    "seoBaslik": "GençTek Kurumsal · GençTek",
+    "seoAciklama": "GençTek marka öğeleri, kullanım kuralları ve indirilebilir dosyalar.",
+    "bloklar": [
+      {
+        "tur": "kartlar",
+        "ogeler": [
+          { "ad": "GençTek logo", "aciklama": "Amblemin kullanıma hazır sürümlerini içeren arşiv (RAR).", "dosya": "/marka/genctek-logo.rar" },
+          { "ad": "Renk kodları", "aciklama": "Marka renkleri ve logo kullanımı (PDF).", "dosya": "/marka/genctek_logo_2024_b.pdf" }
+        ]
+      },
+      {
+        "tur": "kartlar",
+        "ogeler": [
+          { "ad": "Sunum şablonları", "aciklama": "GençTek sunum şablonu dosyaları.", "dosya": "" },
+          { "ad": "Video", "aciklama": "Tanıtım videoları ve jenerik öğeleri.", "dosya": "" },
+          { "ad": "Yaka kartları", "aciklama": "Etkinlik yaka kartı tasarımları.", "dosya": "" }
+        ]
+      },
+      { "tur": "not", "metin": "Roll-up şablonları, yatay/dikey logo varyantları ve vektörel (SVG) sürümler henüz yüklenmedi. Dosyalar geldiğinde bu listeye eklenecek." },
+      { "tur": "baslik", "metin": "Kullanım kuralları", "ustEtiket": "Dikkat", "yeniBolum": true },
+      {
+        "tur": "liste",
+        "ogeler": [
+          { "baslik": "Amblemin en boy oranını değiştirmeyin; sıkıştırmayın, esnetmeyin." },
+          { "baslik": "Çevresinde amblem yüksekliğinin en az yarısı kadar boşluk bırakın." },
+          { "baslik": "Renklerini değiştirmeyin; koyu zeminde beyaz sürümü kullanın." },
+          { "baslik": "Amblemi başka bir logoyla birleştirip yeni bir işaret üretmeyin." },
+          { "baslik": "Okunabilirliği bozacak kadar küçültmeyin." }
+        ]
+      }
+    ]
+  }
+]

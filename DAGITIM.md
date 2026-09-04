@@ -208,6 +208,53 @@ npm run goc:temalar
 Betik tablo doluysa hiçbir şey yapmaz — ikinci çalıştırma panelden yapılan
 düzenlemeleri dosyadaki eski hâle döndürürdü.
 
+**Hakkında sayfaları da tabloda.** 4 Eylül 2026'da kartlar ve üç sayfanın
+gövdesi kodun içinden `"Page"` tablosuna (`section = 'hakkinda'`) taşındı.
+Göçün kaynağı `data-ornek/hakkinda.json`; migration uygulandıktan sonra bir
+kereliğine:
+
+```bash
+npm run goc:hakkinda
+```
+
+**Bu adım atlanırsa ana sayfadaki kart ızgarası ve üst menüdeki "Hakkında"
+listesi boş çıkar** — kartların tek kaynağı artık tablo.
+
+**Zirveler de tabloda.** Aynı gün iki GençTek Zirvesi'nin içeriği de `"Page"`
+tablosuna (`section = 'zirve'`) taşındı. Kaynak `data-ornek/zirveler.json`;
+bir kereliğine:
+
+```bash
+npm run goc:zirveler
+```
+
+Atlanırsa `/zirve` ve `/2-genctek-zirvesi-2026` 404 döner ve üst menüdeki
+"GençTek Zirvesi" listesi boş kalır.
+
+**Yardımlaşma grupları da tabloda.** Çalışma Grupları sayfasının altındaki dört
+kart `"Page"` tablosuna (`section = 'yardimlasma'`) taşındı. Kaynak
+`data-ornek/yardimlasma.json`; bir kereliğine:
+
+```bash
+npm run goc:yardimlasma
+```
+
+Atlanırsa `/temalar` sayfasının alt bölümü boş kalır.
+
+**Temel etkinlik programları da tabloda.** On dokuz program `"Page"` tablosuna
+(`section = 'temel-etkinlik'` ve `'grup-etkinligi'`) taşındı. Kaynak
+`data-ornek/temel-etkinlikler.json`; bir kereliğine:
+
+```bash
+npm run goc:etkinlikler
+```
+
+Atlanırsa `/hakkinda/temel-etkinlikler` sayfası boş kalır ve program
+sayfaları 404 döner.
+
+Göç betiklerinin hepsi aynı kuralla çalışır: bölümde kayıt varsa hiçbir şey yapmaz,
+yani ikinci kez çalıştırmak zararsızdır.
+
 Sunucuda `data/` klasörü artık `git checkout -f`'ten etkilenmez — tıpkı
 aşağıdaki medya klasörleri gibi. Yedeklemek isteyen:
 

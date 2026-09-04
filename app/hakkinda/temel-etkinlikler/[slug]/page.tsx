@@ -2,23 +2,23 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { aciklamaParcalari, temelEtkinlikBul, temelEtkinlikKomsulari, temelEtkinlikSluglari } from "@/lib/temel-etkinlik";
+import { aciklamaParcalari, temelEtkinlikBul, temelEtkinlikKomsulari } from "@/lib/temel-etkinlik";
 
 /*
  * PROGRAMIN KENDİ SAYFASI (31 Ağustos 2026 · istek: "her birinin kendi sayfası
  * ve geniş içeriği vardı").
  *
- * İçerik kod içinde sabit duruyor (bkz. lib/temel-etkinlik.ts) — veritabanına
- * gitmiyor, o yüzden adresler build'de üretilebiliyor: `generateStaticParams`
- * on dokuz sayfayı da statik basıyor, ziyaretçi hiç bekleme görmüyor.
+ * İÇERİK ARTIK BUILD'DE ÜRETİLMİYOR (4 Eylül 2026): programların metni kod
+ * içinde sabit ama "GençTek Zirvesi" kaydı zirve sayfalarıyla aynı kaynaktan,
+ * yani veritabanından besleniyor. `generateStaticParams` ile statik basmak
+ * build'i veritabanına bağımlı kılardı — tema ve haber göçlerinde aynı tuzağa
+ * düşülmüştü (bkz. app/sitemap.ts'teki not).
  */
-export function generateStaticParams() {
-  return temelEtkinlikSluglari().map((slug) => ({ slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const kayit = temelEtkinlikBul(slug);
+  const kayit = await temelEtkinlikBul(slug);
   if (!kayit) return { title: "Bulunamadı · GençTek" };
   return {
     title: `${kayit.ad} · GençTek`,
@@ -29,10 +29,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function TemelEtkinlikSayfasi({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const kayit = temelEtkinlikBul(slug);
+  const kayit = await temelEtkinlikBul(slug);
   if (!kayit) notFound();
 
-  const { onceki, sonraki } = temelEtkinlikKomsulari(slug);
+  const { onceki, sonraki } = await temelEtkinlikKomsulari(slug);
 
   return <>
     <Header />

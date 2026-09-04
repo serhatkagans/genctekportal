@@ -4,7 +4,9 @@ import { MarkaSimgesi } from "./marka-simgesi";
 import { MenuKapatici } from "./menu-kapatici";
 import { TemaSecici } from "./TemaSecici";
 import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
-import { HAKKINDA_KARTLARI } from "@/lib/hakkinda";
+import { hakkindaKartlariniOku } from "@/lib/hakkinda";
+import { zirveleriOku } from "@/lib/zirve";
+import { menuyuOku, type MenuOgesi } from "@/lib/menu";
 import { uygulamaYolu } from "@/lib/ortam";
 
 /**
@@ -29,10 +31,12 @@ import { uygulamaYolu } from "@/lib/ortam";
  * devam ediyor. Menüden kalkmak, sayfanın ulaşılmaz olması demek değil —
  * paylaşılmış bağlantılar da çalışmayı sürdürüyor.
  */
-const baglantilar = [
-  ["Haberler", "/haberler"],
-  ["Etkinlikler", "/etkinlikler"],
-] as const;
+/*
+ * BAŞLIKLAR ARTIK KODDA DEĞİL (4 Eylül 2026): "Haberler" ve "Etkinlikler"
+ * burada elle yazılı bir diziydi; sıra ve adlarla birlikte panele taşındı
+ * (Yönetim → Üst menü). Yukarıdaki gerekçeler geçerliliğini koruyor, yalnızca
+ * listenin durduğu yer değişti.
+ */
 
 /**
  * İKİ ZİRVE TEK BAŞLIK ALTINDA (20 Ağustos 2026 · istek: "zirveler birleşsin
@@ -44,12 +48,13 @@ const baglantilar = [
  * tıklanamaz olurdu.
  *
  * SIRA YENİDEN ESKİYE: menüyü açan kişi neredeyse her zaman güncel zirveyi
- * arıyor, o yüzden en üstte o duruyor. Yeni zirve eklenirken başa yazılmalı.
+ * arıyor, o yüzden en üstte o duruyor. Sıra "Page" tablosundaki `order`
+ * sütununda ve panelden ok tuşlarıyla değişiyor — 4 Eylül 2026'da zirveler de
+ * veritabanına taşındı, menüde elle yazılı liste kalmadı.
+ *
+ * ETİKET "Zirve <yıl>": menüde tam ad ("2. GençTek Zirvesi") kutuyu gereksiz
+ * genişletiyordu, yıl tek başına ayırt etmeye yetiyor.
  */
-const zirveler = [
-  ["Zirve 2026", "/2-genctek-zirvesi-2026"],
-  ["Zirve 2025", "/zirve"],
-] as const;
 
 /*
  * HAKKINDA AÇILIR MENÜSÜ (31 Ağustos 2026 · istek: "bu kartlar hakkımda
@@ -65,10 +70,6 @@ const zirveler = [
  * "Çalışma Grupları" portal içinde /temalar'a düşer — adres kart listesinde
  * yazılı olduğu için burada ayrıca bilinmesi gerekmiyor.
  */
-const hakkindaBaglantilari = HAKKINDA_KARTLARI.map(
-  (kart) => [kart.baslik, kart.adres] as const,
-);
-
 /*
  * Menü başlığının kendisi hâlâ ANA SAYFADAKİ kart bölümüne iniyor: altı
  * başlığı bir arada görmek isteyen oraya gidiyor.
@@ -83,7 +84,7 @@ const hakkindaBaglantilari = HAKKINDA_KARTLARI.map(
  */
 const anaSayfaCapasi = (cengel: string) => `${uygulamaYolu("/")}#${cengel}`;
 
-export function Header() {
+export async function Header() {
   /*
    * DÜĞMENİN ADI "GİRİŞ" VE HEDEFİ PLATFORM (20 Ağustos 2026 · istekler:
    * "portal olandaki katılım formu platforma gidecek (giriş) şeklinde, yani
@@ -99,6 +100,31 @@ export function Header() {
    */
   const katilimAdresi = genctekGirisAdresi();
 
+  /* İKİ LİSTE DE VERİTABANINDAN (4 Eylül 2026): bileşen bu yüzden async oldu.
+     Menü her sayfada basıldığı için iki sorgu da her istekte çalışıyor —
+     ikisi de indeksli tek satırlık SELECT. Bağlantı düşerse okuma son sağlam
+     anlık görüntüye düşüyor, menü boş kalmıyor (bkz. lib/hakkinda.ts ve
+     lib/zirve.ts'teki yedek notu). */
+  const hakkindaBaglantilari = (await hakkindaKartlariniOku()).map(
+    (kart) => [kart.baslik, kart.adres] as const,
+  );
+  const zirveler = (await zirveleriOku()).map(
+    (zirve) => [`Zirve ${zirve.yil}`, zirve.yol] as const,
+  );
+  /* Başlıkların kendisi de panelden (4 Eylül 2026 · istek: "menülerin de ismi
+     değişebilir olabilir mi"): sıra, ad, düz bağlantıların adresi ve giriş
+     düğmesinin yazısı "Page" tablosunda. Kayıt yoksa bugünkü menü varsayılan
+     olarak basılıyor (bkz. lib/menu.ts). */
+  const menu = await menuyuOku();
+
+  /*
+   * Açılır listelerin içeriği türüne göre seçiliyor: menüde "Hakkında" öğesi
+   * varsa altında Hakkında sayfaları, "GençTek Zirvesi" varsa zirve kayıtları
+   * listeleniyor. Panelden yazılan yalnızca başlığın kendisi.
+   */
+  const altListe = (tur: MenuOgesi["tur"]) =>
+    tur === "hakkinda" ? hakkindaBaglantilari : tur === "zirveler" ? zirveler : [];
+
   return (
     <header className="site-header">
       <div className="container header-inner">
@@ -106,42 +132,46 @@ export function Header() {
           <MarkaSimgesi /><span>GENÇ<span className="brand-accent">TEK</span></span>
         </Link>
         <nav className="main-nav" aria-label="Ana menü">
-          <details className="nav-acilir">
-            {/* Başlığın kendisi de bir bağlantı: tıklayan kişi ana sayfadaki
-                kart bölümüne (#hakkinda) iniyor, oku tıklayan altı başlığı
-                açıyor. */}
-            <summary><HakkindaBaglantisi href={anaSayfaCapasi("hakkinda")}>Hakkında</HakkindaBaglantisi></summary>
-            <div className="nav-acilir-govde">
-              {hakkindaBaglantilari.map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
-            </div>
-          </details>
-          {baglantilar.map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
-          <details className="nav-acilir">
-            <summary>GençTek Zirvesi</summary>
-            <div className="nav-acilir-govde">
-              {zirveler.map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
-            </div>
-          </details>
+          {menu.ogeler.map((oge, sira) =>
+            oge.tur === "baglanti" ? (
+              <Link href={oge.adres} key={`${oge.adres}-${sira}`}>{oge.etiket}</Link>
+            ) : (
+              <details className="nav-acilir" key={`${oge.tur}-${sira}`}>
+                {/* HAKKINDA BAŞLIĞI AYNI ZAMANDA BİR BAĞLANTI: tıklayan kişi ana
+                    sayfadaki kart bölümüne (#hakkinda) iniyor, oku tıklayan alt
+                    başlıkları açıyor. Zirve başlığının böyle bir çapası yok. */}
+                <summary>
+                  {oge.tur === "hakkinda"
+                    ? <HakkindaBaglantisi href={anaSayfaCapasi("hakkinda")}>{oge.etiket}</HakkindaBaglantisi>
+                    : oge.etiket}
+                </summary>
+                <div className="nav-acilir-govde">
+                  {altListe(oge.tur).map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
+                </div>
+              </details>
+            ),
+          )}
         </nav>
         <TemaSecici />
-        <a className="button button-primary header-cta" href={katilimAdresi}>Giriş</a>
+        <a className="button button-primary header-cta" href={katilimAdresi}>{menu.girisEtiketi}</a>
         <details className="mobile-menu">
           <summary aria-label="Menüyü aç">Menü</summary>
           <nav aria-label="Mobil menü">
-            <details className="mobil-alt-menu">
-              <summary>Hakkında</summary>
-              <div className="mobil-alt-menu-govde">
-                {hakkindaBaglantilari.map(([etiket, adres]) => <Link className="mobil-alt-baglanti" href={adres} key={adres}>{etiket}</Link>)}
-              </div>
-            </details>
-            {baglantilar.map(([etiket, adres]) => <Link href={adres} key={adres}>{etiket}</Link>)}
-            <details className="mobil-alt-menu">
-              <summary>GençTek Zirvesi</summary>
-              <div className="mobil-alt-menu-govde">
-                {zirveler.map(([etiket, adres]) => <Link className="mobil-alt-baglanti" href={adres} key={adres}>{etiket}</Link>)}
-              </div>
-            </details>
-            <a href={katilimAdresi}>Giriş</a>
+            {menu.ogeler.map((oge, sira) =>
+              oge.tur === "baglanti" ? (
+                <Link href={oge.adres} key={`${oge.adres}-${sira}`}>{oge.etiket}</Link>
+              ) : (
+                <details className="mobil-alt-menu" key={`${oge.tur}-${sira}`}>
+                  <summary>{oge.etiket}</summary>
+                  <div className="mobil-alt-menu-govde">
+                    {altListe(oge.tur).map(([etiket, adres]) => (
+                      <Link className="mobil-alt-baglanti" href={adres} key={adres}>{etiket}</Link>
+                    ))}
+                  </div>
+                </details>
+              ),
+            )}
+            <a href={katilimAdresi}>{menu.girisEtiketi}</a>
           </nav>
         </details>
       </div>

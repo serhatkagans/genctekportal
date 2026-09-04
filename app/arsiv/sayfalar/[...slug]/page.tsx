@@ -3,14 +3,14 @@ import { notFound } from "next/navigation";
 import { WordPressArticle } from "@/components/wordpress-article";
 import { wordpressPages } from "@/lib/wordpress-content";
 
+/* ÜST MENÜ VERİTABANINDAN GELİYOR (4 Eylül 2026): Hakkında başlıkları ve zirve
+   listesi panelden değişiyor. Bu sayfa derleme anında basılsaydı menüsü o günün
+   hâlinde donar, panelden eklenen başlık burada görünmezdi. */
+export const dynamic = "force-dynamic";
+
 function findPage(parts: string[]) {
   const value = parts.join("/");
   return wordpressPages.find((item) => item.path === (value === "home" ? "" : value));
-}
-export function generateStaticParams() { return wordpressPages.map(({ path }) => ({ slug: (path || "home").split("/") })); }
-export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }): Promise<Metadata> {
-  const item = findPage((await params).slug);
-  return item ? { title: item.title, description: item.excerpt || undefined } : {};
 }
 export default async function ImportedPage({ params }: { params: Promise<{ slug: string[] }> }) {
   const item = findPage((await params).slug);

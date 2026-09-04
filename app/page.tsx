@@ -9,6 +9,7 @@ import { haberKartlariOku } from "@/lib/haber";
 import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
 import { genctekEtkinlikleriOku } from "@/lib/genctek-etkinlik";
 import { genctekIstatistigiOku, sayiyiBicimle } from "@/lib/genctek-istatistik";
+import { hakkindaKartlariniOku } from "@/lib/hakkinda";
 
 // Ana sayfa da haber listesi/detayıyla aynı kaynağı kullanmalı; ayrı tohum verisi
 // kullanıldığında slug'lar tutmadığı için her kart 404'e gidiyordu.
@@ -33,18 +34,24 @@ export default async function Home() {
    * yazılmış "81 / 16 / 1200+" kaldırıldı: yazıldığı gün doğru, ertesi ay
    * yanlıştı. Uç kapalıysa şerit hiç basılmaz.
    *
-   * İL SONDA: önce ekosistemi kuran insanlar (öğrenci, öğretmen, mentör),
-   * sonra ürettikleri (etkinlik, ürün), en sonda bunların yayıldığı alan.
+   * İL BAŞTA (4 Eylül 2026 · istek: "ana sayfadaki bu listede ili başa al"):
+   * önce ekosistemin kaç ile yayıldığı, sonra o alanı dolduran insanlar
+   * (öğrenci, öğretmen, mentör) ve ürettikleri (etkinlik, ürün). Önceden il
+   * sondaydı; şeridin ilk sayısı en çok okunan sayı olduğu için kapsamı
+   * anlatan rakam öne alındı.
    */
   const istatistik = await genctekIstatistigiOku();
+  /* Hakkında kartları veritabanından: panelden eklenen başlık burada ve üst
+     menüde kendiliğinden beliriyor (bkz. lib/hakkinda.ts). */
+  const hakkindaKartlari = await hakkindaKartlariniOku();
   const paneldekiSayilar = istatistik
     ? [
+        { deger: istatistik.il, etiket: "İl" },
         { deger: istatistik.ogrenci, etiket: "Öğrenci" },
         { deger: istatistik.ogretmen, etiket: "Öğretmen" },
         { deger: istatistik.mentor, etiket: "Mentör" },
         { deger: istatistik.etkinlik, etiket: "Etkinlik" },
         { deger: istatistik.urun, etiket: "Ürün" },
-        { deger: istatistik.il, etiket: "İl" },
       ]
     : [];
   return <>
@@ -111,7 +118,7 @@ export default async function Home() {
       */}
       <section className="section" id="hakkinda">
         <div className="container"><div className="section-heading"><div><span className="eyebrow">GençTek</span><h2>Hakkında</h2></div></div>
-          <HakkindaKartlari />
+          <HakkindaKartlari kartlar={hakkindaKartlari} />
         </div>
       </section>
 

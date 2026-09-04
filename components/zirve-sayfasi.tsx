@@ -3,17 +3,21 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { ZirveGorselGalerisi } from "@/components/zirve-gorsel-galerisi";
 import { gorselYolu } from "@/lib/ortam";
-import { ZIRVELER, type Zirve } from "@/lib/zirve";
+import type { Zirve } from "@/lib/zirve-govde";
 
 /**
  * Bir zirvenin sayfası: /zirve ve /2-genctek-zirvesi-2026 aynı düzeni kullanır.
  *
- * Metin ve fotoğraflar `lib/zirve.ts`'ten geliyor; sayfa dosyaları yalnızca
- * hangi zirve olduğunu söylüyor. Altta öteki zirvenin bağlantısı var — iki
- * sayfa arasında gidip gelmek için menüye dönmek gerekmesin.
+ * Metin ve fotoğraflar veritabanından geliyor (4 Eylül 2026'da lib/zirve.ts'in
+ * sabit dizisinden "Page" tablosuna taşındılar); sayfa dosyaları yalnızca hangi
+ * zirve olduğunu söylüyor. Altta öteki zirvelerin bağlantısı var — iki sayfa
+ * arasında gidip gelmek için menüye dönmek gerekmesin.
+ *
+ * ÖTEKİ ZİRVELER DIŞARIDAN GELİYOR: bu bileşen listeyi kendisi sorgulamıyor,
+ * çağıran sayfa zaten bütün listeyi okuyup içinden bunu seçiyor — aynı sorgu
+ * iki kez çalışmasın.
  */
-export function ZirveSayfasi({ zirve }: { zirve: Zirve }) {
-  const digerleri = ZIRVELER.filter((kayit) => kayit.yol !== zirve.yol);
+export function ZirveSayfasi({ zirve, digerleri = [] }: { zirve: Zirve; digerleri?: Zirve[] }) {
 
   return <>
     <Header />

@@ -994,3 +994,63 @@ html[data-theme="kirmizi"] .site-header .nav-acilir-govde a{color:var(--color-te
    hemen ardındaki ana içerikle sınırlıdır; menü, düğme, yönetim ekranı ve alt
    bilgi gibi arayüz metinlerinin kendi hizası korunur. */
 .site-header + main :where(p,li){text-align:justify;text-justify:inter-word}
+
+/* HAKKINDA SAYFALARI (4 Eylül 2026): kartlar ve sayfa gövdeleri veritabanına
+   taşındı; aşağıdakiler yalnızca YENİ EKRANLARIN eksik parçaları. Sayfaların
+   kendi görünümü eski sınıfları (value-list, yapilanma-liste, marka-karti,
+   zirve-video) olduğu gibi kullanmaya devam ediyor — taşınırken hiçbir sayfanın
+   görünüşü değişmesin diye. */
+.hakkinda-bant-news{background:linear-gradient(135deg,#6b1a1d,#b23a3f)}
+.hakkinda-bant-file{background:linear-gradient(135deg,#4a4a4d,#8a8589)}
+.hakkinda-bant-shield{background:linear-gradient(135deg,#7c2a2e,#b8595d)}
+.hakkinda-bant-form{background:linear-gradient(135deg,#93202a,#d1595f)}
+/* Blok araları: eski sayfalarda bu boşluklar elle (style={{marginTop:24}})
+   veriliyordu; artık gövde bileşeninde tekrar etmesin diye sınıfa bağlandı. */
+.hakkinda-kart-izgara+.hakkinda-kart-izgara,.hakkinda-kart-izgara+.hakkinda-not,.hakkinda-not{margin-top:24px}
+
+/* Taslak rozeti: yayında olmayan kart yalnızca panelde görünüyor. */
+.status-draft{background:var(--color-bg-subtle);color:var(--color-text-muted)}
+
+/* Yönetim listesi: simge, başlık, adres, durum, sıra düğmeleri. */
+.hakkinda-satiri{grid-template-columns:44px minmax(0,1fr) auto auto auto auto auto}
+.hakkinda-satiri>a{color:inherit;text-decoration:none;display:block;min-width:0}
+.hakkinda-satiri strong{display:block}
+.hakkinda-satiri span:not(.status):not(.hakkinda-satir-simge){color:var(--color-text-muted);font-size:.85rem}
+.hakkinda-satir-simge{display:grid;place-items:center;width:36px;height:36px;border-radius:8px;color:#fff}
+.hakkinda-satir-simge svg{width:18px;height:18px}
+.hakkinda-satir-adres,.hakkinda-satir-tur{font-size:.78rem;color:var(--color-text-muted)}
+.hakkinda-satir-araclar{display:flex;gap:4px}
+.hakkinda-satir-araclar button{min-width:32px;min-height:32px;border:1px solid var(--color-border);border-radius:6px;background:var(--color-surface);cursor:pointer}
+.hakkinda-satir-araclar button:disabled{opacity:.35;cursor:default}
+@media(max-width:960px){.hakkinda-satiri{grid-template-columns:44px minmax(0,1fr) auto}.hakkinda-satir-adres,.hakkinda-satir-tur,.hakkinda-satiri .status{display:none}}
+
+/* Blok editörü. */
+.blok-editor{display:grid;gap:16px;border-top:1px solid var(--color-border);padding-top:20px}
+.blok-editor-baslik{display:flex;align-items:baseline;justify-content:space-between}
+.blok-editor-baslik h2{font-size:1.05rem;margin:0}
+.blok-editor-baslik span{color:var(--color-text-muted);font-size:.82rem}
+.blok-kutusu{display:grid;gap:12px;border:1px solid var(--color-border);border-radius:10px;background:var(--color-bg-subtle);padding:16px}
+.blok-kutusu-ust{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.blok-kutusu-ust strong{font-size:.82rem;letter-spacing:.04em;color:var(--color-text-muted)}
+.blok-araclar{display:flex;align-items:center;gap:6px}
+.blok-araclar button{min-width:32px;min-height:32px;border:1px solid var(--color-border);border-radius:6px;background:var(--color-surface);cursor:pointer}
+.blok-araclar button:disabled{opacity:.35;cursor:default}
+.blok-sil{color:var(--color-brand)}
+.blok-sutun{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--color-text-muted)}
+.blok-sutun input{width:auto;min-height:0}
+.blok-ogeler{display:grid;gap:10px}
+.blok-oge{display:grid;grid-template-columns:32px minmax(0,1fr) 32px;align-items:start;gap:10px}
+.blok-oge>span{color:var(--color-brand);font-weight:800;padding-top:10px;font-size:.82rem}
+.blok-oge>div{display:grid;gap:8px}
+.blok-ekle{display:flex;flex-wrap:wrap;gap:8px}
+.blok-ekle .button{font-size:.85rem;padding:8px 12px}
+
+/* ZİRVE EDİTÖRÜ (4 Eylül 2026): zirveler de veritabanına taşındı. Sayfaların
+   kendi görünümü değişmedi — aşağıdakiler yalnızca panelin yeni alanları. */
+.editor-ikili{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.zirve-gorsel-satiri>div{position:relative}
+.zirve-gorsel-onizleme{display:block;width:100%;max-height:120px;object-fit:cover;border-radius:8px;border:1px solid var(--color-border);background:var(--color-bg-subtle)}
+@media(max-width:720px){.editor-ikili{grid-template-columns:1fr}}
+/* Alt bilgi editöründeki logo önizlemesi: zemin koyu olduğu için beyaz logolar
+   panelde görünmez kalıyordu, önizleme kendi koyu kutusunda duruyor. */
+.altbilgi-logo-onizleme{display:block;max-height:64px;width:auto;padding:12px 16px;border-radius:8px;background:var(--color-bg-inverse)}

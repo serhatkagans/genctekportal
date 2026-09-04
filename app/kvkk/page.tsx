@@ -1,6 +1,11 @@
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
+/* ÜST MENÜ VERİTABANINDAN GELİYOR (4 Eylül 2026): Hakkında başlıkları ve zirve
+   listesi panelden değişiyor. Bu sayfa derleme anında basılsaydı menüsü o günün
+   hâlinde donar, panelden eklenen başlık burada görünmezdi. */
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "KVKK Aydınlatma Metni · GençTek",
   description: "Kişisel Verilerin İşlenmesi Aydınlatma Metni.",

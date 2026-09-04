@@ -4,6 +4,7 @@ import Link from "next/link";
 import { MarkaSimgesi } from "./marka-simgesi";
 import { gorselYolu } from "@/lib/ortam";
 import { ayarlariOkuSessiz } from "@/lib/yonetim/ayar";
+import { altbilgiyiOku, type AltbilgiMarkasi } from "@/lib/altbilgi";
 
 /**
  * Alt bilgi.
@@ -14,18 +15,7 @@ import { ayarlariOkuSessiz } from "@/lib/yonetim/ayar";
  *
  * ÜÇ KURUM YAN YANA, EN ÜST SATIRDA (31 Ağustos 2026 · istek: "alt footer
  * olmamış, GENÇTEK bloğu gibi yan yana 3 tane olacak logolu — 1. yeğitek
- * 2. gençtek 3. etkim"). Önce yalnızca adlardan oluşan ayrı bir şerit vardı;
- * o kalktı, kurumlar artık GençTek bloğunun yanında ve logolarıyla duruyor.
- * Logolar beyaz, alt bilginin zemini koyu.
- *
- * LOGO DOSYASI YOKSA AD YAZILIR: dosyanın varlığı sunucuda kontrol ediliyor,
- * eksik bir dosya kırık görsel değil düz yazı olarak görünsün diye.
- *
- * ÜÇ SÜTUN HİZALI (31 Ağustos 2026 · istek: "yazılar ve resimler hizalı değil
- * aynı sırada değil gibi"). Her sütunda logo/marka ayrı bir kutuda
- * (.footer-brand-marka) duruyor: kutu sabit yükseklikte olduğu için üç logo
- * aynı çizgide oturuyor ve altlarındaki kurum satırları da aynı hizada
- * başlıyor.
+ * 2. gençtek 3. etkim").
  *
  * TELİF SATIRI KALKTI (31 Ağustos 2026 · istek: "© 2026 GençTek bunları
  * kaldır").
@@ -33,48 +23,80 @@ import { ayarlariOkuSessiz } from "@/lib/yonetim/ayar";
  * YALNIZCA LOGOLAR, LOGOLAR DA BAĞLANTI (1 Eylül 2026 · istek: "alttaki
  * footerda yazılar kalksın, resimlere link ver, kvkknın yanına mail adresini
  * koy"). Logoların altındaki kurum satırları ve ayrı iletişim satırı kalktı;
- * kurum adları logolarda zaten yazılı. E-posta en alta, KVKK bağlantısının
- * yanına taşındı — alt bilgide kalan tek iki bilgi bunlar.
+ * kurum adları logolarda zaten yazılı.
+ *
+ * İÇERİK ARTIK PANELDEN (4 Eylül 2026 · istek: "footer için de ayar yap"):
+ * markalar ve alt satır bağlantıları kodda sabit bir diziydi, "Page" tablosuna
+ * taşındı (bkz. lib/altbilgi.ts). Sıralama da panelden değişiyor — GençTek'in
+ * ortada olması bir tasarım kararı, kodun dayattığı bir kural değil.
+ *
+ * LOGO DOSYASI YOKSA AD YAZILIR: dosyanın varlığı sunucuda kontrol ediliyor,
+ * eksik bir dosya kırık görsel değil düz yazı olarak görünsün diye. Panelden
+ * yanlış bir yol yazıldığında alt bilgi her sayfada kırık kalırdı.
+ *
+ * ÜÇ SÜTUN HİZALI (31 Ağustos 2026 · istek: "yazılar ve resimler hizalı değil
+ * aynı sırada değil gibi"). Her sütunda logo/marka ayrı bir kutuda
+ * (.footer-brand-marka) duruyor: kutu sabit yükseklikte olduğu için logolar
+ * aynı çizgide oturuyor.
  */
-const KURUM_MARKALARI = [
-  { ad: "MEB YEĞİTEK", logo: "/logo-yegitek.png", adres: "https://yegitek.meb.gov.tr" },
-  { ad: "ETKİM", logo: "/logo-etkim.png", adres: "https://etkim.gov.tr/" },
-];
 
 function logoVarMi(dosya: string) {
+  // Yalnızca site içi yollar dosya sisteminde aranıyor; dış adresli bir logo
+  // (başka kurumun sunucusu) doğrudan basılır.
+  if (!dosya.startsWith("/")) return true;
   return existsSync(path.join(process.cwd(), "public", dosya));
 }
 
+function MarkaIcerigi({ marka }: { marka: AltbilgiMarkasi }) {
+  if (marka.tur === "genctek") {
+    return (
+      <span className="brand brand-inverse">
+        <MarkaSimgesi /><span>GENÇ<span className="brand-accent">TEK</span></span>
+      </span>
+    );
+  }
+  return marka.logo && logoVarMi(marka.logo)
+    ? <img src={gorselYolu(marka.logo)} alt={`${marka.ad} logosu`} />
+    : <span className="footer-brand-ad">{marka.ad}</span>;
+}
+
 export async function Footer() {
-  // İletişim bilgisi yönetim panelinden düzenleniyor (Genel ayarlar);
-  // veritabanı kapalıyken varsayılana düşer, alt bilgi boş kalmaz.
+  // İletişim bilgisi Genel ayarlardan (GlobalSetting), markalar ve bağlantılar
+  // Alt bilgi ekranından geliyor; ikisi de veritabanı kapalıyken varsayılana
+  // düşer, alt bilgi boş kalmaz.
   const ayarlar = await ayarlariOkuSessiz();
-  const [yegitek, etkim] = KURUM_MARKALARI;
+  const altbilgi = await altbilgiyiOku();
+  const eposta = ayarlar["iletisim.eposta"];
 
   return (
     <footer className="site-footer">
       <div className="container footer-brands">
-        <div className="footer-brand">
-          <a className="footer-brand-marka" href={yegitek.adres} target="_blank" rel="noreferrer">
-            {logoVarMi(yegitek.logo)
-              ? <img src={gorselYolu(yegitek.logo)} alt={`${yegitek.ad} logosu`} />
-              : <span className="footer-brand-ad">{yegitek.ad}</span>}
-          </a>
-        </div>
-        <div className="footer-brand">
-          <Link className="footer-brand-marka" href="/">
-            <span className="brand brand-inverse"><MarkaSimgesi /><span>GENÇ<span className="brand-accent">TEK</span></span></span>
-          </Link>
-        </div>
-        <div className="footer-brand">
-          <a className="footer-brand-marka" href={etkim.adres} target="_blank" rel="noreferrer">
-            {logoVarMi(etkim.logo)
-              ? <img src={gorselYolu(etkim.logo)} alt={`${etkim.ad} logosu`} />
-              : <span className="footer-brand-ad">{etkim.ad}</span>}
-          </a>
-        </div>
+        {altbilgi.markalar.map((marka, sira) => (
+          <div className="footer-brand" key={`${marka.tur}-${marka.ad}-${sira}`}>
+            {/* Site içi hedefler next/link ile (istemci tarafı gezinme), dış
+                kurum adresleri düz <a> ile ve yeni sekmede. */}
+            {marka.adres.startsWith("/") ? (
+              <Link className="footer-brand-marka" href={marka.adres}>
+                <MarkaIcerigi marka={marka} />
+              </Link>
+            ) : marka.adres ? (
+              <a className="footer-brand-marka" href={marka.adres} target="_blank" rel="noreferrer">
+                <MarkaIcerigi marka={marka} />
+              </a>
+            ) : (
+              <span className="footer-brand-marka"><MarkaIcerigi marka={marka} /></span>
+            )}
+          </div>
+        ))}
       </div>
-      <div className="container footer-bottom"><Link href="/kvkk">KVKK ve Gizlilik</Link><a href={`mailto:${ayarlar["iletisim.eposta"]}`}>{ayarlar["iletisim.eposta"]}</a></div>
+      <div className="container footer-bottom">
+        {altbilgi.baglantilar.map((baglanti) =>
+          baglanti.adres.startsWith("/")
+            ? <Link href={baglanti.adres} key={baglanti.adres}>{baglanti.etiket}</Link>
+            : <a href={baglanti.adres} key={baglanti.adres} target="_blank" rel="noreferrer">{baglanti.etiket}</a>,
+        )}
+        {eposta ? <a href={`mailto:${eposta}`}>{eposta}</a> : null}
+      </div>
     </footer>
   );
 }

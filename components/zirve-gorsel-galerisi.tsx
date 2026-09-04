@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gorselYolu } from "@/lib/ortam";
-import type { ZirveGorseli } from "@/lib/zirve";
+import type { ZirveGorseli } from "@/lib/zirve-govde";
 
 const TUR_SURESI = 72_000;
 const DUGME_BEKLEMESI = 900;

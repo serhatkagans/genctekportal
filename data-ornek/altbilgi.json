@@ -1,0 +1,10 @@
+{
+  "markalar": [
+    { "tur": "logo", "ad": "MEB YEĞİTEK", "logo": "/logo-yegitek.png", "adres": "https://yegitek.meb.gov.tr" },
+    { "tur": "genctek", "ad": "GençTek", "logo": "", "adres": "/" },
+    { "tur": "logo", "ad": "ETKİM", "logo": "/logo-etkim.png", "adres": "https://etkim.gov.tr/" }
+  ],
+  "baglantilar": [
+    { "etiket": "KVKK ve Gizlilik", "adres": "/kvkk" }
+  ]
+}

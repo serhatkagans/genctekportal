@@ -204,6 +204,21 @@ model AuthEvent {
   @@index([email, createdAt])
 }
 
+// Hakkında başlıkları ve GençTek Zirveleri 4 Eylül 2026'da sabit dizilerden
+// (lib/hakkinda.ts, lib/zirve.ts) bu tabloya taşındı: sayfayı da kartı da
+// panelden ekleyip silebilmek için. İki içerik türü `section` ile ayrılıyor
+// ('hakkinda' / 'zirve') ve aynı sütunları paylaşıyor; ayrı tablo açmak, aynı
+// beş alanı (başlık, özet, sıra, durum, gövde) iki yerde tanımlamak olurdu.
+//
+// Ortak alanların bölüme göre okunuşu:
+//   linkUrl → Hakkında'da "kart başka bir adrese gider", zirvede "sayfanın
+//             tarihsel adresi" (/zirve, /2-genctek-zirvesi-2026).
+//   eyebrow → Hakkında'da başlık üstü etiket, zirvede tarih ve yer satırı.
+//   blocks  → Hakkında'da blok listesi, zirvede adlı alanlardan oluşan nesne
+//             (metin, vurgular, bölümler, görseller, video).
+//
+// Kart alanları (ozet, ikon, sıra) JSONB'ye gömülmedi, sütun açıldı — tema ve
+// haber göçlerindeki karar.
 model Page {
   id             String        @id @default(cuid())
   title          String
@@ -217,6 +232,26 @@ model Page {
   scheduledAt    DateTime?
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
+
+  // Sayfanın hangi kart öbeğine ait olduğu. Şimdilik tek değer ("hakkinda");
+  // ileride başka bir bölüm kart listesi isterse ayrım burada duruyor.
+  section     String  @default("hakkinda")
+  // Kartın üstündeki sıra ve simge; ikon adları components/icons.tsx'ten.
+  order       Int     @default(0)
+  iconName    String  @default("badge")
+  summary     String  @default("")
+  // Sayfa başlığı kart başlığından farklı olabiliyor ("GençTek Nedir?" kartı,
+  // "GençTek" sayfası). Boşsa title kullanılır.
+  pageTitle   String  @default("")
+  eyebrow     String  @default("")
+  lede        String  @default("")
+  // Doluysa kart kendi sayfasına değil bu adrese gider ve gövde basılmaz:
+  // Çalışma Grupları /temalar'a, İl Koordinatörleri kendi ekranına gidiyor.
+  linkUrl     String  @default("")
+  // "tek" veya "ikili" (prose-grid): ikilide blokların bir kısmı sağ sütunda.
+  layout      String  @default("tek")
+
+  @@index([section, order])
 }
 
 model Article {

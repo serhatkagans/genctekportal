@@ -19,6 +19,89 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Hakkında sayfaları artık panelden yönetiliyor.** Altı kart (başlık, özet,
+  simge, sıra, hedef adres) ve üç sayfanın gövdesi kodun içinde yazılıydı;
+  `"Page"` tablosuna taşındı ve **Yönetim → Hakkında sayfaları** ekranından
+  eklenip düzenlenip silinebiliyor. Yeni bir başlık eklendiğinde ana sayfadaki
+  kart ızgarasında, üst menünün "Hakkında" listesinde ve site haritasında
+  kendiliğinden beliriyor. Sayfa gövdesi serbest HTML değil blok listesi
+  (başlık, metin, numaralı liste, görsel, video, indirme kartları, not) —
+  sayfalar birbirinin aynı görünüyor ve panelden ham HTML girilemiyor. Slug
+  değiştirildiğinde eski adrese 301 yönlendirmesi kendiliğinden açılıyor.
+  `/hakkinda/genctek-nedir`, `/hakkinda/amaclar` ve `/hakkinda/logolar` dosya
+  olmaktan çıktı, adresleri değişmedi. Canlıya alırken: `prisma migrate deploy`
+  ardından bir kereliğine `npm run goc:hakkinda`
+  (`lib/hakkinda.ts`, `lib/hakkinda-govde.ts`, `app/hakkinda/[slug]`,
+  `app/yonetim/hakkinda`, `components/hakkinda-govdesi.tsx`,
+  `components/hakkinda-editoru.tsx`).
+- **Zirve sayfaları da panelden yönetiliyor.** İki GençTek Zirvesi'nin metni,
+  sayı şeridi, program bölümleri, fotoğrafları ve videosu koddan `"Page"`
+  tablosuna taşındı; **Yönetim → Zirveler** ekranından düzenleniyor ve her yıl
+  yenisi panelden ekleniyor. Yeni zirve üst menüde ve site haritasında
+  kendiliğinden beliriyor; sırası ok tuşlarıyla değişiyor. Eski iki adres
+  (`/zirve`, `/2-genctek-zirvesi-2026`) olduğu gibi kaldı, panelden açılan
+  zirveler `/zirve/<adres>` altına düşüyor. "GençTek Zirvesi" temel etkinlik
+  sayfası hâlâ aynı kaynaktan besleniyor. Canlıya alırken bir kereliğine
+  `npm run goc:zirveler` (`lib/zirve.ts`, `lib/zirve-govde.ts`,
+  `app/zirve/[slug]`, `app/yonetim/zirveler`, `components/zirve-editoru.tsx`).
+- **Üst menü panelden düzenleniyor.** Menüdeki başlıklar (Hakkında, Haberler,
+  Etkinlikler, GençTek Zirvesi) ve sağdaki “Giriş” düğmesinin yazısı kodda
+  sabitti; **Yönetim → Üst menü** ekranına taşındı. Başlık adı, sırası, düz
+  bağlantıların adresi ve giriş düğmesinin yazısı değiştirilebiliyor, yeni
+  bağlantı eklenip çıkarılabiliyor. Açılır listelerin ALT başlıkları kendi
+  ekranlarından gelmeye devam ediyor: “Hakkında” altındakiler Hakkında
+  sayfalarından, “GençTek Zirvesi” altındakiler zirve kayıtlarından. Ayrı bir
+  göç adımı yok: kayıt yoksa bugünkü menü varsayılan olarak basılıyor, ilk
+  kaydetmede satır kendiliğinden açılıyor (`lib/menu.ts`, `app/yonetim/menu`,
+  `components/menu-editoru.tsx`).
+- **Temel etkinlik programları panelden yönetiliyor.** On dokuz program (13
+  temel etkinlik + 6 çalışma grubu etkinliği) kodda sabitti; **Yönetim → Temel
+  etkinlikler** ekranına taşındı. Ad, adres, açıklama, fotoğraflar ve hangi
+  listede olduğu düzenleniyor; yeni program eklenip silinebiliyor, sıra ok
+  tuşlarıyla değişiyor. Adres değişirse eskisine 301 açılıyor. "GençTek Zirvesi"
+  kaydının metni ve galerisi Zirveler ekranından gelmeye devam ediyor (editörde
+  yazılı). Ekranda ayrıca şu uyarı var: liste platformdaki
+  `temel_etkinlik_programi` tablosuyla aynı olmalı, ad değişirse orası da
+  güncellenmeli. Canlıya alırken bir kereliğine `npm run goc:etkinlikler`
+  (`lib/temel-etkinlik.ts`, `app/yonetim/temel-etkinlikler`,
+  `components/etkinlik-programi-editoru.tsx`).
+- **Yardımlaşma grupları panelden yönetiliyor.** Çalışma Grupları sayfasının
+  altındaki dört kart (MEB Robot Yarışması, TEKNOFEST, TÜBİTAK, Oyun Tasarımı)
+  kodda sabitti ve tanıtım metinleri boş bırakılmıştı; **Yönetim → Yardımlaşma
+  grupları** ekranına taşındı. Ad, adres, kart görseli ve tanıtım metni
+  düzenleniyor, yeni grup eklenip silinebiliyor, sıra ok tuşlarıyla değişiyor.
+  Metin boş satırlardan paragraflara bölünüyor; adres değişirse eskisine 301
+  açılıyor. Canlıya alırken bir kereliğine `npm run goc:yardimlasma`
+  (`lib/yardimlasma.ts`, `app/yonetim/yardimlasma`,
+  `components/yardimlasma-editoru.tsx`).
+- **Tema tercihi artık çerezde; satır içi betik kalktı.** Kırmızı/açık tema
+  seçimi `localStorage`daydı ve `app/layout.tsx`teki satır içi bir betik temayı
+  React'ten önce uyguluyordu; React 19 bu etiket için uyarı veriyor, `next/script`
+  ile `beforeInteractive`e taşımak ise temayı hydration sonrasına bıraktığı için
+  kırmızı temada açılışta beyaz ekran titremesine yol açıyordu. Tercih çereze
+  taşındı: sunucu `<html data-theme>` değerini doğrudan basıyor, tema düğmesi de
+  ilk hâliyle doğru yazıyla çıkıyor. Betik, uyarı ve iki `suppressHydrationWarning`
+  birlikte kalktı. Eskiden kırmızı temayı seçmiş kullanıcıların tercihi ilk
+  açılışta `localStorage`dan çereze taşınıyor (`lib/tema-tercihi.ts`,
+  `components/tema-baglami.tsx`, `components/TemaSecici.tsx`).
+- **Alt bilgi panelden düzenleniyor.** Kurum logoları (ad, logo, bağlantı,
+  sıra) ve alt satır bağlantıları koda yazılıydı; **Yönetim → Alt bilgi**
+  ekranına taşındı. GençTek markası da listenin bir öğesi, yani sırası
+  değiştirilebiliyor. İletişim e-postası aynı ekranda görünüyor ama kaydı
+  Genel ayarlarda kalıyor — aynı değer iki yerde tutulmuyor. Ayrı bir göç
+  adımı yok: kayıt yoksa alt bilgi varsayılan hâliyle basılıyor, ilk
+  kaydetmede satır kendiliğinden açılıyor (`lib/altbilgi.ts`,
+  `app/yonetim/altbilgi`, `components/altbilgi-editoru.tsx`).
+- **Ana sayfadaki sayı şeridinde il başa alındı**; sıra artık il, öğrenci,
+  öğretmen, mentör, etkinlik, ürün (`app/page.tsx`).
+- **Menü artık hiçbir sayfada eskimiyor.** Hakkında ve zirve listeleri
+  veritabanından geldiği için, derleme anında basılan sayfaların menüsü o günün
+  hâlinde donuyordu; `/katilim`, `/kvkk`, `/arsiv/sayfalar` ve `/yardimlasma`
+  sayfaları da istek anında üretiliyor.
+- **"Misafir Öğretmenlik/Öğrencilik" kartının kapağı değişti**; yerine Sinop
+  Üniversitesi'ndeki misafir öğrenci buluşmasının fotoğrafı kondu
+  (`lib/temel-etkinlik.ts`).
+
 ---
 
 ## v2.1.0 — 3 Eylül 2026

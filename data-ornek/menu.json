@@ -1,0 +1,9 @@
+{
+  "ogeler": [
+    { "tur": "hakkinda", "etiket": "Hakkında", "adres": "" },
+    { "tur": "baglanti", "etiket": "Haberler", "adres": "/haberler" },
+    { "tur": "baglanti", "etiket": "Etkinlikler", "adres": "/etkinlikler" },
+    { "tur": "zirveler", "etiket": "GençTek Zirvesi", "adres": "" }
+  ],
+  "girisEtiketi": "Giriş"
+}

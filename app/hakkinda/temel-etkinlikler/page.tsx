@@ -5,7 +5,7 @@ import { Icon } from "@/components/icons";
 import { gorselYolu } from "@/lib/ortam";
 import {
   aciklamaOzeti,
-  TEMEL_ETKINLIKLER,
+  temelEtkinlikleriOku,
   type TemelEtkinlik,
 } from "@/lib/temel-etkinlik";
 
@@ -54,7 +54,14 @@ function ProgramIzgarasi({ kayitlar }: { kayitlar: TemelEtkinlik[] }) {
   );
 }
 
-export default function TemelEtkinliklerSayfasi() {
+/* Liste artık veritabanına uğruyor: "GençTek Zirvesi" kaydının metni ve
+   galerisi zirve sayfalarıyla aynı kaynaktan geliyor (bkz. lib/temel-etkinlik.ts
+   · temelEtkinlikleriOku). Bu yüzden sayfa istek anında üretiliyor. */
+export const dynamic = "force-dynamic";
+
+export default async function TemelEtkinliklerSayfasi() {
+  const temelEtkinlikler = await temelEtkinlikleriOku();
+
   return <>
     <Header />
     <main>
@@ -71,7 +78,7 @@ export default function TemelEtkinliklerSayfasi() {
 
       <section className="section">
         <div className="container">
-          <ProgramIzgarasi kayitlar={TEMEL_ETKINLIKLER} />
+          <ProgramIzgarasi kayitlar={temelEtkinlikler} />
         </div>
       </section>
 

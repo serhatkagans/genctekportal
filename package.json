@@ -17,6 +17,10 @@
     "goc:temalar": "node scripts/goc-temalar.mjs",
     "goc:haberler": "node scripts/goc-haberler.mjs",
     "goc:koordinatorler": "node scripts/goc-koordinatorler.mjs",
+    "goc:hakkinda": "node scripts/goc-hakkinda.mjs",
+    "goc:zirveler": "node scripts/goc-zirveler.mjs",
+    "goc:yardimlasma": "node scripts/goc-yardimlasma.mjs",
+    "goc:etkinlikler": "node scripts/goc-temel-etkinlikler.mjs",
     "temalar:tamamla": "node scripts/calisma-gruplarini-tamamla.mjs"
   },
   "dependencies": {

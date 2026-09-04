@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Icon } from "./icons";
-import { HAKKINDA_KARTLARI } from "@/lib/hakkinda";
+import type { HakkindaKarti } from "@/lib/hakkinda";
 
 /**
  * Hakkında başlıklarının kart ızgarası.
@@ -24,11 +24,15 @@ import { HAKKINDA_KARTLARI } from "@/lib/hakkinda";
  * SÜSLEME DEĞİL AYIRT ETME: bant rengi kartın sırasına göre değil TÜRÜNE göre
  * seçiliyor (bkz. lib/hakkinda.ts · ikon). Rastgele dağıtılan renkler, ikinci
  * ziyarette kartın yerini hatırlamayı zorlaştırırdı.
+ *
+ * LİSTE DIŞARIDAN GELİYOR (4 Eylül 2026): kartlar veritabanına taşındı; bu
+ * bileşen sunucu bileşeni kalsın diye sorguyu kendisi yapmıyor, çağıran sayfa
+ * okuyup veriyor.
  */
-export function HakkindaKartlari() {
+export function HakkindaKartlari({ kartlar }: { kartlar: HakkindaKarti[] }) {
   return (
     <div className="hakkinda-izgara">
-      {HAKKINDA_KARTLARI.map((kart, sira) => (
+      {kartlar.map((kart, sira) => (
         <Link className="hakkinda-karti" href={kart.adres} key={kart.slug} id={`hakkinda-${kart.slug}`}>
           <span className={`hakkinda-bant hakkinda-bant-${kart.ikon}`}>
             <span className="hakkinda-filigran" aria-hidden="true">

@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
+import { TemaSaglayici } from "@/components/tema-baglami";
+import { TEMA_CEREZI, temaCoz } from "@/lib/tema-tercihi";
 import { siteAdresi } from "@/lib/ortam";
 import { ayarlariOkuSessiz } from "@/lib/yonetim/ayar";
 import { Archivo, Source_Sans_3 } from "next/font/google";
@@ -44,13 +47,37 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+/**
+ * TEMA ÇEREZDEN OKUNUYOR (4 Eylül 2026).
+ *
+ * Önceden burada satır içi bir `<script>` vardı: tercih `localStorage`da
+ * olduğu için sunucu göremiyor, betik React'ten önce çalışıp `data-theme`i
+ * yazıyordu. React 19 bu etiket için "Encountered a script tag while rendering
+ * React component" uyarısı veriyordu; `next/script` + `beforeInteractive` ise
+ * betiği Next'in kuyruğuna (`__next_s`) alıyor ve tema ancak hydration'dan
+ * sonra uygulanıyor — kırmızı temayı seçen kullanıcı her açılışta bir an beyaz
+ * ekran görürdü (üretim çıktısında da ölçüldü).
+ *
+ * Tercih çereze taşınınca üçü birden çözüldü: betik gerekmiyor, sunucu doğru
+ * temayı basıyor, düğme de ilk hâliyle doğru yazıyla çıkıyor
+ * (bkz. components/tema-baglami.tsx).
+ *
+ * ÇEREZ OKUMAK SAYFALARI DİNAMİKLEŞTİRİR: portalın kamu sayfaları zaten
+ * force-dynamic; geriye kalan birkaç kimlik ekranı da istek anında üretilse
+ * maliyeti yok (bkz. portal yük profili · ~0,75 istek/sn).
+ */
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const tema = temaCoz((await cookies()).get(TEMA_CEREZI)?.value);
+
   return (
-    <html lang="tr" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: `(()=>{const a="genctek-tema",d=document.documentElement;const k=()=>d.dataset.theme==="kirmizi";const g=()=>{document.querySelectorAll("[data-tema-secici]").forEach(b=>{const r=k();b.setAttribute("aria-pressed",String(r));b.setAttribute("aria-label",r?"Açık temaya geç":"Kırmızı temaya geç");b.title=r?"Açık temaya geç":"Kırmızı temaya geç";const m=b.querySelector(".tema-secici-metin");if(m)m.textContent=r?"Açık tema":"Kırmızı tema"})};try{if(localStorage.getItem(a)==="kirmizi")d.dataset.theme="kirmizi"}catch{}document.addEventListener("DOMContentLoaded",g);document.addEventListener("click",e=>{const t=e.target instanceof Element?e.target.closest("[data-tema-secici]"):null;if(!t)return;e.preventDefault();if(k())delete d.dataset.theme;else d.dataset.theme="kirmizi";try{localStorage.setItem(a,k()?"kirmizi":"acik")}catch{}g()})})();` }} />
-      </head>
-      <body>{children}</body>
+    <html
+      lang="tr"
+      className={`${display.variable} ${body.variable}`}
+      data-theme={tema === "kirmizi" ? "kirmizi" : undefined}
+    >
+      <body>
+        <TemaSaglayici baslangic={tema}>{children}</TemaSaglayici>
+      </body>
     </html>
   );
 }
