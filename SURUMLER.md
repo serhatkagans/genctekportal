@@ -19,6 +19,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+---
+
+## v2.2.0 — 5 Eylül 2026
+
 - **Hakkında sayfaları artık panelden yönetiliyor.** Altı kart (başlık, özet,
   simge, sıra, hedef adres) ve üç sayfanın gövdesi kodun içinde yazılıydı;
   `"Page"` tablosuna taşındı ve **Yönetim → Hakkında sayfaları** ekranından
