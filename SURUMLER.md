@@ -19,6 +19,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+---
+
+## v2.4.0 — 6 Eylül 2026
+
 - **İki adımlı doğrulama varmış gibi görünüyordu, yoktu.** `girisYap`
   `mfaEnabled` alanını okuyor ama hiç kullanmıyordu: parola doğrulanır
   doğrulanmaz tam yetkili oturum açılıyordu. `/mfa` ve `/mfa/kurtarma`
