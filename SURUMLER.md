@@ -19,6 +19,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+---
+
+## v2.3.1 — 5 Eylül 2026
+
 - **Panelden girilen adreslerde şema-göreli açık kapatıldı.** Yedi süzgeç
   (alt bilgi, üst menü, Hakkında, zirve, temel etkinlik, yardımlaşma, sabit
   sayfa metinleri) `"/"` ile başlayan her değeri site içi yol sayıyordu;
