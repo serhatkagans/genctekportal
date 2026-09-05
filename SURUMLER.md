@@ -19,6 +19,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+---
+
+## v2.3.0 — 5 Eylül 2026
+
 - **Ana sayfa, katılım sayfası ve KVKK metni artık panelden yönetiliyor.**
   Sitede kod içinde yazılı kalan son üç metin bloğu `"Page"` tablosuna taşındı:
   ana sayfanın giriş bölümü (üst etiket, başlık, vurgulanan kelime, tanıtım
