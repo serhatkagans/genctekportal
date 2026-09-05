@@ -19,6 +19,26 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Haber gövdesi temizleyicisinde de aynı şema-göreli açık kapatıldı.**
+  `sanitize-html`'in varsayılanı `//kotu.example` gibi adresleri geçirmek:
+  `allowedSchemes` şema taşımayan bir değere hiç bakmıyor. Haber gövdesi
+  panelden yazıldığı için bu, okuyucuyu site içi yol kılığında dışarı götüren
+  bir bağlantı demekti. `allowProtocolRelative: false` eklendi; mevcut içerikte
+  tek bir örneği yoktu (`lib/content-services/sanitize.ts`).
+
+- **Parola sıfırlama sayfası artık doğruyu söylüyor.** `/parola-sifirla`
+  "tek kullanımlık bağlantıyı e-posta adresinize göndereceğiz" diyen bir form
+  basıyordu ama arkasında hiçbir uç yoktu ve `SMTP_URL` de boş — gönder'e basan
+  kişi gelmeyecek bir e-postayı bekliyordu. Form kaldırıldı, yerine ne
+  yapılacağını söyleyen yönlendirme kondu. Sıfırlama akışı yazıldığında form
+  geri gelecek.
+
+- **`npm run parola` eklendi.** Tek bir hesabın parolasını değiştirir, açık
+  oturumlarını iptal eder ve denetim kaydına `PAROLA_DEGISTIRILDI` satırı
+  bırakır. Parolasını unutan yöneticinin tek çıkışı `npm run db:seed` idi; o
+  betik veri de tohumladığı için canlıda çalıştırılamıyordu
+  (`scripts/parola-degistir.mjs`, DAGITIM.md · "Panel parolası unutulursa").
+
 ---
 
 ## v2.3.1 — 5 Eylül 2026

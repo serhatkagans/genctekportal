@@ -233,6 +233,14 @@ export function sanitizeRichText(input: string) {
     allowedTags: ["p", "h1", "h2", "h3", "h4", "h5", "h6", "strong", "b", "em", "i", "u", "ul", "ol", "li", "blockquote", "a", "br", "hr", "figure", "figcaption", "img", "div", "span", "table", "thead", "tbody", "tfoot", "tr", "th", "td", "caption", "pre", "code", "details", "summary", "sup", "sub", "iframe", "video", "source"],
     allowedAttributes: { "*": ["class", "id", "title", "aria-label", "aria-hidden"], a: ["href", "target", "rel", "download"], img: ["src", "srcset", "sizes", "alt", "width", "height", "loading", "decoding"], iframe: ["src", "width", "height", "title", "allow", "allowfullscreen", "loading"], video: ["src", "poster", "controls", "width", "height"], source: ["src", "srcset", "type", "media"], td: ["colspan", "rowspan"], th: ["colspan", "rowspan", "scope"] },
     allowedSchemes: ["https", "http", "mailto", "tel"],
+    /* ŞEMA-GÖRELİ ADRESLER DE ELENİYOR (5 Eylül 2026 · güvenlik incelemesi).
+       sanitize-html'in varsayılanı bunları GEÇİRMEK: `allowedSchemes` bir şema
+       taşımayan `//kotu.example` adresine hiç bakmıyor, dolayısıyla haber
+       gövdesine yazılan böyle bir bağlantı temizleyiciden sağ çıkıyordu ve
+       okuyucuyu site içi bir yol gibi görünürken dışarı götürüyordu. Aynı açık
+       panelin adres alanlarında da vardı (bkz. lib/guvenli-adres.ts).
+       Mevcut içerikte tek bir örneği yok; dış adres `https://` ile yazılıyor. */
+    allowProtocolRelative: false,
     allowedIframeHostnames: ["www.youtube.com", "youtube.com", "www.youtube-nocookie.com"],
     transformTags: {
       img: medyaDonusumu,

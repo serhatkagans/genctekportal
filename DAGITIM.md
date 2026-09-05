@@ -88,6 +88,29 @@ systemctl restart genctekportal
 kurduğu için üretilmiş istemci siliniyor ve derleme
 `import type { RoleCode } from "@prisma/client"` satırında düşüyor.
 
+## Panel parolası unutulursa
+
+"Parolamı unuttum" akışı **çalışmıyor**: `/parola-sifirla` sayfasının arkasında
+bir uç yok ve `SMTP_URL` boş (YAPILACAKLAR.md §3). Sayfa bunu artık açıkça
+söylüyor ve yöneticiye yönlendiriyor.
+
+Parolayı sunucuda değiştirmek (`root` olarak):
+
+```bash
+cd /opt/genctekportal
+sudo -u genctekportal env PATH=/opt/node24/bin:$PATH   PAROLA='en az 12 karakter' npm run parola -- yonetici@ornek.gov.tr
+```
+
+`PAROLA` verilmezse rastgele üretilir ve **bir kez** ekrana yazılır. Parola
+argüman olarak geçilmiyor: argümanlar `ps` çıktısında ve kabuk geçmişinde
+görünür.
+
+Betik tek satıra dokunur — `npm run db:seed` ile karıştırmayın, o il/faaliyet/
+katılımcı verisi de tohumlar ve **canlıda çalıştırılmaz**. Parola değişince
+hesabın açık oturumları iptal edilir (oturum doğrulaması parolaya değil
+`revokedAt`'e bakar) ve denetim kaydına `PAROLA_DEGISTIRILDI` satırı düşer.
+Hesap yoksa yenisi AÇILMAZ; yeni hesap panelden açılır.
+
 ## KVKK saklama temizliği (günlük görev)
 
 Saklama süresi (`retentionUntil`) dolan başvurular otomatik silinmiyor;

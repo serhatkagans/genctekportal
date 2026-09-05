@@ -11,6 +11,7 @@
     "test:load": "node scripts/yuk-testi.mjs",
     "surum": "node scripts/surum-yayinla.mjs",
     "db:seed": "node scripts/seed-veritabani.mjs",
+    "parola": "node scripts/parola-degistir.mjs",
     "kvkk:temizle": "node scripts/kvkk-temizlik.mjs",
     "import:themes": "node scripts/import-theme-content.mjs",
     "import:site": "node scripts/import-wordpress-site.mjs",

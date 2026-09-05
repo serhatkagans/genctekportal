@@ -96,3 +96,20 @@ describe("altyazilariAt", () => {
   it("altyazısı olmayan gövdeye dokunmaz", () =>
     expect(altyazilariAt("<p>Metin</p>")).toBe("<p>Metin</p>"));
 });
+
+/* Şema-göreli adres (5 Eylül 2026 · güvenlik incelemesi): sanitize-html'in
+   varsayılanı "//kotu.example" gibi adresleri geçirmek — `allowedSchemes` şema
+   taşımayan değere bakmıyor. Haber gövdesi panelden yazıldığı için bu, site
+   içi yol kılığında dışarı götüren bir bağlantı demekti. */
+describe("temizleyici şema-göreli adresleri atar", () => {
+  it("bağlantı ve görselden şema-göreli adresi kaldırır", () => {
+    expect(sanitizeRichText('<p><a href="//kotu.example">tık</a></p>')).not.toContain("kotu.example");
+    expect(sanitizeRichText('<p><img src="//kotu.example/x.png" /></p>')).not.toContain("kotu.example");
+  });
+
+  it("gerçek adresleri geçirmeye devam eder", () => {
+    expect(sanitizeRichText('<p><a href="https://ok.example">tık</a></p>')).toContain('href="https://ok.example"');
+    expect(sanitizeRichText('<p><a href="/haberler">tık</a></p>')).toContain('href="/haberler"');
+    expect(sanitizeRichText('<p><a href="mailto:a@b.example">e</a></p>')).toContain("mailto:a@b.example");
+  });
+});
