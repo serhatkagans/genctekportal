@@ -6,6 +6,12 @@ import {
   kvkkMetniniCoz,
   paragraflaraBol,
 } from "../lib/sayfa-metni-govde";
+import { guvenliAltbilgiAdresi } from "../lib/altbilgi-govde";
+import { guvenliAdres } from "../lib/hakkinda-govde";
+import { guvenliMenuAdresi } from "../lib/menu-govde";
+import { guvenliEtkinlikAdresi } from "../lib/temel-etkinlik-govde";
+import { guvenliYardimlasmaAdresi } from "../lib/yardimlasma-govde";
+import { guvenliZirveAdresi } from "../lib/zirve-govde";
 import anaSayfaYedegi from "../data-ornek/anasayfa.json";
 import katilimYedegi from "../data-ornek/katilim.json";
 import kvkkYedegi from "../data-ornek/kvkk.json";
@@ -97,4 +103,37 @@ describe("KVKK metni", () => {
 
   it("tanınmayan gövdede boş liste döner", () =>
     expect(kvkkMetniniCoz({ bolumler: "bölüm değil" }).bolumler).toEqual([]));
+});
+
+/*
+ * ŞEMA-GÖRELİ ADRESLER (5 Eylül 2026 · güvenlik incelemesi). "//kotu.example"
+ * eğik çizgiyle başlar ama site içi yol değil, dış adrestir; panel yetkisi olan
+ * biri sitenin bağlantılarını sessizce dışarı yönlendirebiliyordu. Kural yedi
+ * süzgecin ortak yardımcısında (lib/guvenli-adres.ts), test hepsini birden
+ * karşılıyor.
+ */
+describe("şema-göreli adresler dış adres sayılır", () => {
+  it("site içi yol kılığındaki dış adresi atar", () => {
+    expect(guvenliSayfaAdresi("//kotu.example")).toBe("");
+    expect(guvenliSayfaAdresi("//kotu.example/yol")).toBe("");
+    // Ters eğik çizgi: tarayıcılar "/\host" ifadesini "//host" gibi çözüyor.
+    expect(guvenliSayfaAdresi("/\\kotu.example")).toBe("");
+    expect(guvenliSayfaAdresi("  //kotu.example")).toBe("");
+  });
+
+  it("gerçek site içi yolu geçirmeye devam eder", () => {
+    expect(guvenliSayfaAdresi("/haberler")).toBe("/haberler");
+    expect(guvenliSayfaAdresi("/")).toBe("/");
+  });
+
+  it("aynı kural diğer altı süzgeçte de uygulanıyor", () => {
+    expect(guvenliAltbilgiAdresi("//kotu.example")).toBe("");
+    expect(guvenliAdres("//kotu.example")).toBe("");
+    expect(guvenliMenuAdresi("//kotu.example")).toBe("");
+    expect(guvenliEtkinlikAdresi("//kotu.example")).toBe("");
+    expect(guvenliYardimlasmaAdresi("//kotu.example")).toBe("");
+    expect(guvenliZirveAdresi("//kotu.example")).toBe("");
+    // Menüdeki çapa bağlantıları etkilenmiyor.
+    expect(guvenliMenuAdresi("#hakkinda")).toBe("#hakkinda");
+  });
 });

@@ -6,6 +6,8 @@
  * yardımlaşma taraflarındaki aynı ayrım.
  */
 
+import { siteIciYolMu } from "./guvenli-adres";
+
 export type EtkinlikGorseli = { url: string; alt: string };
 
 /** İki liste var ve ayrı ayrı sıralanıyor: "Temel GençTek Etkinlikleri"
@@ -27,7 +29,7 @@ export type EtkinlikGovdesi = { aciklama: string; gorseller: EtkinlikGorseli[] }
 export function guvenliEtkinlikAdresi(deger: unknown): string {
   const metin = typeof deger === "string" ? deger.trim() : "";
   if (!metin) return "";
-  if (metin.startsWith("/")) return metin;
+  if (siteIciYolMu(metin)) return metin;
   return /^https?:\/\//i.test(metin) ? metin : "";
 }
 

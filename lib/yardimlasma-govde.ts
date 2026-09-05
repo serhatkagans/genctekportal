@@ -6,6 +6,8 @@
  * tarafında da var.
  */
 
+import { siteIciYolMu } from "./guvenli-adres";
+
 export type YardimlasmaGrubu = {
   id: string;
   slug: string;
@@ -21,7 +23,7 @@ export type YardimlasmaGovdesi = { gorsel: string; metin: string };
 export function guvenliYardimlasmaAdresi(deger: unknown): string {
   const metin = typeof deger === "string" ? deger.trim() : "";
   if (!metin) return "";
-  if (metin.startsWith("/")) return metin;
+  if (siteIciYolMu(metin)) return metin;
   return /^https?:\/\//i.test(metin) ? metin : "";
 }
 

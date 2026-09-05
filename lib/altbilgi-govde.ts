@@ -6,12 +6,15 @@
  * paketine sokardı. Aynı ayrım Hakkında ve zirve tarafında da var.
  */
 
+import { siteIciYolMu } from "./guvenli-adres";
+
 /*
  * Alt bilgideki markalar tek bir sıra: kurum logoları ve GençTek'in kendi
  * yazı markası aynı listede duruyor. Ayrı tutulsalardı sıralamayı panelden
  * değiştirmek mümkün olmazdı — GençTek'in ortada olması bir tasarım kararı,
  * kodun dayattığı bir kural değil.
  */
+
 export type AltbilgiMarkasi = {
   /** "genctek" GençTek yazı markasını basar; "logo" bir kurum logosudur. */
   tur: "genctek" | "logo";
@@ -33,7 +36,7 @@ export type Altbilgi = {
 export function guvenliAltbilgiAdresi(deger: unknown): string {
   const metin = typeof deger === "string" ? deger.trim() : "";
   if (!metin) return "";
-  if (metin.startsWith("/")) return metin;
+  if (siteIciYolMu(metin)) return metin;
   if (metin.startsWith("mailto:")) return metin;
   return /^https?:\/\//i.test(metin) ? metin : "";
 }

@@ -6,10 +6,23 @@ import { sql } from "@/lib/db";
 // göç betiği de yok. Dışa açılan üç fonksiyonun imzası aynı.
 export type Yonlendirme = { id: string; kaynak: string; hedef: string; kod: 301 | 302 };
 
+/*
+ * BAŞTAKİ EĞİK ÇİZGİLER TEKE İNDİRİLİYOR (5 Eylül 2026 · güvenlik incelemesi).
+ *
+ * "//kotu.example" tarayıcı için site içi yol DEĞİL, şema-göreli bir dış
+ * adrestir; eski hâl onu olduğu gibi geçiriyordu ve proxy.ts `new URL(...)` ile
+ * çözünce hedef gerçekten dışarı çıkıyordu. Üretimde basePath öneki
+ * ("/genctekportal") kazara koruyordu, basePath boş olan kurulumlarda ise
+ * yönlendirme motoru açık yönlendiriciye dönüşüyordu. Ters eğik çizgi de aynı
+ * kapıya çıkıyor: tarayıcılar "\" karakterini "/" gibi çözüyor.
+ *
+ * Dış adres yasak değil — "https://" ile yazılan hedef aynen korunuyor.
+ */
 function normalizeYol(deger: string) {
   const temiz = deger.trim();
   if (!temiz) return "";
-  return temiz.startsWith("/") || /^https?:\/\//.test(temiz) ? temiz : `/${temiz}`;
+  if (/^https?:\/\//.test(temiz)) return temiz;
+  return `/${temiz.replace(/^[/\\]+/, "")}`;
 }
 
 type YonlendirmeSatiri = { id: string; source: string; target: string; permanent: boolean };

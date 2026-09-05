@@ -8,6 +8,8 @@
  * (bkz. lib/hakkinda-govde.ts).
  */
 
+import { siteIciYolMu } from "./guvenli-adres";
+
 export type ZirveGorseli = { url: string; alt: string };
 
 /**
@@ -64,7 +66,7 @@ export type ZirveGovdesi = {
 export function guvenliZirveAdresi(deger: unknown): string {
   const metin = typeof deger === "string" ? deger.trim() : "";
   if (!metin) return "";
-  if (metin.startsWith("/")) return metin;
+  if (siteIciYolMu(metin)) return metin;
   return /^https?:\/\//i.test(metin) ? metin : "";
 }
 

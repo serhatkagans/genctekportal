@@ -19,6 +19,18 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Panelden girilen adreslerde şema-göreli açık kapatıldı.** Yedi süzgeç
+  (alt bilgi, üst menü, Hakkında, zirve, temel etkinlik, yardımlaşma, sabit
+  sayfa metinleri) `"/"` ile başlayan her değeri site içi yol sayıyordu;
+  `//kotu.example` de eğik çizgiyle başlar ama tarayıcı için dış adrestir.
+  Panel yetkisi olan biri sitenin herhangi bir bağlantısını sessizce dışarı
+  yönlendirebiliyordu — Hakkında kartının `adres` alanı sunucuda `redirect()`
+  çağırdığı için orada açık yönlendirmeye dönüşüyordu. Kural tek yere alındı
+  (`lib/guvenli-adres.ts`), ters eğik çizgi (`/\host`) de kapsanıyor.
+  Yönlendirme motorunda (`lib/yonlendirme.ts`) da aynı düzeltme yapıldı:
+  baştaki eğik çizgiler teke indiriliyor. Dış adres yasak değil, `https://`
+  ile açıkça yazılabiliyor.
+
 ---
 
 ## v2.3.0 — 5 Eylül 2026

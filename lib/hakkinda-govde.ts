@@ -6,9 +6,13 @@
  * oradan almak, veritabanı sürücüsünü tarayıcı paketine sokup derlemeyi
  * durduruyordu. Burada veritabanına dokunan hiçbir şey yok.
  */
+
+import { siteIciYolMu } from "./guvenli-adres";
+
 // Kartın simgesi. Ad, components/icons.tsx'teki takımdan seçilir; bileşenin tip
 // birliğini buraya import etmek yerine karşılığı yazıldı — lib katmanı
 // bileşenlere bağlanmasın diye.
+
 export const HAKKINDA_IKONLARI = ["badge", "gauge", "calendar", "tag", "users", "image", "news", "file", "shield", "form"] as const;
 export type HakkindaIkonu = (typeof HAKKINDA_IKONLARI)[number];
 
@@ -77,7 +81,7 @@ export function ikonCoz(deger: string): HakkindaIkonu {
 export function guvenliAdres(deger: unknown): string {
   const metin = typeof deger === "string" ? deger.trim() : "";
   if (!metin) return "";
-  if (metin.startsWith("/")) return metin;
+  if (siteIciYolMu(metin)) return metin;
   return /^https?:\/\//i.test(metin) ? metin : "";
 }
 

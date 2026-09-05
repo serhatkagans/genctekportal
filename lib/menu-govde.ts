@@ -6,6 +6,8 @@
  * ve temel etkinlik taraflarındaki aynı ayrım.
  */
 
+import { siteIciYolMu } from "./guvenli-adres";
+
 /**
  * ÜÇ TÜR MENÜ ÖĞESİ VAR ve ayrımın sebebi içeriğin nereden geldiği:
  *
@@ -19,6 +21,7 @@
  * ekranlarından yönetiliyor. Buradan yalnızca başlıkları ve sıraları değişir —
  * aynı başlığı iki yerde tutmak, birinin eskimesi demekti.
  */
+
 export type MenuOgesiTuru = "baglanti" | "hakkinda" | "zirveler";
 
 export type MenuOgesi = { tur: MenuOgesiTuru; etiket: string; adres: string };
@@ -32,7 +35,7 @@ export type Menu = {
 export function guvenliMenuAdresi(deger: unknown): string {
   const metin = typeof deger === "string" ? deger.trim() : "";
   if (!metin) return "";
-  if (metin.startsWith("/") || metin.startsWith("#")) return metin;
+  if (siteIciYolMu(metin) || metin.startsWith("#")) return metin;
   return /^https?:\/\//i.test(metin) ? metin : "";
 }
 

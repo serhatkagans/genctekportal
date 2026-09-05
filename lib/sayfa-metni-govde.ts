@@ -17,6 +17,8 @@
  * içerik yazarının eline script geçmiyor.
  */
 
+import { siteIciYolMu } from "./guvenli-adres";
+
 function yazi(deger: unknown) {
   return typeof deger === "string" ? deger.trim() : "";
 }
@@ -34,10 +36,11 @@ function metin(deger: unknown) {
  * mailto/tel alt bilgideki listede yok, burada var: KVKK metninin başvuru
  * bölümü telefon ve e-posta bağlantısı taşıyor.
  */
+
 export function guvenliSayfaAdresi(deger: unknown): string {
   const deger_ = yazi(deger);
   if (!deger_) return "";
-  if (deger_.startsWith("/")) return deger_;
+  if (siteIciYolMu(deger_)) return deger_;
   if (deger_.startsWith("mailto:") || deger_.startsWith("tel:")) return deger_;
   return /^https?:\/\//i.test(deger_) ? deger_ : "";
 }
