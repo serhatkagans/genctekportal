@@ -1,5 +1,19 @@
-import { describe, expect, it } from "vitest";
+import { createHash } from "node:crypto";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { ipOzeti, istemciIp } from "@/lib/security/istemci-ip";
+
+/* ipOzeti artık anahtarlı (HMAC) ve anahtar yoksa fırlatıyor; testlerde .env
+   okunmadığı için gizli anahtar burada kuruluyor. Anahtarı değiştiren testler
+   var, o yüzden her testten önce sıfırlanıyor ve dosya sonunda ilk hâline
+   döndürülüyor — başka bir test dosyasının beklentisi bozulmasın. */
+const ILK_GIZLI = process.env.SESSION_SECRET;
+beforeEach(() => {
+  process.env.SESSION_SECRET = "test-gizli-anahtar";
+});
+afterEach(() => {
+  if (ILK_GIZLI === undefined) delete process.env.SESSION_SECRET;
+  else process.env.SESSION_SECRET = ILK_GIZLI;
+});
 
 /* Başlık eskiden ilk öğesinden okunuyordu; o öğeyi istemci yazabildiği için
    hız sınırı atlatılabiliyordu. Buradaki testlerin tuttuğu şey son öğenin
@@ -54,6 +68,37 @@ describe("ipOzeti", () => {
   });
 
   it("adres yoksa null döner", () => {
+    expect(ipOzeti(null)).toBeNull();
+  });
+});
+
+/*
+ * IP ÖZETİ ANAHTARLI (5 Eylül 2026 · güvenlik incelemesi). Düz sha256(ip)
+ * koruma değildi: IPv4'ün 2^32 değerinin tümünün özeti çıkarılıp tabloya
+ * bakılabilir, yani veritabanını okuyan gerçek adresi geri buluyordu.
+ */
+describe("ip özeti", () => {
+  it("anahtarsız sha256 üretmez", () => {
+    const eski = createHash("sha256").update("203.0.113.9", "utf8").digest("hex").slice(0, 32);
+    expect(ipOzeti("203.0.113.9")).not.toBe(eski);
+  });
+
+  it("aynı gizli anahtarla kararlı, farklı anahtarla farklı", () => {
+    process.env.SESSION_SECRET = "birinci";
+    const a = ipOzeti("203.0.113.9");
+    expect(ipOzeti("203.0.113.9")).toBe(a);
+    process.env.SESSION_SECRET = "ikinci";
+    expect(ipOzeti("203.0.113.9")).not.toBe(a);
+  });
+
+  // Sessizce anahtarsız özete düşmek, kapatılan açığı üretimde geri açardı.
+  it("gizli anahtar yoksa fırlatır", () => {
+    delete process.env.SESSION_SECRET;
+    expect(() => ipOzeti("203.0.113.9")).toThrow(/SESSION_SECRET/);
+  });
+
+  it("ip yoksa null döner", () => {
+    delete process.env.SESSION_SECRET;
     expect(ipOzeti(null)).toBeNull();
   });
 });

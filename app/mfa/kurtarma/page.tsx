@@ -1,2 +1,17 @@
-import Link from "next/link";
-export default function Page(){return <main className="auth-page"><section className="auth-card"><Link className="brand" href="/"><span className="brand-mark">G</span><span>GENÇ<span className="brand-accent">TEK</span></span></Link><div><span className="eyebrow">Hesap kurtarma</span><h1>Kurtarma kodunu kullanın.</h1><p>MFA kurulurken verilen tek kullanımlık kodlardan birini girin.</p></div><form><label>Kurtarma kodu<input name="recoveryCode" autoComplete="one-time-code" placeholder="XXXX-XXXX-XXXX" required/></label><button className="button button-primary">Kodu doğrula</button></form><Link className="text-link" href="/mfa">Doğrulama koduna dön</Link></section></main>}
+import { redirect } from "next/navigation";
+
+/**
+ * KURTARMA KODU EKRANI — İKİ ADIMLI DOĞRULAMAYLA BİRLİKTE BEKLİYOR
+ * (5 Eylül 2026 · güvenlik incelemesi).
+ *
+ * Burada da işlemeyen bir form vardı: "MFA kurulurken verilen tek kullanımlık
+ * kodlardan birini girin" diyordu ama MFA hiç kurulmuyor, dolayısıyla kimsenin
+ * elinde böyle bir kod yok ve formun `action`'ı da yoktu.
+ *
+ * Ayrı bir "burası da yok" ekranı basmak yerine /mfa'ya yönlendiriliyor: iki
+ * ekranın söyleyeceği aynı şey ve durumun tek bir yerde yazılı olması, akış
+ * yazıldığında ikisini birden güncellemeyi unutma riskini kaldırıyor.
+ */
+export default function KurtarmaSayfasi() {
+  redirect("/mfa");
+}

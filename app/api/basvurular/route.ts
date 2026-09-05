@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { participationSchema } from "@/lib/validation/participation";
-import { createReference, hashToken } from "@/lib/security/tokens";
+import { createReference } from "@/lib/security/tokens";
 import { ipOzeti, istemciIp } from "@/lib/security/istemci-ip";
 import { checkRateLimit } from "@/lib/security/rate-limit";
 import { basvuruKaydet } from "@/lib/forms/basvuru";
@@ -39,7 +39,12 @@ export async function POST(request: NextRequest){
   }
 
   const ip = istemciIp(request.headers) ?? "local";
-  const limit = await checkRateLimit(`participation:${hashToken(ip)}`, {limit:5,windowMs:15*60_000});
+  /* Anahtar `ipOzeti` ile üretiliyor, düz sha256 ile değil (5 Eylül 2026 ·
+     güvenlik incelemesi): hız sınırı anahtarları "RateLimit" tablosunda
+     SAKLANIYOR ve IPv4'ün 2^32 değerinin tümünün düz özeti dakikalar içinde
+     çıkarılabilir — yani anahtar, pencere boyunca ziyaretçinin gerçek
+     adresini geri veriyordu. Gerekçenin tamamı lib/security/istemci-ip.ts'te. */
+  const limit = await checkRateLimit(`participation:${ipOzeti(ip)}`, {limit:5,windowMs:15*60_000});
   if(!limit.allowed) return NextResponse.json({message:"Çok fazla gönderim yapıldı. Lütfen daha sonra tekrar deneyin."},{status:429,headers:{"Retry-After":String(Math.ceil(limit.retryAfterMs/1000))}});
   const form = await request.formData();
   const raw = Object.fromEntries([...form.entries()].filter(([,value])=>typeof value==="string"));

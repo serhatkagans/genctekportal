@@ -75,6 +75,31 @@ export async function girisYap(girdi: {
     };
   }
 
+  /*
+   * MFA AÇIKSA GİRİŞ REDDEDİLİR — AKIŞ YAZILMADIĞI İÇİN (5 Eylül 2026 ·
+   * güvenlik incelemesi).
+   *
+   * `mfaEnabled` buraya kadar okunuyordu ama HİÇ KULLANILMIYORDU: parola
+   * doğrulanır doğrulanmaz tam yetkili oturum açılıyordu. `/mfa` ve
+   * `/mfa/kurtarma` sayfaları ise arkasında hiçbir uç olmayan formlardı ve
+   * panelin kullanıcı listesi "2FA açık" yazıyordu. Yani ikinci adım varmış
+   * gibi görünüyor, gerçekte hiç sorulmuyordu — yöneticinin güvendiği koruma
+   * yoktu. `lib/security/totp.ts` hazır duruyor, bağlanmamış olan akış.
+   *
+   * KAPALI TARAFA DÜŞÜYORUZ: doğrulanamayan bir ikinci adımı sessizce atlamak
+   * yerine giriş reddediliyor. Bugün bu tek bir hesabı bile etkilemiyor —
+   * bayrağı açan bir yol yok, canlıda da açık hesap yok (5 Eylül 2026
+   * itibarıyla 0/1). Biri veritabanından elle açarsa, o hesabın parolayla
+   * girebilmesi bayrağın anlamına aykırı olurdu.
+   */
+  if (kullanici.mfaEnabled) {
+    await olayYaz(kullanici.id, eposta, "LOGIN_FAILURE", "MFA_AKISI_YOK", girdi);
+    return {
+      tamam: false,
+      hata: "Bu hesapta iki adımlı doğrulama açık ama doğrulama akışı henüz kurulmadı. Sistem yöneticisiyle görüşün.",
+    };
+  }
+
   const oturum = createSessionMaterial();
   // Bitiş zamanları SQL'de hesaplanıyor: JS Date parametreleri sürücü tarafından
   // UTC'ye çevrilip naive timestamp sütununa yazılıyor ve saat farkı kadar

@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { createHmac } from "node:crypto";
 
 /*
  * X-FORWARDED-FOR SONDAN OKUNUR, BAŞTAN DEĞİL (3 Eylül 2026).
@@ -27,7 +27,39 @@ export function istemciIp(basliklar: Headers): string | null {
   return zincir.at(-1) ?? null;
 }
 
-// Ham IP saklanmıyor; oran sınırı ve denetim kaydı için özeti yeterli.
+/*
+ * ÖZET ARTIK ANAHTARLI (HMAC) — DÜZ SHA-256 KORUMA SAYILMIYOR
+ * (5 Eylül 2026 · güvenlik incelemesi).
+ *
+ * Ham IP saklanmıyor, denetim kaydına özeti yazılıyor; amaç KVKK tarafında
+ * ziyaretçinin adresini veritabanında açıkta bırakmamak. Ama düz
+ * `sha256(ip)` bunu SAĞLAMIYOR: IPv4'te yalnızca 2^32 olası değer var,
+ * hepsinin özeti sıradan bir makinede dakikalar içinde çıkarılıp tabloya
+ * bakılır. Yani veritabanını eline geçiren biri her satırın gerçek IP'sini
+ * geri okuyabiliyordu — özet, adresi gizlemiyor yalnızca gizliyormuş gibi
+ * duruyordu.
+ *
+ * HMAC sunucudaki gizli anahtarla üretiliyor; anahtar olmadan sözlük saldırısı
+ * kurulamaz. Anahtar yoksa FIRLATIYORUZ: sessizce anahtarsız özete düşmek,
+ * kapatılan açığı üretimde geri açardı. `SESSION_SECRET` zaten hem yerelde hem
+ * sunucuda tanımlı ve dağıtımın önkoşulu.
+ *
+ * ETİKET ("ip-ozeti-v1") aynı gizli anahtarın başka bir amaçla üretilmiş
+ * özetiyle karışmasın diye; ayrıca ileride anahtar döndürülürse sürüm burada
+ * artar.
+ *
+ * ESKİ SATIRLAR DÖNÜŞTÜRÜLMÜYOR: özetin ham hâli elimizde olmadığı için
+ * mümkün de değil. `ipHash` hiçbir yerde KARŞILAŞTIRILMIYOR (yalnızca yazılıp
+ * ekranda gösteriliyor), dolayısıyla eski ve yeni satırların farklı biçimde
+ * olması bir şeyi bozmuyor. Hız sınırı anahtarları zaten geçici.
+ */
+const IP_ETIKETI = "ip-ozeti-v1";
+
 export function ipOzeti(ip: string | null): string | null {
-  return ip ? createHash("sha256").update(ip, "utf8").digest("hex").slice(0, 32) : null;
+  if (!ip) return null;
+  const gizli = process.env.SESSION_SECRET ?? "";
+  if (!gizli) {
+    throw new Error("SESSION_SECRET tanımlı değil; IP özeti anahtarsız üretilemez.");
+  }
+  return createHmac("sha256", `${IP_ETIKETI}:${gizli}`).update(ip, "utf8").digest("hex").slice(0, 32);
 }

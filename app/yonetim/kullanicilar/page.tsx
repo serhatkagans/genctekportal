@@ -77,14 +77,25 @@ export default async function Page() {
       </div>
 
       {/*
-        MFA DURUMU SAYIYLA yazılıyor: "çoğunda kapalı" demek yerine kaç kişide
-        açık olduğu söyleniyor, yönetici kimi arayacağını listeden görüyor.
+        MFA "AÇIK" DEMİYORUZ ARTIK (5 Eylül 2026 · güvenlik incelemesi). Burada
+        önceki metin "{mfali} tanesinde iki adımlı doğrulama açık" yazıyordu ve
+        bu YANLIŞ BİLGİYDİ: doğrulama akışı hiç yazılmamış, giriş ikinci adımı
+        sormuyordu. Yönetici bu satıra bakıp "o hesap korunuyor" diye
+        düşünebilirdi. Bayrak artık ne olduğu söylenerek gösteriliyor; giriş
+        tarafı da bayrağı görünce sessizce geçmek yerine reddediyor
+        (lib/auth/giris.ts).
       */}
       <div className="info-banner">
-        {kullanicilar.length} kişiden {mfali} tanesinde iki adımlı doğrulama açık.
+        <strong>İki adımlı doğrulama kurulmadı.</strong> Giriş yalnızca e-posta ve parolayla
+        yapılıyor; kayıttaki <code>mfaEnabled</code> bayrağı ({mfali}/{kullanicilar.length} kişide
+        işaretli) bugün bir doğrulama yapmıyor — işaretli bir hesap giriş yapamaz, çünkü
+        doğrulanamayan ikinci adım sessizce atlanmıyor.
+      </div>
+      <div className="info-banner">
         Davet ve parola sıfırlama bu ekranda YOK: ikisi de e-posta gönderimi
         gerektiriyor ve <code>SMTP_URL</code> henüz tanımlı değil — panelden
         &quot;gönderildi&quot; deyip hiçbir şey göndermemektense yapılmadı.
+        Parolayı sunucuda <code>npm run parola -- &lt;e-posta&gt;</code> ile değiştirebilirsiniz.
       </div>
 
       {kullanicilar.length === 0 ? (
@@ -102,7 +113,9 @@ export default async function Page() {
                   <span>
                     {k.eposta}
                     {k.ilAdi ? ` · ${k.ilAdi}` : ""}
-                    {k.mfaAcik ? " · 2FA açık" : ""}
+                    {/* "2FA açık" yazıyordu; koruma olmadığı için bu yanlış
+                        bilgiydi. Bayrak işaretliyse o hesap giriş yapamaz. */}
+                    {k.mfaAcik ? " · 2FA işaretli (giriş kapalı)" : ""}
                   </span>
                   <span className="kullanici-son">
                     {k.sonGiris ? `Son giriş: ${tarihYaz(k.sonGiris)}` : "Hiç giriş yapmadı"}

@@ -19,6 +19,26 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **İki adımlı doğrulama varmış gibi görünüyordu, yoktu.** `girisYap`
+  `mfaEnabled` alanını okuyor ama hiç kullanmıyordu: parola doğrulanır
+  doğrulanmaz tam yetkili oturum açılıyordu. `/mfa` ve `/mfa/kurtarma`
+  sayfaları `action`'ı olmayan ölü formlardı, panelin kullanıcı listesi ise
+  "2FA açık" yazıyordu — yöneticinin güvendiği koruma yoktu. Giriş artık
+  **kapalı tarafa düşüyor**: bayrak işaretliyse giriş reddediliyor ve denetim
+  kaydına `MFA_AKISI_YOK` satırı düşüyor. İki ekran ve paneldeki metin durumu
+  olduğu gibi anlatıyor. Bugün tek bir hesabı etkilemiyor (canlıda 0/1 hesapta
+  işaretli, bayrağı açan bir yol da yok). TOTP altyapısı
+  (`lib/security/totp.ts`) bağlanmayı bekliyor.
+
+- **IP özetleri artık anahtarlı (HMAC).** Denetim kayıtlarındaki `ipHash` ve
+  hız sınırı anahtarları düz `sha256(ip)` idi; IPv4'te yalnızca 2^32 değer
+  olduğu için tüm özetler dakikalar içinde çıkarılıp tabloya bakılabiliyordu —
+  yani özet, ziyaretçinin adresini gizlemiyor sadece gizliyormuş gibi
+  duruyordu. Artık `SESSION_SECRET` ile HMAC; anahtar yoksa sessizce anahtarsız
+  özete düşmek yerine hata veriliyor. Eski satırlar dönüştürülmedi (ham hâl
+  elde yok) ama `ipHash` hiçbir yerde karşılaştırılmıyor, yalnızca yazılıyor
+  (`lib/security/istemci-ip.ts`).
+
 ---
 
 ## v2.3.2 — 5 Eylül 2026
