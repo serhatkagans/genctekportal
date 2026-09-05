@@ -10,6 +10,7 @@ import { genctekGirisAdresi } from "@/lib/genctek-baglanti";
 import { genctekEtkinlikleriOku } from "@/lib/genctek-etkinlik";
 import { genctekIstatistigiOku, sayiyiBicimle } from "@/lib/genctek-istatistik";
 import { hakkindaKartlariniOku } from "@/lib/hakkinda";
+import { anaSayfaMetniniOku, paragraflaraBol } from "@/lib/sayfa-metni";
 
 // Ana sayfa da haber listesi/detayıyla aynı kaynağı kullanmalı; ayrı tohum verisi
 // kullanıldığında slug'lar tutmadığı için her kart 404'e gidiyordu.
@@ -44,6 +45,13 @@ export default async function Home() {
   /* Hakkında kartları veritabanından: panelden eklenen başlık burada ve üst
      menüde kendiliğinden beliriyor (bkz. lib/hakkinda.ts). */
   const hakkindaKartlari = await hakkindaKartlariniOku();
+  /* SAYFANIN SABİT YAZILARI DA TABLODAN (5 Eylül 2026 · istek: "hepsini yap").
+     Hero başlığı, bölüm başlıkları ve alttaki çağrı /yonetim/anasayfa
+     ekranından düzenleniyor. Kartların KENDİLERİ yukarıdaki kaynaklardan
+     gelmeye devam ediyor — bu ekran yalnızca aralarındaki yazıları yönetir.
+     Tabloda satır yoksa metinler data-ornek/anasayfa.json'daki hâline düşüyor,
+     yani taşınmadan önceki yazıların birebir aynısı. */
+  const metin = await anaSayfaMetniniOku();
   const paneldekiSayilar = istatistik
     ? [
         { deger: istatistik.il, etiket: "İl" },
@@ -70,20 +78,22 @@ export default async function Home() {
               ise gençleri bugünün izleyicisi olarak değil yarının sektör lideri
               olarak konumluyor; vurgu "liderleri" kelimesinde.
             */}
-            <span className="eyebrow">YEĞİTEK Genel Müdürlüğü</span>
-            <h1>Sektörün Yeni <em>Liderleri</em></h1>
-            <p>GençTek, Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü koordinasyonunda, bilişim alanında çalışma gerçekleştirmek isteyen, çalışmalar yürüten ya da mevcut çalışmalarının etkisini arttırmak isteyen öğrencilerin ve danışman öğretmenlerin desteklendiği, birbirleriyle ve paydaşlarla iletişim ve iş birliğinin sağlandığı Genç Bilişim Ekosistemidir.</p>
+            {metin.hero.ustEtiket ? <span className="eyebrow">{metin.hero.ustEtiket}</span> : null}
+            {/* Başlık ve boşluk tek dizge: ayrı çocuk düğüm olsalardı React
+                araya <!-- --> ayracı basardı. */}
+            <h1>{metin.hero.vurgu ? `${metin.hero.baslik} ` : metin.hero.baslik}{metin.hero.vurgu ? <em>{metin.hero.vurgu}</em> : null}</h1>
+            {paragraflaraBol(metin.hero.metin).map((p, i) => <p key={i}>{p}</p>)}
             {/*
               HERO DÜĞMESİ DE PLATFORMA (20 Ağustos 2026 · istek: "herodaki
               ekosisteme katıl da giriş olsun ve platforma girişe
               yönlendirsin"). Sayfadaki üç çağrı — üst menü, hero ve alttaki
               şerit — artık aynı adı taşıyıp aynı kapıya gidiyor.
             */}
-            <div className="button-row"><a className="button button-primary" href={genctekGirisAdresi()}>Ekosisteme Katıl <Icon name="arrow" /></a></div>
+            <div className="button-row"><a className="button button-primary" href={genctekGirisAdresi()}>{`${metin.hero.dugme} `}<Icon name="arrow" /></a></div>
           </div>
           <div className="hero-panel" aria-label="GençTek etki özeti">
-            <div className="hero-panel-head"><span>2026–2027</span><span className="live-dot">Aktif dönem</span></div>
-            <div className="signal"><span>GençTek Akran Öğrenme Modeli</span><strong>Genç Bilişim <em>Ekosistemi</em></strong></div>
+            <div className="hero-panel-head"><span>{metin.panel.donem}</span><span className="live-dot">{metin.panel.durum}</span></div>
+            <div className="signal"><span>{metin.panel.ustSatir}</span><strong>{metin.panel.markaVurgu ? `${metin.panel.marka} ` : metin.panel.marka}{metin.panel.markaVurgu ? <em>{metin.panel.markaVurgu}</em> : null}</strong></div>
             {paneldekiSayilar.length > 0 && (
               <div className="mini-stats mini-stats-cok">
                 {paneldekiSayilar.map((sayi) => (
@@ -95,10 +105,14 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="section stats-band"><div className="container stat-row"><span>Öğrenen Topluluklar</span><span>Ortak Üretim</span><span>Uluslararası Ağ</span></div></section>
+      {/* Şeridin tamamı panelden silinebiliyor: boş bir zemin şeridi basmak
+          yerine bölüm hiç açılmıyor. */}
+      {metin.serit.length > 0 && (
+        <section className="section stats-band"><div className="container stat-row">{metin.serit.map((yazi) => <span key={yazi}>{yazi}</span>)}</div></section>
+      )}
 
       <section className="section" id="haberler">
-        <div className="container"><div className="section-heading"><div><span className="eyebrow">GençTek Ekosisteminden</span><h2>Son Haberler</h2></div><Link className="text-link" href="/haberler">Tüm haberler <Icon name="arrow" /></Link></div>
+        <div className="container"><div className="section-heading"><div><span className="eyebrow">{metin.haberler.ustEtiket}</span><h2>{metin.haberler.baslik}</h2></div><Link className="text-link" href="/haberler">{`${metin.haberler.baglanti} `}<Icon name="arrow" /></Link></div>
           <HaberGalerisi haberler={sonHaberler} />
         </div>
       </section>
@@ -117,7 +131,7 @@ export default async function Home() {
         geliyor (bkz. next.config.ts).
       */}
       <section className="section" id="hakkinda">
-        <div className="container"><div className="section-heading"><div><span className="eyebrow">GençTek</span><h2>Hakkında</h2></div></div>
+        <div className="container"><div className="section-heading"><div><span className="eyebrow">{metin.hakkinda.ustEtiket}</span><h2>{metin.hakkinda.baslik}</h2></div></div>
           <HakkindaKartlari kartlar={hakkindaKartlari} />
         </div>
       </section>
@@ -130,9 +144,9 @@ export default async function Home() {
         tarihli bir çağrı.
       */}
       <section className="section themes-section" id="etkinlikler">
-        <div className="container"><div className="section-heading"><div><span className="eyebrow">GençTek Etkinlikleri</span><h2>Yaklaşan Etkinlikler</h2><p>GençTek panelinde açılmış, başvuruya açık ve yaklaşan etkinlikler.</p></div><Link className="text-link" href="/etkinlikler">Tüm etkinlikler <Icon name="arrow" /></Link></div>
+        <div className="container"><div className="section-heading"><div><span className="eyebrow">{metin.etkinlikler.ustEtiket}</span><h2>{metin.etkinlikler.baslik}</h2>{metin.etkinlikler.metin ? <p>{metin.etkinlikler.metin}</p> : null}</div><Link className="text-link" href="/etkinlikler">{`${metin.etkinlikler.baglanti} `}<Icon name="arrow" /></Link></div>
           {etkinlikler.length === 0
-            ? <p className="etkinlik-bos">Şu an listelenecek etkinlik yok. Yeni etkinlikler açıldığında burada görünecek.</p>
+            ? <p className="etkinlik-bos">{metin.etkinlikler.bosMetin}</p>
             : <div className="card-grid">{etkinlikler.map((etkinlik) => <EtkinlikKarti etkinlik={etkinlik} key={etkinlik.id} />)}</div>}
         </div>
       </section>
@@ -146,7 +160,7 @@ export default async function Home() {
         adlar taşıması ("Başvuruyu başlat" / "Giriş") aynı kapıyı iki ayrı kapı
         gibi gösteriyordu.
       */}
-      <section className="section join-section"><div className="container join-card"><div><span className="eyebrow eyebrow-light">Sıra sende</span><h2>Ürününü paylaş, çalışmalarını duyur, ekibini kur, destek al.</h2><p>Öğrenci, danışman öğretmen, mezun, mentör ve paydaş olarak ekosisteme katılmak için giriş yapınız.</p></div><a className="button button-light" href={genctekGirisAdresi()}>Ekosisteme Katıl <Icon name="arrow" /></a></div></section>
+      <section className="section join-section"><div className="container join-card"><div><span className="eyebrow eyebrow-light">{metin.cagri.ustEtiket}</span><h2>{metin.cagri.baslik}</h2>{paragraflaraBol(metin.cagri.metin).map((p, i) => <p key={i}>{p}</p>)}</div><a className="button button-light" href={genctekGirisAdresi()}>{`${metin.cagri.dugme} `}<Icon name="arrow" /></a></div></section>
     </main>
     <Footer />
   </>;

@@ -1,0 +1,80 @@
+{
+  "ustEtiket": "Yasal bilgiler",
+  "baslik": "Kişisel Verilerin İşlenmesi Aydınlatma Metni",
+  "spot": "Bu aydınlatma metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu'nun 10. maddesi ile Aydınlatma Yükümlülüğünün Yerine Getirilmesinde Uyulacak Usul ve Esaslar Hakkında Tebliğ kapsamında veri sorumlusu sıfatıyla Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü tarafından hazırlanmıştır.",
+  "seoBaslik": "KVKK Aydınlatma Metni · GençTek",
+  "seoAciklama": "Kişisel Verilerin İşlenmesi Aydınlatma Metni.",
+  "bolumler": [
+    {
+      "baslik": "1. Veri Sorumlusu",
+      "giris": "KVKK uyarınca, kişisel verileriniz Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü tarafından veri sorumlusu sıfatıyla işlenmektedir.",
+      "maddeler": [],
+      "satirlar": []
+    },
+    {
+      "baslik": "2. Kişisel Verilerin İşlenme Amaçları",
+      "giris": "Kişisel verileriniz, aşağıdaki amaçlarla işlenmektedir:",
+      "maddeler": [
+        { "baslik": "Hizmet Sunumu", "metin": "Web sitemiz, dijital platformlarımız ve online öğrenme ortamlarımız üzerinden sunulan hizmetlerin sağlanması." },
+        { "baslik": "Eğitim ve Öğretim", "metin": "Dijital içerikler, eğitim materyalleri ve online derslerin sunulması ve yönetilmesi." },
+        { "baslik": "Kullanıcı Deneyimi", "metin": "Kullanıcı deneyiminin iyileştirilmesi, kişiselleştirilmiş hizmet sunumu ve kullanıcı tercihlerinin hatırlanması." },
+        { "baslik": "Yasal Yükümlülükler", "metin": "Yasal ve düzenleyici gerekliliklerin yerine getirilmesi." },
+        { "baslik": "İletişim", "metin": "Kullanıcılarımızla iletişim kurulması ve bildirimlerin iletilmesi." },
+        { "baslik": "Güvenlik", "metin": "Bilgi güvenliği süreçlerinin yürütülmesi ve kullanıcılarımızın verilerinin korunması." },
+        { "baslik": "Analiz ve Raporlama", "metin": "Hizmetlerimizin performansını analiz etmek ve raporlamak." }
+      ],
+      "satirlar": []
+    },
+    {
+      "baslik": "3. Kişisel Verilerin Toplanma Yöntemleri ve Hukuki Sebepler",
+      "giris": "Kişisel verileriniz, web sitemiz, mobil uygulamalarımız, dijital platformlarımız ve diğer iletişim kanallarımız aracılığıyla elektronik ortamda toplanmaktadır. Kişisel verilerinizin toplanma ve işlenme hukuki sebepleri şunlardır:",
+      "maddeler": [
+        { "baslik": "Kanunlarda Açıkça Öngörülmesi", "metin": "Kişisel verilerinizin işlenmesinin kanunlarda açıkça öngörülmesi." },
+        { "baslik": "Sözleşmenin İfası", "metin": "Sözleşmenin kurulması veya ifasıyla doğrudan doğruya ilgili olması kaydıyla, sözleşmenin taraflarına ait kişisel verilerin işlenmesinin gerekli olması." },
+        { "baslik": "Hukuki Yükümlülüğün Yerine Getirilmesi", "metin": "Veri sorumlusunun hukuki yükümlülüklerini yerine getirebilmesi için zorunlu olması." },
+        { "baslik": "Meşru Menfaat", "metin": "Veri sorumlusunun meşru menfaatleri için veri işlenmesinin zorunlu olması, temel hak ve özgürlüklerinize zarar vermemek kaydıyla." }
+      ],
+      "satirlar": []
+    },
+    {
+      "baslik": "4. Kişisel Verilerin Aktarımı",
+      "giris": "İşlenen kişisel verileriniz, yukarıda belirtilen amaçlar doğrultusunda ve KVKK'nın 8. ve 9. maddelerine uygun olarak, yalnızca yetkili kamu kurum ve kuruluşları ile hukuken yetkili özel hukuk tüzel kişileri ile paylaşılabilecektir. Ayrıca, platformun teknik altyapısını sağlayan üçüncü taraf hizmet sağlayıcılarla da gerekli güvenlik önlemleri alınarak paylaşım yapılabilmektedir.",
+      "maddeler": [],
+      "satirlar": []
+    },
+    {
+      "baslik": "5. Kişisel Verilerin Saklanma Süresi",
+      "giris": "Kişisel verileriniz, yukarıda belirtilen amaçlarla gerekli olan süre boyunca saklanacak olup, yasal saklama sürelerinin bitiminde veya işlenme amacının ortadan kalkması hâlinde imha edilecektir.",
+      "maddeler": [],
+      "satirlar": []
+    },
+    {
+      "baslik": "6. KVKK Kapsamındaki Haklarınız",
+      "giris": "KVKK'nın 11. maddesi uyarınca, kişisel verilerinizle ilgili olarak aşağıdaki haklara sahipsiniz:",
+      "maddeler": [
+        { "baslik": "", "metin": "Kişisel verilerinizin işlenip işlenmediğini öğrenme." },
+        { "baslik": "", "metin": "Kişisel verileriniz işlenmişse buna ilişkin bilgi talep etme." },
+        { "baslik": "", "metin": "Kişisel verilerinizin işlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme." },
+        { "baslik": "", "metin": "Yurt içinde veya yurt dışında kişisel verilerinizin aktarıldığı üçüncü kişileri bilme." },
+        { "baslik": "", "metin": "Kişisel verilerinizin eksik veya yanlış işlenmiş olması hâlinde bunların düzeltilmesini isteme." },
+        { "baslik": "", "metin": "Kişisel verilerinizin silinmesini veya yok edilmesini isteme." },
+        { "baslik": "", "metin": "Kişisel verilerin düzeltilmesi, silinmesi veya yok edilmesine ilişkin işlemlerin kişisel verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme." },
+        { "baslik": "", "metin": "İşlenen verilerin münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme." },
+        { "baslik": "", "metin": "Kişisel verilerinizin kanuna aykırı olarak işlenmesi sebebiyle zarara uğramanız hâlinde zararın giderilmesini talep etme." }
+      ],
+      "satirlar": []
+    },
+    {
+      "baslik": "7. İletişim",
+      "giris": "Kişisel verilerinize ilişkin taleplerinizi Veri Sorumlusuna Başvuru Usul ve Esasları Hakkında Tebliğ'e göre aşağıdaki iletişim bilgileri üzerinden iletebilirsiniz:",
+      "maddeler": [],
+      "satirlar": [
+        { "metin": "Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü", "baglantiMetni": "", "adres": "" },
+        { "metin": "Emniyet Mahallesi, Milas Sokak, No: 8, 06560 Yenimahalle / ANKARA", "baglantiMetni": "", "adres": "" },
+        { "metin": "Telefon:", "baglantiMetni": "0312 296 94 00", "adres": "tel:+903122969400" },
+        { "metin": "E-posta:", "baglantiMetni": "yegitek@meb.gov.tr", "adres": "mailto:yegitek@meb.gov.tr" },
+        { "metin": "İletişim formu:", "baglantiMetni": "yegitek.meb.gov.tr ↗", "adres": "https://yegitek.meb.gov.tr/www/eposta_gonder.php" }
+      ]
+    }
+  ]
+}

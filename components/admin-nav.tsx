@@ -12,6 +12,9 @@ const GRUPLAR: { baslik: string; baglantilar: Baglanti[] }[] = [
     baslik: "İÇERİK",
     baglantilar: [
       { etiket: "Genel bakış", href: "/yonetim", ikon: "gauge" },
+      // Sabit sayfa metinleri (5 Eylül 2026): ana sayfa hero'su ve katılım
+      // sayfasının başlığı koda yazılıydı, artık panelden düzenleniyor.
+      { etiket: "Ana sayfa", href: "/yonetim/anasayfa", ikon: "image" },
       { etiket: "Haberler", href: "/yonetim/icerik", ikon: "news" },
       { etiket: "Hakkında sayfaları", href: "/yonetim/hakkinda", ikon: "badge" },
       { etiket: "Zirveler", href: "/yonetim/zirveler", ikon: "calendar" },
@@ -28,6 +31,7 @@ const GRUPLAR: { baslik: string; baglantilar: Baglanti[] }[] = [
       { etiket: "Koordinatörler", href: "/yonetim/koordinatorler", ikon: "users" },
       { etiket: "Medya", href: "/yonetim/medya", ikon: "image" },
       { etiket: "Formlar", href: "/yonetim/formlar", ikon: "form" },
+      { etiket: "Katılım sayfası", href: "/yonetim/katilim", ikon: "badge" },
       { etiket: "Başvurular", href: "/yonetim/basvurular", ikon: "inbox" },
     ],
   },
@@ -38,6 +42,8 @@ const GRUPLAR: { baslik: string; baglantilar: Baglanti[] }[] = [
       { etiket: "Üst menü", href: "/yonetim/menu", ikon: "redirect" },
       { etiket: "Alt bilgi", href: "/yonetim/altbilgi", ikon: "file" },
       { etiket: "Yönlendirmeler", href: "/yonetim/yonlendirmeler", ikon: "redirect" },
+      // İçerik grubunda değil: bu bir tanıtım metni değil, kurumun yasal beyanı.
+      { etiket: "KVKK metni", href: "/yonetim/kvkk", ikon: "shield" },
       { etiket: "Denetim kaydı", href: "/yonetim/denetim", ikon: "shield" },
       { etiket: "Ayarlar", href: "/yonetim/ayarlar", ikon: "settings" },
     ],

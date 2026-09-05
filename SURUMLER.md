@@ -19,6 +19,27 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Ana sayfa, katılım sayfası ve KVKK metni artık panelden yönetiliyor.**
+  Sitede kod içinde yazılı kalan son üç metin bloğu `"Page"` tablosuna taşındı:
+  ana sayfanın giriş bölümü (üst etiket, başlık, vurgulanan kelime, tanıtım
+  metni, düğme yazısı), sağdaki özet kutusu, alt şerit, bölüm başlıkları ve
+  alttaki çağrı **Yönetim → Ana sayfa**'dan; `/katilim` başlık bloğu
+  **Yönetim → Katılım sayfası**'ndan; KVKK aydınlatma metninin bölümleri,
+  madde listeleri ve başvuru adresi **Yönetim → KVKK metni**'nden
+  düzenleniyor. Kartların kendileri (haber, Hakkında, etkinlik) eskisi gibi
+  kendi ekranlarından ve GençTek platformundan geliyor; bu ekranlar
+  aralarındaki sabit yazıları yönetir.
+
+  Gövde serbest HTML değil: her alan düz metin, listeler sayılı tipler, adres
+  alanları yalnızca site içi yol, `https://`, `mailto:` ve `tel:` kabul ediyor.
+
+  **Göç betiği gerekmiyor.** Tabloda satır yoksa üç sayfa da
+  `data-ornek/{anasayfa,katilim,kvkk}.json` içindeki bugünkü metne düşer;
+  satır panelden ilk kaydetmede açılır. Canlıya alırken yalnızca derleme ve
+  yeniden başlatma yeter (`lib/sayfa-metni.ts`, `lib/sayfa-metni-govde.ts`,
+  `app/yonetim/anasayfa`, `app/yonetim/katilim`, `app/yonetim/kvkk`,
+  `components/kvkk-govdesi.tsx`, `components/kvkk-editoru.tsx`).
+
 ---
 
 ## v2.2.0 — 5 Eylül 2026

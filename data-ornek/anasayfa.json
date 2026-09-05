@@ -1,0 +1,39 @@
+{
+  "hero": {
+    "ustEtiket": "YEĞİTEK Genel Müdürlüğü",
+    "baslik": "Sektörün Yeni",
+    "vurgu": "Liderleri",
+    "metin": "GençTek, Millî Eğitim Bakanlığı Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü koordinasyonunda, bilişim alanında çalışma gerçekleştirmek isteyen, çalışmalar yürüten ya da mevcut çalışmalarının etkisini arttırmak isteyen öğrencilerin ve danışman öğretmenlerin desteklendiği, birbirleriyle ve paydaşlarla iletişim ve iş birliğinin sağlandığı Genç Bilişim Ekosistemidir.",
+    "dugme": "Ekosisteme Katıl"
+  },
+  "panel": {
+    "donem": "2026–2027",
+    "durum": "Aktif dönem",
+    "ustSatir": "GençTek Akran Öğrenme Modeli",
+    "marka": "Genç Bilişim",
+    "markaVurgu": "Ekosistemi"
+  },
+  "serit": ["Öğrenen Topluluklar", "Ortak Üretim", "Uluslararası Ağ"],
+  "haberler": {
+    "ustEtiket": "GençTek Ekosisteminden",
+    "baslik": "Son Haberler",
+    "baglanti": "Tüm haberler"
+  },
+  "hakkinda": {
+    "ustEtiket": "GençTek",
+    "baslik": "Hakkında"
+  },
+  "etkinlikler": {
+    "ustEtiket": "GençTek Etkinlikleri",
+    "baslik": "Yaklaşan Etkinlikler",
+    "metin": "GençTek panelinde açılmış, başvuruya açık ve yaklaşan etkinlikler.",
+    "baglanti": "Tüm etkinlikler",
+    "bosMetin": "Şu an listelenecek etkinlik yok. Yeni etkinlikler açıldığında burada görünecek."
+  },
+  "cagri": {
+    "ustEtiket": "Sıra sende",
+    "baslik": "Ürününü paylaş, çalışmalarını duyur, ekibini kur, destek al.",
+    "metin": "Öğrenci, danışman öğretmen, mezun, mentör ve paydaş olarak ekosisteme katılmak için giriş yapınız.",
+    "dugme": "Ekosisteme Katıl"
+  }
+}
