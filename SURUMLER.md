@@ -19,6 +19,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+---
+
+## v2.3.2 — 5 Eylül 2026
+
 - **Haber gövdesi temizleyicisinde de aynı şema-göreli açık kapatıldı.**
   `sanitize-html`'in varsayılanı `//kotu.example` gibi adresleri geçirmek:
   `allowedSchemes` şema taşımayan bir değere hiç bakmıyor. Haber gövdesi
