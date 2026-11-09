@@ -19,6 +19,15 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Panelden yüklenen görsel, portal yeniden başlatılana kadar görünmüyordu.**
+  `next start`, `public/` altındaki dosyaların listesini yalnızca açılışta
+  çıkarıyor. Yükleme dosyayı `public/medya`'ya yazıyordu ama sunucu onu
+  tanımadığı için adres 404, küçültülmüş sürümü 400 veriyordu. Ebru ALACA'nın
+  fotoğrafında fark edildi. Artık `app/medya/[ad]/route.ts` açılıştan sonra
+  eklenen dosyaları diskten sunuyor. Adresler aynı kaldığı için kayıtlara
+  dokunulmadı. Rota yalnızca yüklemenin üretebildiği türleri (PNG, JPEG,
+  WebP, AVIF, GIF) veriyor, SVG ve klasör dışına çıkan adlar 404 alıyor.
+
 ---
 
 ## v2.4.0 — 6 Eylül 2026

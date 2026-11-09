@@ -5,7 +5,7 @@ import { dosyaImzasiUyuyorMu } from "@/lib/security/dosya-imzasi";
 
 // İki kaynak var: WordPress içe aktarımıyla gelen dosyalar ve panelden yüklenenler.
 // İçe aktarılan klasöre yazmıyoruz ki yeniden içe aktarma yüklenenleri ezmesin.
-const YUKLEME_KLASORU = path.join(process.cwd(), "public", "medya");
+export const YUKLEME_KLASORU = path.join(process.cwd(), "public", "medya");
 const ICE_AKTARIM_KLASORU = path.join(process.cwd(), "public", "wordpress", "media");
 
 export const YUKLEME_URL_ONEKI = "/medya";
@@ -33,6 +33,12 @@ const KABUL_EDILEN_TURLER: Record<string, string> = {
   "image/avif": ".avif",
   "image/gif": ".gif",
 };
+
+// Yüklenen dosyayı sunan rota (app/medya/[ad]/route.ts) türü bu tablodan
+// buluyor. Yalnızca yüklemenin üretebildiği uzantılar var, SVG bilerek yok.
+export const YUKLENEN_TURLER: Record<string, string> = Object.fromEntries(
+  Object.entries(KABUL_EDILEN_TURLER).map(([tur, uzanti]) => [uzanti, tur]),
+);
 
 export const EN_BUYUK_BOYUT = 8 * 1024 * 1024;
 
