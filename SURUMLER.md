@@ -19,6 +19,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+---
+
+## v2.4.1 — 9 Kasım 2026
+
 - **Panelden yüklenen görsel, portal yeniden başlatılana kadar görünmüyordu.**
   `next start`, `public/` altındaki dosyaların listesini yalnızca açılışta
   çıkarıyor. Yükleme dosyayı `public/medya`'ya yazıyordu ama sunucu onu
