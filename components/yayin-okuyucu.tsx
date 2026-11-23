@@ -104,6 +104,11 @@ export function YayinOkuyucu({ kokAdres, sayfaSayisi, genislik, yukseklik, pdfAd
         mobileScrollSupport: true,
         maxShadowOpacity: 0.45,
         flippingTime: 750,
+        // BOYUT CSS'TE (bkz. globals.css · .yayin-kitap). autoSize açıkken
+        // kütüphane yüksekliği yalnızca genişlikten hesaplıyor ve CSS'teki
+        // sınırı görmüyordu: tam ekranda kitap denetim düğmelerinin üstüne
+        // taşıyordu. Kapalıyken kökün ölçüsüne sığdırıyor.
+        autoSize: false,
       });
       kitap.on("flip", ({ data }) => { setSayfa(data); yukle(data); });
       kitap.on("changeOrientation", ({ data }) => setYatay(data === "landscape"));
@@ -140,6 +145,14 @@ export function YayinOkuyucu({ kokAdres, sayfaSayisi, genislik, yukseklik, pdfAd
     };
     window.addEventListener("keydown", tus);
     return () => window.removeEventListener("keydown", tus);
+  }, []);
+
+  // Tam ekrana girip çıkınca kitabın kökü yeni ölçüsünü CSS'ten alıyor;
+  // kütüphane yalnızca pencere boyutunu dinlediği için bir kez de elle ölçtür.
+  useEffect(() => {
+    const yenile = () => requestAnimationFrame(() => kitapRef.current?.update());
+    document.addEventListener("fullscreenchange", yenile);
+    return () => document.removeEventListener("fullscreenchange", yenile);
   }, []);
 
   // Şeritte açık sayfanın önizlemesi görünür kalsın.

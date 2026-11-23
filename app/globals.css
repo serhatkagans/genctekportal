@@ -1060,10 +1060,16 @@ html[data-theme="kirmizi"] .site-header .nav-acilir-govde a{color:var(--color-te
    StPageFlip sayfa boyunu kökün yüksekliğine sığdırıyor. Oran sayfanın
    kendisinden (--yayin-oran = en/boy): geniş ekranda iki sayfa yan yana. */
 .yayin-okuyucu{display:grid;gap:16px}
-.yayin-okuyucu:fullscreen{background:var(--color-bg-subtle);padding:24px;align-content:center;overflow:auto}
-.yayin-sahne{position:relative;display:grid;place-items:center;min-height:240px}
+/* Tam ekranda üç satır: kitap kalan yeri alır, denetim ve şerit altta sabit. */
+.yayin-okuyucu:fullscreen{height:100vh;grid-template-rows:minmax(0,1fr) auto auto;background:var(--color-bg-subtle);padding:24px}
+/* TAŞMA SAHNEDE KIRPILIYOR: fare kenara gelince kütüphane sayfa köşesini
+   kıvırıp kitabın dışına gölge çiziyor. Kırpılmazsa sayfada kaydırma çubuğu
+   beliriyor, çubuk genişliği değiştirince kitap yeniden ölçülüp zıplıyordu. */
+.yayin-sahne{position:relative;display:grid;place-items:center;min-height:240px;overflow:hidden;overflow:clip;padding-block:12px}
+.yayin-okuyucu:fullscreen .yayin-sahne{min-height:0;height:100%;padding:0}
 .yayin-kitap{width:100%;aspect-ratio:calc(2 * var(--yayin-oran));max-height:min(86vh,1300px);margin-inline:auto}
-.yayin-okuyucu:fullscreen .yayin-kitap{max-height:calc(100vh - 200px)}
+.yayin-okuyucu:fullscreen .yayin-kitap{height:100%;max-height:none;aspect-ratio:auto}
+.yayin-kitap .stf__wrapper{height:100%}
 .yayin-sayfa{background:#fff;overflow:hidden}
 .yayin-sayfa img{display:block;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none}
 .yayin-yukleniyor{position:absolute;inset:0;display:grid;place-items:center;margin:0;color:var(--color-text-muted)}
@@ -1083,4 +1089,5 @@ html[data-theme="kirmizi"] .site-header .nav-acilir-govde a{color:var(--color-te
 .yayin-karti img{display:block;width:100%;aspect-ratio:var(--yayin-oran,.707);object-fit:cover;border-radius:6px;border:1px solid var(--color-border);box-shadow:var(--shadow-md);transition:transform 150ms}
 .yayin-karti:hover img{transform:translateY(-4px)}
 .yayin-karti span{color:var(--color-text-muted);font-weight:500;font-size:.88rem}
-@media(max-width:640px){.yayin-kitap{aspect-ratio:var(--yayin-oran)}.yayin-denetim-ara{display:none}.yayin-denetim .button{font-size:.88rem}}
+/* 607 px: kitap 560 px altında tek sayfaya geçiyor (minWidth 280 × 2) ve kap iki yandan 24 px dar. */
+@media(max-width:607px){.yayin-kitap{aspect-ratio:var(--yayin-oran)}.yayin-denetim-ara{display:none}.yayin-denetim .button{font-size:.88rem}}

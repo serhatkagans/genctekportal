@@ -19,6 +19,12 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Yayın okuyucusunda tam ekran ve kenar düzeltmesi.** Tam ekranda kitap
+  denetim düğmelerinin üstüne taşıyordu: yüksekliği kütüphane yalnızca
+  genişlikten hesaplıyordu, artık CSS veriyor (`autoSize: false`). Fare sayfa
+  kenarına gelince kıvrılan köşe sayfada kaydırma çubuğu açıyor ve kitap
+  zıplıyordu; taşma artık sahnede kırpılıyor.
+
 ---
 
 ## v2.5.2 — 23 Kasım 2026
