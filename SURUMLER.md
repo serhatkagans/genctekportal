@@ -19,6 +19,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+---
+
+## v2.5.3 — 23 Kasım 2026
+
 - **Yayın okuyucusunda tam ekran ve kenar düzeltmesi.** Tam ekranda kitap
   denetim düğmelerinin üstüne taşıyordu: yüksekliği kütüphane yalnızca
   genişlikten hesaplıyordu, artık CSS veriyor (`autoSize: false`). Fare sayfa
