@@ -2,7 +2,8 @@
 
 Tanıtım sitesi `https://aiotechs.cloud/genctekportal` adresinde yayında.
 GençTek platformu (panel) aynı sunucuda ama **ayrı bir uygulama ve ayrı bir
-veritabanı**: `https://aiotechs.cloud/genctek`.
+veritabanı**: `https://aiotechs.cloud/genctektopluluk`. (Kasım 2026'ya kadar
+`/genctek` önekindeydi; eski önek kapatıldı, portal artık oraya bağlanmıyor.)
 
 ## Sunucudaki yerleşim
 
@@ -307,13 +308,19 @@ Ana sayfadaki ve `/etkinlikler` sayfasındaki etkinlikler portalda **tutulmaz**;
 platformun herkese açık ucundan okunur:
 
 ```
-GENCTEK_APP_URL="https://aiotechs.cloud/genctek"
+GENCTEK_APP_URL="https://aiotechs.cloud/genctektopluluk"
 ```
 
 Bu değişken `/opt/genctekportal/.env` içinde. Boş bırakılırsa portal çökmez,
 etkinlik bölümü boş durumunu basar (bkz. `lib/genctek-etkinlik.ts`).
 
-Kartların "başvur" bağlantısı platformun GİRİŞ ekranına, `?nereye=` ile gider:
+Değiştirdikten sonra `systemctl restart genctekportal` yeterli: değer her
+istekte sunucuda okunuyor, bütün sayfalar dinamik (derleme çıktısında `ƒ`).
+Bir sayfa ileride statik (`○`) yapılırsa o sayfa adresi derleme anında
+gömer ve yeniden derleme de gerekir.
+
+Genel "katıl" düğmeleri platformun KÖKÜNE (giriş + kayıt vitrini) gider.
+Kartların "başvur" bağlantısı ise platformun GİRİŞ ekranına, `?nereye=` ile gider:
 ziyaretçi girişten sonra tıkladığı etkinlikte açılır. Yol öneksizdir
 (`/panel/etkinlikler/12`) — öneki hem `GENCTEK_APP_URL` hem de platformun kendi
 `redirect()`'i ekler.

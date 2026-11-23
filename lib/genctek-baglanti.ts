@@ -16,9 +16,17 @@ export const GENCTEK_ADRESI = (process.env.GENCTEK_APP_URL ?? "")
   .replace(/\/$/, "");
 
 /**
- * Platformun giriş ekranı. `nereye` verilirse kişi girişten SONRA oraya
- * bırakılır — uygulamanın giriş ekranı bu parametreyi tanıyor ve uygulama
- * dışına çıkan değerleri eliyor (bkz. uygulamada lib/auth/donus-yolu.ts).
+ * Platforma giriş kapısı.
+ *
+ * `nereye` yoksa (üst menü, "Ekosisteme Katıl" kartları) platformun KÖKÜNE
+ * gidilir: orası giriş ve kayıt düğmelerini birlikte sunan vitrin sayfası.
+ * Doğrudan /giris'e atmak kayıt olmamış ziyaretçiyi yanlış kapıya koyuyordu.
+ *
+ * `nereye` verilirse (etkinlik kartları) giriş ekranına gidilir ve kişi
+ * girişten SONRA oraya bırakılır — uygulamanın giriş ekranı bu parametreyi
+ * tanıyor ve uygulama dışına çıkan değerleri eliyor (bkz. uygulamada
+ * lib/auth/donus-yolu.ts). Vitrin bu parametreyi taşımaz, o yüzden burada
+ * kök kullanılamaz.
  *
  * Adres tanımlanmamışsa portalın kendi katılım sayfasına düşülür: tanıtım
  * sitesindeki bir düğmenin hiçbir yere gitmemesi, yanlış yere gitmesinden de
@@ -26,6 +34,6 @@ export const GENCTEK_ADRESI = (process.env.GENCTEK_APP_URL ?? "")
  */
 export function genctekGirisAdresi(nereye?: string): string {
   if (!GENCTEK_ADRESI) return "/katilim";
-  if (!nereye) return `${GENCTEK_ADRESI}/giris`;
+  if (!nereye) return GENCTEK_ADRESI;
   return `${GENCTEK_ADRESI}/giris?nereye=${encodeURIComponent(nereye)}`;
 }
