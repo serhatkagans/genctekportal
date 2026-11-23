@@ -19,6 +19,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+---
+
+## v2.5.1 — 23 Kasım 2026
+
 - **Yayının İngilizce baskısı eklendi** ("Peer Learning Model and Youth Tech
   Ecosystem"); okuyucuda Türkçe/English düğmeleriyle seçiliyor.
 - **Yayının adresi değişti:** `/yayinlar/aom-gbe` → `/yayinlar/genctek-ekosistemi`,
