@@ -19,6 +19,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+---
+
+## v2.5.0 — 23 Kasım 2026
+
 - **Yayınlar: sayfası çevrilebilir okuyucu.** Üst menüye "Yayınlar" açılır
   listesi eklenebiliyor (Yönetim → Üst menü → "Yayınlar listesi"). `/yayinlar`
   yayınları listeliyor; `/yayinlar/<ad>` sayfaları köşesinden çekilerek
