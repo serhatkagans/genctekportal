@@ -90,7 +90,19 @@ export function yayinDilleri(yayin: Yayin): YayinDili[] {
   return DIL_SIRASI.filter((d) => yayin.diller[d]);
 }
 
-/** Menüde ve listede görünen ad: Türkçe başlık, yoksa ilk dilinki. */
-export function yayinAdi(yayin: Yayin): string {
-  return baskiSec(yayin, "tr")[1].baslik;
+export function baskiAdresi(kisaAd: string, dil: YayinDili): string {
+  return dil === "tr" ? `/yayinlar/${kisaAd}` : `/yayinlar/${kisaAd}?dil=${dil}`;
+}
+
+/**
+ * HER DİL AYRI SATIR (23 Kasım 2026 · istek: "/yayinlar'da sadece tr versiyon
+ * var"). Tek kartta İngilizceye yalnızca okuyucunun içindeki düğmeden
+ * gidiliyordu; listede ve menüde her baskı kendi kapağı ve adıyla duruyor.
+ */
+export function baskilar(yayinlar: Yayin[]) {
+  return yayinlar.flatMap((yayin) =>
+    yayinDilleri(yayin).map((dil) => ({
+      yayin, dil, baski: yayin.diller[dil]!, adres: baskiAdresi(yayin.kisaAd, dil),
+    })),
+  );
 }

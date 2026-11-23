@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { uygulamaYolu } from "@/lib/ortam";
-import { baskiSec, yayinAdi, yayinDilleri, yayinlariOku, DIL_ADLARI } from "@/lib/yayinlar";
+import { baskilar, yayinlariOku, DIL_ADLARI } from "@/lib/yayinlar";
 
 /**
  * YAYINLAR LİSTESİ (23 Kasım 2026). Menüdeki "Yayınlar" başlığının kendisi
@@ -37,17 +37,14 @@ export default async function YayinlarSayfasi() {
             ? <p>Henüz yayın eklenmedi.</p>
             : (
               <div className="yayin-listesi">
-                {yayinlar.map((yayin) => {
-                  const [dil, baski] = baskiSec(yayin, "tr");
-                  return (
-                    <Link className="yayin-karti" href={`/yayinlar/${yayin.kisaAd}`} key={yayin.kisaAd}
-                      style={{ "--yayin-oran": baski.genislik / baski.yukseklik } as React.CSSProperties}>
-                      <img src={uygulamaYolu(`/yayinlar/${yayin.kisaAd}/${dil}/s001.webp`)} alt="" />
-                      {yayinAdi(yayin)}
-                      <span>{baski.sayfaSayisi} sayfa · {yayinDilleri(yayin).map((d) => DIL_ADLARI[d]).join(" / ")}</span>
-                    </Link>
-                  );
-                })}
+                {baskilar(yayinlar).map(({ yayin, dil, baski, adres }) => (
+                  <Link className="yayin-karti" href={adres} key={`${yayin.kisaAd}-${dil}`} lang={dil}
+                    style={{ "--yayin-oran": baski.genislik / baski.yukseklik } as React.CSSProperties}>
+                    <img src={uygulamaYolu(`/yayinlar/${yayin.kisaAd}/${dil}/s001.webp`)} alt="" />
+                    {baski.baslik}
+                    <span>{DIL_ADLARI[dil]} · {baski.sayfaSayisi} {dil === "en" ? "pages" : "sayfa"}</span>
+                  </Link>
+                ))}
               </div>
             )}
         </div>

@@ -5,7 +5,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { YayinOkuyucu } from "@/components/yayin-okuyucu";
 import { uygulamaYolu } from "@/lib/ortam";
-import { baskiSec, yayinBul, yayinDilleri, DIL_ADLARI } from "@/lib/yayinlar";
+import { baskiAdresi, baskiSec, yayinBul, yayinDilleri, DIL_ADLARI } from "@/lib/yayinlar";
 
 /**
  * TEK YAYIN — SAYFASI ÇEVRİLEBİLİR OKUYUCU (23 Kasım 2026).
@@ -59,7 +59,7 @@ export default async function YayinSayfasi(p: Parametreler) {
             <nav className="yayin-diller" aria-label={dil === "en" ? "Language" : "Dil"}>
               {diller.map((d) => (
                 <Link key={d} className="button button-secondary" lang={d}
-                  href={d === "tr" ? `/yayinlar/${yayin.kisaAd}` : `/yayinlar/${yayin.kisaAd}?dil=${d}`}
+                  href={baskiAdresi(yayin.kisaAd, d)}
                   aria-current={d === dil ? "page" : undefined}>
                   {DIL_ADLARI[d]}
                 </Link>

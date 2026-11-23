@@ -8,7 +8,7 @@ import { hakkindaKartlariniOku } from "@/lib/hakkinda";
 import { zirveleriOku } from "@/lib/zirve";
 import { menuyuOku, type MenuOgesi } from "@/lib/menu";
 import { uygulamaYolu } from "@/lib/ortam";
-import { yayinAdi, yayinlariOku } from "@/lib/yayinlar";
+import { baskilar, yayinlariOku } from "@/lib/yayinlar";
 
 /**
  * ÜST MENÜ (20 Ağustos 2026 · istek: "üst menü sırayla: hakkında, haberler,
@@ -122,7 +122,7 @@ export async function Header() {
      bir bağlantısı yok, Hakkında'daki çakışmaya ikinci kez girmemek için. */
   const yayinlar = menu.ogeler.some((o) => o.tur === "yayinlar")
     ? [["Tüm yayınlar", "/yayinlar"] as const,
-       ...(await yayinlariOku()).map((y) => [yayinAdi(y), `/yayinlar/${y.kisaAd}`] as const)]
+       ...baskilar(await yayinlariOku()).map((b) => [b.baski.baslik, b.adres] as const)]
     : [];
 
   /*
