@@ -43,6 +43,16 @@ const nextConfig: NextConfig = {
        * sayfada, haberlerin altında duruyor. Alt sayfalar (/hakkinda/amaclar,
        * /hakkinda/logolar …) yerinde; yönlendirilen yalnızca aradaki liste.
        */
+      /*
+       * Yayının ilk kısa adı (v2.5.0, 23 Kasım 2026) aynı gün değişti:
+       * "aom-gbe" okunmuyordu. Birkaç saat canlıda durduğu için paylaşılmış
+       * olabilir; dil seçimi (?dil=en) sorgu dizesiyle birlikte taşınır.
+       */
+      {
+        source: "/yayinlar/aom-gbe",
+        destination: "/yayinlar/genctek-ekosistemi",
+        permanent: true,
+      },
       {
         source: "/hakkinda",
         destination: "/#hakkinda",

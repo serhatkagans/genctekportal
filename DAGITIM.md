@@ -311,14 +311,14 @@ görselleri. Klasör `.gitignore`'da (dil başına ~30 MB); dağıtım ona dokun
 Yeni yayın ya da ikinci dil **yerelde** hazırlanır (sunucuda Python yok):
 
 ```bash
-python -I scripts/yayin-hazirla.py gorseller/aom_gbe_en.pdf aom-gbe en --baslik "..."
+python -I scripts/yayin-hazirla.py "gorseller/GENCTEK Youth Tech Ecosystem (2).pdf" genctek-ekosistemi en --baslik "..."
 ```
 
 Sonra klasör sunucuya gider ve portal yeniden başlatılır — `next start`
 public/ listesini yalnızca açılışta çıkarıyor, yeniden başlatmadan görseller 404:
 
 ```bash
-tar -C public -czf - yayinlar/aom-gbe | ssh genctek "tar -C /opt/genctekportal/public -xzf - && chown -R genctekportal:genctekportal /opt/genctekportal/public/yayinlar && systemctl restart genctekportal"
+tar -C public -czf - yayinlar/genctek-ekosistemi | ssh genctek "tar -C /opt/genctekportal/public -xzf - && chown -R genctekportal:genctekportal /opt/genctekportal/public/yayinlar && systemctl restart genctekportal"
 ```
 
 Menüdeki "Yayınlar" başlığı panelden bir kez eklenir (Yönetim → Üst menü →

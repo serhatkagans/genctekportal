@@ -6,8 +6,8 @@ Kullanım (yerelde çalışır, sunucuda Python yok):
 
     python -I scripts/yayin-hazirla.py <pdf> <kisa-ad> <dil> --baslik "Yayının adı"
 
-    python -I scripts/yayin-hazirla.py gorseller/aom_gbe.pdf aom-gbe tr --baslik "..."
-    python -I scripts/yayin-hazirla.py gorseller/aom_gbe_en.pdf aom-gbe en --baslik "..."
+    python -I scripts/yayin-hazirla.py gorseller/aom_gbe.pdf genctek-ekosistemi tr --baslik "..."
+    python -I scripts/yayin-hazirla.py "gorseller/GENCTEK Youth Tech Ecosystem (2).pdf" genctek-ekosistemi en --baslik "..."
 
 Gereken: PyMuPDF (`pip install pymupdf`) ve Pillow.
 
@@ -59,7 +59,7 @@ def main() -> int:
     a = ap.parse_args()
 
     if not KISA_AD.match(a.kisa_ad):
-        sys.exit("Kısa ad yalnızca küçük harf, rakam ve tire içerebilir (ör. aom-gbe).")
+        sys.exit("Kısa ad yalnızca küçük harf, rakam ve tire içerebilir (ör. genctek-ekosistemi).")
     if a.dil not in DILLER:
         sys.exit(f"Dil şunlardan biri olmalı: {', '.join(sorted(DILLER))}")
 

@@ -40,7 +40,7 @@ const GERI = 2;
 const ILERI = 5;
 
 export function YayinOkuyucu({ kokAdres, sayfaSayisi, genislik, yukseklik, pdfAdresi, dil }: {
-  /** Görsellerin klasörü, uygulama eki dahil: ".../yayinlar/aom-gbe/tr" */
+  /** Görsellerin klasörü, uygulama eki dahil: ".../yayinlar/genctek-ekosistemi/tr" */
   kokAdres: string;
   sayfaSayisi: number;
   genislik: number;
