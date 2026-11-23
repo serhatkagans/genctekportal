@@ -8,6 +8,7 @@ import { hakkindaKartlariniOku } from "@/lib/hakkinda";
 import { zirveleriOku } from "@/lib/zirve";
 import { menuyuOku, type MenuOgesi } from "@/lib/menu";
 import { uygulamaYolu } from "@/lib/ortam";
+import { yayinAdi, yayinlariOku } from "@/lib/yayinlar";
 
 /**
  * ÜST MENÜ (20 Ağustos 2026 · istek: "üst menü sırayla: hakkında, haberler,
@@ -116,6 +117,13 @@ export async function Header() {
      düğmesinin yazısı "Page" tablosunda. Kayıt yoksa bugünkü menü varsayılan
      olarak basılıyor (bkz. lib/menu.ts). */
   const menu = await menuyuOku();
+  /* YAYINLAR (23 Kasım 2026): diskten okunuyor, veritabanından değil (bkz.
+     lib/yayinlar.ts). En üstte listenin kendisi — başlığın <summary> olarak
+     bir bağlantısı yok, Hakkında'daki çakışmaya ikinci kez girmemek için. */
+  const yayinlar = menu.ogeler.some((o) => o.tur === "yayinlar")
+    ? [["Tüm yayınlar", "/yayinlar"] as const,
+       ...(await yayinlariOku()).map((y) => [yayinAdi(y), `/yayinlar/${y.kisaAd}`] as const)]
+    : [];
 
   /*
    * Açılır listelerin içeriği türüne göre seçiliyor: menüde "Hakkında" öğesi
@@ -123,7 +131,10 @@ export async function Header() {
    * listeleniyor. Panelden yazılan yalnızca başlığın kendisi.
    */
   const altListe = (tur: MenuOgesi["tur"]) =>
-    tur === "hakkinda" ? hakkindaBaglantilari : tur === "zirveler" ? zirveler : [];
+    tur === "hakkinda" ? hakkindaBaglantilari
+      : tur === "zirveler" ? zirveler
+      : tur === "yayinlar" ? yayinlar
+      : [];
 
   return (
     <header className="site-header">

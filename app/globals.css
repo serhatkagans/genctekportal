@@ -1054,3 +1054,33 @@ html[data-theme="kirmizi"] .site-header .nav-acilir-govde a{color:var(--color-te
 /* Alt bilgi editöründeki logo önizlemesi: zemin koyu olduğu için beyaz logolar
    panelde görünmez kalıyordu, önizleme kendi koyu kutusunda duruyor. */
 .altbilgi-logo-onizleme{display:block;max-height:64px;width:auto;padding:12px 16px;border-radius:8px;background:var(--color-bg-inverse)}
+
+/* YAYIN OKUYUCU (23 Kasım 2026): sayfası çevrilebilir yayınlar. Kitabın kökü
+   (.yayin-kitap) bileşende elle kuruluyor; yüksekliği burada veriliyor çünkü
+   StPageFlip sayfa boyunu kökün yüksekliğine sığdırıyor. Oran sayfanın
+   kendisinden (--yayin-oran = en/boy): geniş ekranda iki sayfa yan yana. */
+.yayin-okuyucu{display:grid;gap:16px}
+.yayin-okuyucu:fullscreen{background:var(--color-bg-subtle);padding:24px;align-content:center;overflow:auto}
+.yayin-sahne{position:relative;display:grid;place-items:center;min-height:240px}
+.yayin-kitap{width:100%;aspect-ratio:calc(2 * var(--yayin-oran));max-height:min(86vh,1300px);margin-inline:auto}
+.yayin-okuyucu:fullscreen .yayin-kitap{max-height:calc(100vh - 200px)}
+.yayin-sayfa{background:#fff;overflow:hidden}
+.yayin-sayfa img{display:block;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.yayin-yukleniyor{position:absolute;inset:0;display:grid;place-items:center;margin:0;color:var(--color-text-muted)}
+.yayin-denetim{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.yayin-denetim>button:first-child,.yayin-denetim>button:nth-child(3){min-width:48px;font-size:1.4rem;line-height:1;padding-inline:12px}
+.yayin-denetim button:disabled{opacity:.4;cursor:default;transform:none}
+.yayin-gosterge{min-width:120px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.yayin-denetim-ara{flex:1}
+.yayin-serit{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x proximity}
+.yayin-onizleme{flex:none;display:grid;gap:4px;justify-items:center;width:76px;padding:4px;border:2px solid transparent;border-radius:6px;background:none;cursor:pointer;scroll-snap-align:center;font-size:.75rem;color:var(--color-text-muted)}
+.yayin-onizleme img{display:block;width:100%;aspect-ratio:var(--yayin-oran);object-fit:cover;border-radius:3px;background:var(--color-bg-subtle);box-shadow:0 1px 3px rgb(0 0 0 / .18)}
+.yayin-onizleme.etkin{border-color:var(--color-brand);color:var(--color-brand);font-weight:800}
+.yayin-diller{display:flex;gap:8px;margin-top:20px}
+.yayin-diller a[aria-current]{background:var(--color-brand);color:var(--color-text-on-brand);border-color:var(--color-brand)}
+.yayin-listesi{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px}
+.yayin-karti{display:grid;gap:12px;color:var(--color-text-strong);font-weight:750}
+.yayin-karti img{display:block;width:100%;aspect-ratio:var(--yayin-oran,.707);object-fit:cover;border-radius:6px;border:1px solid var(--color-border);box-shadow:var(--shadow-md);transition:transform 150ms}
+.yayin-karti:hover img{transform:translateY(-4px)}
+.yayin-karti span{color:var(--color-text-muted);font-weight:500;font-size:.88rem}
+@media(max-width:640px){.yayin-kitap{aspect-ratio:var(--yayin-oran)}.yayin-denetim-ara{display:none}.yayin-denetim .button{font-size:.88rem}}

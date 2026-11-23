@@ -3,7 +3,8 @@
     { "tur": "hakkinda", "etiket": "Hakkında", "adres": "" },
     { "tur": "baglanti", "etiket": "Haberler", "adres": "/haberler" },
     { "tur": "baglanti", "etiket": "Etkinlikler", "adres": "/etkinlikler" },
-    { "tur": "zirveler", "etiket": "GençTek Zirvesi", "adres": "" }
+    { "tur": "zirveler", "etiket": "GençTek Zirvesi", "adres": "" },
+    { "tur": "yayinlar", "etiket": "Yayınlar", "adres": "" }
   ],
   "girisEtiketi": "Giriş"
 }

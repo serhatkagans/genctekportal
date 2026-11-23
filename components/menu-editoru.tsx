@@ -22,6 +22,7 @@ const TUR_ADLARI: Record<MenuOgesi["tur"], string> = {
   baglanti: "Bağlantı",
   hakkinda: "Hakkında açılır listesi",
   zirveler: "Zirveler açılır listesi",
+  yayinlar: "Yayınlar açılır listesi",
 };
 
 export function MenuEditoru({ menu, kaydedildi }: { menu: Menu; kaydedildi?: boolean }) {
@@ -88,7 +89,9 @@ export function MenuEditoru({ menu, kaydedildi }: { menu: Menu; kaydedildi?: boo
                 <p className="ayar-aciklama">
                   {oge.tur === "hakkinda"
                     ? "Alt başlıklar Hakkında sayfalarından geliyor; başlığa tıklayan ana sayfadaki kart bölümüne iner."
-                    : "Alt başlıklar zirve kayıtlarından geliyor (en güncel zirve en üstte)."}
+                    : oge.tur === "yayinlar"
+                      ? "Alt başlıklar sunucudaki yayınlardan geliyor; en üstte tüm yayınların listesi durur."
+                      : "Alt başlıklar zirve kayıtlarından geliyor (en güncel zirve en üstte)."}
                 </p>
               )}
             </article>
@@ -106,6 +109,10 @@ export function MenuEditoru({ menu, kaydedildi }: { menu: Menu; kaydedildi?: boo
             <button type="button" className="button button-secondary" disabled={varOlanTur("zirveler")}
               onClick={() => setOgeler([...ogeler, { tur: "zirveler", etiket: "GençTek Zirvesi", adres: "" }])}>
               <Icon name="plus" />Zirveler listesi
+            </button>
+            <button type="button" className="button button-secondary" disabled={varOlanTur("yayinlar")}
+              onClick={() => setOgeler([...ogeler, { tur: "yayinlar", etiket: "Yayınlar", adres: "" }])}>
+              <Icon name="plus" />Yayınlar listesi
             </button>
           </div>
         </div>

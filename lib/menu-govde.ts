@@ -16,13 +16,15 @@ import { siteIciYolMu } from "./guvenli-adres";
  *   hakkinda  — açılır liste; alt başlıkları Hakkında sayfalarından gelir ve
  *               başlığın kendisi ana sayfadaki kart bölümüne (#hakkinda) iner.
  *   zirveler  — açılır liste; alt başlıkları zirve kayıtlarından gelir.
+ *   yayinlar  — açılır liste; alt başlıkları public/yayinlar altındaki
+ *               yayınlardan gelir (bkz. lib/yayinlar.ts · 23 Kasım 2026).
  *
  * Açılır listelerin İÇERİĞİ panelden yazılmaz; o iki liste zaten kendi
  * ekranlarından yönetiliyor. Buradan yalnızca başlıkları ve sıraları değişir —
  * aynı başlığı iki yerde tutmak, birinin eskimesi demekti.
  */
 
-export type MenuOgesiTuru = "baglanti" | "hakkinda" | "zirveler";
+export type MenuOgesiTuru = "baglanti" | "hakkinda" | "zirveler" | "yayinlar";
 
 export type MenuOgesi = { tur: MenuOgesiTuru; etiket: string; adres: string };
 
@@ -49,7 +51,7 @@ export function menuyuCoz(ham: unknown): Menu {
       .map((o) => {
         const oge = (o ?? {}) as Record<string, unknown>;
         const tur: MenuOgesiTuru =
-          oge.tur === "hakkinda" || oge.tur === "zirveler" ? oge.tur : "baglanti";
+          oge.tur === "hakkinda" || oge.tur === "zirveler" || oge.tur === "yayinlar" ? oge.tur : "baglanti";
         return {
           tur,
           etiket: typeof oge.etiket === "string" ? oge.etiket.trim() : "",

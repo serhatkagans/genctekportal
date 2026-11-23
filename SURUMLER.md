@@ -19,6 +19,17 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+- **Yayınlar: sayfası çevrilebilir okuyucu.** Üst menüye "Yayınlar" açılır
+  listesi eklenebiliyor (Yönetim → Üst menü → "Yayınlar listesi"). `/yayinlar`
+  yayınları listeliyor; `/yayinlar/<ad>` sayfaları köşesinden çekilerek
+  çevrilen bir kitap gösteriyor (StPageFlip · `page-flip` paketi). İlk yayın
+  "Akran Öğrenme Modeli ve Genç Bilişim Ekosistemi" (`aom-gbe`, 68 sayfa).
+  İngilizce baskı geldiğinde `?dil=en` ile aynı sayfada açılır.
+  Sayfa görselleri `scripts/yayin-hazirla.py` ile PDF'ten üretiliyor ve depoda
+  değil — sunucuya scp ile gider (DAGITIM.md · "Yayınlar").
+- **Katıl düğmeleri platformun vitrin sayfasına gidiyor**, giriş ekranına
+  değil; etkinlik kartlarındaki "başvur" akışı aynı.
+
 ---
 
 ## v2.4.1 — 9 Kasım 2026

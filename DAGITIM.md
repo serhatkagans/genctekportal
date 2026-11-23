@@ -302,6 +302,28 @@ rsync -az genctek:/opt/genctekportal/public/temalar   public/
 rsync -az genctek:/opt/genctekportal/public/video     public/
 ```
 
+## Yayınlar (sayfası çevrilebilir PDF'ler)
+
+`/yayinlar` sayfaları veritabanından değil, **diskten** okunuyor:
+`public/yayinlar/<kisa-ad>/` altında `yayin.json` ve her dil için sayfa
+görselleri. Klasör `.gitignore`'da (dil başına ~30 MB); dağıtım ona dokunmaz.
+
+Yeni yayın ya da ikinci dil **yerelde** hazırlanır (sunucuda Python yok):
+
+```bash
+python -I scripts/yayin-hazirla.py gorseller/aom_gbe_en.pdf aom-gbe en --baslik "..."
+```
+
+Sonra klasör sunucuya gider ve portal yeniden başlatılır — `next start`
+public/ listesini yalnızca açılışta çıkarıyor, yeniden başlatmadan görseller 404:
+
+```bash
+tar -C public -czf - yayinlar/aom-gbe | ssh genctek "tar -C /opt/genctekportal/public -xzf - && chown -R genctekportal:genctekportal /opt/genctekportal/public/yayinlar && systemctl restart genctekportal"
+```
+
+Menüdeki "Yayınlar" başlığı panelden bir kez eklenir (Yönetim → Üst menü →
+"Yayınlar listesi"); altındaki yayınlar klasörlerden kendiliğinden gelir.
+
 ## Platform bağlantısı
 
 Ana sayfadaki ve `/etkinlikler` sayfasındaki etkinlikler portalda **tutulmaz**;
