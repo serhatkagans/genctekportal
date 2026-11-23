@@ -19,6 +19,10 @@ kesilir; betik aşağıdaki **Yayımlanmamış** başlığını tarihiyle birlik
 
 <!-- Buraya yazılan maddeler bir sonraki sürümün notu olur. -->
 
+---
+
+## v2.5.2 — 23 Kasım 2026
+
 - **Yayınlar listesinde ve menüde her dil ayrı satır.** İngilizce baskıya
   yalnızca okuyucunun içindeki düğmeden ulaşılıyordu; artık `/yayinlar`'da
   kendi kapağıyla ayrı kart, menüde kendi adıyla ayrı bağlantı.
